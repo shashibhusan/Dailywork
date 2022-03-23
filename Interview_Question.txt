@@ -1,0 +1,208 @@
+HQL (how you will use syntax)....DONE
+What is use of AOP in your project....DONE
+Named Query or creteria query.
+Transaction management in Spring....DONE
+Join in mysql....DONE
+Impact analysis in your project....DONE
+Flow diagram of your current project....DONE
+how you are avoiding session hijacking in your project.
+Change the way to introduce yourself....DONE
+What is design pattern & Type of design pattern.....DONE
+What are the design pattern in Spring.....DONE
+Difference between Synchronize HashMap & Concurrent HashMap......DONE
+How to create a singleton Bean when it will be required......DONE
+Interceptor Example in both Struts1.x & Struts2.x.....DONE
+How you will intiate Spring using java means no configuration file......DONE
+Can you overload main method (YES)......DONE
+Serailization in detail......DONE
+String heap & pool concept......DONE
+Concurrent hashMap in detail......DONE
+How to iterate Map in java......DONE
+Design pattern in java......DONE
+What is dispatcher servlet in spring......DONE
+Bean scope......DONE
+Why we use @Qualifier annotation......DONE
+How to map composite Key in Hibernate......DONE
+How to manage transaction in hibernate.....DONE
+How you will handle Exception in REST API......DONE
+How you will swap the two object in java......DONE
+How can you make a object immutable in java......DONE
+Run three thread in parallel & check what it will return....DONE
+Study the polymorphism concept in detail.....DONE
+Want to sort the Int array with different value & complexity of the sorting.....DONE
+want put object in hashMap with same id & then check the size of the hashMap.....DONE
+How to make HashMap Synchronize in java.....DONE
+what is call by value & what is call by reference.....DONE
+What is Thread group.....DONE
+Call by Value & call by reference.....DONE
+Internal working of Garbdge collector & Type of Garbdge collector.....DONE
+Thread Pool......DONE
+Internal working of HashMap......DONE
+What is Marker Interface......DONE
+What happen When you manually change the class file(Change the class file after compilation)......DONE
+What happen when you manually copy a class file in an other class file(If there is two file & you copy the content of
+a class file inside the other class file & vice-versa .....DONE
+How you will convert ArrayList to LinkedList......DONE
+@Transient annotation in Hibernate......DONE
+What is fail safe......DONE
+Flow of Spring......DONE
+Bean Life Cycle.......DONE
+Trasaction mgnt in Spring.......DONE
+How you will configure view resolver in spring with & without xml.......DONE
+Method inside REST webservices.......DONE
+What is patch Method.......DONE
+How you are consuming REST web services.......DONE
+Explain the Bean Scope in Detail.......DONE
+Design pattern that is there in Spring MVC.......DONE
+What is different GET and POST method.......DONE
+When use GET , when use POST.......DONE
+What is solid in java development.......DONE
+How you can make a class immutable if it contain a refernce varriable.......DONE
+Why wait() & notify() method is inside the object class.......DONE
+What are the final method of the object class........DONE
+How can i make the sub class non serailzable if super class is serailzable.......DONE
+Implementation of hashcode & equals method menas if hashcode code will always return same or equals always returns same.......DONE
+How you have implemented the digital sign as you mention in your resume.
+How can i sort a object arraylist.......DONE
+Flow of Spring.......DONE
+Difference between component,service,repository & controller.......DONE 
+Can we use each in place of each other.......DONE
+Autowiring in Spring.......DONE
+Scope of singleton object.......DONE
+Can we Autowiring static varriable Spring.......DONE
+What is method local varriable.......DONE
+how filter works in servlet......DONE
+how you handle warning in jdbc......DONE
+advantage of jdbc over jdbc template.......DONE
+difference between beanFactory & ApplicationContext........DONE
+what in thread local varriable in java........DONE
+Close with resource in java........DONE
+how to map composite key in hibernate........DONE
+@qualifier annotation in spring........DONE
+How you are using AOP in your project.........DONE
+Difference between rowset & resultSet.........DONE
+what are the method of Spring JDBC template you are using.........DONE
+how serailzable works.........DONE
+what is intern method in java.........DONE
+can we write constructor in abstract class........DONE
+what is down casting........DONE
+why we get concurrentupdate exception........DONE
+how can i make a class immutable if it contain the reference of other class.........DONE
+how to get department with maximum number of employee.........DONE
+How can we reduce the complexity of hashMap.........DONE
+Use of recursion.------------
+Problem solving issue when travel form a-b, b-c........DONE 
+Which exception we need to handle compile time or runtime.........DONE
+Can we write constructor in abstract class.........DONE
+Can abstract class implement an interface.........DONE
+When constructor of the abstract class will be called.........DONE
+Can we write main method in abstract class.........DONE
+How you will tract your application in hanged and there is nothings in log file at that time----------
+What happen in background when we hits any URL------------
+What is restful webservices.........DONE
+What happen if there is streaming a video using restful webservices.-----------
+What is iterator.........DONE 
+Is there add method in iterator :-NO
+Woking of hashMap.........DONE
+How can i synchronize a hashmap.........DONE
+Difference between hashMap & hashTable.........DONE
+How can i clone a collection like arraylist.--------------
+What is collection.........DONE
+Comprable contain compareTo()........DONE
+Comparator contain compare()........DONE
+Constructor based dependency injection using spring annotation........DONE
+Difference Between RowMapper & ResultSetExtractor........DONE
+Difference between ResultSet & RowSet ........DONE 
+Advantage of jdbcTemplate over Hibernate........DONE
+Main method inside JdbcTemplate
+  query(),execute(),update(),queryForList()
+Expression for Pointcut ........DONE
+Difference between doGet() & doPost()........DONE
+How can i validate a json request ........DONE
+RowNum in mysql........DONE
+Procedure in mysql........DONE
+OOPS concept in detail........DONE
+DES (Data encryption standard)
+solid ........DONE
+Bean cycle ........DONE
+second level of catching in hibernate........DONE 
+How to create native query in hibernate........DONE 
+Why sub class can not hold the reference of super class........DONE
+Give me the scenario when you go for rest and when you go for soap........DONE
+How to covert set in arrayList and vice-versa........DONE
+How to covert LinkedList in arrayList and vice-versa........DONE
+What is enumarator in java........DONE
+What will be state of thread after calling the yield() method........DONE
+How to configure hibernate with spring.........DONE
+How to sort a hash on value base in java.........DONE
+What is atomicity in java.........DONE
+Type of synchronization in .........DONE
+what are the synchronize class in Collection frameWork.........DONE
+What is the difference between preemptive scheduling and time slicing?.........DONE
+When collection introduce in java means in which version..........DONE
+What is static & dynamic binding in java.
+how can i return some value form thread.
+How can i handle if 10  request will hit my web service at same time.
+How can i delete duplicate from a text file having case insensitive string.
+Which is better based on the performance method overloading or method overriding.
+Where we should use template pattern in java
+Where we sould use normalization and where denormalization in java.
+What is difference between primary key & unique key.
+Answer:-Yes, We can use more than one column for primary key then it will be a composite.
+		but main difference between primary key & unique key is that primary key can not be null.
+How to break the singleton class 
+How can we return value from thread means use of call method 
+What is the difference between CyclicBarrier and CountDownLatch in Java 
+What is race condition in Java? Given one example
+How to stop a thread in Java 
+What happens when an Exception occurs in a thread? 
+Producer consumer problem
+What is FutureTask in Java
+How to create thread-safe Singleton in Java
+What happens if a thread throws an Exception inside synchronized block
+Example of Join method 
+What is the difference between the submit() and execute() method thread pool in Java 
+What is join method 
+synchronized is thread 
+What is Abstract Map or Map of Map
+What is materialized view in mysql
+how to create proxy object
+how to write different pointcut 
+Example of deadLock
+What is Thread group
+comparator & comparable with example
+Memory management in Java
+Thread Pool
+Spring Core Projects 
+What is ACID property in java 
+Question of thread 
+Internal working of ConcurrentHashMap 
+What is thread local in java. 
+How to write custom exception in Java 
+what happen when you use transaction at both class level & method level 
+Advantage of Spring over hibernate 
+What will be memory location of clone object in java.
+how can we create exactly five object of a class in java.
+What is try with resource in java for custom resource
+How to sort a HashMap based on Value?.
+How to find all permutations of String?.
+How to remove duplicate characters from String? 
+Use of comparator with example  
+Write a program to find the longest palindrome in a string & longest string of non repeatable character.
+Can we make final class serializable
+Difference between init block and static 
+The static initializer block will be called on loading of the class
+The non-static initializer block on the other hand is created on object construction only
+So static block are used for static intialization where as initializer are used for non-static varriables
+Advantage of dependency injection in Spring
+It is making it easy to follow the Single Responsibility Principle.
+Detail about serialization
+what is iterable in java 
+The Java Iterable interface ( java.lang.Iterable ) is one of the root interfaces of the Java Collections API
+Advantage of iterator in java 
+Iterator Advantage: Ability to remove elements from Collections. Ability to move 
+forward and backward using next() and previous().
+Use of @primary annotation 
+method used in jdbc template
+What is return type of put method in hashMap 
+It returns the previous value associated with key, or null if there was no mapping for key.

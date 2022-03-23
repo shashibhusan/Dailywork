@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+<title>Database</title>
+<head>
+	<style type="text/css">
+	.redC{color:red}
+	.bb{color:blue}
+	</style>
+</head>
+<body>
+
+<div data-role="page">
+
+  <div data-role="main" class="ui-content">
+  
+  <b class="redC">What is primary key</b><br/>
+  <font class="redC">1-</font>There will be only one primary key in a table.<br/>
+  <font class="redC">2-</font>It can not have null value.<br/>
+  <font class="redC">3-</font>If it cantain more than one column then it will become <b class="redC">composite key</b><br/>
+  <br/>
+  <b class="redC">What is candidate key</b><br/>
+  <font class="redC">1-</font>There may be more than one candidate key in a table.<br/>
+  <font class="redC">2-</font>It can have null value.<br/>
+  <font class="redC">3-</font>It can have more than one column<br/>
+  <br/>
+  <b class="redC">What is unique key</b><br/>
+  <font class="redC">1-</font>There may be many unique key one table.<br/>
+  <font class="redC">2-</font>It can have null value.<br/>
+  <font class="redC">3-</font>A unique key is a set of one or more than one fields/columns of a table that uniquely identify a record in a database table.<br/>
+  <br/>
+  <b class="redC">Note:-</b><br/>
+  Candidate key is also a unique key to identify a record uniquely in a table<br/>
+  <br/>
+  <table border="1">
+	<tbody>
+	<tr>
+	<th>Truncate</th>
+	<th>Delete</th>
+	</tr>
+	<tr>
+	<td>We can't Rollback after performing Truncate. </td>
+	<td>We can Rollback after delete.</td>
+	</tr>
+	<tr>
+	<td>Truncate reset identity of table means auto_increment column</td>
+	<td>Delete does not reset identity of table.</td>
+	</tr>
+	<tr>
+	<td>It locks the entire table.</td>
+	<td>It locks the table row.</td>
+	</tr>
+	<tr>
+	<td>Its DDL(Data Definition Language) command.</td>
+	<td>Its DML(Data Manipulation Language) command. </td>
+	</tr>
+	<tr>
+	<td>We can't use WHERE clause with it.</td>
+	<td>We can use WHERE to filter data to delete.</td>
+	</tr>
+	</tbody>
+	</table><br/>
+    The PreparedStatement interface is a subinterface of Statement. It is used to execute parameterized query.<br/>
+    <p><b class="redC">Main advatage of the PreparedStatement over simple statement(means simple insert)is that you can insert all the special character in the database using PreparedStatement</b><br/>
+	    PreparedStatement stmt=con.prepareStatement("insert into Emp values(?,?)");<br/>  
+	    stmt.setInt(1,101);//1 specifies the first parameter in the query <br/> 
+	    stmt.setString(2,"Ratan");  <br/>
+	
+	    int i=stmt.executeUpdate(); <br/> 
+	    System.out.println(i+" records inserted");  <br/>
+    con.close();<br/>
+    </p>       
+            <b class="redC">Java CallableStatement Interface</b><br/>
+   CallableStatement interface is used to call the stored procedures and functions.<br/>
+        <p> CallableStatement stmt = null;<br/>
+            String strSql = "call msme_didi_cases (?,?)";<br/>
+            stmt = con.prepareCall(strSql);<br/>
+            stmt.setString(1, years);<br/>
+            <strong> 
+                if there is out put parameter then we will call like<br/>
+            </strong>       
+            stmt.registerOutParameter(2, java.sql.Types.VARCHAR);<br/>
+            rsAdminResult = stmt.executeQuery();<br/>
+            <b> Then String outputValue=stmt.getString(2);</b>
+        </p>
+<b class="redC">Detail:-</b><br/> 
+<b class="redC">Question:-</b>What is the Prons/cons of procedure.<br/>
+<b class="redC">Prons:-</b><br/>
+<b>1-Better Performance –</b>The procedure calls are quick and efficient as stored procedures are compiled once and stored in executable form.
+     Hence the response is quick. The executable code is automatically cached, hence lowers the memory requirements.<br/>
+<b>2-Higher Productivity –</b>Since the same piece of code is used again and again so, it results in higher productivity.<br/>
+	 
+<b class="redC">cons:-</b><br/>
+<b>1-Testing –</b>Testing of a logic which is encapsulated inside a stored procedure is very difficult. Any data errors in handling stored procedures are not generated until runtime.<br/>
+<b>2-Debugging –</b>Depending on the database technology, debugging stored procedures will either be very difficult or not possible at all. Some relational databases such as SQL Server have some debugging capabilities.<br/>
+<b class="redC">Note:-</b><br/>
+<b>1-</b>EXISTS executes at high speed against IN : when the subquery results is very large.<br/>
+<b>2-</b>IN gets ahead of EXISTS : when the subquery results is very small<br/>
+
+        <table border="1">
+        <tr>
+	        	<td>
+				delimiter //<br/>
+				create procedure interview(in a int)<br/>
+				begin <br/>
+				select * from test2 where age=a;<br/>
+				end//<br/>
+				delimiter ;<br/>
+	            </td>
+	            <td> 
+	            con = ConnectionManager.getConnectionDirectForMySQL();<br/>
+	            String strSql = "call interview(?)";<br/>
+	            stmt = con.prepareCall(strSql);<br/>
+	            stmt.setInt(1,28);<br/>
+	            rsAdminResult = stmt.executeQuery();<br/>
+	            
+	            while(rsAdminResult.next())<br/>
+	            {<br/>
+	                out.print(rsAdminResult.getString("name"));<br/>
+	            }<br/>
+				<b class="redC">call interview(28);</b><br/>
+	            </td>
+          </tr>
+           <tr>
+                <td>
+				delimiter //<br/>
+				create procedure interview2(in a int,out b int)<br/>
+				begin <br/>
+				select avg(salary) into b from test2;<br/>
+				end//<br/>
+				delimiter ; <br/>
+                </td>
+                <td>
+                 con = ConnectionManager.getConnectionDirectForMySQL();<br/>
+                 String strSql = "call interview2(?,?)";<br/>
+                 stmt = con.prepareCall(strSql);<br/>
+                 stmt.setInt(1,28);<br/>
+                 stmt.registerOutParameter(2,java.sql.Types.INTEGER);<br/>
+                 stmt.executeUpdate();<br/>
+                 int result = stmt.getInt(2);<br/>
+    			 <b class="redC">call interview2(28,@t);</b><br/>
+    			 select @t;<br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+				delimiter //<br/>
+				create procedure interview3(inout b int)<br/>
+				begin <br/>
+				select avg(salary) into b from test2;<br/>
+				end//
+				delimiter ;   <br/>
+                </td>
+                <td>      
+                con = ConnectionManager.getConnectionDirectForMySQL();<br/>
+                String strSql = "call interview3(?)";<br/>
+                stmt = con.prepareCall(strSql);<br/>
+                stmt.setInt(1,28);<br/>
+                stmt.registerOutParameter(1,java.sql.Types.INTEGER);<br/>
+                stmt.executeUpdate();<br/>
+                int result = stmt.getInt(1);<br/>
+				set @a=28;<br/>
+				<b class="redC">call interview3(@a);</b><br/>
+				select @a;<br/>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <table border="1">
+            <tbody><tr><th>Stored Procedure</th><th>Function</th></tr>
+                <tr><td>1-is used to perform business logic.</td><td>1-is used to perform calculation.</td></tr>
+                <tr><td>2-must not have the return type.</td><td>2-must have the return type.</td></tr>
+                <tr><td>3-may return 0 or more values.</td><td>3-may return only one values.</td></tr>
+                <tr><td>4-We can call functions from the procedure.</td><td>4-Procedure cannot be called from function.</td></tr>
+                <tr><td>5-Procedure supports input and output parameters.</td><td>5-Function supports only input parameter.</td></tr>
+                <tr><td>6-Exception handling using try/catch block can be used in stored procedures.</td><td>6-Exception handling using try/catch can't be used in user defined functions.</td></tr>
+            </tbody></table>  
+       <b class="redC"> FLOAT(M,N) : FLOAT(4,2) - Four digits total of which 2 are after the decimal. i.e. 12.34 Values are rounded to fit format if they are too large.</b><br/> 
+
+        <b class="redC">
+            Batch Processing in JDBC
+        </b><br/>
+        Instead of executing a single query, we can execute a batch (group) of queries. It makes the performance fast.
+        <br/>
+        <table border="1">
+            <tbody><tr><th>Method</th><th>Description</th></tr>
+                <tr><td>void addBatch(String query)</td><td>It adds query into batch.</td></tr>
+                <tr><td>int[] executeBatch()</td><td>It executes the batch of queries.</td></tr>
+            </tbody></table> 
+        <br/>
+        <table border="1"><tbody>
+                <tr><td colspan="2"><strong>Theme in struts</strong></td></tr>
+                <tr><th colspan="1" rowspan="1" class="confluenceTh"><p> <a   href="simple-theme.html">simple theme</a> </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> A minimal theme with no "bells and whistles" </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> <a   href="xhtml-theme.html">xhtml theme</a> </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> The default theme that uses common HTML practices </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> <a   href="cssxhtml-theme.html">css_xhtml theme</a> </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> The <a   href="xhtml-theme.html">xhtml theme</a> re-implemented using strictly CSS for layout </p></td></tr><tr><th colspan="1" rowspan="1" class="confluenceTh"><p> <a   href="ajax-theme.html">ajax theme</a> </p></th><td colspan="1" rowspan="1" class="confluenceTd"><p> A theme based on the <a   href="xhtml-theme.html">xhtml theme</a> that provides advanced AJAX features </p></td></tr></tbody></table>     
+
+<b class="redC">
+           Example of exception handling in struts 2 
+ </b><br/>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-xml"><li class="alt"><span><span class="tag">&lt;?</span><span class="tag-name">xml</span><span>&nbsp;</span><span class="attribute">version</span><span>=</span><span class="attribute-value">"1.0"</span><span>&nbsp;</span><span class="attribute">encoding</span><span>=</span><span class="attribute-value">"UTF-8"</span><span>&nbsp;</span><span class="tag">?&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&lt;!DOCTYPE&nbsp;struts&nbsp;PUBLIC&nbsp;"-//Apache&nbsp;Software&nbsp;Foundation//DTD&nbsp;Struts&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;Configuration&nbsp;2.1//EN"&nbsp;"http://struts.apache.org/dtds/struts-2.1.dtd"<span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;</span><span class="tag-name">struts</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">package</span><span>&nbsp;</span><span class="attribute">name</span><span>=</span><span class="attribute-value">"aa"</span><span>&nbsp;</span><span class="attribute">extends</span><span>=</span><span class="attribute-value">"struts-default"</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">global-results</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;</span><span class="tag-name">result</span><span>&nbsp;</span><span class="attribute">name</span><span>=</span><span class="attribute-value">"myresult"</span><span class="tag">&gt;</span><span>globalresult.jsp</span><span class="tag">&lt;/</span><span class="tag-name">result</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;/</span><span class="tag-name">global-results</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">global-exception-mappings</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;</span><span class="tag-name">exception-mapping</span><span>&nbsp;</span><span class="attribute">result</span><span>=</span><span class="attribute-value">"myresult"</span><span>&nbsp;</span><span class="attribute">exception</span><span>=</span><span class="attribute-value">"java.lang.Exception"</span><span class="tag">&gt;</span><span class="tag">&lt;/</span><span class="tag-name">exception-mapping</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;/</span><span class="tag-name">global-exception-mappings</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">action</span><span>&nbsp;</span><span class="attribute">name</span><span>=</span><span class="attribute-value">"login"</span><span>&nbsp;</span><span class="attribute">class</span><span>=</span><span class="attribute-value">"com.Login"</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;</span><span class="tag-name">result</span><span class="tag">&gt;</span><span>welcome.jsp</span><span class="tag">&lt;/</span><span class="tag-name">result</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;</span><span class="tag-name">result</span><span>&nbsp;</span><span class="attribute">name</span><span>=</span><span class="attribute-value">"error"</span><span class="tag">&gt;</span><span>error.jsp</span><span class="tag">&lt;/</span><span class="tag-name">result</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="tag">&lt;/</span><span class="tag-name">action</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="tag">&lt;/</span><span class="tag-name">package</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="tag">&lt;/</span><span class="tag-name">struts</span><span class="tag">&gt;</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li></ol></div><textarea name="code" class="xml" style="display: none;">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+		&lt;!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts
+		 Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd"&gt;
+		&lt;struts&gt;
+		&lt;package name="aa" extends="struts-default"&gt;
+		
+		&lt;global-results&gt;
+		&lt;result name="myresult"&gt;globalresult.jsp&lt;/result&gt;
+		&lt;/global-results&gt;
+		
+		&lt;global-exception-mappings&gt;
+		&lt;exception-mapping result="myresult" exception="java.lang.Exception"&gt;&lt;/exception-mapping&gt;
+		&lt;/global-exception-mappings&gt;
+		
+		&lt;action name="login" class="com.Login"&gt;
+		&lt;result&gt;welcome.jsp&lt;/result&gt;
+		&lt;result name="error"&gt;error.jsp&lt;/result&gt;
+		&lt;/action&gt;
+		
+		&lt;/package&gt;
+		&lt;/struts&gt;    
+</textarea></div>
+        <b class="redC">
+           Example of exception handling in struts 1.x
+        </b><br/>
+        <pre>
+		 &lt;struts-config>
+         &lt;global-exceptions>
+	     &lt;exception
+	      key="error.global.mesage"
+	      type="java.io.IOException"
+	      path="/pages/error.jsp" />
+	 	&lt;/global-exceptions>
+	 	&lt;action-mappings>
+		//...
+	 	&lt;/action-mappings>
+ 		&lt;/struts-config>
+        </pre> 
+        <b class="redC">
+           Interceptor in struts2
+        </b><br/>
+           <b class="redC">exception</b> :It maps exception to a result<br/>
+           <b class="redC">i18n</b>: It provides support to internationalization and localization.<br/>
+           <b class="redC">validation</b> : It provides support to input validation.<br/>
+           <b class="redC">createSession</b> :It creates and HttpSession object if it doesn't exists.<br/>
+           <b class="redC">clearSession</b>clearSession :It unbinds the HttpSession object.<br/>
+        <b class="redC">f we want to get value from the session in struts2 then</b><br/>
+        HttpSession session=ServletActionContext.getRequest().getSession();<br/>
+        and if we want to get the value on the jsp page the <br/>
+        &lt;s:property name="#session.username"/&gt;<br/>
+        <b class="redC">Struts 2 OGNL Tutorial</b>
+        It works in the background of the struts2<br/>
+        Main work of OGNL is <br/>
+        1-Conversion of value that are entered in to the form to data type that is in form bean(means in action class)<br/>
+        2-it also convert the java type value to String to display the result.<br/>
+        
+ <b class="redC">Struts 2 Custom Interceptor Example</b>
+        
+     <pre>
+	package example;
+	
+	import com.opensymphony.xwork2.ActionInvocation;
+	import com.opensymphony.xwork2.interceptor.Interceptor;
+	
+	public class TestInterceptor implements Interceptor{
+	
+	    @Override
+	    public void destroy() {
+	    }
+	    
+	    @Override
+	    public void init() {
+	    }
+	
+	    @Override
+	    public String intercept(ActionInvocation ai) throws Exception {
+	        
+	        System.out.println("Here we will perform pre processing");
+	        
+	        ai.invoke(); 
+	        
+	        System.out.println("Here we will perform post processing");
+	         
+	        return "success";
+	    }
+	    
+	}
+     </pre>
+   <b class="redC">Now you need to make entry in Struts.xml</b>  
+        <pre>
+        &lt;struts>
+    &lt;package name="example" namespace="/example" extends="struts-default">
+        
+        &lt;interceptors>
+            &lt;interceptor name="TestInterceptor" class="example.TestInterceptor">&lt;/interceptor>
+        &lt;/interceptors>
+        
+        &lt;action name="HelloWorld" class="example.HelloWorldAction">
+          <b>  &lt;interceptor-ref name="TestInterceptor">&lt;/interceptor-ref></b>
+            &lt;result name="success">/example/success.jsp&lt;/result>
+            &lt;result name ="input">HelloWorld.jsp&lt;/result> 
+        &lt;/action>
+    &lt;/package>
+&lt;/struts>
+    </pre> 
+        <b class="redC">Now something about the validation in struts1.x</b><br/>
+        <b>1-</b>you can not change the name of the validator-rules.xml<br/>
+        <b>2-</b>you can not change the name of the validation.xml<br/>
+        <b>3-</b>These two configuration file should be place somewhere inside the /WEB-INF folder of the application.<br/>
+        <b>4-</b>validator-rules.xml file which contains the default Struts pluggable validator definitions.<br/>
+        You can add new validation rules by adding an entry in this file.<br/>
+       <b class="redC">Now about the validation in struts2.x</b><br/> 
+        <pre>
+         The naming convention of the XML validation file should be ActionClass-Validation.xml.
+        </pre>
+        <pre>
+        <b class="redC">Note : </b>Properties file should also have the same name as the Action class.
+			if we are making the properties file in struts2 then it will search for the properties file in following 
+			order
+		Resource bundle search order
+      <b style="color: red">  Resource bundle is searched in the following order:
+	    1-ActionClass.properties
+	    2-Interface.properties
+	    3-BaseClass.properties
+	    4-ModelDriven's model
+	    5-package.properties
+	    6-Search up the i18n message key hierarchy itself
+	    7-Global resource properties
+	</b> 
+        </pre>
+        <b>
+        How to convert Array to list and vice-versa
+        </b>
+        <pre>
+        String namelist[]={"shashi","bhusan","patel"};
+
+        ArrayList all=new ArrayList(Arrays.asList(namelist));
+
+        ArrayList &lt;String> al=new ArrayList &lt;String>();
+        al.add("abc");
+        al.add("def");
+        al.add("ghi");
+        String [] countries = al.toArray(new String[al.size()]);
+<b style="color: red;">
+    It works only for the String array because String is a object in java
+</b>
+        </pre>
+<b class="redC">Function in Mysql</b><br/>
+	<pre>
+	delimiter //
+	create function bhusan() returns int
+	begin
+	declare aa int;
+	select count(name) into aa from student;
+	set aa=123;
+	return (aa);
+	end //
+	delimiter ;
+	
+	select bhusan();
+	</pre>
+<b class="redC">Another example of Function is</b><br/>
+	<pre>
+	delimiter //
+	create function bhusan() returns int
+	begin
+	declare aa int;
+	select count(name) into aa from student;
+	return (aa);
+	end //
+	delimiter ;
+	</pre>
+<b class="redC"> Another example of Function with argument.</b><br/>
+ <pre>
+	delimiter //
+	create function bhusan(a int)returns int
+	begin
+	declare aa int;
+	select count(name) into aa from student;
+	return (aa);
+	end //
+	delimiter ;
+ </pre>
+<b class="redC">Few important point :-</b><br/>
+ <pre>
+1-<b class="redC">WHERE</b> clause is used for filtering rows and it applies on each and every row,
+  while HAVING clause is used to filter groups.
+2-<b class="redC">Distinct</b> is used to filter unique records out of the records that satisfy the query criteria. 
+  Group by clause is used to group the data upon which the aggregate functions are fired
+</pre>
+
+<b class="redC">Now some important point about hibernate</b><br/>
+<pre>
+1-We can change the name and location of Hibernate.cfg.xml file,
+name will be any things but location must be relative to project means in differnt package.
+2-We can change the name name location of tablename.hbm.xml file,
+name will be anything but location must be relative to projrct means in different package.
+</pre>
+<b class="redC">Important point about hibernate</b><br/>
+        
+<pre>
+1-A POJO is a Java object that doesn't have a requirement to implement a particular interface or derive from a particular base class,
+or make use of particular annotations in order to be compatible with a given framework 
+2-A JavaBean follows certain conventions.Getter/setter naming,having a public default constructor, being serialisable.
+</pre>
+
+<b class="redC">creating the session factory</b><br/>
+<pre>
+    	//creating configuration object
+        Configuration cfg = new Configuration();
+        cfg.configure("hiberante/hibernateMysql.cfg.xml");
+        //creating seession factory object
+        SessionFactory factory = cfg.buildSessionFactory();
+        //creating session object
+        Session session = factory.openSession();
+        //creating transaction object
+        Transaction t = session.beginTransaction();
+        Test t1=new Test("bhusan", "ballia");
+        session.save(t1);
+        t.commit();
+        session.close();
+</pre>
+<b class="redC">Now how to load/get data in hibernate</b>
+    <pre>
+<b>
+    difference between get and load is that <br/>
+    in case of get object will be fetch from the database when you ask for the object.<br/>
+    but in case of load , object will be fetch from the database when it will be actually use<br/>
+    means in case of load <br/>
+    Test t1=(Test)session.load(Test.class,1);<br/>
+    no query will be fire on database<br/>
+    but if we write this <br/>
+    String value=t1.getName();<br/>
+    then actually query will be fire.<br/>
+    but in case of get all the object will be load from the database<br/>
+    then this statement will fire a query on database
+    Test t1=(Test)session.get(Test.class,1);
+    
+</b>
+</pre>
+<b style="color: red">
+    Now how you will update value in database.
+</b>
+<pre>
+     Test t1=(Test)session.get(Test.class,2);
+     t1.setName("rejesh kumar mishra");
+     t.commit();
+     session.close();
+     
+   <b class="redC">Important</b> is that this is called dirty checking in hibernate because
+    we are not writing the update query here but hibernate will automatically find the change in
+    the object and will update the value in database
+
+</pre>
+
+<b style="color: red">
+    Now difference between merge and update <br/>
+    major difference between update and merge is that update method cannot be used when the
+    same object exists in the session
+    Example:-
+</b>
+<pre>
+        Student current = (Student)session.get(Student.class, 100);
+        System.out.println("Before merge: " + current.getName());
+        Student changed = new Student();
+        changed.setId(100);
+        changed.setName("Changed new Name");
+        // session.update(changed); // Throws NonUniqueObjectException
+        session.merge(changed); 
+        System.out.println("After merge: " + current.getName());
+</pre>
+
+<b style="color: red">Now single table mapping</b>
+<pre>
+<b class="redC">Advantage:-</b>
+It provide best performance because there is only one table will used in this approch.
+Disadvantage:-
+Table will not be normalize and null value constraint can not be applied in this approch.
+</pre>
+
+<b class="redC">Join table Mapping OR Table per subclass mapping</b>
+<pre>
+<b class="redC">NOTE:-</b><br/>
+ In case of Table Per Subclass, subclass mapped tables are related to parent 
+ class mapped table by primary key and foreign key relationship.
+<b class="redC">Advantage:-</b>
+Table is normalize and having null constraint.
+</pre>
+
+<b class="redC">
+Table per class 
+</b><br/>
+<pre>
+	In case of Table Per Concrete class, there will be three tables in the database having no relations to each other.
+    Advantage:-
+    faster than the previous because here we need to manage a only one table for each class.
+    Disadvantage:-
+    Only state of the entity is saved , their relation is lossed.
+</pre>
+
+
+<b class="redC">Some important point</b><br/>
+1-Cascade <br/>
+Cascade always used in owner side which told which operaton of owner will be applied on owned entity.<br/>
+2-Inverse true<br/>
+The side which will write inverse true will be managed side. this attribute will be used when we make the relation by-directional.<br/>
+
+ 
+<b class="redC">Now when to use what mapping </b>
+    1-if relation is currently one-to-one and may be one-to-many or many to many in future then we should use the<br/>
+    Joint table mapping.<br/>
+    Example is :- relation between franchise and its owner , today there only one owner of a franchise but in future there can<br/>
+    be more than one co-owner.<br/>
+    2- now if it is not the case then one-to-many mapping can be of two type<br/>
+    relation between dependent entity and relation independent entity<br/>
+    if the relation is between dependent entity then we should use same-pK mapping.<br/>
+    Example:-Relation between country and PM.<br/>
+    Now if the relation is between independent entity then we should use Pk-FK Approach<br/>
+    Example is :-Room and man lives inside the room.<br/>
+    <br/>
+<table border="1">
+    <tbody>
+        <tr>
+            <td> one to one</td>
+            <td>
+                Re-present one to one relation b/w object, need an additional element for DB mapping.
+            </td>
+        </tr>
+        <tr>
+            <td>Many to one </td>
+            <td>
+                Represent one to one mapping with set unique true<br/>
+                and off-course it is used for many to one mapping<br/>
+                create a PK-FK relation between Owner and Owned  object table in which Pk of owned works as fk in owner table.
+            </td>
+        </tr>
+        <tr>
+            <td>one to many</td>
+            <td>Represents one to many relation between object and required an additional element for DB mapping</td>
+        </tr>
+        <tr>
+            <td>Many to many </td>
+            <td>
+                Represent many to many and one to many relation between objects<br/>
+                and creates PK-Fk mapping between owner and owned object using relation table
+                in which pk of owned is make fk in relation table.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<b class="redC">Caching in Hibernate</b><br/>
+<pre>
+	Hibernate caching improve the performance of application by pooling the object
+	There is two type of caching in hibernate
+	<b class="redC">1-First level caching</b>
+	<b class="redC">2-Second level caching</b> 
+	
+	<b>
+	First level caching
+	Session object holds the first level cache data. It is enabled by default.
+	The first level cache data will not be available to entire application. An application can use many session object.
+	</b>
+	
+	<b>
+	 Session Factory holds the second level cache data. Data store in second level cache is available for the entire application
+	 but second level cache need to enable explicitely
+	 Second level cache implementation is provided by different vendor.
+	</b>
+
+</pre>
+
+<b class="redC">Servlet package detail</b><br/>
+
+
+<b class="redC">Interfaces in javax.servlet package</b><br/>
+1-Servlet<br/>
+2-ServletRequest<br/>
+3-ServletResponse<br/>
+4-RequestDispatcher<br/>
+5-ServletConfig<br/>
+6-ServletContext<br/>
+7-Filter<br/>
+<b class="redC">Classes in javax.servlet package</b><br/>
+1-GenericServlet<br/>
+2-ServletInputStream<br/>
+3-ServletOutputStream<br/>
+4-ServletException<br/>
+<b class="redC">Interfaces in javax.servlet.http package</b><br/>
+1-HttpServletRequest<br/>
+2-HttpServletResponse<br/>
+3-HttpSession<br/>
+<b class="redC">Classes in javax.servlet.http package</b><br/>
+1-HttpServlet<br/>
+2-Cookie<br/>
+<b class="redC">Method inside the servlet interface</b><br/>
+1-public ServletConfig getServletConfig()<br/>
+<b class="redC">Methods of GenericServlet class</b><br/>
+1-public ServletConfig getServletConfig() returns the object of ServletConfig.<br/>
+2-public ServletContext getServletContext() returns the object of ServletContext.<br/> 
+
+<b class="redC">Methods of RequestDispatcher interface</b><br/>
+1-public void forward(ServletRequest request,ServletResponse response)throws ServletException,java.io.IOException<br/>
+in case of this<br/>
+response of second servlet is sent to the client. Response of the first servlet is not displayed to the user.<br/>
+
+2-public void include(ServletRequest request,ServletResponse response)throws ServletException,java.io.IOException<br/>
+in case of this<br/>
+response of second servlet is included in the response of the first servlet that is being sent to the client.<br/>
+
+<b class="redC">Example:-</b><br/>
+
+RequestDispatcher rd=request.getRequestDispatcher("servlet2");<br/>
+        rd.forward(request, response);<br/>
+<br/>
+ RequestDispatcher rd=request.getRequestDispatcher("/index.html");<br/>
+  rd.include(request, response);<br/>
+<br/>
+<b class="redC">HttpServletResponse interface </b><br/>
+important method is sendRedirect().<br/>
+This is how you will use : <br/>
+response.sendRedirect("http://www.google.com");<br/>
+<br/>
+<b class="redC">
+    Difference between forward() and sendRedirect() method
+</b><br/>
+<br/>
+<table border="1">
+<tbody><tr><th>forward() method</th><th>sendRedirect() method</th></tr>
+<tr><td>The forward() method works at server side.</td><td>The sendRedirect() method works at client side.</td></tr>
+<tr><td>It sends the same request and response objects to another servlet.</td><td>It always sends a new request.</td></tr>
+<tr><td>It can work within the server only.</td><td>It can be used within and outside the server.</td></tr>
+<tr><td>Example: request.getRequestDispacher("servlet2").forward(request,response);</td><td>Example: response.sendRedirect("servlet2");</td></tr>
+</tbody></table>
+<br/>
+<b>ServletConfig Interface</b><br/>
+Mehod define in this interface is :-
+<table>
+    <tr>
+        <td>
+<ol>
+<li><strong>public String getInitParameter(String name):</strong>Returns the parameter value for the specified parameter name.</li>
+<li><strong>public Enumeration getInitParameterNames():</strong>Returns an enumeration of all the initialization parameter names.</li>
+<li><strong>public String getServletName():</strong>Returns the name of the servlet.</li>
+<li><strong>public ServletContext getServletContext():</strong>Returns an object of ServletContext.</li>
+</ol>
+            </td>
+    </tr>
+    </table>
+<b class="redC">HttpServletRequest interface</b><br/>
+Main method inside this is :-<br/>
+1-getRequestURL() <br/>
+2-getSession()	<br/> 
+Methods inherited from interface javax.servlet.ServletRequest<br/>
+3-getAttribute
+4-getParameter
+5-getParameterValues
+6- setAttribute   
+
+<b class="redC">ServletConfig Interface</b><br/>
+<b class="redC">How to get the object of ServletConfig</b><br/>
+getServletConfig() method of Servlet interface returns the object of ServletConfig.<br/>
+ServletConfig config=getServletConfig();<br/>
+
+<b class="redC">ServletContext Interface</b><br/>
+An object of ServletContext is created by the web container at time of deploying the project.<br/>
+There is only one ServletContext object per web application.<br/>
+  <b class="redC">
+   Commonly used methods of ServletContext interface 
+	</b><br/>
+1-public String getInitParameter(String name):Returns the parameter value for the specified parameter name.<br/>
+2-public void setAttribute(String name,Object object):sets the given object in the application scope<br/>
+
+<b class="redC">How to get the object of ServletContext interface</b><br/>
+1-getServletContext() method of ServletConfig interface returns the object of ServletContext.<br/>
+    ServletContext application=getServletConfig().getServletContext();<br/>
+    <br/>  
+2-getServletContext() method of GenericServlet class returns the object of ServletContext.<br/>
+    ServletContext application=getServletContext();<br/>  
+<br/>
+
+<b class="redC">
+    Attribute in Servlet
+</b><br/>
+An attribute in servlet is an object that can be set, get or removed from one of the following scopes:<br/>
+    request scope<br/>
+    session scope<br/>
+    application scope<br/>
+
+<b class="redC">
+    Attribute specific methods of ServletRequest, HttpSession and ServletContext interface
+</b><br/>
+
+There are following 4 attribute specific methods. They are as follows:<br/>
+<br/>
+    public void setAttribute(String name,Object object):sets the given object in the application scope.<br/>
+    public Object getAttribute(String name):Returns the attribute for the specified name.<br/>
+    public Enumeration getInitParameterNames():Returns the names of the context's initialization parameters as an Enumeration of String objects.<br/>
+    public void removeAttribute(String name):Removes the attribute with the given name from the servlet context.<br/>
+<br/>
+<b class="redC">
+   Session Tracking Techniques 
+</b><br/>
+There are four techniques used in Session tracking:<br/>
+<br/>
+   1- Cookies<br/>
+   2- Hidden Form Field<br/>
+   3- URL Rewriting<br/>
+   4- HttpSession<br/>
+<br/>
+<b class="redC">
+   Event and Listener in Servlet 
+</b><br/>
+Events are basically occurrence of something. Changing the state of an object is known as an event<br/>
+
+There are many event classes in Servlet<br/>
+The event classes are as follows:<br/>
+<br/>
+1-ServletRequestEvent<br/>
+2-ServletContextEvent<br/>
+3-ServletRequestAttributeEvent<br/>
+4-ServletContextAttributeEvent<br/>
+5-HttpSessionEvent<br/>
+<br/>
+<b class="redC"><br/>
+Now event interfaces are :-<br/>
+<br/>    
+1-ServletRequestListener<br/>
+2-ServletRequestAttributeListener<br/>
+3-ServletContextListener<br/>
+4-ServletContextAttributeListener<br/>
+5-HttpSessionListene<br/>
+<br/>
+<b class="redC">Now next point is how you will use these classes and interfaces</b><br/>
+</b>
+
+If you want to do somethings at a particular event then you have to implement the corresponding interface<br/>
+<br/>
+For example :-<br/>
+<br/>
+The ServletContextEvent is notified when web application is deployed on the server<br/>
+If you want to perform some action at the time of deploying the web application<br/>
+you need to implement ServletContextListener interface and provide the implementation of its methods.<br/>
+<br/>
+public void contextInitialized(ServletContextEvent e): is invoked when application is deployed on the server.<br/>
+public void contextDestroyed(ServletContextEvent e): is invoked when application is undeployed from the server.<br/>
+<br/>
+similarly we can use the other listeners......................<br/>
+<br/>
+<b class="redC">
+    Servlet Filter
+</b><br/>
+A filter is an object that is invoked at the preprocessing and postprocessing of a request.<br/>
+The javax.servlet package contains the three interfaces of Filter API.<br/>
+<br/>
+    1-Filter<br/>
+    2-FilterChain<br/>
+    3-FilterConfig<br/>
+<b  class="redC">
+  Now method inside the filter interface 
+</b><br/>
+<table border="1">
+<tbody><tr><th>Method</th><th>Description</th></tr>
+<tr><td>public void init(FilterConfig config)</td><td>init() method is invoked only once. It is used to initialize the filter.</td></tr>
+<tr><td>public void doFilter(HttpServletRequest request,HttpServletResponse response, FilterChain chain)</td><td>doFilter() method is invoked every time when user request to any resource, to which the filter is mapped.It is used to perform filtering tasks.</td></tr>
+<tr><td>public void destroy()</td><td>This is invoked only once when filter is taken out of the service.</td></tr>
+</tbody></table>
+<br/>
+<b class="redC">
+FilterChain interface
+</b><br/>
+<b class="redC">Method inside the FilterChain interface</b><br/>
+The object of FilterChain is responsible to invoke the next filter or resource in the chain.This object is passed in the doFilter method of Filter interface.The FilterChain interface contains only one method:<br/>
+public void doFilter(HttpServletRequest request, HttpServletResponse response): it passes the control to the next filter or resource.<br/>
+
+<b class="redC">
+    Now how to use filter in with servlet
+</b><br/>
+    How to define Filter<br/>
+<b class="redC">
+    Step 1:-
+</b><br/>
+    &lt;web-app>  
+ <pre> 
+ &lt;servlet>  
+ &lt;servlet-name>s1 &lt;/servlet-name>  
+ &lt;servlet-class>HelloServlet &lt;/servlet-class>  
+ &lt;/servlet>  
+  
+ &lt;servlet-mapping>  
+ &lt;servlet-name>s1 &lt;/servlet-name>  
+ &lt;url-pattern>/servlet1 &lt;/url-pattern>  
+ &lt;/servlet-mapping>  
+  
+ &lt;filter>  
+ &lt;filter-name>f1 &lt;/filter-name>  
+ &lt;filter-class>MyFilter &lt;/filter-class>  
+ &lt;/filter>  
+   
+ &lt;filter-mapping>  
+ &lt;filter-name>f1 &lt;/filter-name>  
+ &lt;url-pattern>/servlet1 &lt;/url-pattern>  
+ &lt;/filter-mapping>  
+  
+  
+ &lt;/web-app> 
+ 
+</pre>
+
+<b class="redC">
+Step: 2-
+</b><br/>
+<pre>
+public class MyFilter implements Filter{  
+  
+public void init(FilterConfig arg0) throws ServletException {}  
+      
+public void doFilter(ServletRequest req, ServletResponse resp,  
+    FilterChain chain) throws IOException, ServletException {  
+          
+    PrintWriter out=resp.getWriter();  
+    out.print("filter is invoked before");  
+          
+    chain.doFilter(req, resp);//sends request to next resource  
+          
+    out.print("filter is invoked after");  
+    }  
+    public void destroy() {}  
+}
+</pre>
+<b class="redC">To do the transaction with autocommit turned off</b><br/>
+SET autocommit=0; <br/>
+By default it will be SET autocommit=0 means autocommit ON. <br/>
+
+   
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html>
+<title>Hibernate</title>
+<head>
+<style type="text/css">
+.heading {
+	color: red;
+	font: bold;
+}
+
+.redC {
+	color: red
+}
+
+.blueC {
+	color: blue;
+}
+</style>
+</head>
+<body>
+
+<div data-role="page">
+<div data-role="main" class="ui-content">
+<b class="redC">How to call store procedure using hibernate</b><br/>
+<pre class="blueC">
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		PreparedStatement st = session.connection().prepareStatement("{call procedureName(?, ?)}");
+		                st.setString(1, formatter.format(parameter1));
+		                st.setString(2, formatter.format(parameter2));
+		                st.execute();
+		tx.commit();
+</pre>
+
+<b class="redC">Persist</b><br/>
+	The semantics of this method is strictly defined in the specification, which basically states, that:<br/>
+	1)-a transient instance becomes persistent (and the operation cascades to all of its relations with cascade=PERSIST or cascade=ALL)<br/>
+	2)-if an instance is already persistent, then this call has no effect for this particular instance (but it still cascades to its relations with cascade=PERSIST or cascade=ALL)<br/>
+	3)-if an instance is detached, you should expect an exception, either upon calling this method, or upon committing or flushing the session.<br/>
+	<br/>
+	Notice that there is nothing here that concerns the identifier of an instance. The spec does not state that the id will be generated right away, regardless of the id generation strategy.
+	The specification for the persist method allows the implementation to issue statements for generating id on commit or flush, and the id is not guaranteed to be non-null after calling this method,
+	so you should not rely upon it.<br/>
+	You may call this method on an already persistent instance, and nothing happens. But if you try to persist a detached instance, the implementation is bound to throw an exception.<br/>
+<b class="redC">Save</b><br/>
+	The save method is an “original” Hibernate method that does not conform to the JPA specification.<br/>
+	<br/>
+	Its purpose is basically the same as persist, but it has different implementation details. The documentation for this method strictly states that it persists the instance,
+	“first assigning a generated identifier”. The method is guaranteed to return the Serializable value of this identifier.<br/>
+	<br/>
+	<b class="redC">Question:-</b>What is JPA Entity Lifecycle Events<br/>
+	<b class="redC">Answe:-</b><br/>
+	When working with JPA, there are several events that we can be notified of during an entity's lifecycle.<br/>
+	we'll discuss the JPA entity lifecycle events and how we can use annotations to handle the callbacks and execute code when these events occur.<br/>
+	<font class="redC">JPA Entity Lifecycle Events</font><br/>
+	JPA specifies seven optional lifecycle events that are called:<br/>
+	<font class="redC">1-</font>before persist is called for a new entity - @PrePersist<br/>
+	<font class="redC">2-</font>after persist is called for a new entity - @PostPersist<br/>
+	<font class="redC">3-</font>before an entity is removed - @PreRemove<br/>
+	<font class="redC">4-</font>after an entity has been deleted - @PostRemove<br/>
+	<font class="redC">5-</font>before the update operation - @PreUpdate<br/>
+	<font class="redC">6-</font>after an entity is updated - @PostUpdate<br/>
+	<font class="redC">7-</font>after an entity has been loaded - @PostLoad<br/>
+
+	<a target="_blank" href="https://www.baeldung.com/jpa-entity-lifecycle-events"><font class="redC">Read more...</font></a> <br/>
+	<font class="blueC">https://www.baeldung.com/jpa-entity-lifecycle-events</font><br/><br/>
+
+	<b class="redC">Question:-</b>What is difference between hibernate annotation & JPA annotation<br/>
+<b class="redC">Answer:-</b><br/>
+JPA is an specification an Hibernate provides an implementation. You use JPA annotations/API and, by including Hibernate jars in your classpath, Hibernate will provide the actual logic.<br/>
+Additionally, Hibernate offers an API that is unrelated to JPA. You can use that as well; the main difference is:<br/>
+<b class="redC">==>></b>if you use the JPA API, you may later replace Hibernate by other JPA implementation (v.g. EclipseLink) and you will need no changes to your program<br/>
+<b class="redC">==>></b>if you use directly Hibernate API, you have no implementation alternatives. The advantage may be that you can use features that Hibernate has defined but that are not part of JPA standard, which might be usefult to you.<br/>
+At any rate, what you should completely avoid is mixing JPA with the Hibernate API. As a beginner, I would advice you to stick to JPA.<br/>
+<b class="redC">Version 4.3.1</b><br/>
+<b class="redC">Question:-</b>What is Hibernate<br/>
+<b class="redC">Answer :-</b>Hibernate is a pure Java object-relational mapping (ORM) 
+			and persistence framework that allows you to map plain old Java objects to relational database tables <br/>
+<b class="redC">Hibernate With Annotations(Working With Hibernate 4.0)</b><br/> 
+  
+<b class="redC">What is JPA?</b><br/>
+ 	Java Persistence API is a collection of classes and methods to persistently store the vast amounts of data
+ 	into a database which is provided by the Oracle Corporation.<br/>
+<b class="redC">JPA Providers :-</b><br/>
+ 	JPA is an open source API, therefore various enterprise vendors such as Oracle,
+ 	Redhat, Eclipse, etc. provide new products by adding the JPA persistence flavor in them.
+	Some of these products include:
+	Hibernate, Eclipselink, Toplink, Spring Data JPA, etc.<br/>
+<b class="redC">Note:-</b><br/>
+	 JPA is just a specification while Hibernate is one of the JPA provider i.e  
+	 hibernate is implementing various things mentioned in JPA contract. 
+	 JPA or Java Persistence API is a standard specification for ORM implementations whereas Hibernate is the actual ORM implementation or framework. 
+	 JPA is Java Persistence API.<br/>
+<b class="redC">Note:-</b><br/>
+	 Hibernate Annotations are based on the JPA 2 specification<br/>
+  </div>
+ <div data-role="main" class="ui-content">
+  <b class="redC">
+  Note:-<br/>
+  session.createSQLQuery(""); Deprecated. (since 5.2 but we are still using 4.3.So,We are using createSQLQuery('') but if you are using hibernate 5.x then you can use use createNativeQuery(String))<br/>
+  </b>
+  <br/>
+  The Java Persistence Query Language (JPQL) is the most common way to query data from a database with JPA. 
+  But it supports only a small subset of the SQL standard, and it also provides no support for database specific features.<br/>
+  (<b class="redC">that is one of the reason we are using mix up hibernate and JPA because provide more supports to SQL standard</b>)<br/>
+  
+  </div>
+  
+  <div data-role="main" class="ui-content">
+  
+   <b class="redC">SQL Transformers</b><br/>
+    With native sql returning non-entity beans or Map's is often more useful instead of basic Object[]<br/>
+    With result transformers that is now possible.<br/>
+    <pre class="blueC">
+    List resultWithAliasedBean = s.createSQLQuery(
+      SELECT st.name as studentName, co.description as courseDescription
+      FROM Enrolment e
+      INNER JOIN Student st on e.studentId=st.studentId
+      INNER JOIN Course co on e.courseCode=co.courseCode")
+      .addScalar("studentName")<b class="redC">//column name</b>
+      .addScalar("courseDescription")<b class="redC">//column name</b>
+      .setResultTransformer( Transformers.aliasToBean(StudentDTO.class))
+      .list();
+    StudentDTO dto =(StudentDTO) resultWithAliasedBean.get(0);
+    </pre>
+<b class="redC">	 
+Question:- What are the pros and cons of detached objects?
+</b> <br/>
+<b class="redC">Pros:</b> <br/>
+	When long transactions are required due to user think-time, it is the best practice to break the long transaction  
+	up into two or more transactions. You can use detached objects from the first transaction to carry data all the  
+	way up to the presentation layer. These detached objects get modified outside a transaction and later on re-attached 
+	to a new transaction via another session.<br/> 
+<b class="redC">Cons</b> <br/>
+	In general, working with detached objects is quite cumbersome, and better to not clutter up the session with them 
+	if possible. It is better to discard them and re-fetch them on subsequent requests. This approach is not only more 
+  </div>
+  
+  <div data-role="main" class="ui-content">
+  <b class="redC">What is java beans:-</b><br/>
+  A JavaBean is a POJO that is serializable,  has a no-argument constructor, and allows access to properties 
+  using getter and setter methods that follow a simple naming convention<br/>
+  </div>
+  
+  <div data-role="main" class="ui-content">
+  <b class="redC">What is Java Serialization:-</b><br/>
+  Primary purpose of java serialization is to write an object into a stream. 
+  so that it can be transported through a network and that object can be rebuilt again<br/>
+  </div>
+  
+  <div data-role="main" class="ui-content">
+  <b class="redC">Question :-What is advantage of hibernate</b><br/>
+<b class="redC">1.Productivity</b><br/>
+  It helps developers get rid of writing complex and tedious SQL statement, no more need of JDBC APIs for result set 
+  or data handling. It makes developers more concentrate on the business logic and increase the project's productivity<br/>
+<b class="redC">2.Maintainability</b><br/>
+	It helps reduce the lines of code, makes system more understandable and emphasizes more on business logic  
+	rather than persistence work (SQLs). More important, a system with less code is more easier to refactor.<br/>
+<b class="redC">3.Portability</b><br/>
+	It abstracts our application away from the underlying SQL database and sql dialect. Switching to other SQL  
+	database requires few changes in Hibernate configuration file (Write once / run-anywhere)<br/>
+	
+<b class="redC">What is difference between merge and update in hibernate</b><br/>
+<b class="redC">Question :-</b>Type of primary key generator in hibernate <br/>
+<b class="redC">Question :-</b> What is the difference between hibernate and jdbc<br/>
+<b class="redC">1)</b> If you will use only JPA API(Because hibernate have some additional API and if you use them then it will be not database independent) then Hibernate will be database independent, your code will work for all ORACLE,MySQL ,SQLServer etc. 
+   In case of JDBC query must be database specific.<br/>
+<b class="redC">2)</b> Hibernate Supports automatic versioning of rows but JDBC Not.<br/>
+<br/>
+<b class="redC">Question:-</b> What is lazy fetching in Hibernate? With Example.<br/>
+	<b class="redC">Answer :-</b>Lazy fetching decides whether to load child objects while loading the Parent Object. 
+	You need to do this setting respective hibernate mapping file of the parent class. 
+	Lazy = true (means not to load child) 
+	By default the lazy loading of the child objects is true. 
+	This make sure that the child objects are not loaded unless they are explicitly invoked in the application 
+	by calling getChild() method on parent.In this case hibernate issues a fresh database call to load the 
+	child when getChild() is actully called on the Parent object. But in some cases you do need to load the 
+	child objects when parent is loaded. 
+	Just make the lazy=false and hibernate will load the child when parent is loaded from the database.<br/>
+	<b class="redC">Example :-</b>
+	&lt;set name="address" inverse="true" cascade="delete" <b class="redC">lazy="false"</b>&gt;<br/><br/>
+<b class="redC">Question:-</b> What is dirty checking in Hibernate?<br/>
+	<b class="redC">Answer:-</b> Hibernate automatically detects object state changes in order to synchronize the updated state with 
+	the database.<br/>
+<b class="redC">Question:-</b>Filter in Hibernate with Example?<br/>
+<b class="redC">Question:-</b>What the Core interfaces are of hibernate framework?<br/>
+	<b class="redC">1-</b>Session Interface<br/>
+	<b class="redC">2-</b>SessionFactory Interface<br/>
+	<b class="redC">3-</b>Configuration Interface<br/>
+	<b class="redC">4-</b>Transaction Interface<br/>
+	<b class="redC">5-</b>Query<br/>
+	<b class="redC">6-</b>Criteria Interface<br/>
+<b class="redC">Question:-</b>What are Callback interfaces?<br/>
+<b class="redC">Note:-</b>Hibernate's Query facilities do not allow you to Alter the database Structure.<br/>		
+ 
+  <b class="redC">In hibernate there is three way to implement inheritance</b><br/>
+  <b class="redC">(1)Single table strategy.</b>
+  <pre>
+    @Entity
+	//@SequenceGenerator(name="per",sequenceName="per")
+	@Table(name="person")
+	@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+	@DiscriminatorColumn(name="personType",discriminatorType=DiscriminatorType.STRING)
+	@DiscriminatorValue("person")
+	public class Person {
+	@Id	
+	//@GeneratedValue(generator="per",strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	</pre>
+<b class="redC">and then on top of each class</b><br/>
+<pre>
+	@Entity
+	@DiscriminatorValue("employee")
+</pre>	
+<b class="redC">Advantage and Disadvantage :-</b>
+	It provides best performance due to single table  
+	But disadvantage is 
+	Table is not normalize and null constraint will not be applicable.<br/>
+ </div>
+ 
+  <div data-role="main" class="ui-content">
+  <b class="redC">(2)Table per class :-</b>
+  <pre>
+    @Entity
+	@ Table(name="person1")
+	//@ SequenceGenerator(name="g1",sequenceName="per")
+	@ Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+	public class Person1 {
+	@Id
+	@ GeneratedValue(strategy=GenerationType.TABLE)
+	int id;
+  </pre>	
+<b class="redC">Then on every table</b><br/>
+<pre> 
+	@Entity
+	@ Table(name="Employee1")
+</pre>		
+<b class="redC">Advantage and Disadvantage :-</b>
+	Better performance than single table because only one table will be manage for each class 
+	disadvantage is that only state is save here not relation, therefore 
+	not supported by ORM framework.<br/>
+ </div>
+ 
+ <div data-role="main" class="ui-content">
+ <b class="redC">(3)Joined Table</b><br/>
+ <pre>
+    @Entity
+	@Table(name="Personn")
+	// @SequenceGenerator(name="g1",sequenceName="bhusan")
+	@Inheritance(strategy=InheritanceType.JOINED)
+	public class Personn {
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)	
+	int id;
+ </pre>
+<b class="redC">Then on every table</b>
+<pre>
+	@Entity
+	@Table(name="Employee")
+</pre>	
+<b class="redC">Advantage and Disadvantage :-</b>
+	Table will be normalize and null constraint will be applicable but 
+	disadvantage is that performance will be low due to multiple table and join 
+	between tables.<br/>
+ </div>
+ 
+ <div data-role="main" class="ui-content">
+   <b class="redC">Advantage of Hibernate :-</b>
+	<br/>
+	<b class="redC">1)</b> Fast Performance :Beacuse it use first level cache which is enable by default in hibernate.<br/>
+	<b class="redC">2)</b> Database Independent Query:HQL (Hibernate Query Language) is the object-oriented version of SQL.<br/>
+	<b class="redC">3)</b>Automatic Table Creation<br/>
+    <b class="redC">Hibernate Inheritance Mapping:-</b><br/>
+    
+	Hibernate inheritance can be perform by 3 ways<br/>
+    <b class="redC">1)</b>Table Per Hierarchy<b class="redC">(Single table)</b><br/>
+    <b class="redC">2)</b>Table Per Concrete class<b class="redC">(Table per class)</b><br/>
+    <b class="redC">3)</b>Table Per Subclass<b class="redC">(Joint table)</b><br/>
+ 
+	<b class="redC">Question:-</b> 
+	What is hibernate flow diagram.<br/>
+	<b class="redC">Question :-</b>
+	What is a SessionFactory? Is it a thread-safe object?<br/>
+	Answer :-
+	SessionFactory is Hibernates concept of a single data store and is thread safe so that many threads can access it concurrently<br/>   
+	<b class="redC">Question:-</b>
+	What is a Session? Can you share a session object between different theads.<br/>
+	Answer:-
+	Session is a light weight and a non-threadsafe object (No, you cannot share it between threads).<br/>
+	<b class="redC">Type of ID generator in Hibernate</b><br/>
+	<b class="redC">Answer:-</b>
+	The JPA specification supports 4 different primary key generation strategies<br/>
+	<b class="redC">GenerationType.AUTO:-</b><br/>
+	The GenerationType.AUTO is the default generation type and lets the 
+	persistence provider choose the generation strategy.<br/>
+	<b class="redC">Syntax:-</b><br/>
+	
+	<pre class="blueC">
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@Column(name = "id", updatable = false, nullable = false) 
+	</pre>
+	
+	If you use Hibernate as your persistence provider, 
+	it selects a generation strategy based on the database specific dialect 
+	For most popular databases, it selects GenerationType.SEQUENCE which I will explain later.<br/>
+	
+	<b class="redC">GenerationType.IDENTITY :-</b><br/>
+	The GenerationType.IDENTITY is the easiest to use .It works on auto-incremented database column and lets the database to generate.
+	From a database point of view, this is very efficient.
+	because the auto-increment columns are highly optimized, and it doesn't require any additional.
+	statements<br/>
+	
+	<b class="redC">Syntax:-</b><br/>
+	
+	<pre class="blueC">
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "id", updatable = false, nullable = false) 
+	</pre>
+	
+	<b class="redC">Drawback:-</b><br/>
+	This approach has only drawback that we can not know the newly assigned value prior 
+	to executing INSERT statement.<br/>
+	
+	<b class="redC">GenerationType.SEQUENCE :-(not supported by Mysql)</b><br/>
+	
+	The GenerationType.SEQUENCE is preferred way to generate primary key values and uses a 
+	database sequence to generate unique values. 
+	It requires additional select statements to get the next value from a database sequence. 
+	But this has no performance impact for most applications.<br/>
+	
+	<b class="redC">Syntax:-</b><br/>
+	
+	<pre class="blueC">
+	@Id 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE) 
+	@Column(name = "id", updatable = false, nullable = false) 
+	private Long id; 
+	</pre>
+	
+	<b class="redC">If you want to use your own sequence</b><br/>
+	
+	<pre class="blueC">
+	@Id 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator") 
+	@SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50) 
+	@Column(name = "id", updatable = false, nullable = false)  
+	private Long id; 
+	</pre>
+	
+	<b class="redC">GenerationType.TABLE :-</b><br/>
+	The GenerationType.TABLE gets only rarely used nowadays.<b class="redC">Performance issue due to extra table</b><br/>
+	<b class="redC">Syntax :-</b>
+	
+	
+	<pre class="blueC">
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE) 
+	@Column(name = "id", updatable = false, nullable = false) 
+	private Long id; 
+	</pre>
+	
+	
+	<b class="redC">IMPORTANT NOTE :-</b><br/>
+	IDENTITY is only a good choice when you cannot use SEQUENCE (e.g. MySQL)<br/> 
+	
+	<b class="redC">Different ways to create Queries in Hibernate</b><br/>
+	There are three different ways in hibernate to create query instance :<br/>
+	<b class="redC">1.</b>Using HQL syntax<br/>
+	<b class="redC">2.</b>Using SQL syntax<br/>
+	<b class="redC">3.</b>Using criteria API<br/>
+	
+	<b class="redC">1.HQL syntax</b><br/>
+	
+	<pre class="blueC">
+	String hqlQuery = "from Employee";
+	Query query = session.createQuery(hqlQuery);
+	List employeeList = query.list();
+	</pre>
+	
+	<b class="redC">2.SQL syntax</b><br/>
+	
+	<pre class="blueC">
+	String sqlQuery = "select emp_id,emp_name from Employee";
+	SQLQuery query = session.createSQLQuery(sqlQuery);
+    List employeeList = query.list();   
+	</pre>
+	
+	<b class="redC">3.Using Criteria API:</b><br/>
+	
+	<pre class="blueC">
+	Criteria criteria = session.createCriteria(Employee.class);
+	criteria.add(Restrictions.gt("salary",1000))
+    List employeeList = criteria.list();
+	</pre>
+	
+	<b class="redC">IMPORTANT NOTES</b><br/>
+	Calling session.getTransaction().begin() doesn't make much sense as session.getTransaction() will retrieve the transaction already in progress 
+	because it assumes that a transaction is in progress.<br/>
+	
+	<b class="redC">how to use HQL</b><br/>
+	Since "*" does not work in HQL so if you want to get all the object the  
+	String hql="FROM Employee";<br/>
+	
+	<b class="redC">Example :-1(getting all proprty of the object)</b><br/>
+	
+	<pre class="blueC">
+	 Session session = Myfactory.getSession();
+			Query query=session.createQuery("from Employee");
+			session.beginTransaction();
+			List  result=query.list();
+		    Iterator ite=result.iterator();
+		    while (ite.hasNext()) {
+				Employee emp = (Employee) ite.next();
+				System.out.println(":"+emp.getFirstName());
+			}
+		     session.close();
+	</pre>
+	
+<b class="redC">Example :-2(getting selected proprty of the object)</b><br/>
+<pre class="blueC">
+		Session session = Myfactory.getSession();
+		Query query=session.createQuery("select s.firstName, s.lastName from Employee s where s.firstName=?");
+		session.beginTransaction();
+		query.setParameter(0, "shashi");
+		List<Object[]> employees= (List<Object[]>)query.list();
+	     for(Object[] res: employees){
+	         String firstName = (String)res[1];
+	         System.out.println(":"+firstName);
+	     }
+	     session.close();
+</pre>	
+<b class="redC">In above both example there is difference in iteration also</b><br/>
+<br/>
+
+<b class="redC">Some more Example of using HQL </b><br/>
+
+<pre class="blueC">
+String hql="update Employee set salary=:wage where id=:ide";//<b class="redC">This an other way of passing parameter</b>
+        Query query=session.createQuery(hql);
+        query.setParameter("salary", 1000);
+        query.setParameter("ide", 10);
+		Transaction t=session.beginTransaction();
+        int result=query.executeUpdate(hql);
+            t.commit();
+      	if(result>0)
+                {
+         System.out.println("updated successfully");
+                }
+</pre>
+
+<b class="redC">NOTE:-</b><br/>
+<b class="redC">1-</b>Hibernate's Query facilities do not allow you to Alter the database Structure.<br/>
+<b class="redC">2-</b>HQL is object-oriented Query language, similar to Sql ,But Instead of operating on tables and column,<br/>
+	HQL works with persistent persistent objects and their properties.<br/>
+<b class="redC">3-</b>HQL is also case insesitive.<br/>
+<b class="redC">Need to read how to call procedure and function in Hibernate</b><br/>
+<b class="redC">IMPORTANT NOTE:-</b><br/>
+<pre>
+public class Myfactory {
+	static SessionFactory Factory;
+	static {
+		Configuration cfg = new Configuration().configure("hibernateMysql.cfg.xml");
+		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
+		applySettings(cfg.getProperties());
+		Factory = cfg.buildSessionFactory(builder.build());
+	}
+
+	public static SessionFactory getSessionFactory() {
+		return Factory;
+	}
+
+	public static Session getSession() {
+		return Factory.openSession();
+	}
+}
+</pre>
+<b class="redC">Question:-</b>How to map composite Key in hibernate<br/>
+<b class="redC">get() method in hibernate</b><br/>
+<pre>
+Employee en=(Employee)session.get(Employee.class, id);
+	Transaction t=session.beginTransaction();
+	 /*
+	   en.setFirstName("123");
+	   en.setLastName("456");
+	   session.update(en);
+	   <b class="redC">Even if i will comment the above line , query will be fire on database</b>
+	   because in case of .get() method, Object will be load from the database at very first time.
+	 */
+ </pre>	
+ <b class="redC">load() method in hibernate</b><br/> 
+ <pre>
+ Employee en=(Employee)session.load(Employee.class, id);
+	Transaction t=session.beginTransaction();
+	
+	/*en.setFirstName("xyz12345");
+	en.setLastName("abc");
+	session.update(en);*/
+	/*
+	<b class="redC">If we commet the above line no query will be fire on databse</b>
+	because in case of .load() , object will fetch from databse only when it will be use.
+	*/
+ </pre>
+ <b class="redC">What is connected mode in hibernate</b><br/>
+ <pre>
+    Employee e=(Employee)session.load(Employee.class,id);
+	System.out.println("Entity loaded");
+	System.out.println("id"+"  "+"fname"+"  "+"LastName");
+	System.out.println(e.getId()+" "+e.getFirstName()+" "+e.getLastName());
+	session.close();
+	<b class="redC">session is getting closed after getting object property</b>
+</pre>	
+<b class="redC">What is Disconnected mode in hibernate</b><br/>
+<pre>
+	Employee e=(Employee)session.get(Employee.class,id);
+	session.close();
+	System.out.println(e.getId()+" "+e.getFirstName()+" "+e.getLastName());
+	<b class="redC">session is closed above but still we get the object </b>
+</pre>
+<pre>
+	Transient - An object is transient if it has just been instantiated using the new operator,
+				 and it is not associated with a Hibernate Session.
+				 It has no persistent representation in the database and no identifier value has been
+				 assigned. Transient instances will be destroyed by the garbage collector if the
+				 application does not hold a reference anymore. Use the Hibernate Session to make
+				 an object persistent (and let Hibernate take care of the SQL statements that need
+				 to be executed for this transition). 
+	
+	Persistent - A persistent instance has a representation in the database and an identifier value.
+				 It might just have been saved or loaded, however, it is by definition in the scope of
+				 a Session. 
+				 IMPORTANT LINE:-
+				 Hibernate will detect any changes made to an object in persistent state
+				 and synchronize the state with the database when the unit of work completes.
+				 Developers do not execute manual UPDATE statements, or DELETE statements when
+				 an object should be made transient. 
+	
+	Detached - A detached instance is an object that has been persistent, but its Session has been
+			   closed. The reference to the object is still valid, of course, and the detached instance
+			   might even be modified in this state. A detached instance can be reattached to a new
+			   Session at a later point in time, making it (and all the modifications) persistent again.
+			   This feature enables a programming model for long running units of work that require
+			   user think-time. We call them application transactions, i.e., a unit of work from the 
+			   point of view of the user. 
+	
+	Now to understand the merge and update let us take an example 
+	
+	Session session = sessionFactory1.openSession(); 
+	Transaction tx = session.beginTransaction(); 
+	Item item = (Item) session.get(Item.class, new Long(1234)); 
+	tx.commit(); 
+	session.close(); // end of first session, item is detached 
+	
+	item.getId(); // The database identity is "1234" 
+	item.setDescription("my new description"); 
+	Session session2 = sessionFactory.openSession(); 
+	Transaction tx2 = session2.beginTransaction(); 
+	Item item2 = (Item) session2.get(Item.class, new Long(1234)); 
+	session2.update(item); // Throws NonUniqueObjectException 
+	tx2.commit(); 
+	session2.close(); 
+	
+	To understand the cause of this exception, it's important to understand detached objects
+	and what happens when you call saveOrUpdate() (or just update()) on a detached object. 
+	When we close an individual Hibernate Session, the persistent objects we are working with are
+	detached. This means the data is still in the application's memory, but Hibernate is no longer
+	responsible for tracking changes to the objects. 
+	If we then modify our detached object and want to update it, we have to reattach the object.
+	During that reattachment process, Hibernate will check to see if there are any other copies of
+	the same object. If it finds any, it has to tell us it doesn't know what the real copy is
+	any more. Perhaps other changes were made to those other copies that we expect to be saved,
+	but Hibernate doesn't know about them, because it wasn't managing them at the time. 
+	Rather than save possibly bad data, Hibernate tells us about the problem via the
+	NonUniqueObjectException.
+	
+	
+	So what are we to do? In Hibernate 3, we have merge() (in Hibernate 2, use saveOrUpdateCopy()).
+	This method will force Hibernate to copy any changes from other detached instances onto the
+	instance you want to save, and thus merges all the changes in memory before the save. 
+	Session session = sessionFactory1.openSession(); 
+	Transaction tx = session.beginTransaction(); 
+	Item item = (Item) session.get(Item.class, new Long(1234)); 
+	tx.commit(); 
+	session.close(); // end of first session, item is detached 
+	
+	item.getId(); // The database identity is "1234" 
+	item.setDescription("my new description"); 
+	Session session2 = sessionFactory.openSession(); 
+	Transaction tx2 = session2.beginTransaction(); 
+	Item item2 = (Item) session2.get(Item.class, new Long(1234)); 
+	Item item3 = session2.merge(item); // Success! 
+	tx2.commit(); 
+	session2.close(); 
+	It's important to note that merge returns a reference to the newly updated version of the
+	instance. It is not reattaching item to the Session. If you test for instance equality
+	(item == item3), you'll find it returns false in this case.
+    You will probably want to work with item3 from this point forward.
+</pre>
+<b class="redC">Important point before starting one-to-one/many mapping</b><br/>
+<b class="redC">NOTE:1-</b><br/>
+	If you are mapping the entities to a relational database the owning side often can be identified as the entity whose table contains the foreign key.<br/>
+	
+<b class="redC">NOTE:2-</b><br/>
+	The @JoinColumn annotation helps us specify the column we will use for joining an entity association or element collection.<br/>
+	
+<b class="redC">@JoinColumn Annotation</b><br/>
+	In a One-to-Many/Many-to-One relationship, the owning side is usually defined on the it's many side of the relationship. It's usually the side which owns the foreign key.<br/>
+ 	
+<b class="redC">@mappedBy Annotation</b><br/>
+	The value of mappedBy is the name of the association-mapping attribute on the owning side  On other word, the mappedBy attribute is used to define the non-owning side of the relationship 
+	<b class="redC">One-to-One Mapping Example(Relation between country and head of state)</b><br/>
+	
+	<pre>
+	@Entity 
+	@Table(name="country")
+	<b class="redC">public class country </b>{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	int id;
+	String name;
+	@OneToOne(cascade={CascadeType.ALL})
+	<b class="redC">@JoinColumn(name="hosid")</b>
+	Headofstate hod;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	// Other setters and getters
+	
+	}
+	</pre>
+	Now the HeadOfState class<br/>
+	<pre>
+	@Entity
+	@Table(name="headofstate")
+	<b class="redC">public class Headofstate</b> {
+	@Id	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	int hid;
+	String title,name;
+	<b class="redC">I have added this code to make it bi-directional 
+	@OneToOne(mappedBy="hod")</b>
+	country con;  
+	public country getCon() {
+		return con;
+	}
+	public void setCon(country con) {
+		this.con = con;
+	}
+	// Getters and setters
+	}
+	</pre>	
+	<b class="redC">Example of oneToMany mapping</b><br/>
+	Here i am taking a example of product to part mapping <br/>
+	<pre>
+	@Entity
+	<b class="redC">public class Product {</b>
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	int productId;
+	String productName;
+	<b class="redC">@OneToMany(cascade=CascadeType.ALL,mappedBy="Parts")
+	@JoinColumn(name="PID")</b>
+	Set&lt;Part&gt;parts;
+	public Set&lt;Part&gt; getParts() {
+		return parts;
+	}
+	public void setParts(Set&lt;Part&gt; parts) {
+		this.parts = parts;
+	}
+	// Getters and setters
+	
+	}
+	</pre>	
+	Now the annotation for the Part class<br/>
+	<pre>
+	@Entity
+	<b class="redC">public class Part {</b>
+	@Id	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	int partId;
+	String partName;
+	Product product;
+	<b class="redC">@ManyToOne</b>
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	// Getters and Setters
+	}
+	</pre>
+	<b class="redC">Example of oneToMany mapping by Join Table</b><br/>	
+	Here i am taking Example of Student and Phone<br/>
+	<pre>
+	@Entity
+	<b class="redC">public class Student {</b>
+	
+	private long studentId;
+	private String studentName;
+	
+	@Id
+	@GeneratedValue
+	public long getStudentId() {
+		return this.studentId;
+	}
+
+	<b class="redC">@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "STUDENT_PHONE", joinColumns = { @JoinColumn(name = "STUDENT_ID") }, inverseJoinColumns = { @JoinColumn(name = "PHONE_ID") })</b>
+	public Set&lt;Phone&gt; getStudentPhoneNumbers() {
+		return this.studentPhoneNumbers;
+	}
+	}
+	</pre>
+	Now the Phone class <br/>
+	<b class="redC">Here i am not making it bi-directional</b>
+	<pre>
+	@Entity
+	public class Phone {
+	@Id
+	@GeneratedValue
+	public long getPhoneId() {
+		return this.phoneId;
+	}
+	// Getter and Setters	
+	}
+	</pre>
+	<b class="redC">Example of manyToOne</b><br/>
+	I am taking the Example of Student and Address class<br/>
+	<pre>
+	@Entity
+	<b class="redC">public class Student1 {</b>
+	
+		private long studentId;
+		private String studentName;
+		private Address studentAddress;
+	
+		@Id
+		@GeneratedValue
+		public long getStudentId() {
+			return this.studentId;
+		}
+	
+		<b class="redC">@ManyToOne(cascade = CascadeType.ALL)</b>
+		public Address getStudentAddress() {
+			return this.studentAddress;
+		}
+	
+	}
+	</pre>
+	Now the Address Class <br/>
+	<pre>
+	@Entity
+	public class Address {
+	
+		private long addressId;
+		private String street;
+		private String city;
+		private String state;
+		private String zipcode;
+		
+		@Id
+		@GeneratedValue
+		public long getAddressId() {
+			return this.addressId;
+		}
+		
+		// Getter and Setters
+	
+	}
+	</pre>
+	<b class="redC">Example of manyTOmany</b><br/>
+	Here i am taking the example of Student and Course<br/>
+	<pre>
+	@Entity
+	<b class="redC">public class Student2 {</b>
+	
+		private long studentId;
+		private String studentName;
+		private Set&lt;Course&gt; courses = new HashSet&lt;Course&gt;();
+		
+		@Id
+		@GeneratedValue
+		
+		public long getStudentId() {
+			return this.studentId;
+		}
+	
+		<b class="redC">@ManyToMany(cascade = CascadeType.ALL)
+		@JoinTable(name = "STUDENT_COURSE", joinColumns = { @JoinColumn(name = "STUDENT_ID") }, inverseJoinColumns = { @JoinColumn(name = "COURSE_ID") })</b>
+		public Set&lt;Course&gt; getCourses() {
+			return this.courses;
+		}
+	
+	}
+	</pre>
+	Now the Course Class <br/>
+	<pre>
+	@Entity
+	<b class="redC">public class Course {</b>
+	
+		private long courseId;
+		private String courseName;
+	    
+		@Id
+		@GeneratedValue
+		public long getCourseId() {
+			return this.courseId;
+		}
+	
+	   <b class="redC"> @ManyToMany(mappedBy="courses")</b>
+		public Set&lt;Student2&gt; getStu() {
+			return stu;
+		}
+		// Getter and Setters
+	}
+	</pre>
+<b>Java's transient</b> keyword is used to denote that a field is not to be serialized, whereas JPA's @Transient annotation is used to indicate that a field is not to be persisted in the database, i.e. their semantics are different.<br/>
+<b class="redC">Question:-</b>What are the key components/objects of hibernate? <br/>
+<b>1-Configuration <br/>
+2-SessionFactory <br/>
+3-Session <br/>
+4-Transaction <br/>
+5-Query <br/>
+6-Criteria <br/>
+</b>
+<b class="redC">Question:-</b>What is first level cache in hibernate?  <br/>
+<b class="redC">Question:-</b>What is second level cache in hibernate? <br/>
+<b class="redC">Question:-</b>Transaction management in Hibernate?<br/>
+<b class="redC">Answer:-</b>Transaction management is the process of managing a set of statements or commands.In hibernate; transaction 
+management is done by transaction interface as shown in below code:<br/>
+<pre class="blueC">
+Session s = null;
+Transaction tr = null;
+try {
+s = sessionFactory.openSession();
+tr = s.beginTransaction();
+doTheAction(s);
+tr.commit();
+} catch (RuntimeException exc) {
+tr.rollback();
+} finally {
+s.close();
+}
+</pre>
+<b class="redC">Answer:-</b>Hibernate has numerous ways of managing concurrency. They are as listed below: <br/>
+<b>1-Automatic versioning<br/>
+2-Detached object <br/>
+3-Extended user sessions<br/>
+</b>
+<b class="redC">Question:-</b> Can you detail out the various collection types in Hibernate?<br/>
+<b class="redC">Answer:-</b><br/>
+<b>1-Bag<br/>
+2-Set<br/>
+3-List<br/>
+4-Array<br/>
+5-Map <br/>
+</b>
+<b class="redC">Question:-</b>How can we get hibernate statistics?<br/>
+<b>Answer:-</b>We can get hibernate statistics using getStatistics() method of SessionFactory class as shown below:<br/>
+		SessionFactory.getStatistics().<br/>
+<b class="redC">Question:-</b>What's the usage of callback interfaces in hibernate?<br/>
+<b>Answer:-</b>Callback interfaces of hibernate are useful in receiving event notifications from objects. For example, when an object is<br/>
+loaded or deleted, an event is generated and notification is sent using callback interfaces.<br/>
+<b class="redC">Question:-</b> What is the default cache service of hibernate?<br/>
+<b>Answer:-</b>Hibernate supports multiple cache services like EHCache, OSCache, SWARMCache and TreeCache and default cache <br/>
+service of hibernate is EHCache.<br/>
+<b class="redC">Question:-</b>How can we map the classes as immutable?<br/>
+<b>Answer:-</b>If we don't want an application to update or delete objects of a class in hibernate, we can make the class as immutable <br/>
+by setting mutable=false<br/>
+<b class="redC">Question:-</b>What's the use of version property in hibernate?<br/>
+<b>Answer:-</b>Version property is used in hibernate to know whether an object is in transient state or in detached state.<br/>
+<b class="redC">Question:-</b>Does hibernate support polymorphism?<br/>
+<b>Answer:-</b>Yes, hibernate fully supports polymorphism. Polymorphism queries and polymorphism associations are supported in<br/>
+all mapping strategies of hibernate.<br/>
+
+<b class="redC">Question:-</b> What is N+1 SELECT problem in Hibernate? <br/>
+<b class="redC">Question:-</b> What are some strategies to solve the N+1 SELECT problem in Hibernate?<br/>
+
+<b class="redC">Question:-</b> Does SessionFactory thread-safe in Hibernate?<br/>
+<b>Answer:-</b>SessionFactory is both Immutable and thread-safe and it has just one single instance in Hibernate <br/>
+application. It is used to create a Session object and it also provides caching by storing SQL queries<br/>
+stored by multiple session.<br/>
+<b class="redC">Question:-</b>What is the requirement for a Java object to become a Hibernate entity object?<br/>
+<b>Answer :-</b><br/>
+A POJO should not:<br/>
+1-Extend prespecified classes, Ex: public class GFG extends javax.servlet.http.HttpServlet { ? } is not a POJO class.<br/>
+2-Implement prespecified interfaces, Ex: public class Bar implements javax.ejb.EntityBean { ?} is not a POJO class.<br/>
+3-Contain prespecified annotations, Ex: @javax.persistence.Entity public class Baz { ? } is not a POJO class.<br/>
+<b>Beans are special type of Pojos. There are some restrictions on POJO to be a bean</b><br/>
+1-Serializable i.e. they should implement Serializable interface<br/>
+2-Fields should be private. This is to provide the complete control on fields<br/>
+3-Fields should have getters or setters or both.<br/>
+4-A no-arg constructor should be there in a bean.<br/>
+
+<b class="redC">Question:-</b>What is Hibernate Validator Framework?<br/>
+<b>Answer:-</b>Validation is a cross cutting task, so we should try to keep it apart from our business logic. 
+That's why JSR303 and JSR349 provides specification for validating a bean by using  
+annotations. Hibernate Validator provides the reference implementation of both these bean validation specs.<br/>
+
+<b class="redC">Question:-</b>How to write composite key mapping for hibernate? <br/>
+<b>Answer:-</b>You need to create a new @Embeddable class containing fields.<br/>
+<pre class="blueC">
+@Embeddable
+public class user_groupId implements Serializable { 
+    @Column(name="userId")
+    private String userId;
+
+    @Column(name="groupId")
+    private String group;
+}
+
+and then
+
+@Entity
+public class user_group {
+
+    @EmbeddedId
+    user_groupId id;
+
+    ...
+}
+</pre>
+Using the same way we can make more than one column as primary key.<br/>
+<br/>
+<b class="redC">Question:-</b>What is difference between save and persist in hibernate? <br/>
+<br/>
+
+<b>1-</b> 
+First difference between save and persist is there return type. 
+Similar to save method persist also INSERT records into database but return type of persist is void while return type of save 
+is Serializable object.<br/>
+
+<b>2-</b> 
+Another difference between persist and save is that both methods make a transient object to persistent state. 
+However, persist() method does not  guarantee that the identifier value will be assigned to the persistent state 
+immediately, the assignment might happen at flush time.<br/>
+<b>3-</b>
+<pre class="blueC">
+Session session = sessionFactory.openSession();
+session.beginTransaction();
+EmployeeOne e1 =(EmployeeOne) session.get(EmployeeOne.class,new Integer(1));
+session.close();
+System.out.println("First session closed");
+Session session2 = sessionFactory.openSession();
+Transaction t2 = session2.beginTransaction();
+e1.setLastName("bhusan");
+//session2.save(e1);
+//session.persist(e1);
+</pre>
+
+Here i am dealing with detached object in this case  
+if i will call the session.save() method then it will make an other entry  
+into data base.<br/>
+But if i will use session.persist() then it will throw Exception detached entity passed to persist 
+so we need to use merge().<br/>
+Therefore  it is always better to use Persist() rather than Save() as save has to be carefully used when dealing with session and transaction. 
+This is useful in long-running conversations with an extended Session/persistence context.  
+t2.commit();<br/>
+session2.close();<br/>
+
+<b class="redC">Question:-</b>how to choose between save() and persist().<br/>
+<b class="redC">Question:-</b>What is inverse true in hibernate?.<br/>
+<b>Answer:-</b>In short, inverse="true" means this is the relationship owner<br/>
+
+<b class="redC">Question:-</b>Differnece between rowSet and resultSet.<br/>
+
+<b class="redC">Question:-</b>Advantage of Hibernate ORM over SpringJdbc template ........Done<br/>
+
+<b class="redC">Question:-</b>how you will handle warning in Jdbc .......Done<br/>
+
+<b class="redC">Question:-</b>how you get data using spring jdbc template with row mapper and resultSetExtrator<br/>
+
+6-polymorphism in hibernate .....Pending.<br/>
+
+<b class="redC">Question:-</b>Connection Pooling in hibernate<br/>
+<b>Answer :-</b>Connection pool is good for performance, as it prevents Java application create a connection each time when interact <br/>
+		with database and minimizes the cost of opening and closing connections.<br/>
+<pre>
+&lt;property name="hibernate.c3p0.min_size"&gt;5&lt;/property&gt;
+&lt;property name="hibernate.c3p0.max_size"&gt;20&lt;/property&gt;
+&lt;property name="hibernate.c3p0.timeout"&gt;300&lt;/property&gt;
+&lt;property name="hibernate.c3p0.max_statements"&gt;50&lt;/property&gt;
+&lt;property name="hibernate.c3p0.idle_test_period"&gt;3000&lt;/property&gt;
+</pre>		
+<b class="redC">Question:-</b>Optimistic Locking in Hibernate<br/>
+<b>SaveOrUpdate<br/></b>
+This method will work for both new and old objects. If object is new, <br/>
+it will work like simple save or if object is already persistent, it will work like update.<br/>
+
+<b class="redC">Question:-</b>Spring bean thread safe<br/>
+<b>Answer:-</b>
+Singleton spring beans has no relation with thread safety. spring container only 
+manages life-cycle of objects and guaranteed that only one object in spring 
+container. so If an Non thread safe object is injected then obviously it is not thread  
+safe. To make it thread safe you have to handle it by coding.<br/>
+<b>Reasons to choose hibernate over jdbc Template:-</b><br/>
+<b>1-</b>Database Independent.<br/>
+<b>2-</b>Associations mapping means we are also mapping the relations.<br/>
+<b>3-</b>Lazy Loading.<br/>
+<b>4-</b>Hibernate Caching.<br/>
+<b>5-</b>Versioning.<br/>
+<b class="redC">Pessimistic & optimistic Locking in JPA 2 and Hibernate:-<br/></b>
+
+When your Java application has multiple transactions reading or modifying the 
+same record in the database, data concurrency is a major issue that you need to  
+address. A concurrency control mechanism, which applies locks to the records,  
+enables data integrity and avoids any conflict of data. The two main types of locks 
+used are pessimistic locking and optimistic locking.<br/>
+
+In pessimistic locking, the object is locked when it is initially accessed for the first  
+time in a given transaction. The lock then is released only when the transaction completes; the object is 
+not accessible for any other transactions during the transaction.<br/>
+
+In optimistic locking, the object is not locked when it is accessed for the first time in the transaction. 
+Instead, its state (generally the version number) is saved. When other transactions that are accessing  
+the same object try to modify the state of the object, the present state and the saved state are  
+compared. If the states differ, then it's a clear indication of a conflicting update and the transaction will 
+be rolled back.<br/>
+
+<b class="redC">How to do Versioning in Hibernate with annotation</b><br/>
+<pre class="blueC">
+@Entity
+@Table(name = "UsersTest1")
+public class Student implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue
+	@Column(name = "STUDENT_ID")
+	private long id;
+	@Version
+	@Column(name = "hit")
+	private int count;
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public String getEmail() {
+		return email;
+	}
+	
+	}
+</pre>
+<b class="redC">How to Identify and Resolve Hibernate N+1 SELECT's Problems</b><br/>
+Let's say you have a collection of Car objects (database rows), and each Car has a collection of  
+Wheel objects (also rows). In other words, Car -> Wheel is a 1-to-many relationship. 
+Now, let's say you need to iterate through all the cars, and for each one, print out a list of the wheels. 
+The naive O/R implementation would do the following:<br/>
+
+SELECT * FROM Cars;<br/>
+And then for each Car:<br/>
+SELECT * FROM Wheel WHERE CarId = ?<br/>
+
+In other words, you have one select for the Cars, and then N additional selects, where N is the total number of cars.<br/>
+As you see, the N+1 problem can happen if the first query populates the primary object and the second
+query populates all the child objects for each of the unique primary objects returned.
+<b class="redC">Resolve N+1 SELECTs problem</b><br/>
+
+<b>HQL fetch join</b>
+"from Car car join fetch car.wheel Wheel";<br/>
+<b class="redC">Question:-</b>If a class is serializable but its superclass in not,what will be the state of the instance variables inherited from super class after deserialization?<br/>
+
+<b>Answer:-</b>The values of the instance variables inherited from superclass will be reset to the 
+values they were given during the original construction of the object as the non-serializable super-class constructor will run.<br/>
+<br/>
+
+<b>Question:-Spring 4.0 Features<br/></b>
+<b>Answer:-</b>
+<b>1-</b>JSR-349 Bean Validation 1.1<br/>
+<b>2-</b>Most of the new features in Spring 4.0 is the bringing Java 8.0 and JEE 7.0 support for the Spring community.<br/>
+<b class="redC">*********Using HQL*************<br/></b>
+<pre>
+Session session = sessionFactory.openSession();<br/>
+Transaction t = session.beginTransaction();<br/>
+Query query = session.createQuery("select e1.firstName,e1.lastName from Employee e1 where e1.id=:id");
+query.setInteger("id", 0); 
+Query query = session.createQuery("select e1.firstName,e2.firstName from Employee e1 left join EmployeeOne e2 ");
+List  empList = query.list();
+Iterator ite=empList.iterator();
+while (ite.hasNext()) {
+	Object[] value=(Object[])ite.next();
+	System.out.println(" Values are "+value[0]);
+}
+t.commit();
+session.close();
+<b class="redC">******UPDATE********</b>
+Query&lt;Employee&gt;query = session.createQuery("update Employee set firstName=:fName where lastName =: lName");
+query.setParameter("fName","Zahid Sir");
+query.setParameter("lName","kumar");
+int a=query.executeUpdate();
+System.out.println("Number of row updated is : "+a);
+<b class="redC">*****DELETE*********</b>
+Query&lt;Employee&gt;query = session.createQuery("delete Employee where lastName =: lName");
+query.setParameter("lName","kumar");
+int a=query.executeUpdate();
+System.out.println("Number of row affected is : "+a);
+<b class="redC">INSERT INTO</b>
+Query&lt;Employee&gt; query = session.createQuery("insert into Employee(id,firstName,lastName) select id,firstName,lastName from EmployeeOne  where id=5");
+int a=query.executeUpdate(); 
+System.out.println("Number of row affected is : "+a);
+<b>*********IMPORTANT********</b> 
+There is no "ON" statement in HQL, hibernate does automatically based on your mappings and defined Associations.<br/>
+<b class="redC">Using Native query with Transformer DTO</b>
+List resultWithAliasedBean = session.createSQLQuery(
+		  "SELECT E.firstName as firstName ,E.lastName  as lastName FROM empdata E LEFT JOIN empdataone E1 ON E.id = E1.id"
+		  )
+		  .addScalar("firstName")
+		  .addScalar("lastName") 
+		  .setResultTransformer( Transformers.aliasToBean(DTO.class)) 
+		  .list(); 
+		DTO dto =(DTO) resultWithAliasedBean.get(0); 
+		System.out.println("===Value="+dto.getFirstName()); 
+<b class="redC">2-Native Query using Object Array</b> 
+List resultWithAliasedBean = session.createSQLQuery(
+		  "SELECT E.firstName as firstName ,E.lastName  as lastName FROM empdata E LEFT JOIN empdataone E1 ON E.id = E1.id"
+		  ) 
+		  .list(); 
+		Iterator ite=resultWithAliasedBean.iterator(); 
+		while (ite.hasNext()) { 
+			Object[] obj=(Object[])ite.next(); 
+			System.out.println("===="+obj[0]); 
+		} 
+	} 
+</pre>	
+<b class="redC">NOTE:-</b><br/>
+SessionFactory holds the second level cache data. It is global for all the session objects and not enabled by default.<br/>
+Different vendors have provided the implementation of Second Level Cache<br/>
+ <b>1-</b>EH Cache<br/>
+ <b>2-</b> OS Cache<br/>
+ <b>3-</b>Swarm Cache<br/>
+ <b>4-</b>JBoss Cache<br/>
+Each implementation provides different cache usage functionality. There are four ways to use second level cache.<br/>
+ <b>1-</b>read-only: caching will work for read only operation.<br/>
+ <b>2-</b>nonstrict-read-write: caching will work for read and write but one at a time.<br/>
+ <b>3-</b>read-write: caching will work for read and write, can be used simultaneously.<br/>
+ <b>4-</b>transactional: caching will work for transaction<br/>
+Then at class level you have to set<br/>
+@Cacheable  <br/>
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY) <br/>
+Now making provider entry in .cfg.xml file<br/>
+<pre>
+&lt;property name="cache.use_second_level_cache"&gt;true&lt;/property&gt; 
+&lt;property name="cache.region.factory_class"&gt;org.hibernate.cache.ehcache.EhCacheRegionFactory&lt;/property&gt;
+</pre>
+<b>Then how it works:-</b><br/>
+
+<pre class="blueC">
+Session session1=factory.openSession();    
+Employee emp1=(Employee)session1.load(Employee.class,121);    
+System.out.println(emp1.getId()+" "+emp1.getName()+" "+emp1.getSalary());    
+session1.close();    
+Session session2=factory.openSession(); 
+Employee emp2=(Employee)session2.load(Employee.class,121);  
+System.out.println(emp2.getId()+" "+emp2.getName()+" "+emp2.getSalary());  
+session2.close(); 
+</pre>
+
+When we run this code only one query will be hit to the database <br/>
+If you don't use second level cache, hibernate will fire query twice because both query uses different session objects.<br/>
+<br/>
+<b class="redC">Question:-</b>What is RowSet.<br/>
+<b class="redC">Answer:-</b>It is the wrapper of ResultSet.<br/>
+The implementation classes of RowSet interface are as follows:<br/>
+<b>1-</b>JdbcRowSet<br/>
+<b>2-</b>CachedRowSet<br/>
+<b>3-</b>WebRowSet<br/>
+<b>4-</b>JoinRowSet<br/>
+<b>5-</b>FilteredRowSet<br/>
+<b class="redC">Example:-</b><br/>
+To perform event handling with JdbcRowSet,<br/>
+you need to add the instance of RowSetListener in the addRowSetListener method of JdbcRowSet<br/>
+The RowSetListener interface provides 3 method that must be implemented. They are as follows:<br/>
+<b>1)</b> public void cursorMoved(RowSetEvent event);<br/>
+<b>2)</b> public void rowChanged(RowSetEvent event);<br/>
+<b>3)</b> public void rowSetChanged(RowSetEvent event);<br/>
+<pre> 
+public static void getRoWSetExample() 
+{ 
+	try 
+	{ 
+		 Class.forName("com.mysql.jdbc.Driver"); 
+		 JdbcRowSet rowSet = RowSetProvider.newFactory().createJdbcRowSet(); 
+		 rowSet.setUrl("jdbc:mysql://localhost:3306/test");  
+		 rowSet.setUsername("root");  
+		 rowSet.setPassword("220047");  
+		 rowSet.setCommand("select * from invoice_info");  
+		 rowSet.execute(); 
+		 rowSet.addRowSetListener(<b class="redC">new MyListener()</b>); 
+		 while (rowSet.next()) { 
+				// Generating cursor Moved event 
+				System.out.println("CART_ID: " + rowSet.getString(1));  
+				System.out.println("CART_INFO_ONE: " + rowSet.getString(2));  
+				System.out.println("INVOICE_NO: " + rowSet.getString(3));   
+		}   
+	} 
+	catch(Exception ex) { System.out.println("=======ConnectionMgn===="+ex);} 
+} 
+	 
+} 
+class <b class="redC">MyListener</b> implements RowSetListener {   
+    public void cursorMoved(RowSetEvent event) {   
+              System.out.println("Cursor Moved...");  
+    }  
+   public void rowChanged(RowSetEvent event) {  
+              System.out.println("Cursor Changed...");  
+   }   
+   public void rowSetChanged(RowSetEvent event) {   
+              System.out.println("RowSet changed..."); 
+   }   
+}  
+</pre>
+<br/>
+<b class="redC">Note:-</b><b>Differnece between ResultSet and RowSet</b><br/>
+<b>1-</b>It is Scrollable and Updatable bydefault<br/>
+<b>2-</b>A ResultSet maintains a connection to a database and because of that it cann't be serialized <br/>
+RowSet is a disconnected, serializable version of a JDBC ResultSet and also the<br/>
+RowSet extends the ResultSet interface so it has all the methods of ResultSet<br/>
+ </div>
+ <div data-role="main" class="ui-content">
+ </div>
+</div>
+</body>
+</html>

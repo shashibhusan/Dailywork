@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+                <div>
+<a href="http://www.javamadesoeasy.com/2015/03/threads-top-75-interview-questions-and_9.html" style="text-decoration:none;">THREADS - Top 80 interview questions and answers (detailed explanation with programs)</a> <br/>
+Question 61.&nbsp;</b></p><pre class="brush:java">
+
+class MyRunnable implements Runnable{
+   	public void run(){
+          	for(int i=0;i&lt;3;i++){
+                 	System.out.println("i="+i+" ,ThreadName="+Thread.currentThread().getName());
+          	}         	
+   	}
+}
+ 
+public class MyClass {
+   	public static void main(String...args){
+          	MyRunnable runnable=new MyRunnable();
+          	System.out.println("start main() method");
+          	Thread thread1=new Thread(runnable);
+          	Thread thread2=new Thread(runnable);
+          	thread1.start();
+          	thread2.start();
+          	System.out.println("end main() method");
+   	}
+}
+</pre><br/>Answer.<br/><a href="http://www.javamadesoeasy.com/2015/03/thread-behaviour-is-unpredictable.html" style="text-decoration:none;">Thread behaviour is unpredictable</a> because execution of Threads depends on Thread scheduler,</p><p>start main() method will be the printed first, but after that we cannot guarantee the order of thread1, thread2 and main thread they might run simultaneously or sequentially, so order of end main() method will not be guaranteed.</p><p><br></p><p>/*OUTPUT</p><p>start main() method</p><p>end main() method</p><p>i=0 ,ThreadName=Thread-0</p><p>i=0 ,ThreadName=Thread-1</p><p>i=1 ,ThreadName=Thread-0</p><p>i=2 ,ThreadName=Thread-0</p><p>i=1 ,ThreadName=Thread-1</p><p>i=2 ,ThreadName=Thread-1</p><p>*/</p><p><b><br></b></p><p><b>Question 62. &nbsp;</b></p><pre class="brush:java">class MyRunnable implements Runnable{
+   	public void run(){
+          	for(int i=0;i&lt;3;i++){
+                 	System.out.println("i="+i+" ,ThreadName="+Thread.currentThread().getName());
+          	}         	
+   	}
+}
+ 
+public class MyClass {
+   	public static void main(String...args) throws InterruptedException{
+          	System.out.println("In main() method");
+          	MyRunnable runnable=new MyRunnable();
+          	Thread thread1=new Thread(runnable);
+          	Thread thread2=new Thread(runnable);
+          	thread1.start();
+          	thread1.join();
+          	thread2.start();
+          	thread2.join();
+          	System.out.println("end main() method");
+   	}
+}
+
+
+
+</pre><p><b><br></b></p><p>Answer. &nbsp;We use <a href="http://www.javamadesoeasy.com/2015/03/join-method-ensure-all-threads-that.html" style="text-decoration:none;">join() method</a>to ensure all threads that started from main must end in order in which they started and also main should end in last. In other words <a href="http://www.javamadesoeasy.com/2015/03/join-method-ensure-all-threads-that.html" style="text-decoration:none;">join() method</a> waited for this thread to die.</p><p><br></p><p>/*OUTPUT</p><p>In main() method</p><p>i=0 ,ThreadName=Thread-0</p><p>i=1 ,ThreadName=Thread-0</p><p>i=2 ,ThreadName=Thread-0</p><p>i=0 ,ThreadName=Thread-1</p><p>i=1 ,ThreadName=Thread-1</p><p>i=2 ,ThreadName=Thread-1</p><p>end main() method</p><p>*/</p><p><br></p><p><b>Question 63. &nbsp;</b><br></p><pre class="brush:java">class MyRunnable implements Runnable {
+ 
+   	public void run() {
+          	try {
+                 	while (!Thread.currentThread().isInterrupted()) {
+                       	Thread.sleep(1000);
+                       	System.out.println("x");
+                 	}
+          	} catch (InterruptedException e) {
+                 	System.out.println(Thread.currentThread().getName() + " ENDED");
+          	}
+   	}
+}
+ 
+public class MyClass {
+   	public static void main(String args[]) throws Exception {
+ 
+          	MyRunnable obj = new MyRunnable();
+          	Thread t = new Thread(obj, "Thread-1");
+          	t.start();
+ 
+          	System.out.println("press enter");
+          	System.in.read();
+          	t.interrupt();
+   	}
+}
+</pre><p>Answer. &nbsp;"press enter" will be printed first then <a href="http://www.javamadesoeasy.com/2015/03/2-alternate-ways-to-stop-thread-as-stop.html" style="text-decoration:none;">thread1 will keep on printing x until enter is pressed</a>, once enter is pressed "Thread-1 ENDED" will be printed. System.in.read() causes main thread to go from <a href="http://www.javamadesoeasy.com/2015/03/thread-states-thread-life-cycle-in-java.html" style="text-decoration:none;">running to waiting state</a> (thread waits for user input)</p><p><br><br></p><p>/* OUTPUT</p><p>press enter</p><p>x</p><p>x</p><p>x</p><p>x</p><p>Thread-1 ENDED</p><p>*/</p><p><b><br></b></p><p><b>Question 64. &nbsp;</b><br></p><pre class="brush:java">class MyRunnable implements Runnable{
+   	
+   	public void run(){
+ 
+          	synchronized (this) {
+                 	System.out.println("1 ");
+                 	try {                  	
+                       	this.wait();           	
+                       	System.out.println("2 ");
+                 	} catch (InterruptedException e) {
+                       	e.printStackTrace();
+                 	}
+                                     	
+          	}
+          	
+   	}
+}
+public class MyClass  {
+   	
+   	public static void main(String[] args) {
+          	
+          	MyRunnable myRunnable=new MyRunnable();
+          	Thread thread1=new Thread(myRunnable,"Thread-1");  	
+          	thread1.start();
+                       	
+   	}
+ 
+}
+ 
+
+</pre><p><br></p><p>Answer. &nbsp;Thread acquires lock on myRunnable object so 1 was printed but notify wasn't called so 2 will never be printed, this is called frozen process. Deadlock is formed, These type of &nbsp;<a href="http://www.javamadesoeasy.com/2015/03/deadlock-in-multithreading-program-to.html" style="text-decoration:none;">deadlocks</a>are called Frozen processes.</p><p><br></p><p>/*OUTPUT</p><p>1</p><p>*/</p><p><b>Question 65. &nbsp;</b><br></p><pre class="brush:java">import java.util.ArrayList;
+ 
+ 
+/* Producer is producing, Producer will allow consumer to
+ * consume only when 10 products have been produced (i.e. when production is over).
+ */
+class Producer implements Runnable{
+ 
+   	ArrayList&lt;Integer&gt; sharedQueue;
+   	
+   	Producer(){
+          	sharedQueue=new ArrayList&lt;Integer&gt;();
+   	}
+   	
+   	@Override
+   	public void run(){
+          	
+          	synchronized (this) {
+                 	for(int i=1;i&lt;=3;i++){ 	//Producer will produce 10 products
+                       	sharedQueue.add(i);
+                       	System.out.println("Producer is still Producing, Produced : "+i);
+                       	
+                       	try{
+                              	Thread.sleep(1000);
+                       	}catch(InterruptedException e){e.printStackTrace();}
+                 	
+                 	}
+                 	System.out.println("Production is over, consumer can consume.");
+                 	this.notify();
+          	}
+   	}
+   	
+}
+ 
+class Consumer extends Thread{
+   	Producer prod;
+   	
+   	Consumer(Producer obj){
+     prod=obj;
+   	}
+   	
+   	public void run(){
+          	synchronized (this.prod) {
+                 	
+                 	System.out.println("Consumer waiting for production to get over.");
+                 	   try{
+                       	 this.prod.wait();
+                       	}catch(InterruptedException e){e.printStackTrace();}
+                 	
+          	}
+          	
+          	
+          	int productSize=this.prod.sharedQueue.size();
+          	for(int i=0;i&lt;productSize;i++)
+                 	System.out.println("Consumed : "+ this.prod.sharedQueue.remove(0) +" ");  
+          	
+   	}
+   	
+}
+ 
+public class MyClass {
+   	public static void main(String args[]) throws InterruptedException{
+          	
+          	Producer prod=new Producer();
+          	Consumer cons=new Consumer(prod);
+          	
+          	Thread prodThread=new Thread(prod,"prodThread");
+          	Thread consThread=new Thread(cons,"consThread");
+          	
+          	consThread.start();    	
+          	Thread.sleep(100);     //minor delay.
+          	prodThread.start();    	
+          	
+          	
+   	}
+ 
+} 
+
+</pre><p><b><br></b></p><p><br></p><p>Answer. Because of minor delay delay consThread surely started before producer thread. "Consumer waiting for production to get over." printed first</p><p>than producer produced</p><p>than "Production is over, consumer can consume."</p><p>than consumer consumed.</p><p><br></p><p>The above program is classical example of <a href="http://www.javamadesoeasy.com/2015/03/solve-consumer-producer-problem-by_2.html" style="text-decoration:none;">how to solve Consumer Producer problem by using wait() and notify() methods</a>.</p><p><br></p><p>/*OUTPUT</p><p>Consumer waiting for production to get over.</p><p>Producer is still Producing, Produced : 1</p><p>Producer is still Producing, Produced : 2</p><p>Producer is still Producing, Produced : 3</p><p>Production is over, consumer can consume.</p><p>Consumed : 1</p><p>Consumed : 2</p><p>Consumed : 3</p><p>*/</p><div><p><b>Question 66.&nbsp;</b>&nbsp;</p><pre class="brush:java">class MyRunnable implements Runnable{
+   	
+   	public void run(){
+          	synchronized (this) {
+                 	System.out.print("1 ");
+                 	try {                  	
+                       	this.wait(1000); 		
+                       	System.out.print("2");
+                 	} catch (InterruptedException e) {
+                       	e.printStackTrace();
+                 	}                	
+          	}         	
+   	}
+}
+public class MyClass  {
+   	public static void main(String[] args) {
+          	MyRunnable myRunnable=new MyRunnable();
+          	Thread thread1=new Thread(myRunnable,"Thread-1");  	
+          	thread1.start();
+   	}
+}
+</pre><p><br></p><p>Answer. &nbsp;First 1 will be printed then even if <a href="http://www.javamadesoeasy.com/2015/03/difference-between-notify-and-notifyall.html" style="text-decoration:none;">notify() or notifyAll()</a> is not called, thread will be <a href="http://www.javamadesoeasy.com/2015/03/difference-between-wait-and-waitlong.html" style="text-decoration:none;">notified after 1000 millisec</a> and 2 will be printed.</p><p><br></p><p>/*OUTPUT</p><p><br></p><p>1 2</p><p><br></p><p>*/</p><p><br></p><p><b style="line-height: 1.45em; background-color: initial;">Question 67.&nbsp;</b><span style="font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif; font-size: 15px; line-height: 1.45em; background-color: initial;">&nbsp;</span></p><pre class="brush:java">class MyRunnable implements Runnable {
+   	public void run() {
+ 
+          	System.out.println(Thread.currentThread().getName() + " has started");
+          	try {
+                 	Thread.sleep(100); //ensure that main thread don’t complete before Thread-1
+          	} catch (InterruptedException e) {
+                 	e.printStackTrace();
+          	}
+          	System.out.println(Thread.currentThread().getName() + " has ended");
+ 
+   	}
+}
+ 
+public class MyClass {
+   	public static void main(String... args) throws InterruptedException {
+ 
+          	System.out.println(Thread.currentThread().getName() + " has started");
+ 
+          	Thread thread1 = new Thread(new MyRunnable(), "Thread-1");
+          	thread1.start();
+          	thread1.sleep(10000); 
+          	System.out.println(Thread.currentThread().getName() + " has ended");
+ 
+   	}
+}
+
+</pre><p><br></p><p>Answer.</p><p><br></p><p><a href="http://www.javamadesoeasy.com/2015/03/sleep-method-in-threads-10-key-features.html" style="text-decoration:none;">sleep()</a>is a static method, causes the currently executing thread to sleep for the specified number of milliseconds. </p><p><br></p><p>Callingthread1.sleep(10000); &nbsp;will show warning - The static method sleep(long) from the type Thread should be accessed in a static way.</p><p><br></p><p>In the program first main thread started, than it invoked Thread-1, then Thread-1 called sleep(100) method to ensure that main thread don’t complete before Thread-1, than execution control went to &nbsp;main thread &nbsp;and it calledthread1.sleep(10000)but rather than putting Thread-1 on sleep it made main thread to sleep. And Thread-1 ended before main thread.</p><p><br></p><p>/*OUTPUT</p><p>main has started</p><p>Thread-1 has started</p><p>Thread-1 has ended</p><p>main has ended</p><p>*/<b style="line-height: 1.45em; background-color: initial;"><br></b></p><p><b style="line-height: 1.45em; background-color: initial;">Question 68.&nbsp;</b><span style="font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif; font-size: 15px; line-height: 1.45em; background-color: initial;">&nbsp;</span></p><pre class="brush:java">class MyRunnable1 implements Runnable{
+ 
+   	@Override
+   	public void run(){
+          	
+          	synchronized (this) {
+                       	try{
+                              	System.out.print("2 ");
+                              	Thread.sleep(1000);
+                       	}catch(InterruptedException e){e.printStackTrace();}
+                 	
+                 	this.notify();
+                 	
+                 	System.out.print("3 ");
+                 	
+          	}
+   	}
+   	
+}
+ 
+class MyRunnable2 extends Thread{
+   	MyRunnable1 prod;
+   	
+   	MyRunnable2(MyRunnable1 obj){
+     prod=obj;
+   	}
+   	
+   	public void run(){
+          	synchronized (this.prod) {
+                 	
+                 	System.out.print("1 ");
+                 	   try{
+                       	 this.prod.wait();
+                       	}catch(InterruptedException e){e.printStackTrace();}
+                 	
+          	}
+          	
+          	System.out.print("4 ");	
+          	
+   	}
+   	
+}
+ 
+public class MyClass {
+   	public static void main(String args[]) throws InterruptedException{
+          	
+          	MyRunnable1 myRunnable1=new MyRunnable1();
+          	MyRunnable2 myRunnable2=new MyRunnable2(myRunnable1);
+          	
+          	Thread thread1=new Thread(myRunnable1,"Thread-1");
+          	Thread thread2=new Thread(myRunnable2,"Thread-2");
+          	
+          	thread2.start();       	
+          	Thread.sleep(100);   //This minor delay will ensure that Thread-1 thread starts Thread-2
+          	thread1.start();       	
+          	
+          	
+   	}
+ 
+}
+
+</pre><div><p>Answer.<a href="http://www.javamadesoeasy.com/2015/03/wait-and-notify-methods-definition-8.html" style="text-decoration:none;">Wait()</a> method causes the current thread to wait until another thread invokes the notify() or notifyAll() method for this object. </p><p>Now, as soon as <a href="http://www.javamadesoeasy.com/2015/03/difference-between-notify-and-notifyall.html" style="text-decoration:none;">notify() or notifyall()</a> method is called it notifies the waiting thread, but object monitor is not yet available. Object monitor is available only when thread exits synchronized block or synchronized method. So, what happens is code after notify() is also executed and execution is done until we reach end of synchronized block. </p><p><a href="http://www.javamadesoeasy.com/2015/03/the-awakened-threads-will-not-be-able.html" style="text-decoration:none;">The awakened threads will not be able to proceed until the current thread relinquishes the lock on this object</a></p><p><br></p><p>/*OUTPUT</p><p>1 2 3 4</p><p>*/</p><p><b>Question 69.</b></p><pre class="brush:java">class MyThread extends Thread {
+   	MyThread() {
+          	System.out.print("1 ");
+   	}
+ 
+   	public void run() {
+          	System.out.print("2 ");
+   	}
+ 
+}
+ 
+public class MyClass {
+   	public static void main(String[] args) {
+          	Thread thread1 = new MyThread() {
+                 	public void run() {
+                       	System.out.print("3 ");
+                 	}
+          	};
+          	thread1.start();
+   	}
+}
+</pre><div><p>Answer.</p><p>new MyThread() &gt; created instance of an anonymous inner class.</p><p>constructor was called which printed 1</p><p>than overridden run() method of anonymous inner class was invoked, which printed 3.</p><p>/*OUTPUT</p><p>1 3</p><p>*/</p><p><b>Question 70.</b></p><pre class="brush:java">class MyRunnable implements Runnable{
+   	public void run(){
+          	method();
+   	}
+   	synchronized void method(){
+          	for(int i=0;i&lt;2;i++){
+                 	System.out.println(Thread.currentThread().getName());
+          	}  	
+   	}
+}
+ 
+public class MyClass {
+   	public static void main(String...args){
+          	MyRunnable runnable=new MyRunnable();
+          	Thread thread1=new Thread(runnable,"Thread-1");
+          	Thread thread2=new Thread(runnable,"Thread-2");
+          	thread1.start();
+          	thread2.start();
+   	}
+}
+ 
+
+
+</pre><p><br></p><p>Answer. Thread behavior is unpredictable because execution of Threads depends on Thread scheduler, either of thread1 and thread2 can start first and synchronized method <a href="http://www.javamadesoeasy.com/2015/03/suppose-you-have-2-threads-thread-1-and_5.html" style="text-decoration:none;">will be executed by one thread at a time</a>.</p><p><br></p><p>/*OUTPUT if Thread-1 entered first in synchronized block.</p><p>Thread-1</p><p>Thread-1</p><p>Thread-2</p><p>Thread-2</p><p>*/</p><p><br></p><p>/*OUTPUT if Thread-2 entered first in synchronized block.</p><p>Thread-2</p><p>Thread-2</p><p>Thread-1</p><p>Thread-1</p><p>*/</p><p><b style="line-height: 1.45em; background-color: initial;">Question 71.</b><b style="line-height: 1.45em; background-color: initial;">&nbsp;</b><span style="font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif; font-size: 15px; line-height: 1.45em; background-color: initial;">&nbsp;</span><b style="line-height: 1.45em; background-color: initial;">&nbsp;</b><span style="font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif; font-size: 15px; line-height: 1.45em; background-color: initial;">&nbsp;</span></p><pre class="brush:java">public class MyClass {
+ 
+   	public static void main(String[] args) {
+          	Thread thread1=new Thread("Thread-1"){
+                 	public void run() {
+                       	
+                       	synchronized (String.class) {
+                              	
+                              	try {
+                                     	Thread.sleep(100);
+                              	} catch (InterruptedException e) {e.printStackTrace();}
+                              	
+                              	System.out.println("1 ");
+                              	synchronized (Object.class) {
+                                     	System.out.println("2 ");
+                              	}
+                       	}
+                       	
+                       	System.out.println("3 ");
+                 	}
+ 
+          	};
+ 
+          	Thread thread2=new Thread("Thread-2"){
+                 	public void run() {
+                       	
+                       	synchronized (Object.class) { 	
+                              	System.out.println("4 ");
+                              	
+                              	try {
+                                     	Thread.sleep(100);
+                              	} catch (InterruptedException e) {e.printStackTrace();}
+                              	
+                              	
+                              	synchronized (String.class) {
+                                     	System.out.println("5 ");
+                              	}
+                       	}
+                       	
+                       	System.out.println("6 ");
+                 	}
+ 
+          	};
+          	thread1.start();
+          	thread2.start();
+   	}
+ 
+}
+</pre><div><p><br></p><p>Answer.<a href="http://www.javamadesoeasy.com/2015/03/deadlock-in-multithreading-program-to.html" style="text-decoration:none;">Deadlock</a> is formed in above program :</p><p>Thread-1 acquires lock on String.class and then calls <a href="http://www.javamadesoeasy.com/2015/03/sleep-method-in-threads-10-key-features.html" style="text-decoration:none;">sleep()</a> method which gives Thread-2 the chance to execute immediately after Thread-1 has acquired lock on String.class and Thread-2 acquires lock on Object.class then calls <a href="http://www.javamadesoeasy.com/2015/03/sleep-method-in-threads-10-key-features.html" style="text-decoration:none;">sleep()</a> method and now it waits for Thread-1 to release lock on String.class.</p><p>Conclusion:</p><p>Now, Thread-1 is <a href="http://www.javamadesoeasy.com/2015/03/thread-states-thread-life-cycle-in-java.html" style="text-decoration:none;">waiting</a> for Thread-2 to release lock on Object.class and Thread-2 is <a href="http://www.javamadesoeasy.com/2015/03/thread-states-thread-life-cycle-in-java.html" style="text-decoration:none;">waiting</a> for Thread-1 to release lock on String.class and <a href="http://www.javamadesoeasy.com/2015/03/deadlock-in-multithreading-program-to.html" style="text-decoration:none;">deadlock</a> is formed.</p><p><br></p><p>/*OUTPUT</p><p> &nbsp;</p><p>4</p><p>1</p><p>*/</p><p><b>Question 72.</b></p><pre class="brush:java">public class MyClass  {
+   	
+   	public static void main(String[] args) throws InterruptedException {
+          	
+          	synchronized (args) {
+                 	System.out.print("1 ");
+                 	args.wait();
+                 	System.out.print("2 ");
+          	}
+                       	
+   	}
+ 
+}
+</pre><p><br></p><p>Answer.Though this question looks bit similar to &nbsp;4 but intention is to show args is object and we can acquire lock on it.</p><p>Thread acquires lock on args object but notify wasn't called so 2 will never be printed, this is called frozen process.</p><p><br></p><p>/*OUTPUT</p><p>1</p><p>*/</p><p><b>Question 73.</b></p></div></div></div></div><pre class="brush:java">class Class2 {
+   	void method2(String name) {
+          	for (int x = 1; x &lt;=2; x++) {
+                 	System.out.println(Thread.currentThread().getName());
+          	}
+   	}
+}
+ 
+public class MyClass implements Runnable {
+   	Class2 obj2;
+ 
+   	public static void main(String[] args) {
+          	new MyClass().method1();
+   	}
+ 
+   	void method1() {
+          	obj2 = new Class2();
+          	new Thread(new MyClass()).start();
+          	new Thread(new MyClass()).start();
+   	}
+ 
+   	public void run() {
+          	obj2.method2(Thread.currentThread().getName());
+   	}
+}
+</pre><p><br></p><p>Answer. &nbsp;Program will face NullPointerException at Class2 obj2, we must make it static. As new Thread(new MyClass()).start(); creates thread on new instance of MyClass.</p><p>If Class2 obj2 is made static, than</p><p>Thread-0 and Thread-1 will be printed twice but in unpredictable order.</p><p><br></p><p>So, output will be different in subsequent executions,(as shown below)-</p><p><br></p><p>/*OUTPUT</p><p>Thread-1</p><p>Thread-1</p><p>Thread-0</p><p>Thread-0</p><p>*/</p><p>/*OUTPUT</p><p>Thread-0</p><p>Thread-1</p><p>Thread-1</p><p>Thread-0</p><p>*/<b><br></b></p><p><b>Question 74.</b></p><pre class="brush:java">class MyRunnable1 implements Runnable{
+ 
+   	@Override
+   	public void run(){
+      		if(Thread.currentThread().getName().equals("Thread-1"))
+             		method1();
+      		else
+             		method2();
+   	}
+ 
+   	synchronized void method1(){
+      		System.out.println(Thread.currentThread().getName()
+                   		+" in synchronized void method1() started");
+      		try {
+             		Thread.sleep(2000);
+      		} catch (InterruptedException e) {
+             		e.printStackTrace();
+      		}
+      		System.out.println(Thread.currentThread().getName()
+                   		+" in synchronized void method1() ended");
+   	}
+   	
+   	synchronized void method2(){
+      		System.out.println(Thread.currentThread().getName()
+                   		+" in synchronized void method2() started");
+      		try {
+             		Thread.sleep(2000);
+      		} catch (InterruptedException e) {
+             		e.printStackTrace();
+      		}
+      		System.out.println(Thread.currentThread().getName()+
+                   		" in synchronized void method2() ended");
+   	}
+   	
+}
+ 
+public class MyClass {
+   	public static void main(String args[]) throws InterruptedException{
+      		
+      		MyRunnable1 myRunnable1=new MyRunnable1();
+      		
+      		Thread thread1=new Thread(myRunnable1,"Thread-1");
+      		Thread thread2=new Thread(myRunnable1,"Thread-2");
+      		thread1.start();   		
+      		Thread.sleep(10);//Just to ensure Thread-1 starts before Thread-2
+      		thread2.start();   		
+      		
+      		
+   	}
+ 
+}
+</pre><p>Answer. &nbsp;Here when Thread-1 is in synchronized method1() it must be holding lock on object’s monitor and will release lock on object’s monitor only when it exits synchronized method1(). So, Thread-2 will have to wait for Thread-1 to release lock on object’s monitor so that it could enter synchronized method2().</p><p><br></p><p>Likewise, Thread-2 even cannot enter synchronized method1() which is being executed by Thread-1. Thread-2 will have to wait for Thread-1 to release lock on object’s monitor so that it could enter synchronized method1().</p><p><br></p><p>/*OUTPUT</p><p>Thread-1 in synchronized void method1() started</p><p>Thread-1 in synchronized void method1() ended</p><p>Thread-2 in synchronized void method2() started</p><p>Thread-2 in synchronized void method2() ended</p><p>*/</p><p><br></p><p><b>Question 75.</b></p><pre class="brush:java">class MyRunnable implements Runnable{
+   	
+   	public void run(){
+          	
+          	System.out.println("1 ");
+          	try {
+                 	this.wait();
+          	} catch (InterruptedException e) {
+                 	e.printStackTrace();
+          	}  	
+          	System.out.println("2 ");
+          	
+   	}
+}
+public class WaitNoParaMethod  {
+   	public static void main(String[] args) {
+          	MyRunnable myRunnable=new MyRunnable();
+          	Thread thread1=new Thread(myRunnable,"Thread-1");  	
+          	thread1.start();
+                       	
+   	}
+ 
+}
+</pre><p><br></p><p>Answer.</p><p>IllegalMonitorStateException is thrown at runtime, as <a href="http://www.javamadesoeasy.com/2015/03/wait-and-notify-methods-definition-8.html" style="text-decoration:none;">wait()</a> method was called without acquiring lock on object monitor.</p><p><br></p><p>/*OUTPUT</p><p>1</p><p>Exception in thread "Thread-1" java.lang.IllegalMonitorStateException</p><p> &nbsp;at java.lang.Object.wait(Native Method)</p><p> &nbsp;at java.lang.Object.wait(Object.java:503)</p><p> &nbsp;at o15_wait_IllegalMoni.MyRunnable.run(WaitNoParaMethod.java:9)</p><p> &nbsp;at java.lang.Thread.run(Unknown Source)</p><p>*/</p><p><b>Question 76.</b></p><pre class="brush:java">public class MyClass implements Runnable{
+   	
+   	@Override
+   	public void run() {
+          	System.out.println("1");
+   	}
+   	
+   	public static void main(String[] args) {
+                 	MyClass obj=new MyClass();           	
+      		Thread thread1=new Thread(obj,"Thread-1");
+      		thread1.start();
+      		thread1.start();
+   	}
+ 
+}
+ 
+</pre><p>Answer. &nbsp;<a href="http://www.javamadesoeasy.com/2015/03/can-we-start-thread-again.html" style="text-decoration:none;">we cannot start Thread again</a>, doing so will throw runtimeException java.lang.IllegalThreadStateException. The reason is once run() method is executed by Thread, it goes into <a href="http://www.javamadesoeasy.com/2015/03/thread-states-thread-life-cycle-in-java.html" style="text-decoration:none;">dead state</a>. </p><p>Let’s take an example-</p><p>Thinking of starting thread again and calling start() method on it (which internally is going to call run() method) for us is some what like asking dead man to wake up and run. As, after completing his life person goes to dead state.</p><p><br><br></p><p>/*OUTPUT</p><p>1</p><p>Exception in thread "main" java.lang.IllegalThreadStateException</p><p> &nbsp;at java.lang.Thread.start(Unknown Source) </p><p>*/</p><p><b>Question 77.</b></p><pre class="brush:java">class MyThread extends Thread {
+}
+ 
+public class MyClass {
+   	public static void main(String[] args) {
+          	Thread thread1=new MyThread();
+          	thread1.start();
+   	}
+ 
+}
+</pre><p>Answer. &nbsp;Nothing will be printed in output.</p><p><br></p><p>When we call start() method on thread, it internally calls run() method with newly created thread. So, if we don’t override run() method newly created thread won’t be called and nothing will happen.</p><p><b>Question 78.</b></p><pre class="brush:java">class MyThread extends Thread {
+ 
+   	public void run() {
+          	System.out.println("1");
+   	}
+   	public void start(){
+          	System.out.println("2");
+   	}
+   	
+}
+ 
+public class MyClass {
+   	public static void main(String[] args) {
+          	MyThread thread1=new MyThread();
+          	thread1.start();
+          	
+   	}
+ 
+}
+ 
+
+</pre><p><br></p><p>Answer.When we call start() method on thread, it internally calls run() method with newly created thread. So, if we override start() method, run() method will not be called until we write code for calling run() method.</p><p><br></p><p>/*OUTPUT</p><p>2</p><p>*/</p><p><br></p><p><b>Question 79.</b></p><pre class="brush:java">class MyRunnable1 implements Runnable{
+ 
+   	@Override
+   	public void run(){
+          	if(Thread.currentThread().getName().equals("Thread-1"))
+                 	method1();
+          	else
+                 	method2();
+   	}
+ 
+   	static synchronized void method1(){
+          	System.out.println(Thread.currentThread().getName()+
+                       	" in synchronized void method1() started");
+          	try {
+                 	Thread.sleep(2000);
+          	} catch (InterruptedException e) {
+                 	e.printStackTrace();
+          	}
+          	System.out.println(Thread.currentThread().getName()
+                       	+" in synchronized void method1() ended");
+   	}
+   	
+   	static synchronized void method2(){
+          	System.out.println(Thread.currentThread().getName()
+                       	+" in synchronized void method2() started");
+          	try {
+                 	Thread.sleep(2000);
+          	} catch (InterruptedException e) {
+   	          	e.printStackTrace();
+          	}
+          	System.out.println(Thread.currentThread().getName()
+                       	+" in synchronized void method2() ended");
+   	}
+ 
+          	
+}
+ 
+ 
+public class MyClass {
+   	public static void main(String args[]) throws InterruptedException{
+ 
+          	MyRunnable1 object1=new MyRunnable1();
+          	MyRunnable1 object2=new MyRunnable1();
+          	
+          	Thread thread1=new Thread(object1,"Thread-1");
+          	Thread thread2=new Thread(object2,"Thread-2");
+          	thread1.start();       	
+          	Thread.sleep(10);//Just to ensure Thread-1 starts before Thread-2
+          	thread2.start();       	
+          	
+          	
+   	}
+ 
+}
+
+</pre><p><br></p><p>Answer. &nbsp;It might confuse you a bit that threads are created on different objects. But, not to forgot that multiple objects may exist but there is always one <a href="http://www.javamadesoeasy.com/2015/03/acquiring-lock-on-class-2-ways-to.html" style="text-decoration:none;">class’s class object</a> lock available.</p><p>Here, when Thread-1 is in static synchronized method1() it must be holding lock on class class’s object and will release lock on class’s classobject only when it exits static synchronized method1(). So, Thread-2 will have to <a href="http://www.javamadesoeasy.com/2015/03/wait-and-notify-methods-definition-8.html" style="text-decoration:none;">wait</a> for Thread-1 to release lock on class’s classobject so that it could enter static synchronized method2().</p><p><br></p><p>/*OUTPUT</p><p>Thread-1 in synchronized void method1() started</p><p>Thread-1 in synchronized void method1() ended</p><p>Thread-2 in synchronized void method2() started</p><p>Thread-2 in synchronized void method2() ended</p><p>*/</p><p><br></p><p><b>Question 80.</b></p><pre class="brush:java">class MyRunnable1 implements Runnable{
+ 
+   	@Override
+   	public void run(){
+          	if(Thread.currentThread().getName().equals("Thread-1"))
+                 	method1();
+          	else
+                 	method2();
+   	}
+ 
+   	synchronized void method1(){
+          	System.out.println(Thread.currentThread().getName()+
+                       	" in synchronized void method1() started");
+          	try {
+                 	Thread.sleep(2000);
+          	} catch (InterruptedException e) {
+                 	e.printStackTrace();
+          	}
+          	System.out.println(Thread.currentThread().getName()+
+                       	" in synchronized void method1() ended");
+   	}
+   	
+   	synchronized void method2(){
+          	System.out.println(Thread.currentThread().getName()
+                       	+" in synchronized void method2() started");
+          	try {
+                 	Thread.sleep(2000);
+          	} catch (InterruptedException e) {
+                 	e.printStackTrace();
+          	}
+          	System.out.println(Thread.currentThread().getName()
+                       	+" in synchronized void method2() ended");
+   	}
+ 
+          	
+}
+ 
+ 
+public class MyClass {
+   	public static void main(String args[]) throws InterruptedException{
+ 
+          	MyRunnable1 object1=new MyRunnable1();
+          	MyRunnable1 object2=new MyRunnable1();
+          	
+          	Thread thread1=new Thread(object1,"Thread-1");
+          	Thread thread2=new Thread(object2,"Thread-2");
+          	thread1.start();       	
+          	Thread.sleep(10);//Just to ensure Thread-1 starts before Thread-2
+          	thread2.start();       	
+          	
+          	
+   	}
+ 
+}
+</pre><p>Answer. Here when Thread-1 is in synchronized method1() it must be holding <a href="http://www.javamadesoeasy.com/2015/03/synchronization-blocks-and-methods.html" style="text-decoration:none;">lock on object1’s monitor</a>. Thread-2 will acquire lock on object2’s monitor and enter synchronized method2().</p><p><br></p><p>/*OUTPUT</p><p>Thread-1 in synchronized void method1() started</p><p>Thread-2 in synchronized void method2() started</p><p>Thread-1 in synchronized void method1() ended</p><p>Thread-2 in synchronized void method2() ended</p><p></p><p></p><p></p><p><br></p><p>*/</p><p><b>Question 81.</b></p><pre class="brush:java">public class MyClass extends Thread{
+ 
+   	public void run() {
+          	method1();
+   	}
+   	
+   	public static void method1() {
+       synchronized (this) { 
+          	System.out.println("2 ");
+          	}
+    }
+   
+   	public static void main(String[] args) {
+          	new Thread(new MyClass()).start();
+   	}
+   
+}
+</pre><p><br>Answer. &nbsp;We will face compilation error at linesynchronized (this)can’t use in static context, because it’s not possible to obtain lock on object from static method. Though we can obtain lock on class’s class object , so synchronized (MyClass.class) will be a valid statement.<b><br></b></p><p><br></p><p><b>Question 82.</b></p><pre class="brush:java">public class MyClass {
+   	public static void main(String[] args) {
+          	System.out.println("1 ");
+          	InnerClass i=new InnerClass();
+          	i.start();
+          	System.out.println("2 ");
+   	}
+          	
+   	static class InnerClass extends Thread{
+          	public void run()throws RuntimeException{
+                 	throw new RuntimeException();
+          	}
+   	}
+}
+ 
+</pre><p><br></p><p>Answer. Program will compile as run() method can throw RuntimeException. 1 &amp; 2 will be present in output and will throw java.lang.RuntimeException at runtime.</p><p><br></p><p>/*OUTPUT</p><p>1</p><p>2</p><p>Exception in thread "Thread-0" java.lang.RuntimeException</p><p> &nbsp;at o22.s$InnerClass.run(s.java:13)</p><p>*/</p><p><a href="http://www.javamadesoeasy.com/2015/03/threads-top-75-interview-questions-and_10.html" style="text-decoration:none;">THREADS - Top 80 interview questions and answers, important interview OUTPUT questions and answers, Set-2 &gt; Q61- Q80</a></div>
+                </div>
+</body></html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<title>SpringBoot and MicroServices</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style type="text/css">
+	.redC
+	{
+	color:red
+	}
+	</style>
+</head>
+<body>
+<div data-role="page">
+  <div data-role="header" data-position="fixed">
+      <br/>
+      <b style="color: red"><a href="coreJava.html">Core Java</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="Database.html">Database</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="Hibernate.html">Hibernate</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="Spring.html">Spring</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="Struts.html">Struts</a></b>
+      <br/>
+  </div>
+ <div data-role="main" class="ui-content">
+ <b class="redC">Question:-</b>What is the exact difference between service discovery and Service Gateway?<br/>
+ <b class="redC">Answer:-</b><br/>
+		 The Services gateway (a.k.a. API gateway) is receiving requests from the clients. It is the (single)
+		 service that the clients see. But it doesn't know by itself how to do what the clients want so it must
+		 forward the request to another service. It inspects the URL and extracts the name of the service that
+		 will actually serve the request, the backend service. That backend service may be located on a
+		 different machine. It may have a dynamic address or port, that may change from time to time, from
+		 different reasons (nodes fail, new nodes are added to the network etc).<br/>
+		 <br/>
+		 So, the gateway doesn't know where to forward the request. This is the job of the Service-discovery
+		 service (Eureka). Eureka knows on which node is located and at which address and port every
+		 service is listening for requests. The gateway is asking Eureka where it can find the backend service
+		 (by sending it only its name). After Eureka is responding, the gateway is forwarding the request to that address.<br/>
+ 
+ <b class="redC">Question:-</b>What is the service model of cloud services<br/>
+ <b class="redC">Answer:-</b>
+	 <br/>
+	SaaS : software as a Service like Gmail<br/>
+	PaaS : Plateform as a service like AWS Elastic Beanstalk,Windows Azure,Google App Engine<br/>
+	IaaS : Infrastructure as a Service<br/>
+ 
+ <img height="350px" alt="model_of_cloud_services" src="image/model_of_cloud_services.jpg"><br/>
+ 
+	<b class="redC">Note:- </b>Modern way of microservice deployment is Service per container.<br/>
+	<b class="redC">Note:- </b>When you are using cloud services to deploy your microservices then it known as serverless deployment.<br/>
+
+	<b class="redC">Question:-</b>What is EC2 in AWS<br/>
+	<b class="redC">Answer:-</b>Actually this a Raw server where we can host your services,where as Lambda is compute service.<br/>
+
+
+	<b class="redC">Question:-</b>What are the cloud providers in the market<br/>
+	<b class="redC">Answer:-</b>There are quite a few cloud providers in the market<br/>
+	1-Amazon Web Services<br/>
+	2-Microsoft Azure<br/>
+	3-Google cloud plateform<br/>
+	4-IBM cloud<br/>
+	5-Digital Ocean<br/>
+	6-terremark<br/>	
+	
+	<b class="redC">Question:-</b>What is cloud<br/>
+
+	<b class="redC">Answer:-</b>If we describe in more general term we can say that there are organization that go ahead bought the server, compute capacity,storage places,compute services
+				& all other things and they have their own channel or network.<br/>
+				All you have to do is to go ahead rent the resources only to amount you needed & Only for time being you needed.
+				and other things is that these providers/organization will take care of all the other things like maintainance & security & other things.
+				so that you can focus on your business only forget about all the other things.<br/>
+ 
+ <b class="redC">Question-</b>Why Spring data REST is not recommended in real world application<br/>
+ <img height="240px" alt="spring_data_rest" src="image/spring_data_rest.jpg"><br/>
+ 
+ <b class="redC">Question-</b>What is Spring Data REST <br/>
+ 
+ <b class="redC">Question-</b>What is advantage of YAML file thn properties file advantage_yaml<br/>
+ 
+ <b class="redC">Question-</b>How to deploy different server with Spring Boot<br/>
+ 
+ <b class="redC">Question-</b>What do you understnad by auto-configuration in Spring Boot and how to disable  the auto-configuration<br/>
+ <img height="240px" alt="auto-configuration_1" src="image/auto-configuration_1.jpg"><br/>
+ <img height="240px" alt="auto-configuration_2" src="image/auto-configuration_2.jpg"><br/>
+ 
+ <b class="redC">Question-</b>What do you understand by spring data<br/>
+ 
+ <b class="redC">Question-</b>How we create a custom endpoint in Spring Boot Accuator <br/>
+ <img height="100px" alt="Spring_Boot_Accuator" src="image/Spring_Boot_Accuator.jpg"><br/>
+ 
+ <b class="redC">Question-</b>How to enable HTTP/2 Support in Spring Boot<br/>
+ <img height="100px" alt="boot_support" src="image/boot_support.jpg"><br/>
+ 
+<b class="redC">Question:-</b>What is Spring boot DevTools <br/>
+<b class="redC">Answer:-</b>If you have worked on latest UI development frameworks e.g. Node, angular, gulp etc. 
+then you must have appreciated the auto-reload of UI in browser whenever there is change in some code. Its pretty useful and saves a lot of time.
+Well, same feature can be utilized in spring boot applications using spring-boot-devtools<br/>
+ 
+<b class="redC">Question:-</b>What is Spring Data <br/>
+<b class="redC">Answer:-</b>
+Spring Data's mission is to provide a familiar and consistent,
+Spring-based programming model for data access while still retaining the special feature of the underlying data store<br/>
+
+<b class="redC">Question:-</b>What is Spring Data JPA <br/>
+<b class="redC">Answer:-</b>
+Spring Data JPA, part of the larger Spring Data family, makes it easy to easily implement JPA based repositories.
+This module deals with enhanced support for JPA based data access layers.
+It makes it easier to build Spring-powered applications that use data access technologies<br/>
+
+<b class="redC">Question:-</b>What is Spring Data Rest <br/>
+<b class="redC">Answer:-</b>Spring Data REST is part of the umbrella Spring Data project and makes it easy to build hypermedia-driven REST web services on top of Spring Data repositories.<br/>
+
+<b class="redC">Important note:-</b> <br/>
+<b class="redC">(1)</b>Netflix Eureka service Discovery is a Netflix project. <br/>
+<b class="redC">(2)</b>API gateway used in spring cloud is also based on Netflix Zuul gateway service. <br/> 
+<b class="redC">(3)</b>Hystrix is also Netflix project. <br/>
+
+<b class="redC">Question</b>What is Agile model of software development <br/>
+<b class="redC">Answer:-</b>
+Agile is a software development methodology to build software incrementally using short 
+iteration of 1 to 4 week so that development is aligned with changing business needs<br/>
+
+Instead of a single pass development of 6 to 18 months where all reqiurements and
+risk are predicated upfront, Agile adapts for frequent feedback by delivering 
+workable product after 1 to 4 week iteration.<br/>
+
+<b class="redC">Question:-</b>what is Fault tolerance<br/>
+<b class="redC">Answer:-</b> Fault tolerance means how your microservices will handle any failure.<br/>
+
+<b class="redC">Question:-</b>What is resilience <br/>
+<b class="redC">Answer:-</b>Resilience means how many failure your microservices can handle <br/>
+
+
+<b class="redC">Question:-</b>What is difference between Fault tolerance & resilience.<br/>
+<br/>
+
+<b class="redC">Note:-</b>Ribbon load balancer is created by NETFLIX but if you are using spring boot to create your services then you can directly use the springBoot implementation of Ribbon.
+	   Let say if you are not using SpringBoot then you can use Ribbon Library in your application.<br/>
+<br/>	    
+<b class="redC">Question:-</b>What is advantage of client side load balancing<br/>
+If you are using client side load balancing then you can choose different strategy for each client which is consuming services 
+but in case of server side load balancing it will be centeralize at server side and will be comman for all clients.<br/>
+ 
+<br/>
+ 
+<b class="redC">Note:-</b><br/>
+<b class="redC">(1)-</b>API gateway is concept & Erureka server is implementation of that concept.<br/>
+<b class="redC">(2)-</b>The recomended way is that we should have seperate database for each microservices but sometime it's diffcult break down the databases because most of the time
+we are using is relational database where there is FK-PK relationship between the tables.<br/>
+
+<b class="redC">Question:-</b>What is Ribbon load balancer<br/>
+
+<b class="redC">Question:-</b>What is feign interface<br/>
+
+<a href="https://github.com/greenlearner01/SpringOpenFeignClient">For more detail</a><br/>
+ 
+<b class="redC">Note</b> 
+In your curd repository, you can also write your own method like this....(You need to write query on top of the method) findbyFirstNameAndLastName<br/>
+
+<b class="redC">Question:-</b>How to make SpringBoot to Web app supporting JSP<br/> 
+
+<b class="redC">Question:-</b>How can I write query in JPACurdRepository<br/>
+
+In your curd repository, you can also write your own method like this....(You need to write query on top of the method) findbyFirstNameAndLastName<br/>
+
+<b class="redC">Question:-</b>How can add support for xml in springBoot<br/>
+
+<b class="redC">Note:-</b>To add the data in H2 database just make file with name data.sql in resources folder & write your query<br/>
+
+<b class="redC">Question:-</b>what are the available discovery server are there like Eureka<br/>
+
+<b class="redC">Question:-</b>Explain microservices architecture.<br/>
+
+<b class="redC">Question:-</b>Name three commonly used tool for microservices<br/> 
+<b class="redC">Answer:-</b>Docker,REST API client, Postman<br/>
+
+<b class="redC">Question:-</b>What is Monolithic architecture.<br/>
+
+<b class="redC">Question:-</b>What is advantage of microservices.<br/>
+
+<b class="redC">Question:-</b>What is Spring cloud.<br/>
+<b class="redC">Answer:-</b>Spring cloud is set of those libraries/techonologies which allow you to both build and manage your microservices on cloud.It's comes under spring umbrela.<br/>
+
+<b class="redC">Question:-</b>What is difference between microservices & Monolithic architecture.<br/>
+
+<b class="redC">Question:-</b>What are challenges you face while using Microservices architecture.<br/>
+<b class="redC">Answer:-</b>Deployment is more complex, Monitorning is more complex, Product release is more complex.<br/>
+
+<b class="redC">Question:-</b>In which cases Microservices architecture best suited
+<b class="redC">Answer:-</b>where there is large application on which multiple team is working and you need certain part of that application to scale up & scale down<br/>
+
+<b class="redC">Question:-</b>What are three type of testing in Microservices<br/>
+<b class="redC">Answer:-</b> unit testing, Integeration testing , User acceptance testing and also contract testing.<br/>
+
+<b class="redC">Question:-</b>What is client certificate in microservices.<br/>
+
+<b class="redC">Question:-</b>How to deploy a microservices  <br/>
+<b class="redC">Answer:-</b>We were using AWS for deploying the microservices<br/>
+
+<b class="redC">Question:-</b>What is Spunk, Kiwana in Java microservices <br/>
+
+ 
+<b class="redC">Question:-</b>What is microservices<br/>
+<b class="redC">Answer:-</b>
+A architectural approach to developed application, where application consist of multiple different components
+These components are basically services, communicating through lightweight mechanism.<br/>
+
+<br/>
+<b class="redC">Question:-</b>What is difference between monolithic & microservices<br/>
+
+<b class="redC">Question:-</b>What is advantage of microservices<br/>
+
+<b class="redC">Question:-</b> Disadvantage of microservices<br/>
+<b class="redC">Answer:-</b><br/>
+<b class="redC">(1)</b>Implementing of distributed transaction<br/>
+<b class="redC">(2)</b>Implementing logging & visualization of logs for a particular request<br/>
+
+<b class="redC">Question:-</b>Why Spring Boot is preferred for microservices in java<br/>
+<b class="redC">Answer:-</b><br/>
+<b class="redC">(1)</b>Microservices should be independent & standalone, Spring Boot helps to achive this.<br/>
+<b class="redC">(2)</b>It's provide quick development start with starter template, Auto-configuration feature & embedded container support<br/>
+
+<b class="redC">Note</b> Zookeeper can be used as both server side as well as client side service discovery<br/> 
+
+<b class="redC">Question:-</b>How microservices communicate with each other<br/>
+<b class="redC">(1)</b>restTemplate<br/>
+<b class="redC">(2)</b>WebClient<br/>
+
+<b class="redC">Question:-</b>How you have implemented service discovery?<br/>
+<b class="redC">Answer:-</b>With Netflix Eureka , I have used client side service discovery.<br/>
+
+<b class="redC">Question:-</b>Do you know any other architectural pattern<br/>
+<b class="redC">Answer:-</b>Yes, Earlier we have monolithic , SOA , Rest.<br/>
+
+<b class="redC">Question:-</b>What is difference between architectural pattern & design pattern<br/>
+<b class="redC">Answer:-</b>architectural pattern:- High level strategy to implement an architectural style covering all component, global properties & configuration.<br/>
+
+<b class="redC">Question:-</b>Do you know any other microservice design pattern<br/>
+<b class="redC">Answer:-</b>Service Discovery pattern, API gateway pattern , Circuite breaker pattern  etc<br/>
+
+<b class="redC">Question:-</b>What is Saga design pattern <br/> 
+
+<b class="redC">Question:-</b>How you have implement data consistency <br/>
+<b class="redC">Answer:-</b>Used saga design pattern <br/>
+
+<b class="redC">Question:-</b>Where you have deployed microservices <br/> 
+<b class="redC">Answer:-</b>Generally we used cloud , But you can also use the traditional server.<br/>
+
+<b class="redC">Question:-</b>How you are monitoring your microservice<br/>
+<b class="redC">(1)</b>For API monitoring we can use tools like Kong, Apigee<br/>
+<b class="redC">(2)</b>For distributed logging we can use Zipkin+sleuth , jaeger + sleuth<br/>
+  <br/>
+  
+<b class="redC">Question:-</b>Is microservice is part of cloud native<br/>
+<b class="redC">Answer:-</b>Yes<br/>
+
+<b class="redC">Question:-</b>Can we use embedded tomcat server of spring boot in production<br/>
+<b class="redC">Answer:-</b>Yes<br/>
+
+<b class="redC">Question:-</b>Can we do load balancing with embedded server<br/>
+<b class="redC">Answer:-</b>Yes , We can do this by putting the multiple instance of the application behind the load balancer<br/>
+
+<b class="redC">Question:-</b>How can use filter methods of API-GATEWAY in spring boot like zull API-GATEWAY<br/>
+
+
+
+<b class="redC">Question:-</b>What is Spring Boot & mention the need for it.<br/>
+<img height="300px" alt="API-GATEWAY-SPRING" src="image/Need_of_Spring_Boot.jpg"><br/>
+
+<b class="redC">Question:-</b>What is advantage of spring boot   & <br/>
+<img height="400px" alt="API-GATEWAY-SPRING" src="image/advantage_of_spring_boot_1.jpg"><br/>
+<img height="400px" alt="API-GATEWAY-SPRING" src="image/advantage_of_spring_boot_2.jpg"><br/>
+
+<b class="redC">Question:-</b>What is feature of Spring Boot<br/>
+<img height="400px" alt="API-GATEWAY-SPRING" src="image/feature_of_Spring_Boot.jpg"><br/>
+
+<b class="redC">Question:-</b>What is possible source of external configuration  <br/>
+<img height="300px" alt="API-GATEWAY-SPRING" src="image/source_of_configuration.jpg"><br/>
+
+<b class="redC">Question:-</b>What are spring boot starter <br/>
+<img height="280px" alt="API-GATEWAY-SPRING" src="image/spring_boot_starter.jpg"><br/>
+
+<b class="redC">Question:-</b>What is spring boot dependency means<br/>
+<img height="120px" alt="API-GATEWAY-SPRING" src="image/dependency_means.jpg"><br/>
+
+<b class="redC">Question:-</b> Mention the minimun requirement for spring boot  <br/>
+<img height="300px" alt="API-GATEWAY-SPRING" src="image/requirement_spring_boot.jpg"><br/>
+ 
+
+ <b class="redC">Question:-</b>which is the best API gateway for micro services using spring?<br/>
+ <img height="600px" alt="API-GATEWAY-SPRING" src="image/API-GATEWAY-SPRING.jpg"><br/>
+ <b class="redC">Question:-</b>What is Service Discovery<br/>
+ <b class="redC">Answer:-</b> Service Discovery is the action of retrieving a specific service for your need, basically asking the service registry to get an URL to call.<br/>
+ <b class="redC">Question:-</b>What is Service Registry<br/>
+ <b class="redC">Answer:-</b>
+ Service registry is the registry where all services register themselves, giving a way to contact them (public API, IP, port).<br/>
+ <b>In other word</b><br/>
+ The service registry is a key part of service discovery. It is a database containing the network locations of service instances. A service registry needs to be highly available and up to date.<br/>
+ <b>Netflix Eureka is good example of a service registry</b><br/>
+ <b class="redC">Other examples</b> of service registries include:etcd,consul,Apache Zookeeper<br/>
+ <img height="120px" alt="service_discovery_1" src="image/service_discovery_1.jpg"><br/>
+ <b class="redC">Question:-</b>What is the exact difference between service discovery and Service Gateway?<br/>
+ <b class="redC">Answer:-</b><br/>
+ <img height="280px" alt="service_discovery_2" src="image/service_discovery_2.jpg"><br/> 
+ <b class="redC">Note:-</b><br/>
+  <img height="180px" alt="service_discovery_3" src="image/service_discovery_3.jpg"><br/>
+ 
+ <b class="redC">Note:-</b>When Spring Boot BootStrap it did following things<br/>
+ <b class="redC">1-</b>Sets up default configuration<br/>
+ <b class="redC">2-</b>Starts Spring application context<br/>
+ <b class="redC">3-</b>Perform class path scan<br/>
+ <b class="redC">4-</b>Starts Tomcat server<br/>
+ <br/>
+ <b class="redC">Question:-</b>What is Spring Boot CrudRepository<br/>
+ <b class="redC">Answer:-</b><br/>
+ Spring Boot provides an interface called CrudRepository that contains methods for CRUD operations. It is defined in the package
+ org.springframework.data.repository. It extends the Spring Data Repository interface. It provides generic Crud operation on a
+ repository. If we want to use CrudRepository in an application, we have to create an interface and extend the CrudRepository.
+ <br/>
+ <img height="300px" alt="Spring Boot CrudRepository" src="image/SpringBootCrudRepository.jpg"><br/>
+ 
+ <b class="redC">Question:-</b>What is Spring Boot JpaRepository<br/>
+ <b class="redC">Answer:-</b><br/>
+ JpaRepository provides JPA related methods such as flushing, persistence context, and deletes a record in a batch. It is defined in the
+ package org.springframework.data.jpa.repository. JpaRepository extends both CrudRepository and PagingAndSortingRepository.
+ <br/>
+ <img height="450px" alt="Spring Boot JpaRepository" src="image/SpringBootJpaRepository.jpg"><br/>
+ 
+ <b class="redC">CrudRepository vs. JpaRepository</b><br/>
+ <img height="300px" alt="CrudRepository vs. JpaRepository" src="image/CrudRepositoryvsJpaRepository.jpg"><br/>
+ 
+ <b class="redC">How to use SpringJpaRepository</b><br/>
+ <b class="redC">Here is Example</b><br/>
+ <img height="300px" alt="JpaRepository_interface" src="image/JpaRepository_interface.jpg"><br/>
+ <b class="redC">Then you can use this repository in services like this</b><br/>
+ <img height="500px" alt="JpaRepository_services" src="image/JpaRepository_services.jpg"><br/>
+ 
+ 
+  <b class="redC">Question:-</b>What is use of @PostConstruct<br/>
+  <b class="redC">Answer:-</b><br/>
+  @PostConstruct is an annotation used on a method that needs to be executed after dependency injection is done to perform any initialization.<br/>
+  <br/>
+ <b style="color: red">Latest Spring Boot version 2.2.6.RELEASE</b><br/>
+ <b style="color: red">Spring Boot flow architecture</b><br/>
+ <img alt="Spring Boot flow architecture" src="image/SpringBootflowArchitecture.jpg"><br/>
+ <b style="color: red">Steps:-</b><br/>
+ <b style="color: red">==>></b>A client makes the https request(PUT/GET)<br/>
+ <b style="color: red">==>></b>Then it goes to controller and the controller mapped with that route as that of request handles it, and calls the service logic if required.<br/>
+ <b style="color: red">==>></b>Business logic is performed in the service layer which might be performing the logic on the data from the database which is mapped through model class<br/>
+ <b style="color: red">==>></b>Finally, a JSP page is returned in the response if no error occurred.<br/>
+ <b style="color: red">Question:-What is Spring Boot</b><br/>
+ Spring Boot is a project that is built on the top of the Spring Framework.<br/>
+ It provides an easier and faster way to set up, configure, and run both simple and web-based applications.<br/>
+ <b style="color: red">or</b><br/>
+ In short, Spring Boot is the combination of Spring Framework and Embedded Servers.<br/>
+ <br/>
+ <img src="image/what-is-spring-boot.png" alt="What is Spring Boot"><br/>
+ 
+ <b style="color: red">Advantages of Spring Boot</b><br/>
+ <b>1-</b>It tests web applications easily with the help of different Embedded HTTP servers such as Tomcat, Jetty, etc.<br/>
+ We don't need to deploy WAR files.<br/>
+ <b>2-</b>There is no requirement for XML configuration.<br/>
+ <b>3-</b>It offers a CLI tool for developing and testing the Spring Boot application.<br/>
+ <b>4-</b>It offers the number of plug-ins.<br/>
+ <b>5-</b>It also minimizes writing multiple boilerplate codes (the code that has to be included in many places with little or no<br/>
+ alteration), XML configuration, and annotations.<br/>
+ <b>6-</b>It increases productivity and reduces development time.<br/>
+ <b style="color: red">What Spring Boot brings to the table</b><br/>
+ <b>1-</b>-Convetion over configuration<br/>
+ <b>2-</b>-Stadardizatiion for MicroServices<br/>
+ <b>3-</b>-Integrated server for development<br/> 
+ <b style="color: red">The latest version of Spring Boot is 2.0</b><br/> 
+ <b style="color: red">Difference between Spring Boot and Spring MVC</b><br/>
+ 
+ <img src="image/Difference_between_Spring_Boot_and_Spring_MVC.jpg" alt="Difference between Spring Boot and Spring MVC"><br/>
+ 
+ <b style="color: red">Some Important annotation in Spring Boot</b><br/>
+@Service  <br/>
+@Repository <br/>
+@SpringBootApplication <br/>
+@EnableAutoConfiguration <br/>
+@Component <br/>
+@Autowired <br/>
+@Qualifier <br/>
+@Configuration  <br/>
+@Bean <br/>
+@Transactional <br/>
+@ConfigurationProperties <br/>
+@ComponentScan <br/>
+@Controller <br/>
+@RequestMapping <br/>
+@GetMapping <br/>
+@PostMapping <br/>
+@RequestBody <br/>
+@ResponseBody <br/>
+@PathVariable <br/>
+@RequestParam <br/>
+ 
+ <b style="color: red">Question:-What is starter template</b><br/>
+ <b style="color: red">Answer:-</b><br/>
+ Spring Boot starters are templates that contain a collection of all the relevant transitive dependencies that are needed to start a particular functionality.<br/>
+ <b style="color: red">@EnableAutoConfiguration:-</b>This annotation enable Spring Boot to automatically configures your application based on the dependencies you have added to the project.<br/>
+ <b style="color: red">@SpringBootApplication:-</b>The entry point of the spring boot application is the class contains @SpringBootApplication annotation and the main method.<br/>
+ <b style="color: red">Note:-</b>If you added @SpringBootApplication annotation to the class, you do not need to add the
+ @EnableAutoConfiguration, @ComponentScan and @SpringBootConfiguration annotation.The @SpringBootApplication annotation includes all other annotations.<br/>
+ <b style="color: red">@ComponentScan:-</b>Spring Boot application scans all the beans and package declarations when the application initializes.
+ You need to add the @ComponentScan annotation for your class file to scan your components added in your project.<br/>
+ <b style="color: red">Note:-</b>There is spring intializr page using this page create spring boot application.<br/>
+ <b style="color: red">Creating Spring Boot application</b><br/>
+ Spring Boot had been built for rapid application development<br/>
+ Creating spring boot application using<br/>
+ <b>1-</b>Eclipse Maven<br/>
+ <b>2-</b>start.spring.io<br/>
+ <b>3-</b>Eclipse STS<br/>
+ <b>4-</b>Spring Boot CLI<br/>
+ <b style="color: red">Run Spring Boot application using</b><br/>
+ <b>1-</b>Java CLI<br/>
+ <b>2-</b>Eclipse IDE <br/>
+ <b style="color: red">--></b>SpringBoot works for JDK 1.6 and above version<br/>
+ <b style="color: red">--></b>slf4j works as logger in the application when we use spring Boot<br/>
+ <b style="color: red">commond to make jar file</b><br/> 
+ 1st go to the pom.xml location then Type mvn install. A jar file will be created in that location<br/>
+ then type java -jar "name_of the_jar_file" then jar file will be executed which we can check on the browser<br/>
+ <b style="color: red">Question:-</b>What is Spring Boot CLI<br/>
+ <b style="color: red">Answer:-</b>The Spring Boot CLI (Command Line Interface) is a command line tool that you can use to quickly prototype with Spring.
+ It lets you run Groovy scripts, which means that you have a familiar Java-like syntax without so much boilerplate code.
+ <b>You do not need to use the CLI to work with Spring Boot, but it is definitely the quickest way to get a Spring application off the ground.</b><br/>
+ <b style="color: red">Disadvantages of Spring Boot</b><br/>
+ <b style="color: red">1-Migration Efforts</b><br/>
+ Migration form already existing spring project to spring boot is not straightforward. Spring Boot is mostly for new development.<br/>
+ <b style="color: red">2-Deployment to WebSphere/WebLogic/Other App Servers</b><br/>
+ Deploying Spring Boot application to WebSphere/WebLogic and other App servers are not very simple.You need to make few changes
+ like downgrading JPA Version,removing conflicting Jars etc in order to make it work in application server.<br/>
+ <b style="color: red">3-MicroServices & Cloud Native</b><br/> 
+ Spring Boot has been developed Keeping Micro services & Cloud Native in mind. You my not see improvements in other areas.<br/>
+ Note:- you can get all the application properties by simply google to "spring boot common application properties"<br/>
+ <b style="color: red">Question:-</b>what is spring data jpa.<br/>
+ <b style="color: red">Answer:-</b>Spring Data JPA API provides JpaTemplate class to integrate spring application with JPA. JPA (Java Persistent API) is the sun specification for persisting objects in the enterprise application.<br/>
+ <b style="color: red">Question:-</b><br/>
+ What is Spring Boot Actuator<br/>
+ <b style="color: red">Answer:-</b><br/>
+ Spring Boot provides actuator to monitor and manage our application. Actuator is a tool which has HTTP endpoints. when
+ application is pushed to production, you can choose to manage and monitor your application using HTTP endpoints.<br/>
+ <b style="color: red">Question:-</b>How to connect Spring Boot to the database using JPA<br/>
+ <b style="color: red">Answer:-</b>Spring Boot provides spring-boot-starter-data-jpa starter to connect Spring application with relational database efficiently. You can use it into project POM (Project Object Model) file<br/>
+ <b style="color: red">What are some important features of using Spring Boot</b><br/>
+ <b>1.</b>Starter dependency<br/>
+ <b>2.</b>Auto-Configuration<br/>
+ <b>3.</b>Spring Initializer<br/>
+ <b>4.</b>Spring Actuator<br/>
+ <b>5.</b>Spring CLI<br/>
+ <b style="color: red">Question:-</b>What embedded containers does Spring Boot support?<br/>
+ <b style="color: red">Answer:-</b>Spring Boot support three embedded containers: Tomcat, Jetty, and Undertow. By default, it uses Tomcat as embedded containers but you can change it to Jetty or Undertow.<br/>
+ 
+ <b style="color: red">Important Spring Annotation</b><br/>
+ <b>@SpringBootApplication:-</b>It enable three things<br/>
+ <b>(i)-</b>@EnableAutoConfiguration : enable auto-configuration mechanism<br/>
+ <b>(ii)-</b>@ComponentScan : enable @Component scan<br/>
+ <b>(iii)-</b>@SpringBootConfiguration : register extra beans in the context<br/>
+ <b>@EnableAutoConfiguration:-</b>This annotation enables auto-configuration of the Spring Application Context, attempting to guess and configure beans that we are likely to need based on the presence of predefined classes in classpath.<br/>
+ <b>@Component:-</b>Spring Component annotation is used to denote a class as Component. It means that Spring framework will autodetect these classes for dependency injection when annotation-based configuration and classpath scanning is used<br/>
+ <b>@SpringBootConfiguration:-</b>As per the Spring documentation, @SpringBootConfiguration is just an alternative to the Spring standard @Configuration<br/>
+ <img alt="SpringBootConfiguration" src="image/SpringBootConfiguration.jpg"><br/>
+ <b>@ImportAutoConfiguration:-</b>It import and apply only the specified auto-configuration classes. The difference between @ImportAutoConfiguration and @EnableAutoConfiguration is that later attempts to configure beans that are found in the classpath during scanning,
+ whereas @ImportAutoConfiguration only runs the configuration classes that we provide in the annotation.</b><br/>
+ <pre>
+ @ImportAutoConfiguration({WebMvcAutoConfiguration.class
+    ,DispatcherServletAutoConfiguration.class
+    ,EmbeddedServletContainerAutoConfiguration.class
+    ,ServerPropertiesAutoConfiguration.class
+    ,HttpMessageConvertersAutoConfiguration.class})
+	public class App 
+	{
+	// class body
+	}
+ </pre>
+ <b>@ConditionalOnBean and @ConditionalOnMissingBean:-</b>These annotations let a bean be included based on the presence or absence of specific beans.It�s value attribute is used to specify beans by type or by name. Also the search attribute lets us
+    limit the ApplicationContext hierarchy that should be considered when searching for beans.Using these annotations at the class level prevents registration of the @Configuration class as a bean if the condition does not match.<br/>
+ @SpringBootTest<br/>
+ @ConfigurationProperties<br/>
+ @CookieValue<br/>
+ @CrossOrigin<br/>
+ <b style="color: red">@Configuration:-</b>@Configuration annotation indicates that a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions and service requests for those beans at runtime<br/>
+ <b style="color: red">Question:-</b>What are the Spring Boot starters and what are available the starters<br/>
+ <b style="color: red">Answer:-</b><br/>
+ Spring Boot starters are a set of convenient dependency management providers which can be used in the application to enable dependencies. These starters, make development easy and rapid<br/>
+ All the available starters come under the org.springframework.boot group<br/>
+ <b style="color: red">Question:-</b>What do you understand by auto-configuration in Spring Boot and how to disable the  auto-configuration<br/>
+ <b style="color: red">Answer:-</b><br/>
+ Auto-configuration is used to automatically configure the required configuration for the application. For example, if you have a data source bean present in the classpath of the application, then it<br/>
+ automatically configures the JDBC template. With the help of auto-configuration, you can create a Java application in an easy way, as it automatically configures the required beans, controllers, etc.<br/>
+ To disable the auto-configuration property, you have to exclude attribute of @EnableAutoConfiguration, in the scenario where you do not want it to be applied.<br/>
+ @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})<br/>
+ If the class is not on the classpath, then to exclude the auto-configuration, you have to mention the following code:<br/>
+ @EnableAutoConfiguration(excludeName={Sample.class})<br/>
+ Apart from this, Spring Boot also provides the facility to exclude list of auto-configuration classes by using the spring.autoconfigure.exclude property.<br/>
+ <b style="color: red">MicroServices:-</b><br/>
+ A set of loosely coupled  collaborating services Each service is<br/>
+ <b style="color: red">==></b>Highly maintainable and testable<br/>
+ <b style="color: red">==></b>Loosely coupled with other services<br/>
+ <b style="color: red">==></b>Independently deployable<br/>
+ <b style="color: red">==></b>Capable of being developed by small team<br/>
+ <b style="color: red">==></b>Services can be developed independent to each other<br/>
+ <b style="color: red">==></b>Communication among services via HTTP/REST/AMQP<br/>
+ </div>
+</div>
+</body>
+</html>

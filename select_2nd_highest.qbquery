@@ -1,0 +1,13 @@
+﻿
+select distinct total  from 
+(SELECT  count(*) as 'total',d.dname FROM emp e left join dept d on e.eid=d.eid group by d.dname order by total asc)
+as abc limit 1,1;
+
+SELECT d.dname , count(*) as 't' FROM emp e left join dept d on e.eid=d.eid group by d.dname having t=(
+select distinct total  from (
+SELECT  count(*) as 'total',d.dname FROM emp e left join dept d on e.eid=d.eid group by d.dname order by total asc)
+as abc limit 1,1
+);
+
+
+  

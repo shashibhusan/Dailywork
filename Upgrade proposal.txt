@@ -1,0 +1,128 @@
+1-Add point regarding the zulu first.
+2-Spring point:-
+First we need to change the xxd then need to add the corresponding jar files
+
+Then I need to check how they are getting the bean 
+
+ 
+
+  ApplicationContext context = new ClassPathXmlApplicationContext("config/weCanchangeNameAndLocation.xml"); 
+  Student stBean = (Student) context.getBean("studentbean"); 
+  System.out.println("then prpperty of the bean : "+stBean.getName()); 
+  
+If you are using BeanFactory
+  Resource resource=new ClassPathResource("config/weCanchangeNameAndLocation.xml");
+  BeanFactory factory=new XmlBeanFactory(resource);
+  Student stBean1 =(Student)factory.getBean("studentbean");
+  System.out.println("the propery of the bean :"+stBean1.getName());
+  
+  then only we need to change way of getting object of applicableContext or beanFactory.
+  
+InCase we will use annotation
+
+	AbstractApplicationContext context = new AnnotationConfigApplicationContext(ConfigurationClass.class);
+	Student st=(Student)context.getBean("studentBean");
+	and ConfigurationClass class will be like
+	@Configuration
+	@ComponentScan("com.bean") 
+	public class ConfigurationClass {
+		@Autowired
+		private Employee employee;
+		@Bean(name="studentBean")
+		public Student shashi()
+		{
+			return new Student();
+		}
+	}
+	
+May be we need to use @ImportResource("classpath:bean.xml") in case we annotation.
+
+Question :- Will hibernate version change also ?.
+2-If there seperate integration of hibernate then only we need to chnage the sessionFactory code
+From:-
+  static SessionFactory Factory;
+	static {
+		Configuration cfg = new Configuration().configure("hibernateMysql.cfg.xml");
+		Factory = cfg.buildSessionFactory();
+	}
+To:-
+static SessionFactory Factory;
+	static {
+		Configuration cfg = new Configuration().configure("hibernateMysql.cfg.xml");
+		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
+		applySettings(cfg.getProperties());
+		Factory = cfg.buildSessionFactory(builder.build());
+	}
+3-If hibernate configuration is there in application context file then for that 
+	we need to change configuration(Need to use LocalSessionFactoryBean)
+	
+	<bean id="mysessionFactory"  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource"></property>  
+          
+        <property name="mappingResources">  
+        <list>  
+        <value>employee.hbm.xml</value>  
+        </list>  
+        </property>  
+          
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                  
+            </props>  
+        </property>  
+    </bean>  
+Note:- For SLF4J only jar file will be change.
+
+#######Study######
+
+https://www.youtube.com/watch?v=hxUhqDjD0_4&t=32s
+https://www.youtube.com/watch?v=HM4IUvrDZ9s&t=65s
+https://www.youtube.com/watch?v=pfniJLwHzio&t=20s
+https://www.youtube.com/watch?v=pjpE-3siXII
+
+
+https://www.youtube.com/watch?v=CrpBJgGqhS8&list=PLmCsXDGbJHdgt5mskUPyhtBHQvQsRoJWj
+
+Note:-Apache ActiveMQ is a messaging bus.
+Question:-What is wsdl is soap
+Answer:-It's used for describing the functionality of a SOAP based web service
+		It tell what a web service will do & how can we consume it.
+Note:-JAX-WS for Soap & JAX-RS for Restful
+Note:-Apache Axis 2 are two implementations of JAX-WS
+
+What is Apache CXF :- It is a framework for creating the web service.
+https://www.youtube.com/watch?v=CrpBJgGqhS8&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=2
+https://www.youtube.com/watch?v=zbgxzdzWyuk&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=3
+https://www.youtube.com/watch?v=CM1PinyCsc8&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=4
+https://www.youtube.com/watch?v=Wdnyx1e-JW4&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=5
+https://www.youtube.com/watch?v=pt-ndssfvwU&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=6
+https://www.youtube.com/watch?v=yjrS95TMCvg&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=7
+https://www.youtube.com/watch?v=EX4wUhnIZDI&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=8
+https://www.youtube.com/watch?v=K5VbMkv_poE&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=9
+https://www.youtube.com/watch?v=ftLyny77wsc&list=PLmCsXDGbJHdibOx6axScPiuHA8ftsrmut&index=10
+
+Bootstrap Class Loader – 
+It loads JDK internal classes, typically loads rt.jar and other core classes for example java.lang.* package classes
+Extensions Class Loader –
+It loads classes from the JDK extensions directory, usually $JAVA_HOME/lib/ext directory.
+System Class Loader – 
+It loads classes from the current classpath that can be set while invoking a program using -cp or -classpath command line options.
+
+
+al-181206,0719
+
+al-181206,0719
+
+Web Server is designed to serve HTTP Content. App Server can also serve HTTP Content but is not limited to just HTTP. It can be provided other protocol support such as RMI/RPC
+Web Server is mostly designed to serve static content, though most Web Servers have plugins to support scripting languages like Perl, PHP, ASP, JSP etc. through which these servers can generate dynamic HTTP content.
+
+
+
+
+
+
+	
+ 
