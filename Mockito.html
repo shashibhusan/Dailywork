@@ -13,6 +13,57 @@
 <div style="text-align:justify;" data-role="page">
   
 <div data-role="main" class="ui-content">
+<b class="redC">Important Mockito annotations</b><br/>
+@PrepareForTest <br/>
+@PowerMockIgnore <br/>
+@InjectMock <br/>
+@MockUtil----------------------------------------------------Pending<br/>
+MockDestination----------------------------------------------Pending<br/>
+any() <br/>
+@Mock.lient(https://www.baeldung.com/mockito-unnecessary-stubbing-exception)<br/>
+How to mock final class <br/>
+how to mock static method <br/>
+How mock a final method <br/>
+How to check that object is mocked object or not <br/>
+What is Http Unit<br/>
+<br/>
+<b class="redC">Important links</b><br/>
+https://vinaynotes.wordpress.com/tag/powermockignore/<br/>
+https://www.javadoc.io/doc/org.powermock/powermock-core/1.6.5/org/powermock/core/classloader/annotations/PowerMockIgnore.html<br/>
+https://lkrnac.net/blog/2014/01/mock-constructor/#mock-constructor<br/>
+https://lkrnac.net/blog/2014/01/mock-final-class/#mock-final-class<br/>
+https://dzone.com/articles/mock-final-method<br/>
+https://www.baeldung.com/mockito-final<br/>
+https://frontbackend.com/java/mocking-final-method-with-mockito-framework<br/>
+https://stackoverflow.com/questions/11214136/unit-testing-with-mockito-for-constructors<br/>
+https://github.com/powermock/powermock/wiki/Mockito#how-to-mock-construction-of-new-objects<br/>
+<br/>
+System.out.println("===="+Mockito.mockingDetails(calcService1).isMock());<br/>
+<br/>
+<b class="redC">Notes</b><br/>
+@RunWith(MockitoJunitRunner.class)-:Eable to run that particular class with Mockito<br/>
+When(obj.calculate()).thenReturn(value,value);//That means if your method are called multiple times the you can mock to return multiple values<br/>
+VerifyNoMoreInteraction()<br/>
+<br/>
+InOrder inOrder=Mockito.inOrder(bookRepository);<br/>
+inOrder.verify(bookRepository).save();<br/>
+inOrder.verify(bookRepository).findById(bookId);<br/>
+<br/>
+Type of Argument Matchers<br/>
+Method Name -------------------------Matching Rule<br/>
+any()-------------------------any object or null<br/>
+any(Class<T>clazz)-------------------------any object of given type or null<br/>
+anyVararg()	Like anyInt(),anyString() 	any vararg<br/>
+<br/>
+Note:-ArgumentMatcher should be provided for all Arguments<br/>
+<br/>
+Collection Type Argument Matchers<br/>
+Method Name -------------------------Matching Rules<br/>
+anyCollection()-------------------------any Collection type<br/>
+anyList()-------------------------any list type<br/>
+anyMap()-------------------------any Map type<br/>
+anySet()-------------------------any Set type<br/>
+<br/>
 <b class="redC">Important Step in Mockito:-</b><br/>
 
 There are three main section in Mockito<br/>

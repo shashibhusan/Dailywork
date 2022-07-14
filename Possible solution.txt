@@ -1,4 +1,0 @@
-Possible solution
-1- Use @InjectMocks ---"C:\Users\shashi\Desktop\Mokito Tutorials\Mockito Annotations -  @Mock, @Runwith, @InjectMocks and @Captor.mp4"
-Move the DestinationAccessor in same class , get the destination there and use that destionation 
-and the use the @mock object of complete class
