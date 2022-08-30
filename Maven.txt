@@ -1,0 +1,79 @@
+Maven command to deploy project.
+https://www.youtube.com/watch?v=IYRYbPR5Gek&t=67s (Maven Tutorial 03- Maven Build Phases)
+
+What is difference between Artifacts and snapshot in maven 
+
+Release Artifacts:-These are specific, point-in-time releases.Released artifacts are considered to be solid & stable.
+Snapshot Artifacts:-Snapshot artifacts capture a work in progress and used during development.
+
+
+Maven has three life cycle mainly
+1-Default----Having 24 phases
+2-Site-------Having 4 Phases
+3-Clean------Having 3 Phases
+
+https://maven.apache.org/ref/3.6.3/maven-core/lifecycles.html
+
+***Phases of Default life cycle
+
+<phases>
+  <phase>validate</phase>
+  <phase>initialize</phase>
+  <phase>generate-sources</phase>
+  <phase>process-sources</phase>
+  <phase>generate-resources</phase>
+  <phase>process-resources</phase>
+  <phase>compile</phase>
+  <phase>process-classes</phase>
+  <phase>generate-test-sources</phase>
+  <phase>process-test-sources</phase>
+  <phase>generate-test-resources</phase>
+  <phase>process-test-resources</phase>
+  <phase>test-compile</phase>
+  <phase>process-test-classes</phase>
+  <phase>test</phase>
+  <phase>prepare-package</phase>
+  <phase>package</phase>
+  <phase>pre-integration-test</phase>
+  <phase>integration-test</phase>
+  <phase>post-integration-test</phase>
+  <phase>verify</phase>
+  <phase>install</phase>
+  <phase>deploy</phase>
+</phases>
+
+***Phases of Site life cycle
+
+<phases>
+  <phase>pre-site</phase>
+  <phase>site</phase>
+  <phase>post-site</phase>
+  <phase>site-deploy</phase>
+</phases>
+<default-phases>
+  <site>
+    org.apache.maven.plugins:maven-site-plugin:3.3:site
+  </site>
+  <site-deploy>
+    org.apache.maven.plugins:maven-site-plugin:3.3:deploy
+  </site-deploy>
+</default-phases>
+
+
+***Phases of Clean life cycle
+
+<phases>
+  <phase>pre-clean</phase>
+  <phase>clean</phase>
+  <phase>post-clean</phase>
+</phases>
+<default-phases>
+  <clean>
+    org.apache.maven.plugins:maven-clean-plugin:2.5:clean
+  </clean>
+</default-phases>
+
+*****There is three Repository in maven
+1-Local ---->> .m2 folder
+2-Central --->> repo.maven.org
+3-Private ----->> Nexus

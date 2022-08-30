@@ -1,0 +1,76 @@
+-------------------------------------------------------------------------------------------------------------------------
+I am working for capgemini & client is HSBC bank, UK region. 
+HSBC uses product name EDQ that is a Oracle product, it does lot of things....One of them is data processing. 
+there is multiple processing unit or you can say multiple jobs.
+
+Now what happend,HSBC need very specific change in the few jobs that Oracle denies but suggest that they will provide the required library
+Then you can developed your own processing unit that is a seperate spring boot project put them on Weblogic server and can do the same. 
+That is what I was doing ...developing seperate standalone spring boot application & deploying them on Weblogic server.
+
+One more things is that we are using concept of Mbeans in this web aaplication.
+
+So,
+War file is the 1st Part.
+2nd is a client program : Will make the connection with instances running on weblogic server & will access the Mbeans
+3rd is Conrtol-M jobs.
+
+In that web application,we are using the concept of Mbeans
+So, What we are doing is that we have created a java program & write the logic of accessing the Mbeans in Weblogic logic server 
+putting the compile code of this program somewhere on the server.
+
+Then we have Conrtol-M jobs that will execute the java program using java command ....So what that program will do.
+will create connection with server & then invoke() the Operation inside Mbeans. 
+ 
+I can give some high level explaination that standalone web application.
+There is mainly five module 
+1- Parser
+2- Reader Service
+3- Transformer Service
+4- Writer Service
+5- Logical runner
+
+Parser:-Parser will parse multiple Xmls & will get know the table information. We are using javax.xml.parser
+that is DocumentBuilderFactory.
+
+Reader Service :- Reader service responsible to read the data from database.
+
+Transformer service :- Transformer service will responsible for decryption & Transformation of the data using Library provided by Oracle.
+
+Writer service :- Writer service is responsible for writing the data back to database.
+
+So, we are creating three type of threads using executor framework, that is reader, Transformer, Writer corresponding to each service
+and implementing the producer & consumer concept using LinkedBlockingQueue.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Before that I was woking in Travel domain and the project was a B2B project.
+Where I was working on Integeration of two system...There was multiple step but I was part of Invoice & creditNote generation.
+
+
+Let suppose there is a travel service provider like ThomasCook india....and there is an other business organization let say Reliance JIO.
+So, If JIO employee want to use the service of ThomasCook which is travel service provider.
+Then we need to sync the employee data of JIO in ThomasCook system...and then JIO employee make any booking on ThomasCook
+
+and in the end of the month ThomasCook will send all the invoices & creditNote to Reliance JIO for accounting
+
+I was working on this part of sending invoices & creditNote note in client system.
+
+and then that URL will be schedule in Crone Job on Linux server.
+ 
+Last project I did, was for SAP only and client was Chevron, I worked for 8 month, I worked there for two modules
+ 
+ 1- IOTOnboarding :- I Joined this development in between the Sprints, Actually there was 5 sprints but I joined in 3rd sprints
+	So, When we onboard any technical object then after successful onboarding of TO,means once there is Transaction Id correspong to 
+	TO in DB, Then I have to perfom certain set of action that inclues getting some data from ERP system & S4 System, doing some comparision pusing 
+	it to other system and then making a local storage as well.
+	I could explain complete In/Out of the project because I joined the project in between the sprints & after that due to time constraint I couldn't 
+	get time to explore.
+	
+2-  Inspection-Srv :- This module we have developed for creating a dashboard for displaying the TO information for all three, menas TO,Zone Level & CML
+	Level means Level One, Two & Three.The Information we were displaying inclues Characteristic Information & Indicator data information.
+	For that we have configured some configuration in configuration service and based on that configuration information will be displayed on dash board.
+	
+	For that we were getting Characteristic information from Assetbase & Indicator information from IOTOnboarding.
+ 
+ 
+ 

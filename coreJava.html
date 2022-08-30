@@ -13,6 +13,28 @@
 <div style="text-align:justify;" data-role="page">
   
   <div data-role="main" class="ui-content">
+	<b class="redC">Question:-</b>What is Queue interface in Java<br/>
+<b class="redC">Answer:-</b><br/>
+	Being an interface queue nneds a concreate class for the declaration and the most common classes are the PriorityQueue & LinkedList in java. It is to noted that implemention are not thread safe<br/> 
+	PriorityBlockingQueue is one alternative implemention if the thread safe implemention is needed.<br/>  		
+	<br/>
+<b class="redC">Question:-</b>What is different between peek() & element().<br/>
+<b class="redC">Answer:-</b><br/>
+	peek()- Method is used to view the head of the queue without removing it.It returns NULL is the queue is empty.<br/>
+	element()-This method is similar to peek().It throws NoSuchElementException when the queue is empty.<br/>
+<br/>
+<b class="redC">Question:-</b>What is difference between remove() & poll().<br/>
+<b class="redC">Answer:-</b><br/>
+	The remove() and poll() method only differs in their behavior when the queue is empty: the remove() method throws exception, while the poll() method returns null.<br/> 
+<br/> 
+<b class="redC">Question:-</b>What is PriorityBlockingQueue.<br/> 
+<b class="redC">Answer:-</b><br/> 
+		It is to be noted that both implemention , the PriorityQueue and LinkedList are not thread-safe.<br/> 
+		if thread-safe implemention is needed PriorityBlockingQueue are used.<br/> 
+		<br/> 
+	<b class="redC">Note :-</b>
+	 The constructor inside the abstract class can only be called during constructor chaining i.e.<br/>
+	 when we create an instance of sub-classes. This is also one of the reasons abstract class can have a constructor<br/>
     <b class="redC">Question :-</b> What is the worst case in HashMap<br/>
 	<b class="redC">Answer :-</b> worst case occured when all the stored object are in the same index in the hashtable.<br/>
 	<b class="redC">Question :-</b> Can I extend Throwable -->> Yes, We can<br/>
