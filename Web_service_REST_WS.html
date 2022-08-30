@@ -19,7 +19,13 @@
       <br/>
   </div>
   <div data-role="main" class="ui-content">
-  
+	<b class="redC">NOTE:-</b><br/>
+	REST is stateless, server does not stores any session on server side.<br/>
+	The client's application state should never be stored on the server, but passed around from the client to every place that needs it.<br/>
+	That is where the ST in REST comes from, State Transfer. You transfer the state around instead of having the server store it.<br/>
+	This is the only way to scale to millions of concurrent users. If for no other reason than because millions of sessions is millions of sessions.<br/>
+	<b class="redC">Example of transfering the state is use of Token like JWT</b><br/>
+	<br/>
   <b class="redC">Question:-What is use of @ResponseStatus</b><br/>
   <font class="redC">Answer:-</font>
   We use @ResponseStatus to mark a method or an exception class with a status code and that should be returned
