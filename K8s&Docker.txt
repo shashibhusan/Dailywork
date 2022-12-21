@@ -1,0 +1,60 @@
+Pod : 
+	Pod is a smallest unit of K8s
+	basically it's an abstraction over container
+	each pod have it's own IP address
+Service:
+	have Permanent static IP address 
+	and lifecycle of Pod and service Not connected
+	it also a load balancer
+Node:
+	A Node is a worker machine in Kubernetes and may be
+	either a virtual or a physical machine, depending on the cluster.
+Ingress:
+	 Kubernetes Ingress is an API object that provides routing rules
+	 to manage access to the services within a Kubernetes cluster. 
+Config Map:
+	It's a external configuration of your application.
+Secret:
+	It is used to store secret data that is base64 encoded.
+Volumes:
+	It is a storage on local machine or remote, outside of the K8s
+	cluster.
+Deployment:
+	blueprint for apps
+	you create Deployments
+	it's a abstraction of Pods
+StatefulSet:
+	for STATEFUL apps like DB
+	Important point
+	Deployment for stateLess Apps but StatefulSet for stateFUL
+Minikube:
+		It's a one node K8s culster that run on our local machine.
+Kubectl: It is a command line tool for k8s cluster
+		 apps or database.
+		 
+Now it is diffcult task to deploy stateFUL Apps So,DB ARE
+OFTEN HOSTED OUTSIDE OF K8S CULSTER.
+
+Kubelet:
+	It interacts with both the container and node.
+	It starts the pod with a container inside.
+Kube proxy:
+	Kube proxy forwards the requests.
+3 important processess of node
+	i)- Kubelet
+	ii)- Kube Proxy
+	iii)- Container runtime
+Master processes
+	i)APIserver, is a Cluster gate
+	ii)Scheduler
+	iii)Contoller Manager
+	iv) etcd. is a cluster brain
+
+
+	
+	
+	
+	
+	
+	
+	
