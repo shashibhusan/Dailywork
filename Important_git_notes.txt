@@ -8,6 +8,7 @@ Step 2-
 Step 3- 
 		Add remote origin to your local repo with below command
 		git remote add origin git@github.com:shashibhusan/SpringBootWorkspace.git
+		git remote add origin git@github.com:shashibhusan/workspace.git
 Step 4-
 		pull the changes of master if any like ReadMe with below command
 		git pull origin master --allow-unrelated-histories
@@ -19,3 +20,6 @@ Approch -B
 
 Create a remote repo the clone it where ever you want 
 put all the code in that foler and then push the code 
+
+
+ 
