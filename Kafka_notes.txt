@@ -1,0 +1,17 @@
+1-	Kafka cluster is bunch of message brokers that runs on group of computer.They take message record 
+		from producer and stores in Kafka message logs
+2-	Broker is a Kafka server.
+3-	Cluster is a group of computers sharing workload for a common purpose.
+4-	Topic is a unique name for Kafka stream or data set.
+5-	When stream data is huge we can’t  store all the data on same computer
+	we need to break the data in multiple part and each part will be store by a different computer.
+	This is the concept of partition.
+6-	Offset is a sequence id given to messages as they arrive in a partition. There is no global offset value.
+		So if you want to access a message you need to know three things.
+		(i)Topic Number
+		(ii)Partition Number
+		(iii)Offset
+7-	Consumer group is a group of consumers acting as a single logical unit.
+8-	Kafka doesn’t allow more the two consumer to read data from same partition simultaneously to avoid double reading of record.
+9-	Replication factor:- Number of total copy for a partition to handle fault Tolerance.
+	But we define it at topic level and that will apply on all the partition within the topic
