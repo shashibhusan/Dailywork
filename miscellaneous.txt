@@ -1,26 +1,15 @@
-
 What is CDS :- 
 
 Core data service is mainly a view 
 if you are a ANAB developer then you have to write query, procedure and view in HANA database
 but after CDS as developer you don't need to go to database , you can write CDS view in application server
 and that will be converted into HANA view and procedure
-
-
-Kafka Commands :-
-
- .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
- .\bin\windows\kafka-server-start.bat .\config\server.properties
- .\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
- .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic NewTopic
- 
  
 To build & deploy the multi target application there is mta.yaml file
 Thare are mainly three section in mta.yaml file
 1-Global element section:- define overall properties of multi target application
 2-Module section:- Define the application modules to be built , their type , path to their specific development project
 3-Resource section:- Define the external cloud foundary services to be used for example database services or identity services.
-
 
 SAP HANA has two different databases, System DB and Tenant DB. The system database is used for system management/administration.
 It contains the landscape information including the tenant database information.
@@ -29,13 +18,6 @@ These databases are referred to as the tenant database. The tenant database is w
   
 
 An SAP HANA HDI(HANA Deploymentment Infrastructure) container consists of a design-time container and a corresponding run-time container.
-
-
-Question:-What is ZooKeeper role in Kafka?
-Answer:-
-If we must define the role of Zookeeper in a few words, we can say that Zookeeper acts a Kafka cluster coordinator that manages cluster membership of brokers,
-producers, and consumers participating in message transfers via Kafka. It also helps in leader election for a Kafka topic.
-
 
 what is domain in web logic server
 :-Every domain represent the single instance of web-logic server.

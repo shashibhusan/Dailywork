@@ -15,3 +15,16 @@
 8-	Kafka doesn’t allow more the two consumer to read data from same partition simultaneously to avoid double reading of record.
 9-	Replication factor:- Number of total copy for a partition to handle fault Tolerance.
 	But we define it at topic level and that will apply on all the partition within the topic
+
+
+Kafka Commands :-
+
+ .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+ .\bin\windows\kafka-server-start.bat .\config\server.properties
+ .\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+ .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic NewTopic
+
+Question:-What is ZooKeeper role in Kafka?
+Answer:-
+	If we must define the role of Zookeeper in a few words, we can say that Zookeeper acts a Kafka cluster coordinator that manages cluster membership of brokers,
+	producers, and consumers participating in message transfers via Kafka. It also helps in leader election for a Kafka topic.
