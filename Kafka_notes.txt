@@ -1,9 +1,62 @@
+Kafka is a Horizontally scalable, fault-tolerant,distributed sreaming platform.
+Spring implementd Kafka in two ways
+1- Spring for Apache Kafka
+2- Spring Cloud Streams
+Then question is which should we use and answer is both
+
+When we should use Spring for Apache Kafka (This is more important for me)
+1- When we need only Consumer or only producer
+	that means when we take data from REST/SOAP/DB do some processing and send to kafka producer.
+    or we take some data from Kafka consumer do some processing and send it to some REST/SOAP/DB.
+When we should use Spring cloud streams
+   When we have to get some data from Kafka topic do some streams processing like aggregating
+   Summerizing, windowing and send it back to Kafka again some kafka topic that means in spring cloud 
+   streams we can only read data from any topic.
+Note:- There are four type of Serializer in Kafka
+	1- String
+	2- JSON
+	3- Avro
+	4- Protocol Buffer
+Note:- We can use tool Offset explorer to monitor the kafka Partitions & Topics
+Important Notes :- I have start from here to do hands-on
+====>>>>>>>>>>>>>>>>>https://www.youtube.com/watch?v=d0T9g0_G_3U&t=367s
+Question:- Core componant of Kafka EcoSystem
+Answer:-
+1-Kafka Broker
+2-Kafka Client API
+3-Kafka Streams
+4-KSQL
+
+Question:- Where we JSON & where Avro
+Answer:-
+Case for JSON :-
+1-Web APIs and client-server communication, where human readability/debugging is important for in development, where
+JSON is a widely used format for transferring data between client and server.
+2-When data size is small because Can be slower in serialization and deserialization due to text-based encoding and lack of schema information
+3-No validation checks are performed during serialization and deserialization because there is no schema
+
+Case for AVRO :-
+1-Typically faster in serialization and deserialization due to binary encoding and included schema information 
+	so gives better performance for large data size.
+2-Data validation:-	Includes validation checks based on schema during serialization and deserialization
+	because there is schema.
+For more detail Avro_vs_json.JPG on Desktop
+
+Kafka comes in many flavors,and you can classify them into three categories
+1-	Open source eg. Apache Kafka
+2-	Commericial Distribution eg. Confluent.io
+3-	Managed Services eg. Confluent,amazon, aiven.io
+
 1-	Kafka cluster is bunch of message brokers that runs on group of computer.They take message record 
 		from producer and stores in Kafka message logs
 2-	Broker is a Kafka server.
+	A Kafka broker receives messages from producers and stores them on disk
+	keyed by unique offset. A Kafka broker allows consumers to fetch messages by
+	a topic, partition, and offset. Kafka brokers can create a Kafka cluster by sharing
+	information with each other directly or indirectly using Zookeeper.
 3-	Cluster is a group of computers sharing workload for a common purpose.
 4-	Topic is a unique name for Kafka stream or data set.
-5-	When stream data is huge we can’t  store all the data on same computer
+5-	When stream data is huge we can’t store all the data on same computer
 	we need to break the data in multiple part and each part will be store by a different computer.
 	This is the concept of partition.
 6-	Offset is a sequence id given to messages as they arrive in a partition. There is no global offset value.
@@ -15,16 +68,286 @@
 8-	Kafka doesn’t allow more the two consumer to read data from same partition simultaneously to avoid double reading of record.
 9-	Replication factor:- Number of total copy for a partition to handle fault Tolerance.
 	But we define it at topic level and that will apply on all the partition within the topic
+10-	We can create many topics in Apache Kafka, and it is identified by unique name. Topics
+	are split into partitions, each partition is ordered and messages with in a partitions gets an id
+	called Offset and it is incremental unique id.
+Question:-	what is kafka producer and consumer
+Answer:-	The Kafka Producer API allows applications to send streams of data to the Kafka cluster. 
+			The Kafka Consumer API allows applications to read streams of data from the cluster.
+Zookeeper serves as the coordination interface between the Kafka boker, producer and consumer. Kafka stores basic metadata
+			in Zookeeper, such as information about brokers, topics, partition, partition leader/followers, consumer offset etc.
+Question:- What is controller Node in Kafka
+Answer:-In a Kafka cluster, one of the brokers serves as the controller, which is
+		responsible for managing the states of partitions and replicas and for
+		performing administrative tasks like reassigning partitions. At any given
+		time there is only one controller broker in your cluster.Generally first broker in the cluster work as controller.
+		Then question is what Zookeeper will do
+		In that case Zookeeper is the database for Kafka cluster control information
+Note:- Image to explain follower & leader distribution
+	   Desktop Partition_distribution.JPG	
+If we are creating 10 partation and replication factor is 3 the total of 10*3=30 partation will be created
+means total of three copy for each partation including leader and 
+in which first 10 will be leader and remaining 20 will be follower partation 
+Eg:-
+P1 -->p11 , p12
+p2 -->p21 , p22
+and so on ..
+Question:- What is ISR list.
+Answer:- ISR stand for In sync replica list.This is list of all the replica which is in sync with leader and hence
+	they are the excellent condidate to be a leade if current leader die due to some reason.
+	So question is how leader will get to known which leader is in sync and it is based on which is last offset a 
+	follower has requested but infact always follower will be lagging because every time it taking messages from leader
+	and writing it so how can a leader will decide how much a fallower is in sync
+	Answer is based on "Not too for" factor
+	default value for this is 10s means if fallower has requested in last 10s for recent message means it is in sync
+	you can configure this value in configuration file.
+Question:- Commited VS uncommited
+Answer:-
+		From above ISR list if we have configured "Not too for" as 10s and every follower is 11s behind then in case of 
+		leader failure who will be next leader because ISR list is logically empty there comes the cocept of commited and
+		uncommited messages
+		So solution is that leader will consider a message as commited when it is relicated on ISR list in that case
+		follower will not be for behind and 
+		if leader will die commited messages will not be lossed but what about uncommited messages. it is not a issue because
+		it can be resend by producer because producers can choose to receive acknowledgement of sent messages only after the 
+		message is fully commited. In that case producers wait for certain time period for acknowledgement and can resend
+		after that.
+Question:- Minimum ISR List
+Answer:- Take scenario where there is three replica in ISR list including leader and if two fails due to some reason in that case
+		there will be only one replica in ISR list and message will be still consider as commited because it is relicated to all in ISR
+		list.
+		in that case you can set min.insync.replicas=2 and if it is on true then producer will send an error 
+        "Not enough replica" and will work as leader until a other replica will not be ready.		
+Question:-How can I avoid sending duplicate record to by kafka producer.
+Answer :- By setting 
+			enable.idempotence=true.
+Question:-Schema Registry
+Answer:-
+	Schema Registry provides a centralized repository for managing and validating
+		schemas for topic message data, and for serialization and deserialization of the data over the network.
+Question:-How to create consumer group in kafka. 	 
+Answer:-You do not explicitly create consumer groups but rather build consumers which always belong to a
+	consumer group. No matter which technology you are using, each Kafka Consumer will have a Consumer Group.
+	The consumer group is configurable for each individual consumer.
+Question:-What is ZooKeeper role in Kafka?
+Answer:-
+	If we must define the role of Zookeeper in a few words, we can say that Zookeeper acts a Kafka cluster coordinator that manages cluster membership of brokers,
+	producers, and consumers participating in message transfers via Kafka. It also helps in leader election for a Kafka topic.
+	
+Important Notes :- Kafka doesn't allow more than one consumer to read and process data from these same partitions simultaneously
+	and this restriction is necessary to avoid the double reading of records.
+Question:-How can a producer write data in particular partition.
+Answer:-By specifying the partition number when creating the ProducerRecord, you can
+	send data to a specific partition of a Kafka topic. Ensure that the partition number you specify is within the valid range for the topic.
+For more image on desktop partation.JGP
 
+Question:-How can I get all partitions of a topic in kafka.
+Answer:-Retrieve the Partition Number using CLI
+   $ kafka-topics --describe --bootstrap-server localhost:9092 --topic topic_name
+   Using Java code
+   org.apache.kafka.clients.producer.Producer producer = new KafkaProducer(configProperties);
+   producer.partitionsFor("test")
+Question:-How can a consumer read data from a given partition and from given Offsets.
+Answer:-In case you are looking to read specific messages from specific partitions, the
+	.seek() and .assign() API may help you.
+	To use these API, make the following changes:
+	1-Remove the group.id from the consumer properties (we don't use consumer groups anymore)
+	2-Remove the subscription to the topic
+	3-Use consumer assign() and seek() APIs
+ More detail : image Sp_part.JPG
+Question:-What is the responsibility of Broker.
+Answer:-ResposibilityOfBroker.JPG.
+Question:- 
+Note:-Kafka is assigning consumer for each partition by itself.   
+Question:-What is KSQL.
+Answer:-It is a streams for kafka Streams.
+Question:-	What is single node cluster.
+Answer:-	Single node cluster means single broker.
+Question:- What is log segment.
+Answer:- Kafka broker stores messages in log file and breaking it into part in knkown log segment.
 
-Kafka Commands :-
+Confluent Kafka commands
+	Command to start ZooKeeper
+			E:\confluent-7.3.1>bin\windows\zookeeper-server-start.bat etc\kafka\zookeeper.properties
+	Command to start broker
+			E:\confluent-7.3.1>bin\windows\kafka-server-start.bat etc\kafka\server_0.properties
+	Command to create topic
+			E:\confluent-7.3.1>bin\windows\kafka-topics.bat --create --topic testOne --partitions 3 --replication-factor 1 --bootstrap-server localhost:9091
+	Command to create Consumer
+			E:\confluent-7.3.1>bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic testOne --from-beginning
+	Command to create producer
+			E:\confluent-7.3.1>bin\windows\kafka-console-producer.bat --topic testOne --broker-list localhost:9090
+IMPORTANT NOTE :-
+		I'm using three port different for topic,consumer & producer 
+		reason is that i have create three node kafka cluster and brokers are running on 
+		9090,9091 & 9092 port 
+		In case on multi node kafka cluster when we create topic we can use any broker port
+		similarly we can use any broker to produce/consume messages
+		So,to clear this concept i have used different port for topic, consumer & producer
+Apache Kafka Commands :-
 
  .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
  .\bin\windows\kafka-server-start.bat .\config\server.properties
  .\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
  .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic NewTopic
 
-Question:-What is ZooKeeper role in Kafka?
+Question:-what is group id in kafka
+Answer:- If there are four consumers with the same Group ID assigned to the same topic, they will all share the work of reading from the same topic.
+Question:-What is the role of the offset
+Answer:-In partitions, messages are assigned a unique ID number called the offset. The role is to identify each message in the partition uniquely.
+Question:-Can Kafka be used without ZooKeeper?
+Answer:-It is not possible to connect directly to the Kafka Server by bypassing ZooKeeper. Any client request cannot be serviced if ZooKeeper is down.
+Question:-What is a partitioning key.
+Answer:-The partitioning key indicates the destination partition of the message within the producer.
+Question:-What is a partition of a topic in Kafka Cluster.
+Answer:-Partition is a single piece of Kafka topic. 
+Question:-What do you mean by ISR in Kafka environment.
+Answer:-ISR is the abbreviation of In sync replicas. They are a set of message replicas that are synced to be leaders.
+Question:-How can you get precisely one messaging during data production.
 Answer:-
-	If we must define the role of Zookeeper in a few words, we can say that Zookeeper acts a Kafka cluster coordinator that manages cluster membership of brokers,
-	producers, and consumers participating in message transfers via Kafka. It also helps in leader election for a Kafka topic.
+Question:-What is a replica in the Kafka environment?
+Answer:-The replica is a list of essential nodes needed for logging for any particular partition. It can play the role of a follower or leader.
+Question:-What does follower and leader in Kafka mean.
+Answer:-One server in the partition serves as the leader, and one or more servers act as a follower. The leader assigns itself tasks that read and write partition requests. Followers follow the leader and replicate what is being told.
+Question:-What is a consumer group?
+Answer:-When more than one consumer consumes a bunch of subscribed topics jointly, it forms a consumer group.
+Question:-What is Kafka producer Acknowledgement?
+Answer:-An acknowledgement or ack is sent to the producer by a broker to acknowledge receipt of the
+	message. Ack level defines the number of acknowledgements that the producer requires before considering a request complete.
+Question:-What is the consumer lag.
+Answer:-This delta between the consuming offset and the latest offset is called consumer lag.
+Question:-What are the benefits of creating Kafka Cluster?
+Answer:-When we expand the cluster, the Kafka cluster has zero downtime. The cluster manages the replication
+	and persistence of message data. The cluster also offers strong durability because of cluster centric design.
+Question:-What happens if the preferred replica is not in the ISR?
+Answer:-The controller will fail to move leadership to the preferred replica if it is not in the ISR.
+Question:-Is getting message offset possible after producing?
+Answer:-This is not possible from a class behaving as a producer because, like in most queue systems, its role
+	is to forget and fire the messages. As a message consumer, you get the offset from a Kaka broker.
+Question:-How can the Kafka cluster be rebalanced?
+Answer:-When a customer adds new disks or nodes to existing nodes, partitions are not automatically balanced.
+	If several nodes in a topic are already equal to the replication factor, adding disks will not help in rebalancing. Instead, the Kafka-reassign-partitions command is recommended after adding new hosts.
+Question:-Can we use Kafka without Zookeeper?
+Answer:-Kafka can now be used without ZooKeeper as of version 2.8. The release of Kafka 2.8.0 in April 2021 gave us all the opportunity to try it out
+		without ZooKeeper. However, this version is not yet ready for production and lacks some key features.
+Question:-What is the maximum size of a message that Kafka can receive?
+Answer:-By default, the maximum size of a Kafka message is 1MB (megabyte).
+Question:-What do you mean by Kafka schema registry?
+Answer:-A Schema Registry is present for both producers and consumers in a Kafka cluster, and it holds Avro schemas.
+	The Kafka Schema Registry is used to ensure that the schema used by the consumer and the schema used by the producer are identical. 
+Question:-What are some of the features of Kafka.
+Answer:-1-Kafka is a messaging system built for high throughput and fault tolerance.
+	2-Kafka can also save the messages to storage and replicate them across the cluster.
+	 
+Question:-Explain the concept of Leader and Follower in Kafka.
+Answer:-
+	In Kafka, each partition has one server that acts as a Leader and one or more servers that operate as Followers. The Leader is in charge of all read
+	and writes requests for the partition, while the Followers are responsible for passively replicating the leader. In the case that the Leader fails, one of
+	the Followers will assume leadership. The server's load is balanced as a result of this.
+Question:-What are the four core API architectures that Kafka uses?
+Answer:-1-Producer API
+		2-Consumer API
+		3-Streams API
+		4-Connect API (In Apache Kafka, the Kafka Connect API (also called Connector API) connects Kafka topics to applications.)
+Question:-What is the maximum size of a message that Kafka can receive?
+Answer:-By default, the maximum size of a Kafka message is 1MB (megabyte), but we can modify it accordingly. The broker settings facilitate us to modify the size.
+Question:-What is the purpose of the retention period in the Kafka cluster?
+Answer:-Within the Kafka cluster, the retention period is used to retain all the published records without checking whether they have been consumed or not.
+		Using a configuration setting for the retention period, we can easily discard the records. The main purpose of discarding the records from the Kafka cluster is to free up some space.
+Question:-Is it possible to get the message offset after producing?
+Answer:-You cannot do that from a class that behaves as a producer like in most queue systems, its role is to fire and forget the messages. 
+Question:-Differences between Apache Kafka and RabbitMQ:
+
+Answer:-Kafka_vs_rabbit.JPG on desktop.
+
+Question:-What are the biggest advantages of Kafka?
+Answer:-
+1-Kafka is a messaging system, which has provided fault tolerant capability to prevent the message loss. 
+2-Kafka is designed for achieving high throughput and fault tolerant messaging services.
+3-High Throughput
+4-Scalability
+5-Replication
+6-Durability
+7-Stream Processing
+
+Question:-What are the biggest disadvantages of Kafka?
+Answer:-
+1-Brokers and consumers reduce Kafka's performance when they get huge messages because they have to deal with the data by compressing and decompressing the messages.
+	This can reduce the overall Kafka's throughput and performance.
+2-When the messages are continuously updated or changed, Kafka performance degrades. Kafka works well when the message does not need to be updated.
+
+Question:-When does QueueFullException occur in the Producer API?
+Answer:-The QueueFullException occurs when the producer sends messages to the broker at a pace that the broker cannot handle.
+	A solution here is to add more brokers to handle the pace of messages coming in from the producer.
+
+Question:-Is it possible to add partitions to an existing topic in Apache Kafka?
+Answer:-Apache Kafka provides the alter command to change a topic behavior and modify the configurations associated with it. The alter command can be used to add more partitions.
+	The command to increase the partitions to four is as follows:
+	./bin/kafka-topics.sh --alter --zookeeper localhost:2181 --topic my-topic --partitions 4
+Question:-What is the optimal number of partitions for a topic?
+Answer:-The optimal number of partitions a topic should be divided into must be equal to the number of consumers.
+
+Question:-How can large messages be sent in Apache Kafka?
+Answer:-
+By default, the largest size of a message that can be sent in Apache Kafka is 1MB. In order to send larger
+messages using Kafka, a few properties have to be adjusted. Here are the configuration details that have to be updated
+1-At the Consumer end – fetch.message.max.bytes
+2-At the Broker, end to create replica– replica.fetch.max.bytes
+3-At the Broker, the end to create a message – message.max.bytes
+4-At the Broker end for every topic – max.message.bytes
+
+Question:-Explain how Apache Kafka provides security.
+Answer:-There are three components to the security provided by Kafka:
+1-Encryption: All the message transfer processes between the Kafka broker and its various clients are secured
+through encryption. This ensures that other clients can not intercept the data. All the messages are shared
+between the components in an encrypted format.
+2-Authentication: applications that are making use of the Kafka broker have to be authenticated before they
+can be connected to Kafka. Only authorized applications will be allowed to consume or publish messages.
+Authorized applications will have unique ids and passwords to identify themselves.
+3-Authorization: this is done after authentication. Once a client is authenticated, it is allowed to consume or
+publish messages. The authorization ensures that applications can be restricted from write access to prevent data pollution.
+
+Question:-Can a consumer read more than one partition from a topic?
+Answer:-Yes, if the number of partitions is greater than the number of consumers in a consumer group, then a consumer will have to read more than one partition from a topic.
+
+Question:-Name the various types of Kafka producer API.
+Answer:-
+There are three types of Kafka producer API available-
+1-Fire and Forget
+2-Synchronous producer
+3-Asynchronous producer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+Important Notes related to Spring cloud Streams:- Spring Cloud offers us a bunch of binder technologies.
+ We can use Apache Kafka, RabbitMQ, Amazon Kinesis, Google PubSub, Azure Event Hubs, and many more.
+ That is why when we start Spring Boot we need to define which binder technology we are using 
+ Like:- Bindings.jpg on desktop 
+ and then we define corresponding channels for it for doing input/output operation for this bindings
+ and then create topics defined as destination in .yaml file.
+ 
+ 
+  
+
+
+ 
+ 
+ 
+	
+	
+
+

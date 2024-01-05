@@ -1,0 +1,4 @@
+Q21. Differentiate between an Enumeration and an Iterator.
+Ans. The difference between an Enumeration and Iterator is that Enumeration does not have the remove() method, while Iterator has the remove() method.
+Q26. Discuss IdentityHashMap.
+Ans. The IdentityHashMap, with the help of HashMap, implements the Map interface. It compares keys as well as values with the help of reference equality in lieu of object equality.

@@ -21,6 +21,34 @@
 
 <div data-role="page">
 <div data-role="main" class="ui-content">
+<b class="redC">Transaction in hibernate example</b><br/>
+	<pre class="blueC">
+	Session session = null;  
+	Transaction tx = null;  
+	  
+	try {  
+	session = HibernateUtil.getSessionFactory().openSession();
+	tx = session.beginTransaction();  
+	tx.setTimeout(5);
+	//some code to execute within transaction  
+	  
+	tx.commit();  
+	  }
+	catch (Exception ex) {  
+	try{
+			tx.rollback();
+		}catch(Exception exception){
+			log.error("Couldn’t roll back the transaction", exception);
+		}
+		throw ex;
+	}  
+	finally{
+	if(session!=null)
+	{
+	session.close();
+	}
+	}
+	</pre>
 <b class="redC">How to call store procedure using hibernate</b><br/>
 <pre class="blueC">
 		Session session = sessionFactory.openSession();

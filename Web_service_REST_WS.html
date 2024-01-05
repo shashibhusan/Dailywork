@@ -26,6 +26,57 @@
 	This is the only way to scale to millions of concurrent users. If for no other reason than because millions of sessions is millions of sessions.<br/>
 	<b class="redC">Example of transfering the state is use of Token like JWT</b><br/>
 	<br/>
+	<b class="redC">Question:-</b>Can you tell the disadvantages of RESTful web services?<br/>
+	<b class="redC">Answer:-</b>
+	The disadvantages are:<br/>
+
+	<b>1-</b>As the services follow the idea of statelessness, it is not possible to maintain sessions.
+	(Session simulation responsibility lies on the client-side to pass the session id)<br/>
+	
+	<b>2-</b>We can't validate the request before hitting the actual logic.<br/>
+	<br/>
+	<b class="redC">Differentiate between SOAP and REST?</b><br/>
+	<b>1-</b>SOAP supports only XML transmission between the client and the server.<br/>
+	REST supports data of multiple formats like XML, JSON, MIME, Text, etc.<br/>
+	<br/>
+	<b>2-</b>SOAP is not commonly preferred, but they are used in cases which require stateful data transfer and more reliability.<br/>
+	REST is commonly preferred by developers these days as it provides more scalability and maintainability.<br/>
+	<br/>
+	<b class="redC">Note:-</b><br/>
+	REST provides idempotent methods automatically. GET, PUT, DELETE, HEAD, OPTIONS, and TRACE are the <b>idempotent</b> HTTP methods. POST is not idempotent	
+    <br/><br/>
+	<b>POST is not idempotent</b> because POST APIs are usually used for creating a new resource on the server. While calling POST methods N times, there will be N new resources. This does not result in the same outcome at a time.
+	<br/><br/>
+	Methods like GET, OPTIONS, TRACE, and HEAD are idempotent because they do not change the state of resources on the server. They are meant for resource retrieval whenever called. They do not result in write operations on the server thereby making it <b>idempotent</b>.
+	<br/><br/>
+	PUT methods are generally used for updating the state of resources. If you call PUT methods N times, the first request updates the resource and the subsequent requests will be overwriting the same resource again and again without changing anything. Hence, <b>PUT methods are idempotent</b>.
+	<br/><br/>
+	DELETE methods are said to be <b>idempotent</b> because when calling them for N times, the first request results in successful deletion (Status Code 200), and the next subsequent requests result in nothing - Status Code 204. The response is different, but there is no change of resources on the server-side.
+	<br/>
+	<br/>
+	<b class="redC">Question:-</b>What makes REST services to be easily scalable?<br/>
+	<b class="redC">Answer:-</b>REST services follow the concept of statelessness which essentially means no storing of any data across the requests on the server. This makes it easier to scale horizontally because the servers need not communicate much with each other while serving requests.<br/>
+	<br/>
+	<b class="redC">Question:-</b><br/>
+	Based on what factors, you can decide which type of web services you need to use - SOAP or REST<br/>
+	<br/>
+	Does your service require statelessness?<br/>
+	If yes, REST is suitable. If no, SOAP is preferred.<br/>
+	<br/>
+	What is the bandwidth/resource required?<br/>
+	SOAP involves a lot of overhead while sending and receiving XML data, hence it consumes a lot of bandwidth.<br/>
+	REST makes use of less bandwidth for data transmission.<br/>
+	<br/>
+	Does your service require support for multiple formats of data?<br/>
+	If yes, REST supports multiple data formats which is why it is preferred in this case.<br/>
+	<br/>
+	Does the client require a formal strict contract?<br/>
+	If yes, SOAP provides strict contracts by using WSDL. Hence, SOAP is preferred here.<br/>
+	<br/>
+	<b class="redC">Question:-</b>Is it possible to make asynchronous requests in JAX-RS?<br/>
+	<b class="redC">Answer:-</b>Yes. the JAX-RS Client API provides a method called Invocation.Builder.async() that is used for constructing client requests that need to be executed asynchronously<br/>
+		because bydefault REST is synchronous.<br/>
+	<br/>
   <b class="redC">Question:-What is use of @ResponseStatus</b><br/>
   <font class="redC">Answer:-</font>
   We use @ResponseStatus to mark a method or an exception class with a status code and that should be returned
@@ -105,7 +156,8 @@
   <font class="redC">2:-</font>@WebMethod<br/>
   <b class="redC">Question:-</b>What is difference between sessionId and JWT<br/>
   <b class="redC">Answer:-</b><br/>
-  <img alt="JWT_Vs_session_ID" src="image/JWT_Vs_session_ID.JPG"><br/>
+  Session is a reference token where as JWT is a value token.
+  <!--<img alt="JWT_Vs_session_ID" src="image/JWT_Vs_session_ID.JPG"><br/>-->
   <br/>
   <b class="redC">Question:-</b>What is marshalling and unmarshalling in java<br/>
   <b class="redC">Answer:-</b><br/>

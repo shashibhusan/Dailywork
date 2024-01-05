@@ -387,16 +387,13 @@
 
 <b class="redC">Now some important point about hibernate</b><br/>
 <pre>
-1-We can change the name and location of Hibernate.cfg.xml file,
-name will be any things but location must be relative to project means in differnt package.
-2-We can change the name name location of tablename.hbm.xml file,
-name will be anything but location must be relative to projrct means in different package.
+1-We can change the name and location of Hibernate.cfg.xml filename will be any things but location must be relative to project means in differnt package.
+2-We can change the name name location of tablename.hbm.xml filename will be anything but location must be relative to projrct means in different package.
 </pre>
 <b class="redC">Important point about hibernate</b><br/>
         
 <pre>
-1-A POJO is a Java object that doesn't have a requirement to implement a particular interface or derive from a particular base class,
-or make use of particular annotations in order to be compatible with a given framework 
+1-A POJO is a Java object that doesn't have a requirement to implement a particular interface or derive from a particular base class,	or make use of particular annotations in order to be compatible with a given framework 
 2-A JavaBean follows certain conventions.Getter/setter naming,having a public default constructor, being serialisable.
 </pre>
 
@@ -443,9 +440,7 @@ or make use of particular annotations in order to be compatible with a given fra
      t.commit();
      session.close();
      
-   <b class="redC">Important</b> is that this is called dirty checking in hibernate because
-    we are not writing the update query here but hibernate will automatically find the change in
-    the object and will update the value in database
+   <b class="redC">Important</b> is that this is called dirty checking in hibernate because we are not writing the update query here but hibernate will automatically find the change in the object and will update the value in database
 
 </pre>
 

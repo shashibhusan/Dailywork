@@ -1,4 +1,5 @@
 -------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
 I am working for capgemini & client is HSBC bank, UK region. 
 HSBC uses product name EDQ that is a Oracle product, it does lot of things....One of them is data processing. 
 there is multiple processing unit or you can say multiple jobs.
@@ -42,6 +43,7 @@ So, we are creating three type of threads using executor framework, that is read
 and implementing the producer & consumer concept using LinkedBlockingQueue.
 
 ----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 
 Before that I was woking in Travel domain and the project was a B2B project.
 Where I was working on Integeration of two system...There was multiple step but I was part of Invoice & creditNote generation.
@@ -56,21 +58,36 @@ and in the end of the month ThomasCook will send all the invoices & creditNote t
 I was working on this part of sending invoices & creditNote note in client system.
 
 and then that URL will be schedule in Crone Job on Linux server.
+
+----------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------- 
+This project was for SAP only and client was Chevron.
+I was developed in CAP (CAPM)
+The Cloud Application Programming Model is an open and opinionated framework of languages, libraries and tools for building enterprise-grade services and applications.
+I worked for almost a year, I worked there for two modules
  
-Last project I did, was for SAP only and client was Chevron, I worked for 8 month, I worked there for two modules
- 
- 1- IOTOnboarding :- I Joined this development in between the Sprints, Actually there was 5 sprints but I joined in 3rd sprints
-	So, When we onboard any technical object then after successful onboarding of TO,means once there is Transaction Id correspong to 
-	TO in DB, Then I have to perfom certain set of action that inclues getting some data from ERP system & S4 System, doing some comparision pusing 
-	it to other system and then making a local storage as well.
-	I could explain complete In/Out of the project because I joined the project in between the sprints & after that due to time constraint I couldn't 
-	get time to explore.
+1- IOTOnboarding :- When we onboard any technical object then after successful onboarding of TO once there is Transaction Id correspong to 
+	TO it in DB, Then I have to perfom certain set of action that includes getting some data from ERP system & S4 System, doing some comparision pushing 
+	it to other systems and then also making a local storage as well. 
 	
-2-  Inspection-Srv :- This module we have developed for creating a dashboard for displaying the TO information for all three, menas TO,Zone Level & CML
-	Level means Level One, Two & Three.The Information we were displaying inclues Characteristic Information & Indicator data information.
-	For that we have configured some configuration in configuration service and based on that configuration information will be displayed on dash board.
-	
-	For that we were getting Characteristic information from Assetbase & Indicator information from IOTOnboarding.
- 
+2-  Inspection-Srv :- It was customized Dashboard for displaying TO object information on three different levels that is TO,Zone Level & CML 
+	Level(Actually there are three level of information for a TO)and infomation that we were displaying were Characteristic Information & Indicator data information
+	that we were getting from Assetbase & IOTOnboarding respectively.
+	For customization we were getting configuration from configuration service and based on that configuration were displaying on dash board.
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+AN network is a multi-module project and I was working on one of it's module called txn-doc-service
+which responsible for createPO, createInvoice for PO, PO for return Item, cancel PO.
+
+So what I was doing is that Actually AN is old one and they have developed few more application on top of it but for all the back-end activity
+and for business logic these applications are depended on AN and for that reason there required some changes on AN side as well
+
+and when i joined the project those applications were already developed but there was some backlogs.
+and backlogs of type some medium & low priority bugs some perfomance issue due to unwated queries & joins 
+and there was some integration test that was failing 
+Note:- DBeaver tool was there for table & data access 
+
+Note:-The SAP Internet of Things solution (SAP IoT) is a collection of services, apps, and UI templates that help you modeling digital twins of
+	real-world objects that you want to monitor, track, or analyze.
  
  

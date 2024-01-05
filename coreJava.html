@@ -12,26 +12,64 @@
 
 <div style="text-align:justify;" data-role="page">
   
-  <div data-role="main" class="ui-content">
-	<b class="redC">1-</b>While evaluating an expression containing int, bytes or shorts, the whole expression is converted to int then evaluated and the result is also of type int.<br/>
-	<b class="redC">2-</b>When casting int into byte if value of int in beyond the range of byte then  a complete range of byte will be lost means -128 to 127 including 0 that  256 Will be lost.<br/>
+<div data-role="main" class="ui-content">
+<b class="redC">Question:-</b>What is addShutdownHook() in java <br/> 
+	addShutdownHook() will register some actions which is to be performed on a Program's termination.<br/> 
+The program that you start ends in two ways:<br/> 
+1.the main thread (Root) ends its running context;<br/> 
+2.the program meets some unexpected situation, so it cannot proceed further.<br/> 
+If you add a ShutdownHook, the hook will start a thread that will start running at time of termination only.<br/> 
+<b class="redC">For example:</b><br/>
+ Runtime.getRuntime().addShutdownHook(new Thread() {<br/>
+      public void run() {<br/>
+        System.out.println("Running Shutdown Hook");<br/>
+      }<br/>
+    });<br/>
+	<br/>
+<b class="redC">Question:-</b> Can a constructor be synchronized?<br/>
+<b class="redC">Answer:-</b> No, constructor cannot be synchronized. Because constructor is used for instantiating object, when we are in constructor object is under creation.<br/>
+		 So, until object is not instantiated it does not need any synchronization.	<br/>
+<br/>	
+	<b class="redC">Question:-</b>Types of Memory Leaks in Java.<br/>
+	<b class="redC">Answer:-</b><br/>
+	1-Static Field Holding Object Reference<br/>
+	2-Unclosed Resources<br/>
+	3-Through finalize() Methods<br/>
+	Use of finalizers is yet another source of potential memory leak issues. Whenever a class’ finalize() method is<br/>
+	overridden, then objects of that class aren’t instantly garbage collected. Instead, the GC queues them for<br/>
+	finalization, which occurs at a later point in time.<br/>
+	<b class="redC">Question:-</b>Java Memory Leak Detection<br/>
+	<b class="redC">Answer:-</b><br/>
+	1-Memory Profilers like JProfiler<br/>
+	Memory profilers or in general Java Virtual Machine profilers, such as Java VisualVM, YourKit,<br/>
+	JProfiler, and Mission Control are applications allowing you to get a deep insight into what is happening inside the Java Virtual Machine.<br/>
+	2-Heap Dumps:-<br/>
+	heap dumps come in handy. The heap dump is a snapshot of the heap memory of your Java Virtual<br/>
+	Machine that can be generated on demand or for example when the application crashes with the<br/>
+	OutOfMemory error.<br/>
+	<b class="redC">Question:-</b>What are the mainly performace issue in java application.<br/>
+	<img width="650px" alt="Node1" src="image/performance_issue.jpg"><br/>
+   <b class="redC">Question:-</b>What is difference between map() and flatMap().<br/>
+   <img width="700px" alt="Node1" src="image/fmap.jpg"><br/>
+	1-While evaluating an expression containing int, bytes or shorts, the whole expression is converted to int then evaluated and the result is also of type int.<br/>
+	2-When casting int into byte if value of int in beyond the range of byte then  a complete range of byte will be lost means -128 to 127 including 0 that  256 Will be lost.<br/>
 		For example  if I will cast 257 then result will be 1.<br/>
-	<b class="redC">3-</b>We can only overrides methods not variables in java.<br/>
-	<b class="redC">4-</b>If no package is specified, the classes in the file  go into a special unnamed package.<br/>
-	<b class="redC">5-</b>Applets are embedded in another applications.<br/>
-	<b class="redC">6-</b>A Servlet can use the user interface classes like AWT or Swing.<br/>
-	<b class="redC">7-</b>Type IV JDBC driver is a driver - which communicates through Java sockets.<br/>
-	<b class="redC">8-</b>Parameters are passed by value in Java.<br/>
-	<b class="redC">9-</b>We use call-by-reference to pass objects as arguments to methods in java.<br/>
-	<b class="redC">10-</b>TreeMap does not allow null key.<br/>
-	<b class="redC">11-</b>Angle Bracket in Java is used to define Generics.<br/>
+	3-We can only overrides methods not variables in java.<br/>
+	4-If no package is specified, the classes in the file  go into a special unnamed package.<br/>
+	5-Applets are embedded in another applications.<br/>
+	6-A Servlet can use the user interface classes like AWT or Swing.<br/>
+	7-Type IV JDBC driver is a driver - which communicates through Java sockets.<br/>
+	8-Parameters are passed by value in Java.<br/>
+	9-We use call-by-reference to pass objects as arguments to methods in java.<br/>
+	10-TreeMap does not allow null key.<br/>
+	11-Angle Bracket in Java is used to define Generics.<br/>
 		It means that the angle bracket takes a generic type, say T, in the definition and any class as a parameter during the calling.<br/>
 		The idea is to allow type (Integer, String, … etc and user-defined types) to be a parameter to methods, classes, and interfaces.<br/>
 		For example, classes like HashSet, ArrayList, HashMap, etc use generics very well. We can use them for any type.<br/>
 		<br/>
 	<b class="redC">Question:-</b>What is Queue interface in Java<br/>
 <b class="redC">Answer:-</b><br/>
-	Being an interface queue nneds a concreate class for the declaration and the most common classes are the PriorityQueue & LinkedList in java. It is to noted that implemention are not thread safe<br/> 
+	Being an interface queue needs a concreate class for the declaration and the most common classes are the PriorityQueue & LinkedList in java. It is to noted that implemention are not thread safe<br/> 
 	PriorityBlockingQueue is one alternative implemention if the thread safe implemention is needed.<br/>  		
 	<br/>
 <b class="redC">Question:-</b>What is different between peek() & element().<br/>
@@ -49,7 +87,7 @@
 		if thread-safe implemention is needed PriorityBlockingQueue are used.<br/> 
 		<br/> 
 	<b class="redC">Note :-</b>
-	 The constructor inside the abstract class can only be called during constructor chaining i.e.<br/>
+	 The constructor inside the abstract class can only be called during constructor chaining i.e. 
 	 when we create an instance of sub-classes. This is also one of the reasons abstract class can have a constructor<br/>
     <b class="redC">Question :-</b> What is the worst case in HashMap<br/>
 	<b class="redC">Answer :-</b> worst case occured when all the stored object are in the same index in the hashtable.<br/>
@@ -100,7 +138,7 @@
 			<br/>
 <b class="redC">Question</b>Difference between Callable and Runnable in Java<br/>
 <b class="redC">Answer:-</b><br/>
-		1. Checked Exception : Callable's call() method can throw checked exception while  Runnable run() method can  not throw checked exception.
+		1. Checked Exception : Callable's call() method can throw checked exception while  Runnable run() method can  not throw checked exception.<br/>
 		2. Return value : Return type of Runnable run() method is void , so it can not return any value.
 						  while Callable can return the Future object, which represents the life cycle of a task and provides methods to check if the task has been completed or canceled.
 			<br/>
@@ -155,13 +193,12 @@
 						Child obj=new Child();
 						System.out.println("Reference of Child Type :"
 										+ obj.value);
-				
+										
+						Parent par = obj;
+						// Par holding obj will access the value
+						// variable of parent class <br/>
 						// Note that doing "Parent par = new Child()"
 						// would produce same result
-						Parent par = obj;
-				
-						// Par holding obj will access the value
-						// variable of parent class
 						System.out.println("Reference of Parent Type : "
 										+ par.value);
 					}
@@ -241,13 +278,13 @@
   
   <b class="redC">Race condition</b><br/>
   Your code will have a race condition if there’s a possibility to produce incorrect results due to thread interleaving. This section describes two types of race conditions:<br/>
-  1)-Check-then-act<br/>
-  2)-Read-modify-write<br/>
+  1-Check-then-act<br/>
+  2-Read-modify-write<br/>
   <b class="redC">Check-then-act race condition</b><br/>
   This race condition appears when you have a shared field and expect to serially execute the following steps:<br/>
   <br/>
-  1)-Get a value from a field.<br/>
-  2)-Do something based on the result of the previous check.<br/>
+  1-Get a value from a field.<br/>
+  2-Do something based on the result of the previous check.<br/>
   <br/>
   The problem here is that when the first thread is going to act after the previous check, another thread may have
   interleaved and changed the value of the field. Now, the first thread will act based on a value that is no longer valid.<br/>
@@ -255,9 +292,9 @@
   <b class="redC">Read-modify-write race condition</b><br/>
   Here we have another type of race condition which appears when executing the following set of actions:<br/>
   <br/>
-  1)-Fetch a value from a field.<br/>
-  2)-Modify the value.<br/>
-  3)-Store the new value to the field<br/>
+  1-Fetch a value from a field.<br/>
+  2-Modify the value.<br/>
+  3-Store the new value to the field<br/>
   In this case, there’s another dangerous possibility which consists in the loss of some updates to the field.<br/>
   <br/> 
   <b class="redC">Question:</b>Difference between start and run in Java Thread<br/>
@@ -281,11 +318,11 @@
   <br/>
   <b class="redC">Example of Builder Design pattern in Java:-</b><br/><br/>
   We are considering the example of creating a cake using builder design pattern Guideline for builder design pattern in java<br/>
-	<b class="redC">a-</b>Make a static nested class called Builder inside the class whose object will be build by Builder.In this example its Cake<br/>
-	<b class="redC">b-</b>Builder class will have exactly same set of fields as original class.<br/>
-	<b class="redC">c-</b>Builder class will expose method for adding properties.Each method will return same Builder object.Builder will enriched with each method call.<br/>
-	<b class="redC">d-</b>Builder.build() method will copy all builder field values into actual class and return object of the class.<br/>
-	<b class="redC">e-</b>Class for which we are creating builder should have private constructor to create its object from build() method and prevent outsider to access its constructor.<br/>
+	1-Make a static nested class called Builder inside the class whose object will be build by Builder.In this example its Cake<br/>
+	2-Builder class will have exactly same set of fields as original class.<br/>
+	3-Builder class will expose method for adding properties.Each method will return same Builder object.Builder will enriched with each method call.<br/>
+	4-Builder.build() method will copy all builder field values into actual class and return object of the class.<br/>
+	5-Class for which we are creating builder should have private constructor to create its object from build() method and prevent outsider to access its constructor.<br/>
 	<br/>
 	<b class="redC">Example:-</b><br/>
     <pre class="blueC">
@@ -371,6 +408,9 @@ Cake{sugar=0.75, butter=0.5, eggs=2, vanila=2, flour=1.5, bakingpowder=0.0, milk
   <br/>
    <b class="redC">Question:</b>What is difference between findAny() & findFirst()<br/>
    <img width="600px" alt="findAnyVsfindFirst" src="image/findAnyVsfindFirst.jpg"><br/>
+   
+   <b class="redC">Question:</b>Difference Between map() and flatmap()<br/><br/>
+   <img width="600px" alt="findAnyVsfindFirst" src="image/MapAndFlatMap.jpg"><br/>
     
    <b class="redC">Question:</b>What is Double colon (::) operator in Java<br/>
    <img width="650px" alt="DoubleColon_1" src="image/DoubleColon_1.jpg"><br/>
@@ -629,7 +669,7 @@ class BlockingQueue<E> {
   </div>
   
   <div data-role="main" class="ui-content">
-   
+   <b class="redC">Enum:-</b>An enum is a special data type that is used to define a variable which contains a collection of constants<br/>
 	  <b class="redC">Java 8 feature</b><br/>
 	  <b class="redC">(1)-Lambda Expression:-</b><br/>
 	  lambda expressions are nameless functions given as constant values, 
@@ -932,14 +972,14 @@ Java String intern() method is used for getting the string from the memory if it
   Answer:-Jdk 1.2 <br/>
   <b class="redC">Answer:-</b><b>No, you can not override static method in Java</b><br/>
   <b class="redC">Question:-</b>What is static and dynamic binding in java<br/>
-  <b class="redC">Answer:-</b>Static Binding: The binding which can be resolved at compile time by compiler is known<br/>
-  as static or early binding. Binding of all the static, private and final methods is done at compile-time.<br/>
-  <b>Why binding of static, final and private methods is always a static binding?</b><br/>
-  Static binding is better performance wise (no extra overhead is required). Compiler knows<br/>
-  that all such methods cannot be overridden and will always be accessed by object of local<br/>
-  class. Hence compiler doesn’t have any difficulty to determine object of class.<br/> 
+  <b class="redC">Answer:-</b>Static Binding: The binding which can be resolved at compile time by compiler is known
+  as static or early binding. Binding of all the static, private and final methods is done at compile-time.
+  <b>Why binding of static, final and private methods is always a static binding?</b>
+  Static binding is better performance wise (no extra overhead is required). Compiler knows
+  that all such methods cannot be overridden and will always be accessed by object of local
+  class. Hence compiler doesn’t have any difficulty to determine object of class. 
   That’s the reason binding for such methods is static.<br/>
-  <b>Dynamic Binding:</b>In Dynamic binding compiler doesn’t decide the method to be called.<br/> 
+  <b>Dynamic Binding:</b>In Dynamic binding compiler doesn’t decide the method to be called. 
   Overriding is a perfect example of dynamic binding. In overriding both parent and child<br/>
   classes have same method<br/>
   <b class="redC">Question:-</b>What is diamond problem in java<br/>
@@ -975,14 +1015,14 @@ Java String intern() method is used for getting the string from the memory if it
   </b><br/>
   <b class="redC">1.</b> If a parent class has implemented Serializable interface then child class doesn’t need to implement it but vice-versa is not true.<br/>
   <b class="redC">2.</b> Only non-static data members are saved via Serialization process.<br/>
-  <b class="redC">3.</b> Static data members and transient data members are not saved via Serialization<br/>
+  <b class="redC">3.</b> Static data members and transient data members are not saved via Serialization
   	process.So, if you don’t want to save value of a non-static data member then make it transient.<br/>
   <b class="redC">4.</b> Constructor of object is never called when an object is deserialized.<br/>
   <b class="redC"> 5.</b> Associated objects must be implementing Serializable interface.<br/>
   <b class="redC">SerialVersionUID:-</b><br/>
-  The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID<br/>
-  and will ckeck at reciever end if it will not match with sender then it will throw an exception InvalidClassException.<br/>
-  We can also declare our own SerialVersionUID in the Serializable class.<br/>
+  The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID 
+  and will ckeck at reciever end if it will not match with sender then it will throw an exception InvalidClassException. 
+  We can also declare our own SerialVersionUID in the Serializable class.
   To do so, you need to create a field SerialVersionUID and assign a value to it.<br/>
   <b>
   It must be static, final and of type long.<br/>
@@ -1003,7 +1043,7 @@ Java String intern() method is used for getting the string from the memory if it
  	<b class="redC">Cloneable interface:-</b>
   	A class that implements the Cloneable interface indicates that it is legal for clone() method to make a field-for-field copy of instances of that class.<br/>
   	Invoking Object’s clone method on an instance of the class that does not implement the Cloneable interface results in an exception <b class="redC">CloneNotSupportedException</b> being thrown.<br/>
-  	<b class="redC">Transient:-</b><br/>
+  	<b class="redC">Transient:-</b>
   	is a Java keyword which marks a member variable not to be serialized when it is persisted to streams of bytes. When an object is transferred through the network
  </div>
  <div data-role="main" class="ui-content">
@@ -1011,12 +1051,12 @@ Java String intern() method is used for getting the string from the memory if it
  There are methods in Object class:<br/>
 	 <b class="redC">1-</b>toString()<br/>
 	 <b class="redC">2-</b>hashCode()<br/>
-	 <b class="redC">4-</b>equals(Object obj)<br/> 
-	 <b class="redC">5-</b>finalize()<br/>
-	 <b class="redC">6-</b>clone()<br/>
-	 <b class="redC">7-</b>wait()<br/>
-	 <b class="redC">8-</b>notify()<br/>
-	 <b class="redC">9-</b>notifyAll()<br/>
+	 <b class="redC">3-</b>equals(Object obj)<br/> 
+	 <b class="redC">4-</b>finalize()<br/>
+	 <b class="redC">5-</b>clone()<br/>
+	 <b class="redC">6-</b>wait()<br/>
+	 <b class="redC">7-</b>notify()<br/>
+	 <b class="redC">8-</b>notifyAll()<br/>
 	 
 	 <b class="redC">hashCode() (important point):-</b>
 	  A common misconception about this method is that hashCode() method returns the address of object, which is not correct,
@@ -1044,7 +1084,7 @@ Java String intern() method is used for getting the string from the memory if it
 	    return this.getId() == ((Student) obj).getId();
 	}
 	  </pre>
-	  <b class="redC">Means</b><br/> if id of the Student is same object will be same<br/>
+	  <b class="redC">Means:-</b> if id of the Student is same object will be same
 	  Then we need to override the hashCode() also like that<br/>
 	  <pre>
 	  @Override
@@ -1085,21 +1125,21 @@ Java String intern() method is used for getting the string from the memory if it
  </pre>
  </div>
  <div data-role="main" class="ui-content">
- <b class="redC">volatile:-</b><br/>
- 	Means always read from main memory do not use your local copy as we know that each thread have<br/>
+ <b class="redC">Volatile:-</b><br/>
+ 	Means always read from main memory do not use your local copy as we know that each thread have
  	their own copy of local varriable<br/>
   <b class="redC">Explaination :-</b><br/>
-  The volatile keyword is used to say to the jvm "Warning, this variable may be modified in an other Thread". Without this keyword<br/>
-  the JVM is free to make some optimizations, like never refreshing those local copies in some threads. The<br/>
+  The volatile keyword is used to say to the jvm "Warning, this variable may be modified in an other Thread". Without this keyword
+  the JVM is free to make some optimizations, like never refreshing those local copies in some threads. The
   volatile force the thread to update the original variable for each variable<br/>
-  <b class="redC">volatile vs synchronized:-</b><br/>
+  <b class="redC">Volatile vs Synchronized:-</b><br/>
   Before we move on let’s take a look at two important features of locks and synchronization<br/>
   <b class="redC">1-Mutual Exclusion:-</b> It means that only one thread or process can execute a block of code (critical section) at a time.<br/>
   <b class="redC">2-Visibility:-</b>It means that changes made by one thread to shared data are visible to other threads.<br/>
-  Java’s synchronized keyword guarantees both mutual exclusion and visibility<br/>
-  But in some cases we may only desire the visibility and not atomicity<br/>
-  Volatile variables have the visibility features of synchronized but not the atomicity features<br/>
-  The values of volatile variable will never be cached and all writes and reads will be done to and from the main memory.<br/>
+  Java’s synchronized keyword guarantees both mutual exclusion and visibility 
+  But in some cases we may only desire the visibility and not atomicity 
+  Volatile variables have the visibility features of synchronized but not the atomicity features 
+  The values of volatile variable will never be cached and all writes and reads will be done to and from the main memory. 
   However, use of volatile is limited to very restricted set of cases as most of the times atomicity is desired.<br/>
   <b class="redC">For example:-</b><br/>
   however, an operation that requires more than one read/write -- such as i++, which is <br/>
@@ -1139,14 +1179,14 @@ Java String intern() method is used for getting the string from the memory if it
  </pre>
  <b class="redC">Same will be applicable to HashMap also</b>
  <b class="redC">Difference between Synchronized HashMap and ConcurrentHashMap</b><br/>
- <b class="redC">1-</b>Multiple threads can add/remove key-value pairs from ConcurrentHashMap, while only one<br/> 
- 	thread is allowed to make change in case of SynchronizedHashMap. This results higher degree of<br/> 
+ <b class="redC">1-</b>Multiple threads can add/remove key-value pairs from ConcurrentHashMap, while only one  
+ 	thread is allowed to make change in case of SynchronizedHashMap. This results higher degree of  
  	concurrency in ConcurrentHashMap.<br/>
- <b class="redC">2-</b>No need to lock the map to read a value in ConcurrentHashMap. A retrieval operation will return <br/>
- 	the value inserted by the most recent completed insert operation. A lock is required for read <br/>
+ <b class="redC">2-</b>No need to lock the map to read a value in ConcurrentHashMap. A retrieval operation will return  
+ 	the value inserted by the most recent completed insert operation. A lock is required for read  
  	operation too in SynchronizedHashMap.<br/>
- <b class="redC">3-</b>ConcurrentHashMap doesn’t throw a ConcurrentModificationException if one thread tries to<br/> 
- 	modify it while another is iterating over it. The iterator reflects the state of the map at the time of<br/> 
+ <b class="redC">3-</b>ConcurrentHashMap doesn’t throw a ConcurrentModificationException if one thread tries to  
+ 	modify it while another is iterating over it. The iterator reflects the state of the map at the time of 
  	it’s creation. SynchronizedHashMap returns Iterator, which fails-fast on concurrent modification.<br/>
  <b class="redC">Why synchronizedHashMap require both read and write lock</b><br/>
   Because it internally wraps all the methods of Map interface with synchronized keyword.<br/>
@@ -1389,16 +1429,13 @@ Java String intern() method is used for getting the string from the memory if it
  </pre>
  <b class="redC">What is thread pool</b><br/>
  An approach for building a server application would be to create a new thread each time a  
- request arrives and service this new request in the newly created thread. While this ap 
- proach seems simple to implement, it has significant disadvantages. A server that creates  
- a new thread for every request would spend more time and consume more system re 
- sources in creating and destroying threads than processing actual requests.  
+ request arrives and service this new request in the newly created thread. While this approach seems simple to implement, it has significant disadvantages. A server that creates  
+ a new thread for every request would spend more time and consume more system resources in creating and destroying threads than processing actual requests.  
  Since active threads consume system resources, a JVM creating too many threads at the  
  same time can cause the system to run out of memory. This necessitates the need to limit  
  the number of threads being created. <br/>
  <font class="redC">
- A thread pool reuses previously created threads to execute current tasks and offers a so 
- lution to the problem of thread cycle overhead and resource thrashing<br/>
+ A thread pool reuses previously created threads to execute current tasks and offers a solution to the problem of thread cycle overhead and resource thrashing<br/>
  </font><br/>
  Java provides the Executor framework which is centered around the <b class="redC">Executor interface</b><br/>
  its sub-interface –<b class="redC">ExecutorService</b> and the class-<b class="redC">ThreadPoolExecutor</b>, which implements both of these interfaces.<br/>
@@ -1473,10 +1510,10 @@ Java String intern() method is used for getting the string from the memory if it
  </div>
 <div data-role="main" class="ui-content">
 	<b class="redC">Use of finalize:-</b><br/>
-	Note:- Garbadge collector of JVM collect only those object which are created by new key word. <br/>
-	so if you have created an object without new keyword then you need to use finalize block to clear that object. <br/>
-	It is a method that the Garbage Collector always calls just before the deletion/destroying the object <br/>
-	which is eligible for Garbage Collection, so as to perform clean-up activity. Clean-up activity means <br/>
+	<b class="redC">Note:-</b> Garbadge collector of JVM collect only those object which are created by new key word.  
+	so if you have created an object without new keyword then you need to use finalize block to clear that object.  
+	It is a method that the Garbage Collector always calls just before the deletion/destroying the object  
+	which is eligible for Garbage Collection, so as to perform clean-up activity. Clean-up activity means  
 	closing the resources associated with that object like Database Connection, Network Connection<br/>
 </div>
 
@@ -1555,8 +1592,8 @@ Java String intern() method is used for getting the string from the memory if it
   
 <div data-role="main" class="ui-content">
 	<b class="redC">Question:-Why String is immutable in java</b><br/>
-	Answer :-Because String literals are cached in pool and cacahed String is shared bewteen<br/>
-			 mulltiple client so if one client will update the String value then other client<br/>
+	Answer :-Because String literals are cached in pool and cacahed String is shared bewteen 
+			 mulltiple client so if one client will update the String value then other client 
 			 will get wrong value.<br/>
 </div>
 
@@ -1645,12 +1682,12 @@ Java String intern() method is used for getting the string from the memory if it
  
   <div data-role="main" class="ui-content">
   	  <b class="redC">What is HashMap:-</b><br/>
-	  When we create a HashMap without giving size then by default array of 16 will <br/>
-	  be created  each element of the array is know as bucket<br/>
-	  Now when insert any value inside the HashMap then hashMap create a node for each<br/>
-	  value using Node class which is the inner class of HashMap and each Node have data structure<br/>
-	  like linkList<br/>
-	  Iteration time over HashMap is directly  proportional to the (capacity + size).<br/>
+	  When we create a HashMap without giving size then by default array of 16 will  
+	  be created  each element of the array is know as bucket 
+	  Now when insert any value inside the HashMap then hashMap create a node for each 
+	  value using Node class which is the inner class of HashMap and each Node have data structure 
+	  like linkList 
+	  Iteration time over HashMap is directly  proportional to the (capacity + size) 
 	  Capacity is number of bucket and size is number of element present.<br/>
 	  <b class="redC">Note:-</b><br/>
 	  <b class="redC">Initial Capacity :-</b>Is the number of bucket when you have created the instance of HashMap.<br/>
@@ -1702,9 +1739,9 @@ Java String intern() method is used for getting the string from the memory if it
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">Garbage collector</b><br/>
-  Garbage collector is best example of Daemon thread as it is always running in background<br/>
-  Even though programmer is not responsible to destroy useless objects but it is highly<br/>
-  recommended to make an object unreachable(thus eligible for GC) if it is no longe<br/>
+  Garbage collector is best example of Daemon thread as it is always running in background 
+  Even though programmer is not responsible to destroy useless objects but it is highly 
+  recommended to make an object unreachable(thus eligible for GC) if it is no longe 
   required.<br/>
   There are generally four different ways to make an object eligible for garbage collection<br/>
   <br/>
@@ -1734,24 +1771,24 @@ Java String intern() method is used for getting the string from the memory if it
   <b class="redC">III- Execution Engine</b> <br/>
   <b class="redC">I-Class loader Subsystem:-</b><br/>
   <b class="redC">A-Loading :-</b><br/>
-  When we try to use a Class, Java ClassLoader loads that class into memory<br/>
+  When we try to use a Class, Java ClassLoader loads that class into memory 
   Running the first class is usually done by declaring and using a static main() method.<br/>
-  <b class="redC">Types of Java Class Loaders</b><br/>
+  <b>Types of Java Class Loaders</b><br/>
   <b>(i)</b>Bootstrap Class Loader :-It loads JDK internal classes, typically loads rt.jar<br/>
   <b>(ii)</b>Extensions Class Loader – It loads classes from the JDK extensions directory, usually lib <br/>
   <b>(iii)</b>System Class Loader: –It loads application specific classes from the CLASSPATH environment variable.<br/>
-  <b class="redC">When and How are Classes Loaded</b>: There are two cases<br/>
-  <b class="redC">(a)</b>-when the new bytecode is executed (for example, MyClass mc = new MyClass()<br/>
-  <b class="redC">(b)</b>-when the bytecodes make a static reference to a class (for example, System.out).<br/>
+  <b>When and How are Classes Loaded</b>: There are two cases<br/>
+  <b>(a)</b>-when the new bytecode is executed (for example, MyClass mc = new MyClass()<br/>
+  <b>(b)</b>-when the bytecodes make a static reference to a class (for example, System.out).<br/>
   Class loaders are hierarchical. The very first class is specially loaded with the help of static main() method declared <br/>
   in your class. All the subsequently loaded classes are loaded by the classes, which are already loaded and running.<br/>
   Further classloaders follow this rules when loading classes:<br/>
-  <b class="redC">i)</b>Check if the class was already loaded.<br/>
-  <b class="redC">ii)</b>If not loaded, ask parent class loader to load the class.<br/>
-  <b class="redC">iii)</b>If parent class loader cannot load class, attempt to load it in this class loader.<br/>
-  <b class="redC">Static Class Loading: </b>Creating objects and instance using new keyword is known as static class loading<br/>
-  <b class="redC">Dynamic Class Loading: </b>Loading classes use Class.forName () method. Dynamic class loading is done when the name of the class is not known at compile time<br/>
-  <b class="redC">Note:-</b> Dynamic loading is a technique for programmatically invoking the functions of a class loader at run-time by using Class.forName().<br/>
+  <b>i)</b>Check if the class was already loaded.<br/>
+  <b>ii)</b>If not loaded, ask parent class loader to load the class.<br/>
+  <b>iii)</b>If parent class loader cannot load class, attempt to load it in this class loader.<br/>
+  <b>Static Class Loading: </b>Creating objects and instance using new keyword is known as static class loading<br/>
+  <b>Dynamic Class Loading: </b>Loading classes use Class.forName () method. Dynamic class loading is done when the name of the class is not known at compile time<br/>
+  <b>Note:-</b> Dynamic loading is a technique for programmatically invoking the functions of a class loader at run-time by using Class.forName().<br/>
   <b class="redC">B-Linking :-</b><br/>
   (i)Verify – Bytecode verifier will verify whether the generated bytecode is proper or not if verification<br/>
      fails we will get the verification error.<br/>
@@ -1762,29 +1799,29 @@ Java String intern() method is used for getting the string from the memory if it
   <b class="redC">C-Initialization :-</b><br/>
   This is the final phase of Class Loading, here all static variables will be assigned with the original values<br/>
   and the static block will be executed.<br/>
-   <b class="redC">II-</b>Runtime Data Area :The Runtime Data Area is divided into 5 major components<br/>
-   (i)-Method Area –All the class level data will be stored here, including static variables. There is only<br/>
+   <b class="redC">II-Runtime Data Area :</b>The Runtime Data Area is divided into 5 major components<br/>
+   <a class="redC">(i)-Method Area :–</a>All the class level data will be stored here, including static variables. There is only<br/>
    		one method area per JVM, and it is a shared resource.<br/>
-   (ii) Heap Area – All the Objects and their corresponding instance variables and arrays will be stored<br/>
+   <a class="redC">(ii)Heap Area :–</a>All the Objects and their corresponding instance variables and arrays will be stored<br/>
    		here. There is also one Heap Area per JVM. Since the Method and Heap areas share memory for<br/> 
    		multiple threads, the data stored is not thread-safe.<br/>
-   (iii)Stack Area – For every thread, a separate runtime stack will be created. For every method call, one<br/>
+   <a class="redC">(iii)Stack Area :–</a>For every thread, a separate runtime stack will be created. For every method call, one<br/>
    		entry will be made in the stack memory which is called as Stack Frame<br/>
    		Frame is divided into three subentities:<br/> 
    		(a)Local Variable Array – Related to the method how many local variables are involved and the corresponding values will be stored here.<br/>
    		(b)Operand stack – If any intermediate operation is required to perform, operand stack acts as runtime workspace to perform the operation.<br/>
    		(c)Frame data – All symbols corresponding to the method is stored here. In the case of any exception,<br/>
    		 the catch block information will be maintained in the frame data <br/>
-   	(iv)PC Registers :-Each thread will have separate PC Registers, to hold the address of current executing<br/>
+   	<a class="redC">(iv)PC Registers :-</a>Each thread will have separate PC Registers, to hold the address of current executing<br/>
    		instruction once the instruction is executed the PC register will be updated with the next instruction.<br/>
-   	(v)	Native Method stacks:-Native Method Stack holds native method information.<br/>
-   	<b class="redC">III-</b>Execution Engine:-The bytecode which is assigned to the Runtime Data Area will be executed by the Execution Engine<br/>
-   	    (a)	Interpreter – The interpreter interprets the bytecode faster, but executes slowly<br/>
+   	<a class="redC">Native Method stacks:-</a>Native Method Stack holds native method information.<br/>
+   	<b class="redC">III-Execution Engine:-</b>The bytecode which is assigned to the Runtime Data Area will be executed by the Execution Engine<br/>
+   	    <a class="redC">(a)	Interpreter – </a>The interpreter interprets the bytecode faster, but executes slowly<br/>
    	        The disadvantage of the interpreter is that when one method is called multiple times, every time a new interpretation is required.<br/>
-   	    (b) JIT Compiler –The JIT Compiler neutralizes the disadvantage of the interpreter<br/>
+   	    <a class="redC">(b) JIT Compiler –</a>The JIT Compiler neutralizes the disadvantage of the interpreter<br/>
    	    	because  when it finds repeated code it uses the JIT compiler, which compiles the entire bytecode and changes it to native code.<br/>
    	    	This native code will be used directly for repeated method calls.<br/>
-   	    (c)	Garbage Collector :-Collects and removes unreferenced objects.<br/>     		
+   	    <a class="redC">(c)	Garbage Collector :-</a>Collects and removes unreferenced objects.<br/>     		
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">Question:-What is Native method</b><br/>
@@ -1800,8 +1837,8 @@ Java String intern() method is used for getting the string from the memory if it
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">Deadlock</b><br/>
-  Programmatically, You can detect the threads which have entered into deadlock condition and also<br/>
-  you can retrieve the details about them. This can be done using ThreadMXBean interface of <br/>
+  Programmatically, You can detect the threads which have entered into deadlock condition and also 
+  you can retrieve the details about them. This can be done using ThreadMXBean interface of  
   java.lang.Management package.<br/> 
   
   Example :-<br/> 
@@ -1855,7 +1892,7 @@ Java String intern() method is used for getting the string from the memory if it
   <a href="https://javaconceptoftheday.com/interthread-communication-using-wait-notify-notifyall/">More Detail</a><br/>
   <b class="redC">Important point in Thread communication</b> 
   The idea behind the thread communication is simple 
-  one thread needs a certain condition to exist and assumes that another thread  
+  one thread needs a certain condition to exit and assumes that another thread  
   will create that condition<br/>(That is why thread calls wait() method inside synchronized method
   or block)<br/><br/>
   When another thread creates the condition, it notifies the first thread that has been waiting for the condition. 
@@ -1906,45 +1943,45 @@ Java String intern() method is used for getting the string from the memory if it
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">Thread Group In Java :-</b><br/>
-  Thread group in java is used to group similar threads into one unit. A thread group can also contain<br/> 
-  other thread groups. Thread groups are constructed using java.lang.ThreadGroup class.<br/>
-  The main use of thread groups is that you can handle multiple threads simultaneously.<br/>
-  While creating the threads itself, you can specify it’s group using constructor which takes ThreadGroup and name of a thread as arguments.<br/>
+  Thread group in java is used to group similar threads into one unit. A thread group can also contain  
+  other thread groups. Thread groups are constructed using java.lang.ThreadGroup class. 
+  The main use of thread groups is that you can handle multiple threads simultaneously. 
+  While creating the threads itself, you can specify it’s group using constructor which takes ThreadGroup and name of a thread as arguments. 
   Example in coreJavaProject.<br/>
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">Things Every Java Programmer Should Know About Threads In Java</b><br/>
-  &#07;Exception is thread wise not execution wise. i.e exception effects the thread in which it occurs
+  1-Exception is thread wise not execution wise. i.e exception effects the thread in which it occurs
   	Other threads will execute normally.<br/>
-  &#07;Setting the priority to a thread is not effective as we thought. Setting Priority of a thread is just 
+  2-Setting the priority to a thread is not effective as we thought. Setting Priority of a thread is just 
   	an advice to OS not an instruction. It is up to OS to consider this advice<br/>
-  &#07;A thread is a permanent member of a thread group to which it joins during creation. You can’t 
+  3-A thread is a permanent member of a thread group to which it joins during creation. You can’t 
   	move a thread to a new group after creating it.	<br/>  	
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">How To Stop A Thread In Java?</b><br/>
   There are two way two stop a thread in java<br/>
-  &#07;How To Stop A Thread In Java Using A boolean Variable?<br/>
-  &#07;How To Stop A Thread In Java Using interrupt() Method?<br/>
+  1-How To Stop A Thread In Java Using A boolean Variable?<br/>
+  2-How To Stop A Thread In Java Using interrupt() Method?<br/>
   	<b class="aa">Both are Explained in coreJavaProject.</b><br/>
   </div>
   <div data-role="main" class="ui-content">
    <b class="redC">notify()/notifyAll():-</b><br/>
    Note : Before notification, the thread will be in WAITING state. Once it is notified,<br/>
    <b class="redC">it will move to BLOCKED state. It remains in BLOCKED state until it gets the lock.</b><br/>
-   Once it gets the lock, it moves from BLOCKED state to RUNNING state.	<br/>
+   Once it gets the lock, it moves from BLOCKED state to RUNNABLE state.	<br/>
    For more..<a href="https://javaconceptoftheday.com/difference-between-notify-and-notifyall-in-java/">read..</a><br/>	
   </div>
   <div data-role="main" class="ui-content">
   </div>
   <div data-role="main" class="ui-content">
   <b class="redC">LinkedHashMap :-</b><br/>
-  &#07;LinkedHashMap is just an extension of HashMap<br/> 
-  &#07;LinkedHashMap contains all functionalities that HashMap provides, even hashing of keys, retrieval is same as
+  1-LinkedHashMap is just an extension of HashMap<br/> 
+  2-LinkedHashMap contains all functionalities that HashMap provides, even hashing of keys, retrieval is same as
   	HashMap.The difference is when you insert key value pairs in a LinkedHashMap<br/>
-  &#07;it maintains a doubly-linked list running through all of its entries. This linked list defines the iteration ordering, which is normally the
+  3-it maintains a doubly-linked list running through all of its entries. This linked list defines the iteration ordering, which is normally the
   	order in which keys were inserted into the map<br/>
-  &#07;As LinkedHashMap will provide us the retrieval order as insertion order of elements, it needs to 
+  4-As LinkedHashMap will provide us the retrieval order as insertion order of elements, it needs to 
   	keep track of last inserted object. It has two references <b style="color: red">head and tail </b>bwhich will keep track of the 
   	latest object inserted and the first object inserted.	  	   
   </div>
@@ -1997,8 +2034,8 @@ Java String intern() method is used for getting the string from the memory if it
   	(xi)Strategy Pattern<br/>
   	<b class="redC">(i)Template Pattern</b><br/>
   	<font class="blueC">Applicability of template method pattern:-</font><br/>
-  	<b>1-</b>When you have pre-define steps to achieve some algorithm.<br/>
-  	<b>2-</b>When you want to remove the duplicate code for that you define the skeleton in the base class
+  	1-When you have pre-define steps to achieve some algorithm.<br/>
+  	2-When you want to remove the duplicate code for that you define the skeleton in the base class
   			and let the subclass to override the steps without changing the overall structure.<br/>
   			
   	<font class="blueC">Problem Statement</font><br/>	  
@@ -2007,13 +2044,13 @@ Java String intern() method is used for getting the string from the memory if it
   	
   	<font class="blueC">Steps with default implementation</font><br/>
   	
-  	<b>1-</b>Construction of base foundation<br/>
-  	<b>2-</b>Construction of roof<br/>
+  	1-Construction of base foundation<br/>
+  	2-Construction of roof<br/>
   	<font class="blueC">Steps with “NO” default implementation</font><br/>
-  	<b>1-</b>Construction of walls<br/>
-  	<b>2-</b>Construction of windows and doors<br/>
-  	<b>3-</b>Painting<br/>
-  	<b>4-</b>Interior decorating<br/>
+  	1-Construction of walls<br/>
+  	2-Construction of windows and doors<br/>
+  	3-Painting<br/>
+  	4-Interior decorating<br/>
   	
   	<font class="blueC">Code implementation</font><br/>
   	First, we need to create a abstract class called House which will define the template method called buildHouse().<br/>
@@ -2351,23 +2388,24 @@ public class ConcreteWallHouse extends House {
  placeholder for another object to control access to it.</b> A proxy is basically a substitute for an intended
  object which we create due to many reasons e.g. security reasons or cost associated with creating
  fully initialized original object.<br/>
- <b class="aa">Real world example of proxy pattern</b><br/>
- <font class="aa">&#07;In hibernate where creating the object is costly</font><br/>
+ <b class="redC">Real world example of proxy pattern</b><br/>
+ <font class="redC">1-In hibernate where creating the object is costly</font><br/>
  In hibernate, we write the code to fetch entities from the database. Hibernate returns an object
  which a proxy (by dynamically constructed by Hibernate by extending the domain class) to the
  underlying entity class. The client code is able to read the data whatever it needs to read with the proxy.<br/>
- <font class="aa">&#07;Example when there is security is a reason to hide the actual object</font><br/>
+ <font class="redC">2-Example when there is security is a reason to hide the actual object</font><br/>
  In corporate networks, internet access is guarded behind a network proxy. All network requests
  goes through proxy which first check the requests for allowed websites and posted data to
- network. If request looks suspicious, proxy block the request – else request pass through.
- <b class="aa">Example of Proxy Pattern</b><br/>
- <font class="redC">&#07;Step 1:-Create an OfficeInternetAccess interface.</font><br/>
+ network. If request looks suspicious, proxy block the request – else request pass through.<br/>
+ <b class="redC">Example of Proxy Pattern</b><br/>
+ <br/>
+ <font class="redC">Step 1:-Create an OfficeInternetAccess interface.</font><br/>
  <pre class="aa">
 	public interface OfficeInternetAccess {  
 	    public void grantInternetAccess();  
 	} 
  </pre>
- <font class="redC">&#07;Step 2:-Create a RealInternetAccess class that will implement OfficeInternetAccess interface for granting the permission to the specific employee.</font><br/>
+ <font class="redC">Step 2:-Create a RealInternetAccess class that will implement OfficeInternetAccess interface for granting the permission to the specific employee.</font><br/>
  <pre class="aa">
  	
  	public class RealInternetAccess implements OfficeInternetAccess {  
@@ -2381,7 +2419,7 @@ public class ConcreteWallHouse extends House {
     }  
 }  
  </pre>
- <font class="redC">&#07;Step 3:-Create a ProxyInternetAccess class that will implement OfficeInternetAccess interface for providing the object of RealInternetAccess class.</font><br/>
+ <font class="redC">Step 3:-Create a ProxyInternetAccess class that will implement OfficeInternetAccess interface for providing the object of RealInternetAccess class.</font><br/>
  <pre class="aa">
  public class ProxyInternetAccess implements OfficeInternetAccess {  
            private String employeeName;  
@@ -2409,7 +2447,7 @@ public class ConcreteWallHouse extends House {
         }  
 }  
  </pre>
- <font class="redC">&#07;Step 4:-Now, Create a ProxyPatternClient class that can access the internet actually.</font><br/>
+ <font class="redC">Step 4:-Now, Create a ProxyPatternClient class that can access the internet actually.</font><br/>
  <pre class="aa">
  public class ProxyPatternClient {  
     public static void main(String[] args)   
@@ -2705,13 +2743,13 @@ public class ConcreteWallHouse extends House {
 	} 
   </pre>
   <font class="redC">Pros:</font><br/>
-  <font class="redC">1:-</font>Very simple to implement.<br/>
-  <font class="redC">2:-</font>No need to implement getInstance() method. Instance can be accessed directly.<br/>
-  <font class="redC">3:-</font>Exceptions can be handled in static block.<br/>
+  1-Very simple to implement.<br/>
+  2-No need to implement getInstance() method. Instance can be accessed directly.<br/>
+  3-Exceptions can be handled in static block.<br/>
 	
   <font class="redC">Cons:</font><br/>
-  <font class="redC">1:-</font>May lead to resource wastage. Because instance of class is created always, whether it is required or not.<br/>
-  <font class="redC">2:-</font>CPU time is also wasted in creation of instance if it is not required.<br/>
+  1-May lead to resource wastage. Because instance of class is created always, whether it is required or not.<br/>
+  2-CPU time is also wasted in creation of instance if it is not required.<br/>
   
   <font class="redC">&#07;Lazy initialization: :-</font><br/>
     <pre class="aa">
@@ -2739,12 +2777,12 @@ public class ConcreteWallHouse extends House {
 	} 
   	</pre>
   <font class="redC">Pros:</font><br/>
-  <font class="redC">1:-</font>Object is created only if it is needed. It may overcome resource overcome and wastage of CPU time.<br/>
-  <font class="redC">2:-</font>Exception handling is also possible in method.<br/>
+  1-Object is created only if it is needed. It may overcome resource overcome and wastage of CPU time.<br/>
+  2-Exception handling is also possible in method.<br/>
   <font class="redC">Cons:</font><br/>
-  <font class="redC">1:-</font>Every time a condition of null has to be checked.<br/>
-  <font class="redC">2:-</font>instance can’t be accessed directly.<br/>
-  <font class="redC">3:-</font>In multithreaded environment, it may break singleton property.<br/>
+  1-Every time a condition of null has to be checked.<br/>
+  2-instance can’t be accessed directly.<br/>
+  3-In multithreaded environment, it may break singleton property.<br/>
   
   <font class="redC">&#07;Thread Safe Singleton:-</font><br/>
     <pre class="aa">
@@ -2774,10 +2812,10 @@ public class ConcreteWallHouse extends House {
     </pre>
   	</pre>
   <font class="redC">Pros:</font><br/>
-  <font class="redC">1:-</font>Lazy initialization is possible.<br/>
-  <font class="redC">2:-</font>It is also thread safe.<br/>
+  1-Lazy initialization is possible.<br/>
+  2-It is also thread safe.<br/>
   <font class="redC">Cons:</font><br/>
-  <font class="redC">1:-</font>getInstance() method is synchronized so it causes slow performance as multiple threads can’t access it simultaneously.<br/>
+  1-getInstance() method is synchronized so it causes slow performance as multiple threads can’t access it simultaneously.<br/>
   
   
   <font class="redC">&#07;Lazy initialization with Double check locking:-</font><br/>
@@ -2813,11 +2851,11 @@ public class ConcreteWallHouse extends House {
 	} 
   	</pre>
   <font class="redC">Pros:</font><br/>
-  <font class="redC">1:-</font>Lazy initialization is possible.<br/>
-  <font class="redC">2:-</font>It is also thread safe.<br/>
-  <font class="redC">3:-</font>Performance overhead gets reduced because of synchronized keyword.<br/>
+  1-Lazy initialization is possible.<br/>
+  2-</font>It is also thread safe.<br/>
+  3-</font>Performance overhead gets reduced because of synchronized keyword.<br/>
   <font class="redC">Cons:</font><br/>
-  <font class="redC">1:-</font>First time, it can affect performance.As cons. of double check locking method is bearable so it can be used for high performance multi-threaded applications.<br/>
+  1-</font>First time, it can affect performance.As cons. of double check locking method is bearable so it can be used for high performance multi-threaded applications.<br/>
   <br/>
   
   <font class="redC">&#07;Bill Pugh Singleton Implementation::-</font><br/>
@@ -2925,7 +2963,7 @@ public class ConcreteWallHouse extends House {
 <div data-role="main" class="ui-content">
     <b class="redC">Type of thread in java</b><br/>
     <font class="redC">Daemon threads</font><br/>
-    Daemon threads are threads which are mostly created by the JVM. These threads always run in<br/>
+    Daemon threads are threads which are mostly created by the JVM. These threads always run in 
 	background. These threads are used to perform some background tasks like garbage collection<br/>
 	These threads are less priority threads. JVM will not wait for these threads to finish their execution.<br/>
    	<font class="aa"> Note :-</font>The main thread or primary thread created by JVM is an user thread.<br/>
@@ -2959,25 +2997,24 @@ public class ConcreteWallHouse extends House {
 	</pre>	
 				
 <b class="redC">How To Avoid Thread Interference or How To Acheive Thread Safeness</b><br/>
-	<b class="redC">1- </b>By declaring the method as synchronized<br/>
-	<b class="redC">2- </b>By declaring the variables as final<br/>
-	<b class="redC">3- </b>By declaring the variable as volatile<br/>
-	<b class="redC">4- </b>By creating the immutable objects<br/>
-	<b class="redC">5- </b>By using Atomic operations<br/>
-	<b class="redC">6- </b>By restricting the access to same object by multiple threads<br/><br/>
+	1-By declaring the method as synchronized<br/>
+	2-By declaring the variables as final<br/>
+	3-By declaring the variable as volatile<br/>
+	4-By creating the immutable objects<br/>
+	5-By using Atomic operations<br/>
+	6-By restricting the access to same object by multiple threads<br/><br/>
 		
 <b>Logic Behind The Synchronization In Java</b><br/>
     The synchronization in java is built around an entity called object lock or monitor. Here is the 
     brief description about lock or monitor.<br/>
-    1)Whenever an object is created to any class, an object lock is created and is stored inside the object.<br/>
-    2)One object will have only one object lock associated with it.<br/>
-    3)Any thread wants to enter into synchronized methods or blocks of any object, they must ac 
+    1-Whenever an object is created to any class, an object lock is created and is stored inside the object.<br/>
+    2-One object will have only one object lock associated with it.<br/>
+    3-Any thread wants to enter into synchronized methods or blocks of any object, they must ac 
 	quire object lock associated with that object and release the lock after they are done with the  
 	execution.<br/>
-    4)The other threads which wants to enter into synchronized methods of that object have to wait 
+    4-The other threads which wants to enter into synchronized methods of that object have to wait 
 	until the currently executing thread releases the object lock.<br/>
-    5)To enter into static synchronized methods or blocks, threads have to acquire class lock assoc 
-	ated with that class as static members are stored inside the class memory.	<br/>
+    5-To enter into static synchronized methods or blocks, threads have to acquire class lock associated with that class as static members are stored inside the class memory.	<br/>
     <b>Points-To-Remember About Synchronization</b><br/>
     (i)Constructors, Static initializer and instance initializer can’t be declared with synchronized key 
 	word, but they can contain synchronized blocks.<br/>
@@ -3089,24 +3126,24 @@ public class ConcreteWallHouse extends House {
 	</div>
 	
 	<div data-role="main" class="ui-content">
-	1)Whenever you trigger a java command, it divides allocated memory into two parts – Stack and Heap.<br/>
+	1-Whenever you trigger a java command, it divides allocated memory into two parts – Stack and Heap.<br/>
 	Stack is used only for execution purpose. Heap is used for storage purpose.<br/>
-	2)Heap memory is also called Class Memory<br/>
-	3)Static Initialization Block is used to initialize only static variables<br/>
+	2-Heap memory is also called Class Memory<br/>
+	3-Static Initialization Block is used to initialize only static variables<br/>
 	static<br/>
 	{<br/>
 		 //Set Of Statements<br/>
 	}<br/>
-	4) SIBs(Static Initialization Block) are not stored in the heap memory. <br/>
+	4- SIBs(Static Initialization Block) are not stored in the heap memory. <br/>
 	They just come to stack, execute their tasks and leaves the memory.<br/>
-	5) A method must have return type.<br/>	
-	6)IIB stands for Instance Initialization Block.<br/>
+	5- A method must have return type.<br/>	
+	6-IIB stands for Instance Initialization Block.<br/>
 	Actually in every constructor first line of the constructor is init() method<br/>
 	and that init() will call the Initialization Block eg.<br/>
 	{
 		 //Set Of Statements<br/>
 	}
-	7)There is only call by value in java<br/>
+	7-There is only call by value in java<br/>
 	<b class="redC">Variable define in interface will be by default public , static and final</b><br/>
 	<b class="redC">Note</b>We can write multiple exception using | operator<br/>
 	<pre class="blueC">
@@ -3137,11 +3174,12 @@ public class ConcreteWallHouse extends House {
 	Answer:-Vice-versa of fail fast.<br/>
 	<b class="redC">SOLID Principles in Java</b><br/>
 	<a href="https://howtodoinjava.com/best-practices/5-class-design-principles-solid-in-java/">Read more..</a>
-	1. Single Responsibility Principle means (One class should have one and only one responsibility)<br/>
-	2. Open Closed Principle means (Software components should be open for extension, but closed for modification)<br/>
-	3. Liskov’s Substitution Principle means (Derived types must be completely substitutable for their base types)<br/>
-	4. Interface Segregation Principle means (Clients should not be forced to implement unnecessary methods which they will not use)<br/>
-	5. Dependency Inversion Principle means (Depend on abstractions, not on concretions)<br/>
+	<br/>
+	1-Single Responsibility Principle means (One class should have one and only one responsibility)<br/>
+	2-Open Closed Principle means (Software components should be open for extension, but closed for modification)<br/>
+	3-Liskov’s Substitution Principle means (Derived types must be completely substitutable for their base types)<br/>
+	4-Interface Segregation Principle means (Clients should not be forced to implement unnecessary methods which they will not use)<br/>
+	5-Dependency Inversion Principle means (Depend on abstractions, not on concretions)<br/>
 	<b class="redC">Explaination</b><br/>
 	1-Single Responsibility Principle Example is bean class every bean class must represent a single entity.<br/>
 	2-Open Closed Principle example of this principle is DispatcherServlet,struts Action 
@@ -3155,6 +3193,8 @@ public class ConcreteWallHouse extends House {
 	  It means that the classes fellow developer created by extending our class should be able to fit in  
 	  application without failure. This requires the objects of your subclasses to behave in the same way as 
 	  the objects of your superclass.<br/>
+	  <a href="https://springframework.guru/principles-of-object-oriented-design/liskov-substitution-principle/">Read more..</a>
+	  <br/>
 	  <b class="redC">Example are Spring custom property editors</b>
 	  Spring can register one property editor for one data type and it is required to follow the constraint 
 	  mandated by base class PropertyEditorSupport. So is any class extend PropertyEditorSupport class, 
@@ -3166,7 +3206,8 @@ public class ConcreteWallHouse extends House {
 	  from each other using an abstract layer to bind them together. 
 	  The classical use of this principle of bean configuration in Spring framework  
 	  in Spring all the module are seperated and we can inject the dependency according to our need.<br/>
-	 <b class="redC">try-with-resources in Java 7</b><br/>
+	  <a href="https://www.baeldung.com/cs/dip">Read more..</a><br/>
+	  <b class="redC">try-with-resources in Java 7</b><br/>
 	 In java 7, we have a new super interface java.lang.AutoCloseable. This interface have one method:<br/>
 	 <pre class="blueC">
 	 void close() throws Exception;
@@ -3211,10 +3252,10 @@ public class ConcreteWallHouse extends House {
 	}
 	 </pre> 
 	 <b class="redC">New feature in java 7</b><br/>
-	 	<b class="redC">1-</b>Strings in switch Statements.<br/>
-		<b class="redC">2-</b>The try-with-resources Statement.<br/>
-		<b class="redC">3-</b>Catching Multiple Exception Types and Rethrowing Exceptions with Improved Type Checking.<br/>
-		<b class="redC">4-</b>Underscores in Numeric Literals.<br/>
+	 	1-Strings in switch Statements.<br/>
+		2-The try-with-resources Statement.<br/>
+		3-Catching Multiple Exception Types and Rethrowing Exceptions with Improved Type Checking.<br/>
+		4-Underscores in Numeric Literals.<br/>
 	</div>
  
  </div>

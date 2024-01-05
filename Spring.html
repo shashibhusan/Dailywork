@@ -10,6 +10,11 @@
 .blueC {
 	color: blue;
 }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
 </style>
 </head>
 <body>
@@ -17,50 +22,191 @@
 <div data-role="page">
    
   <div data-role="main" class="ui-content">
-  <b>Question-</b>Avantages & Disadvantages of spring container<br/>
+  <table style="width:1000px" >
+<thead>
+<tr>
+<th>
+<p style="text-align:center">BeanFactory</p>
+</th>
+<th>
+<p style="text-align:center">ApplicationContext</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-It is a fundamental container that provides the basic functionality for managing beans.</td>
+<td>1-It is an advanced container that extends the BeanFactory that provides all basic functionality and adds some advanced features.</td>
+</tr>
+<tr>
+<td>2-It supports only Singleton and Prototype bean scopes.</td>
+<td>2-It supports all types of bean scopes such as Singleton, Prototype, Request, Session etc.</td>
+</tr>
+<tr>
+<td>3-It does not support Annotations. In Bean Autowiring, we need to configure the properties in XML file only.</td>
+<td>3-It supports Annotation based configuration in Bean Autowiring.</td>
+</tr>
+<tr>
+<td>4-In BeanFactory, we need to manually register BeanPostProcessors and BeanFactoryPostProcessors.</td>
+<td>4-The ApplicationContext automatically registers BeanFactoryPostProcessor and BeanPostProcessor at startup.</td>
+</tr>
+<tr>
+<td>5-BeanFactory will create a bean object when the getBean() method is called thus making it Lazy initialization.</td>
+<td>5-x`ApplicationContext loads all the beans and creates objects at the time of startup only thus making it Eager initialization.</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<b class="redC">Explaination 3-</b><br/>
+<b>BeanFactory Autowiring :</b> <br/>
+&lt;bean id="welcomeBean" class="com.geeks.beans.WelcomeBean" autowire="byName"/&gt;<br/>
+<br/>
+<b>Autowiring in ApplicationContext:</b><br/>
+@Autowired<br/>
+private String name;<br/>
+<br/>
+<b class="redC">Explaination 4-</b><br/>
+<b>Registering BeanPostProcessors in BeanFactory</b><br/>
+ <br/>
+ConfigurableBeanFactory factory = new ConfigurableBeanFactory(resource); <br/>
+<br/>
+HelloBeanPostProcessor bpp = new HelloBeanPostProcessor();<br/>
+factory.addBeanPostProcessor(bpp);<br/>
+<br/>
+<b>Registering BeanPostProcessors in ApplicableContext</b><br/><br/>
+An ApplicationContext interface will automatically detect if any beans that are deployed into it implementing the BeanPostProcessor<br/>
+simply you need to implement the interface don't need to add it explicity <br/><br/>
+public class Department implements BeanPostProcessor {
+<br/>
+<br/>
+ }<br/>
+ <br/>
+<b class="redC">Question:-</b>What is starter dependency in spring<br/>
+<b class="redC">Answer:-</b><br/>
+ A starter dependency is nothing but a special dependency that aggregates commonly used dependencies for a particular feature.<br/> 
+<b class="redC">Question-</b>What is use of ObjectMapper class<br/>
+<b class="redC">Answer:-</b><br/>
+	<b>1- To convert Java Object to JSON</b><br/>
+	<pre style="color:blue">
+		ObjectMapper objectMapper = new ObjectMapper(); 
+		Car car = new Car("yellow", "renault");
+		objectMapper.writeValue(new File("target/car.json"), car);
+		</pre>	
+	<b>2- To JSON to Java Object</b><br/>
+	<pre style="color:blue">
+		String json = "{ \"color\" : \"Black\", \"type\" : \"BMW\" }"; 
+		Car car = objectMapper.readValue(json, Car.class); 	 
+		</pre>
+<b class="redC">Question-</b>What is working of Stream API<br/>
+<b class="redC">Answer:-</b><br/>
+Stream represents a sequence of objects from a source  
+then we applied Intermediate Operations & Terminate Operations to get the output<br/>
+ <b class="redC">Question-</b>Example of Spring Boot - Interceptor in spring Boot<br/>
+  <b class="redC">Answer:-</b><br/>
+	1-preHandle() method - 
+	This is used to perform operations before sending the request to the controller. 
+	This method should return true to return the response to the client.<br/>
+	2-postHandle() method - 
+	This is used to perform operations before sending the response to the client.<br/>
+	3-afterCompletion() method - 
+	This is used to perform operations after completing the request and response.<br/>
+	
+  <b class="redC">Question-</b>How to read value from properties files in spring Boot<br/>
+  <b class="redC">Answer:-</b><br/>
+  <pre style="color:blue">
+  @Value("${project.name}") 
+    private String projectName; 
+	</pre>	
+	and entry inside properties file will be like below<br/>
+	 <pre style="color:blue">
+	project.name = JavaApplicationProject  
+	</pre>
+	But if we use yml file then we can map other data types like List & Map <br/>
+	<pre style="color:blue">
+@Component
+@ConfigurationProperties(prefix = "application")
+public class ApplicationClass {
+    List<String> profiles;
+    HashMap<String,Integer> hashMap=new HashMap();
+    @Value("${applicationTest}")
+    String applicationTest;
+	// getter & setter
+	}
+	
+	Then application.yml
+application:
+  profiles:
+    - dev
+    - test
+    - prod
+    - 1
+    - 2
+
+  hashMap:
+    raghu:  20
+    shashi: 21
+    setty:  25
+
+applicationTest : applicationTest
+	</pre>
+<b class="redC">Note-</b>
+The ApplicationProps class needs to be decorated with @ConfigurationProperties to express the intention of mapping the YAML properties<br/> 
+<br/>	
+  <b class="redC">Question-</b>Avantages & Disadvantages of spring container<br/>
   <b class="redC">Avantages</b><br/>
-	  1)-Forces you to write more modular code<br/>
-	  2)-Decouples the application<br/>
-	  3)-Centralized configuration<br/>
-	  4)-Control over lifetime of dependencies<br/>
-	  5)-Takes care of long nested dependency chains<br/>
+	  1-Forces you to write more modular code<br/>
+	  2-Decouples the application<br/>
+	  3-Centralized configuration<br/>
+	  4-Control over lifetime of dependencies<br/>
+	  5-Takes care of long nested dependency chains<br/>
   
   <b class="redC">Disadvantages</b><br/>
-	  1)-Another framework in your toolbox (another mindset to adapt)<br/>
-	  2)-Hard to figure out the flow in the application. As in, what is the actual<br/>
-	  3)-No build errors - requires some way of testing dependencies together (yes not unit tests)<br/>
-	  4)-Requires configuration of dependencies.<br/>
+	  1-Another framework in your toolbox (another mindset to adapt)<br/>
+	  2-Hard to figure out the flow in the application. As in, what is the actual<br/>
+	  3-No build errors - requires some way of testing dependencies together (yes not unit tests)<br/>
+	  4-Requires configuration of dependencies.<br/>
   
-    <b>Question-</b>Avantage of annotation over XML configuration in java<br/>
-	<b>Answer:-</b><br/>
+    <b class="redC">Question-</b>Avantage of annotation over XML configuration in java<br/>
+	<b class="redC">Answer:-</b><br/>
 	Advantages of the annotation:<br/>
-		1) All the information is in a single file (no need to open two files to configure a given behavior)<br/>
-		2) When the class changes, no need to modify the xml file<br/>
+		1- All the information is in a single file (no need to open two files to configure a given behavior)<br/>
+		2- When the class changes, no need to modify the xml file<br/>
 	Advantages of xml file:<br/>
-    	1) Clear separation between the POJO and its behavior<br/>
+    	1-Clear separation between the POJO and its behavior<br/>
     	
   <b class="redC">Spring Security</b><br/>
-	 <b class="redC">******Principal:-</b>Means currently login user into system.It is the information about currently login user.Actually,
+  When you want to use Spring Security before spring 3.0 then you have to extends WebSecurityConfigurerAdapter
+  in our configuration class which provide overided configure() method that used for Authentication & Authorization
+  Method for Authentication method takes AuthenticationManagerBuilder as argument and Authorization method takes
+  HttpSecurity as argument as given Below<br/>
+  <pre style="color:blue">
+  public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+   @Override //<b>Authentication method</b>
+   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+      auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+   }
+ 
+   @Override //<b>Authorization method</b>
+   protected void configure(HttpSecurity http) throws Exception {
+      http.csrf().disable()
+      .authorizeRequests().antMatchers("/login").permitAll()
+      .anyRequest().authenticated()
+      .and()
+      .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+      .and()
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+      http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+   }
+}
+  </pre>
+	 <b class="redC">Principal:-</b>Means currently login user into system.It is the information about currently login user.Actually,
 	 It is object that contain information about currently login user.<br/>
-	 <b class="redC">Important Point</b><br/>
-	 <b class="redC">==>></b>If you want to use spring security in spring boot you just need to add <b>"spring-boot-starter-security"</b> in pom.xml file
-	 .Then it will do following things by default<br/>
-	 <b class="redC">(a)</b>Add manadatory authentication for all URL<br/>
-	 <b class="redC">(b)</b>Add login form<br/>
-	 <b class="redC">(c)</b>Handle login Error<br/>
-	 <b class="redC">(d)</b>Create user and set a default password<br/>
-	 <b class="redC">How to configure authentication in spring security</b><br/>
-	 <b class="redC">==>></b>AuthenticationManager is responsible to manage Authentication in spring security.It have a method authenticate()
-	 But we do not deal with AuthenticationManager manager directly, We deal with using AuthenticationManagerBuilder<br/>
-	 <b class="redC">==>></b>To use the Spring security we need to extend WebSecurityConfigurerAdapter which provide a method
-	 <pre style="color:blue">
-	 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	 // write your logic
-	 .....
-	 }
-	 </pre>
-	 <b class="redC">Note:-</b><br/>
-	 <b class="redC">@EnableWebSecurity:-</b>It tells the spring that it is a web security configuration<br/>
+
+	 <b class="redC">Note:-</b>
+	 <b>@EnableWebSecurity:-</b>It tells the spring that it is a web security configuration<br/>
+<b class="redC">Now Spring security after Spring Boot 3.0</b><br/>
+	 
 	 <b class="redC">Question:-</b>How to set passwordEncoder<br/>
 	 <b class="redC">Answer:-</b>Just expose a bean of type passwordEncoder <br/>
 	 <pre style="color:blue">
@@ -69,74 +215,15 @@
 			return new BCryptPasswordEncoder();
 		}
 	 </pre>
-	 <b class="redC">JDBC Authentication Example in Spring security</b><br/>
-    <pre style="color:blue">
-	**you can change the query according to your database
-	
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	auth
-	.jdbcAuthentication()
-	.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
-	.authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username = ?")
-	.dataSource(dataSource);
-	}
-	
-	 </pre>
-  <b class="redC">Note:-</b><br/>
+
+  <b class="redC">Note:-</b> 
   If you want to change the dataSource infromation then you can pass that information in <b>application.properties</b><br/>
   <pre style="color: blue">
   spring.dataSource.url= 
   spring.dataSource.userName= 
   spring.dataSource.password= 
   </pre>
-  
-  <b class="redC">Question:-</b>What is Autherization in spring security<br/>
-  <b class="redC">Answer:-</b>Autherization means to check if a request have autherity to perfom what its need to do.<br/>
-  <b class="redC">Autherization in spring security</b><br/>
-  To configure the authorization you need an object of HttpSecurity,For that you have an other method in WebSecurityConfigurerAdapter
-  <br/>
-  <pre style="color:blue">
-   configure(HttpSecurity http)throwException
-		{
-		then you can use
-		http.antMatcher("Url pattern that you want to match for given role")
-		}
-  </pre>
- <b class="redC">How spring security Authentication works</b><br/>
- For spring security uses filter to filter every request<br/>
- <img src="image/Spring_security_filter.jpg" alt="Spring_security_filter"><br/> 
- <b class="redC">Spring security code that internally works</b><br/>
- <pre style="color: blue;">
-  &lt;filter&gt;
-  &lt;filter-name&gt;SpringSecurityFilterChain &lt;/filter-name&gt;
-  &lt;filter-class&gt;org.springFramework.web.filter.DelegatingFilterProxy &lt;filter-class&gt;
-  &lt;/filter&gt;
- 
-  &lt;filter-mapping&gt;
-  &lt;filter-name&gt;SpringSecurityFilterChain &lt;/filter-name&gt;
-  &lt;filter-pattern>/* &lt;filter-pattern&gt;
-  &lt;/filter-mapping&gt;
- </pre>
- <b class="redC">Flow Diagram of how spring security works</b><br/>
- <img src="image/How_spring_security_works.jpg" alt="How_spring_security_works"><br/>
- <b class="redC">Step:-1</b><br/>Authentication is a internal spring security interface and Authentication object are meant to hold
- the credential before the Authentication process and once user is Authenticated it hold the Principal.So,you can say Authentication
- is a data transfer object in Authentication process. 
- <br/>
- <b class="redC">Step:-2</b><br/>
- It passes the input credential to AuthenticationManager which is responsible to call the supports() mehtod of Authentication provider
- to check which provider will provide the Authentication <br/>
- Each Authentication provider perform Authentication in a specific way.There are multiple Authentication provider in spring boot security
- <br/>
- <b class="redC">Step:-3</b><br/>
- Now Authentication provider calls UserDetailsService,which return Userdetails instance and it flow back to AuthenticationManager
- which return the Authentication object with principal<br/>
- <b class="redC">Step:-4</b><br/>
- That Authentication object with principal will be store in ThreadLocal but when an other request will come then it will be 
- store in current running session and when it will require by the springFramework.It will copy back to ThreadLocal
- .That is why there are multiple filter to perform these actions
- <img src="image/Spring_security_with_JPA.jpg" alt="Spring_security_with_JPA"><br/>
- <br/>
+
  <b class="redC">What is LDAP</b><br/>
  LDAP is light weight Directory Access Protocol<br/>
  LDAP is datastore(It stores data,mostly user identities)<br/>
@@ -183,45 +270,48 @@ you can do this but is not intended for batch-jobs.
 </pre> 	
   <b class="redC">Question:-</b>What are the stereotype annotation in spring.
   @Component is a generic stereotype annotation for any Spring-managed component<br/>
-  This means that if you want to register a class in the application context you can use @Component to do so<br/>
+  This means that if you want to register a class in the application context you can use @Component to do so
   The other stereotypes (Controller, Service, Repository) are simply specializations of the @Component class<br/> 
   <b class="redC">Version 4.0.6.RELEASE </b><br/>
-  <b class="redC">Spring MVC HandlerInterceptor(Project :- SpringMVCBasic)</b><br/><br/>
-  <b class="redC">Step:-1 spring-servelt.xml file changes</b>
+  <b class="redC">HandlerInterceptor in Spring Boot</b><br/> 
+  <b class="redC">Step:-1 Create custom handler</b>
   <pre  class="blueC">
-  &lt;mvc:interceptor&gt;
-	&lt;mvc:mapping path="/empform.shashi"/&gt; // remove this line if you want to use every where  
-	&lt;bean class="com.patel.InterceptorExample"&gt;&lt;/bean&gt;
-	&lt;/mvc:interceptor&gt;
+  @Component
+	public class CustomInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(
+            HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.info("**************This is preHandle method ************");
+        return true;
+    }
+    @Override
+    public void postHandle(
+            HttpServletRequest request, HttpServletResponse response, Object handler,
+            ModelAndView modelAndView) throws Exception {
+        log.info("**************This is postHandle method *************");
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+                                Object handler, Exception exception) throws Exception {
+        log.info("**************This is afterCompletion method ***************");
+    }
+}
   </pre>
-  <b class="redC">Step:-2 create HandlerInterceptor </b> <br/>
+  <b class="redC">Step:-2 Register the custom handler </b> <br/>
   <pre  class="blueC">
-  public class InterceptorExample extends <b class="redC">HandlerInterceptorAdapter</b> {
-  @Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-			<b class="redC">For pre-processing </b>
-		// If we return false it will be not proceed.
-		return true;
-	}
-	
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		<b class="redC">For post-processing </b>
-	}
-	
-		@Override
-		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-				throws Exception {
-			<b class="redC">For afterCompletion rarely used </b>
-		}
-	}
-	</pre>
-	<b class="redC">Exception handling in Spring MVC(Project :- MavenWeb)</b><br/>
+  @Configuration
+	public class InterceptorConfiguration implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new CustomInterceptor());
+    }
+}
+  </pre>
+	<b class="redC">Exception handling in Spring Boot</b><br/>
 	1-@ExceptionHandler<br/>
 	2-@ControllerAdvice<br/>
-	3-HandlerExceptionResolver<br/>
 	<b class="redC">@ExceptionHandler:-</b><br/>
 	This is used at controller level so we need use for every controller<br/>
 	<pre  class="blueC">
@@ -242,50 +332,59 @@ you can do this but is not intended for batch-jobs.
 	@ExceptionHandler(value=Exception.class)	
 		public ModelAndView handleException()
 		{
-			 System.out.println("ExceptionHandlingControllerAdvice.handleException()");
+			System.out.println("ExceptionHandlingControllerAdvice.handleException()");
 			return new ModelAndView("exceptionExample");
 		}
-	
 	}
 	</pre>	
-	<b class="redC">HandlerExceptionResolver:-</b><br/>
-	HandlerExceptionResolver is an interface that has different implementations to resolve exception thrown during <br/>
-	execution. Some implementations are <b class="redC">ExceptionHandlerExceptionResolver, HandlerExceptionResolverComposite,<br/>
-	SimpleMappingExceptionResolver etc.</b> In our example we will use SimpleMappingExceptionResolver.<br/> 
-	<pre  class="blueC">
-	  &lt;bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"&gt;<br/>
-        &lt;property name="exceptionMappings"&gt;<br/>
-            &lt;props&gt; &lt;prop key="java.lang."&gt;exceptionExample &lt;/prop&gt; &lt;/props&gt;<br/>
-        &lt;/property&gt;<br/>
-        &lt;property name="defaultStatusCode" value="400"&gt; &lt;/property&gt;<br/>
-        &lt;property name="defaultErrorView" value="ErrorPage"/&gt;<br/>
-    	&lt;/bean/&gt;<br/>
-    </pre>
-   <b class="redC">If we use all three then preority order will be</b><br/>
+   <b class="redC">If we use both then preority order will be</b><br/>
     @ExceptionHandler<br/>
-	@ControllerAdvice<br/>
-	HandlerExceptionResolver<br/> 
-<b>@ControllerAdvice or HandlerExceptionResolver works when there is Uncought Exception is there</b><br/>		
+	@ControllerAdvice<br/>		
  </div>
  <div data-role="main" class="ui-content">
  <b class="redC">Question:-</b>What is Spring<br/>
  The Spring framework is a Java platform that provides comprehensive infrastructure support for developing Java applications.<br/> 
- <b class="redC">Question:-</b><b>What are the feature of Spring framework</b><br/>
- <b class="redC">1-</b><b>Inversion of control (IOC):-</b>Means inversion of control , Spring IOC is responsible for instantiating, configuring and assembling objects known as beans <br/>
- <b class="redC">2-</b><b>Aspect oriented (AOP):-</b>is used for separating cross-cutting concerns from the business logic of the application.<br/>
- <b class="redC">3-</b><b>Dependency Injection(DI)</b><br/>
- <b class="redC">4-</b><b>MVC Framework:-</b>Spring comes with MVC web application framework<br/>
- <b class="redC">5-</b><b>Transaction Management</b><br/>
- 
- <b class="redC">Question:-</b>Describe some of the standard Spring events<br/>
- <b class="redC">1-</b>ContextRefreshedEvent<br/>
- <b class="redC">2-</b>ContextStartedEvent<br/>
- <b class="redC">3-</b>ContextStoppedEvent<br/>
- <b class="redC">4-</b>ContextClosedEvent<br/>
- <b class="redC">5-</b>RequestHandledEvent<br/>
+ <b class="redC">Question:-</b>What are the feature of Spring framework<br/>
+ <b class="redC">1-</b>Inversion of control (IOC):- Means inversion of control , Spring IOC is responsible for instantiating, configuring and assembling objects known as beans <br/>
+ <b class="redC">2-</b> Aspect oriented (AOP):- is used for separating cross-cutting concerns from the business logic of the application.<br/>
+ <b class="redC">3-</b> Dependency Injection(DI) <br/>
+ <b class="redC">4-</b> MVC Framework:- Spring comes with MVC web application framework<br/>
+ <b class="redC">5-</b> Transaction Management <br/>
+ <b class="redC">Transaction Management in Spring Boot</b><br/>
+ Steps to use @Transactional in Spring Boot<br/>
+ <b class="redC">1-</b>@EnableTransactionManagement to your main class of Spring Boot application.<br/>
+ <b class="redC">2-</b>Use @Transactional annotation on class level or method level.<br/>
+ @Transactional can be annotated not only on methods but also on
+ classes. When annotated on a class, all public methods of that class are
+ transaction-enabled. If both class-level and method-level
+ @Transactional annotations are used, the annotation used at the method
+ evel overrides the class-level annotation.</br>
+ <b class="redC">Attributes of the @Transactional annotation</b><br/>
+ <b>@Transactional(propagation = Propagation.REQUIRED):</b><br/>
+ By default, the @Transactional annotation will create a new transaction for
+ the marked method or class if one does not already exist. If a transaction
+ does already exist, the marked method or class will be executed within the existing transaction.
+ you can specify that a transaction should always be created, regardless of whether a transaction already exists,
+ by using the PROPAGATION_REQUIRED attribute:@Transactional(propagation = Propagation.REQUIRED)
+	<br/><br/>
+<b>@Transactional(isolation = Isolation.SERIALIZABLE):</b><br/>
+You can also specify the isolation level of a transaction by using the
+isolation attribute. The isolation level determines how much a transaction
+is isolated from other transactions. For example, you can use the
+ISOLATION_SERIALIZABLE attribute to specify that the transaction should be completely isolated from other transactions:
+@Transactional(isolation = Isolation.SERIALIZABLE)<br/>
+	<br/><br/>
+<b>@Transactional(timeout = 10):</b><br/>
+You can also specify the maximum time that a transaction should take to complete by using the timeout attribute.
+<br/><br/>
+<b>@Transactional(rollbackFor = { SQLException.class }):</b><br/>
+which can be used to specify the exceptions that should cause a transaction to roll back. 
+<br/><br/>
+<b>@Transactional(readOnly = true):</b><br/>	
+The @Transactional annotation also supports other attributes, such as readOnly, which can be used to indicate that a transaction should be read-only
+<br/><br/>
  <b class="redC">Question:-</b> Which are the Spring framework modules<br/>
- <b class="redC">Answer:-</b><br/>
- <b>4-Module of Spring Architecture</b><br/>
+ <b class="redC">Answer:-</b>Modules of Spring Architecture<br/>
  <b class="redC">1-Core Container</b><br/>
 	(i)-Core<br/> 
 	(ii)-Bean<br/>
@@ -302,13 +401,6 @@ you can do this but is not intended for batch-jobs.
 	(i)AOP<br/>
 	(ii)Aspects Spring module<br/> 
 	(iii)Messaging module<br/>
-	 		 
- <b class="redC">Question:-</b>how to create Request,Session,Global-session scope bean in Spring MVC<br/>
- <b class="redC">1-</b>singleton<br/>
- <b class="redC">2-</b>prototype<br/>
- <b class="redC">3-</b>request<br/>
- <b class="redC">4-</b>session<br/>
- <b class="redC">5-</b>global session<br/>
  
  <b class="redC">Question:-</b>Explain Bean life cycle in Spring framework<br/>
  <img src="image/spring-bean-life-cycle-management-example.png" alt="Spring bean life cycle"><br/>
@@ -561,7 +653,7 @@ you can do this but is not intended for batch-jobs.
   <b class="redC">What is IOC:-</b><br/>
   In Spring framework, IOC container is responsible to inject the dependency. We provide metadata to the IOC container either by XML file or annotation
   </div>
-  
+  <br/>
   <div data-role="main" class="ui-content">
   <b class="redC">Dependency Injection in Spring:-</b>
   Dependency Injection (DI) is a design pattern that removes the dependency from the programming code so that it can be easy to manage.
@@ -601,17 +693,14 @@ you can do this but is not intended for batch-jobs.
    
    Spring container looks at the beans on which autowire attribute is set constructor in the XML configuration file. <br/>
    It then tries to match and wire its constructor's argument with exactly one of the beans name in the configuration file.<br/>
-   <b class="redC">4-Autodetect (but it is deprecated since spring 3)</b> 
+    
    </div>
   <div data-role="main" class="ui-content">
   <b class="redC">Note:-</b><br/>
-   @Autowired<br/>
+   @Autowired 
    is equivalent to  Autowiring byType<br/>
    <br/>
-   @Autowired<br/>
-   @Qualifier("fullSpot")<br/>
-   is equivalent to  Autowiring byType<br/>
-   <a href="https://stackoverflow.com/questions/36183624/how-to-autowire-by-name-in-spring-with-annotations"> read more...</a>
+
   </div>
   
   <div data-role="main" class="ui-content">
@@ -650,7 +739,7 @@ you can do this but is not intended for batch-jobs.
   <b class="redC">Note:-</b>The Spring container is responsible for instantiating, configuring, and assembling the Spring beans<br/>
   
   <b class="redC">BeanFactory VS ApplicationContext</b><br/>
-  BeanFactory is also called basic IOC and ApplicationContext is called Advanced IOC because it implement 
+  BeanFactory is also called basic IOC and ApplicationContext is called Advanced IOC because it extends 
   the BeanFactory so it cantain all the feature of BeanFactory and some extra feature that is why it is known 
   as Advanced IOC<br/><br/>
   
@@ -1006,24 +1095,24 @@ public class PrintableFactory {
   A Concern is a term that refers to a part of the system divided on the basis of the functionality<br/>
     <b class="redC">Concerns are two types:-</b> <br/>
     The concerns representing single and specific functionality for primary requirements are known as core concerns.<br/>
-    <b class="redC">OR</b><br/>
+    <b class="redC">or</b><br/>
     Primary functionlity of the system is knows as core concerns.<br/>
     <b class="redC">For example: Business logic</b><br/>
-    The concerns representing functionalities for secondary requirements are referred to as <br/>
+    The concerns representing functionalities for secondary requirements are referred to as 
 	crosscutting concerns or system-wide concerns.<br/>
-    <b class="redC">OR</b><br/>
-    The crosscutting concern is a concern which is applicable throughout the application and it affects the entire<br/>
+    <b class="redC">or</b><br/>
+    The crosscutting concern is a concern which is applicable throughout the application and it affects the entire
 	application.<br/>
-    <b class="redC">For example:-</b>logging, security and data transfer are the concerns which are needed in almost every module of<br/>
+    <b class="redC">For example:-</b>logging, security and data transfer are the concerns which are needed in almost every module of
 	an application, hence they are cross-cutting concerns.<br/>
  </div>
  
   <div data-role="main" class="ui-content">
   <b class="redC">Why AOP :</b>-<br/>
   It provides the pluggable way to dynamically add the additional concern before, after or around the actual logic.<br/>
-  AOP Concepts and Terminology:-<br/>
+  <b class="redC">AOP Concepts and Terminology:-</b><br/>
   <b class="redC">Join point:-</b><br/>
-  Join point is any point in your program such as method execution, exception handling, field access etc.<br/>
+  Join point is any point in your program such as method execution, exception handling, field access etc.
   Spring supports only method execution join point.<br/>
   <b class="redC">Advice:-</b><br/>
   Advice represents an action taken by an aspect at a particular join point. There are different types of advices<br/>
@@ -1034,12 +1123,6 @@ public class PrintableFactory {
   Around Advice: It executes before and after a join point.<br/>
  <b class="redC">Pointcut:-</b> <br/>
  It is an expression language of AOP that matches join points.<br/>
- <b class="redC">Introduction:-</b><br/>
- It means introduction of additional method and fields for a type.It allows you to introduce new interface to any advised object.<br/>
- 
- <b class="redC">Target Object:-</b><br/>
- It is the object.It is also known as proxied object in spring because Spring AOP is implemented using runtime proxies.<br/>
- <b class="redC">Need to read more about Target Object</b>
  
  <b class="redC">Aspect:-</b><br/>
  It is a class that contains advices, joinpoints etc.<br/>
@@ -1050,81 +1133,46 @@ public class PrintableFactory {
  <b class="redC">Weaving:-</b><br/>
  It is the process of linking aspect with other application types.Weaving can be done at compile time, load time or runtime.<br/>
  Spring AOP performs weaving at runtime<br/>
- <b class="redC">AOP Implementations:-</b><br/>
- AOP implementations are provided by:<br/>
-    AspectJ<br/>
-    Spring AOP<br/>
-    JBoss AOP<br/>
-	<b class="redC">Spring AOP</b><br/>
-	Spring AOP can be used by 3 ways given below<br/>
-    <b class="redC">1-By Spring1.2 Old style</b> (dtd based) (also supported in Spring3)<br/>
-    <b class="redC">2-By AspectJ annotation-style</b><br/>
-    <b class="redC">3-By Spring XML configuration-style</b>(schema based)<br/>
-   Steps to use <b class="redC">AspectJ annotation-style:-</b><br/>
-   <b class="redC">Step 1:-</b>
-   Make that below entry inside spring-servlet.xml file<br/>
-   <b class="redC">&lt;aop:aspectj-autoproxy/&gt;</b> but if you want to use without xml means even without spring-servlet.xml<br/>
-   Then we need do like below<br/>
-   <pre>
-    @Configuration
- 	<b class="redC">@EnableAspectJAutoProxy // Need to use this annotation above the configuration class</b>
- 	public class AppConfig {
-     @Bean
-     public FooService fooService() {
-         return new FooService();
-     }
-
-     @Bean
-     public MyAspect myAspect() {
-         return new MyAspect();
-     }
- 	}
-   </pre>
-    <b class="redC">Step 2:-</b>
-    Create a class like this
-    <pre>
-   <b class="redC">@Aspect // class with this annotation</b>
-	@Component
-	public class AspectClass {
-
-	 @Before("execution(* com.patel.LoginAction.next(..))") 	
-		public void myBeforeAdvice(JoinPoint p)
-		{
-			System.out.println("Before advice is applied ....");
-			System.out.println("Name of the method is .(Before)..."+p.getSignature());
-		}
-	
-	 @After("execution(* com.patel.LoginAction.next(..))") 	
-		public void afterAdvice(JoinPoint p)
-		{
-			System.out.println("After advice is applied .....");
-			System.out.println("Name of the method is .(After)..."+p.getSignature());
-		}
-	
-	 @Around("execution(* com.patel.LoginAction.next(..))") 	
-		public Object  aroundAdvice(ProceedingJoinPoint p) throws Throwable
-		{
-		System.out.println("Before Calling Method...");
-	    Object result =  p.proceed();
-	    System.out.println("After calling method...");
-	    System.out.println("Name of the method is : "+p.getSignature());
-	    return result;
-			} 
-		
-	@AfterReturning("execution(* com.patel.LoginAction.next(..))") 	
-		public void myBeforeAdvice(JoinPoint p)
-		{
-			System.out.println("AfterReturning advice is applied ....");
-		} 
-		
-	@AfterThrowing("execution(* com.patel.LoginAction.next(..))") 	
-		public void myBeforeAdvice(JoinPoint p)
-		{
-			System.out.println("AfterThrowing advice is applied ....");
-		} 
-	
+ <b class="redC">Steps for AOP Implementations:-</b><br/>
+ <b class="redC">Steps 1-</b>Adding dependencies<br/>
+ <pre class="blueC">
+ &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId &gt;
+    &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId &gt;
+&lt;/dependency&gt;
+ </pre>
+ <b class="redC">Steps 2-</b>Enabling Spring AOP<br/>
+ <pre class="blueC">
+	@Configuration
+	@EnableAspectJAutoProxy
+	@ComponentScan
+	public class AopConfig {
+ 
 	}
-    </pre>
+ </pre>
+ <b class="redC">Steps 3-</b>Define an Advice using Aspect and Pointcut Expression<br/>
+ Each Aspect class should be annotated with @Aspect annotation. Within that class, we then specify Pointcuts and Advice.<br/>
+ <pre class="blueC">
+ @Aspect
+ public class EmployeeCRUDAspect {
+      
+    @Before("execution(* EmployeeManager.getEmployeeById(..))")     //point-cut expression
+    public void logBeforeV1(JoinPoint joinPoint) {
+
+        System.out.println("EmployeeCRUDAspect.logBeforeV1() : " + joinPoint.getSignature().getName());
+    }
+ </pre>
+ <b>Write methods on which you want to execute advice and those match with point-cut expressions.</b><br/>
+ <pre class="blueC">
+ @Component
+public class EmployeeManager {
+
+    public EmployeeDTO getEmployeeById(Integer employeeId) {
+        System.out.println("Method getEmployeeById() called");
+        return new EmployeeDTO();
+    }
+}
+</pre>
   <b class="redC">Transaction management in Spring</b><br/>
   <b>Transaction managent using annotation:-</b><br/>
   <b>Step:1-</b>Make the below entry in xxxx-spring.xml file<br/>
@@ -1604,7 +1652,38 @@ public class CustomEditorExample extends PropertyEditorSupport {
 	<b class="redC">4-</b>session<br/>
 	<b class="redC">5-</b>globalSession<br/>
 	<b class="redC">6-</b>some custom scope<br/>
-	
+	<b class="redC">Example</b><br/>
+	<pre>
+	@Bean
+	@Scope("singleton")
+	public User getSingleton() {
+		return new User();
+	}
+
+	@Bean
+	@Scope("prototype")
+	public User getPrototype() {
+		return new User();
+	}
+
+	@Bean
+	@Scope(value = WebApplicationContext.SCOPE_REQUEST)
+	public User getRequest() {
+		return new User();
+	}
+
+	@Bean
+	@Scope(value = WebApplicationContext.SCOPE_SESSION)
+	public User getSession() {
+		return new User();
+	}
+
+	@Bean
+	@Scope(value = WebApplicationContext.SCOPE_APPLICATION)
+	public User getApplication() {
+		return new User();
+	}	
+	</pre>
 	<b class="redC">Important:-</b><br/>
 	<pre>
 	<b class="redC">@ImportResource("classpath:bean2.xml")</b>

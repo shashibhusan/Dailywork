@@ -39,7 +39,7 @@
 <p class="redC">Thread states in detail</p> 
 <p><font class="redC">New :</font> When instance of thread is created using new operator it is in new state, but the start() method has not been invoked on the thread yet, thread is not eligible to run yet.</p> 
 <p><font class="redC">Runnable : </font>When start() method is called on thread it enters runnable state. </p> 
-<p><font class="redC">Running : </font>Thread scheduler selects thread to go fromrunnable to running state. In running state Thread starts executing by entering run() method.</p> 
+<p><font class="redC">Running : </font>Thread scheduler selects thread to go from runnable to running state. In running state Thread starts executing by entering run() method.</p> 
 <p><font class="redC">Waiting/blocked/sleeping :</font> In this state a thread is not eligible to run. </p> 
 
 
@@ -502,13 +502,13 @@ main has ended.
  <li> <p>Thread might be waiting indefinitely for lock on object’s monitor (by calling wait() method), but notify() may be repeatedly awakening some other threads. In that case also Thread starves away to get CPU.</p> </li> 
 </ul> 
 <p><b>Question 57. What is addShutdownHook method in java?</b></p> 
-<p>Answer. &nbsp;<a href="http://www.javamadesoeasy.com/2015/03/threads-addshutdownhook-method-in-java.html" style="text-decoration:none;" rel="nofollow">addShutdownHook</a> method in java &gt;</p> 
+<p>Answer. &nbsp;<a href="http://www.javamadesoeasy.com/2015/03/threads-addshutdownhook-method-in-java.html" style="text-decoration:none;" rel="nofollow">addShutdownHook</a> method in java </p> 
 <ul> 
  <li> <p>addShutdownHook method registers a new virtual-machine shutdown hook.</p> </li> 
  <li> <p>A shutdown hook is a initialized but unstarted thread. </p> </li> 
  <li> <p>When JVM starts its shutdown it will start all registered shutdown hooks in some unspecified order and let them run concurrently. </p> </li> 
+ <li> <p>When JVM (Java virtual machine) &nbsp;shuts down</p> </li>
 </ul> 
-<p>When JVM (Java virtual machine) &nbsp;shuts down &gt;</p> 
 <ul> 
  <li> <p>When the last non-<a href="http://www.javamadesoeasy.com/2015/03/daemon-threads-12-salient-features-of.html" style="text-decoration:none;" rel="nofollow">daemon</a> thread finishes, or </p> </li> 
  <li> <p>when the System.exit is called.</p> </li> 
