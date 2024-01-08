@@ -26,6 +26,40 @@
       <br/>
   </div>	
  <div data-role="main" class="ui-content">
+<b class="redC">Spring security after Spring Boot 3.0</b><br/>
+<b>For Authentication:-</b><br/> 
+<b>1-</b> You need to define a bean of userDetailsService manually and give it AuthenticationProvider<br/>
+<b>2-</b> AuthenticationProvider communicate with userDetailsService & create userDetails object and set to Authentication object.  
+<br/>
+<br/>
+<b>For Authorization:-</b>
+Spring security provides SecurityFilterChain class for Authorization so what we can do  
+we can use this class expose it as a bean and configure our Authorization stuff
+<br/>
+<br/>
+<b>Method Level Authorization:-</b> 
+If you want to use method level Authorization then you need to use 
+@PreAuthorize annotation at method level and enable it by using @EnableMethodSecurity annotation 
+as shown in code snippet
+<br/>
+<br/>
+Majar difference in spring security after Spring Boot 3.0 is that we need to create all the beans manually like<br/>
+UserDetails<br/>
+SecurityFilterChain<br/>
+AuthenticationProvider<br/>
+AuthenticationManager<br/> 
+<br/>
+Please notice that if multiple Spring interceptors are configured, the preHandle() method is executed in the configuration order,
+whereas postHandle() and afterCompletion() methods are invoked in the reverse order.
+<br/>
+<br/>
+ <b class="redC">Graceful shutdown:-</b><br/>
+Graceful shutdown is a feature in Spring Boot that allows the application to finish ongoing tasks and handle active
+requests before shutting down. It ensures that the application exits gracefully without abruptly terminating requests,
+reducing the risk of data loss or client disruptions.<br/>
+<b class="redC">Note:-</b><br/>
+Microservice communication 
+Some of the common protocols that microservices use in communication are API calls, gRPC, and Message Brokers.<br/>
 <b class="redC">Question:-</b>What is Spring WebFlux<br/>
 <b class="redC">Answer:-</b><br/>
 Spring Framework 5.0, released in September 2017, introduced a non-blocking reactive-stack web framework called Spring WebFlux.

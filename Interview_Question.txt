@@ -1,11 +1,4 @@
 What is cyclic barier in multithreading.
-
-CyclicBarrier allows multiple threads to wait for each other to reach a common point
-before continuing their execution.
-
-CountDownLatch is a synchronization aid that allows one or more threads
-to wait for a set of operations to complete.
------------------------------------------------------------------------------------
 What is use of AOP in your project.
 Transaction management in Spring. 
 Join in mysql .
@@ -23,10 +16,7 @@ String heap & pool concept
 Concurrent hashMap in detail 
 How to iterate Map in java 
 Design pattern in java
--------------------------------------------------------------------------
 What is dispatcher servlet in spring
-The DispatcherServlet is the front controller in Spring web applications.
-------------------------------------------------------------------------- 
 Bean scope 
 Why we use @Qualifier annotation 
 How to map composite Key in Hibernate
@@ -47,13 +37,9 @@ What happen when you manually copy a class file in an other class file(If there 
 a class file inside the other class file & vice-versa)  
 How you will convert ArrayList to LinkedList 
 @Transient annotation in Hibernate
-This means that the field or property marked as transient should be excluded when the data persists in the database.
---------------------------------------------------------------
 What is fail safe
-Fail-Safe iterators don’t throw ConcurrentModificationException while Fail-Fast iterators immediately throw ConcurrentModificationException 
--------------------------------------------------------------
 Flow of Spring 
-Bean Life Cycle ---Pending 
+Bean Life Cycle 
 Trasaction mgnt in Spring  
 What is patch Method  
 Explain the Bean Scope in Detail 
@@ -83,29 +69,18 @@ What are Wrapper Class in Java why it require in java
 How can we crate custom exception in java
 Difference between peek() and element() in queue, in collection.
 Difference between poll() and remove() in queue, in collection.
----------------------------------------------------------------------------------
-what is Auto Boxing
-Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes. For example, converting an int to an Integer.
-Consider the following code:
-List<Integer> li = new ArrayList<>();
-for (int i = 1; i < 50; i += 2)
-    li.add(i);
-----------------------------------------------------------------------------------
+What is Auto Boxing
 What is collections in simple word.
 Its a group of Interface & Classes to work with group of object in Java.
----------------------------------------------------------------------------------- 
 Difference between Error and Exception.
 Difference between component,service,repository & controller 
 Autowiring in Spring
 Scope of singleton object
-If the scope is a singleton, then only one instance of that bean will be instantiated per
-Spring IoC container and the same instance will be shared for each request.
-----------------------------------------------------------------------------------
 Can we Autowiring static varriable Spring
 Difference between beanFactory & ApplicationContext.
 What in thread local varriable in java
 How to map composite key in hibernate 
-Difference between rowset & resultSet------Pending  
+Difference between rowset & resultSet  
 can we write constructor in abstract class.
 What is down casting.
 Why we get concurrentupdate exception. 
@@ -119,56 +94,56 @@ How can i synchronize a hashmap.
 How can i clone a collection like arraylist 
 Comprable contain compareTo().
 Comparator contain compare().
-Constructor based dependency injection using spring annotation---Pending
+Constructor based dependency injection using spring annotation 
 Difference Between RowMapper & ResultSetExtractor.
-Difference between ResultSet & RowSet---Pending
-Advantage of Hibernate over jdbcTemplate---Pending
+Difference between ResultSet & RowSet 
+Advantage of Hibernate over jdbcTemplate 
 Expression for Pointcut
 How can i validate a json request---Pending
-RowNum in mysql.---Pending
+RowNum in mysql 
 DES (Data encryption standard)
 SOLID
 Second level of catching in hibernate 
 How to create native query in hibernate 
-Why sub class can not hold the reference of super class---Pending
-Give me the scenario when you go for rest and when you go for soap---Pending
+Why sub class can not hold the reference of super class 
+Give me the scenario when you go for rest and when you go for soap 
 How to covert set in arrayList and vice-versa
 How to covert LinkedList in arrayList and vice-versa
 What is enumarator in java---Pending
 What will be state of thread after calling the yield() method---Pending
-How to configure hibernate with spring----Pending
+How to configure hibernate with spring 
 How to sort a hash on value base in java 
 Executor frameWork
 How can I return some value from thread
 How can we use to two seperate repo in a spring Boot application
 Examples of circuit-breaker
 Working of LinkedHashMap
-Write some hibernate query---Pending
-Program to explain merge() & update in hibernate---Pending
-How to use Auto-Scaler in microservies----Pending
+Write some hibernate query 
+Program to explain merge() & update in hibernate 
+How to use Auto-Scaler in microservies 
 What is the difference between preemptive scheduling and time slicing
 What is static & dynamic binding in java.
 How can i handle if 10  request will hit my web service at same time---Pending
-How can i delete duplicate from a text file having case insensitive string---Pending
+How can i delete duplicate from a text file having case insensitive string 
 Which is better based on the performance method overloading or method overriding---Pending
 Where we should use template design pattern in java
 Where we sould use normalization and where denormalization in java---Pending
-What is difference between primary key & unique key---Pending
-HQL ---Pending
+What is difference between primary key & unique key 
+HQL 
 Answer:-Yes, We can use more than one column for primary key then it will be a composite
 but main difference between primary key & unique key is that primary key can not be null
-How to break the singleton class---Pending 
+How to break the singleton class 
 What is the difference between CyclicBarrier and CountDownLatch in Java
-What is race condition in Java? Given one example---Pending
-How to avoid race condition-----Pending
-How to stop a thread in Java---Pending
-What is Future Task in Java---Pending
-How to achive thread safety in Java---Pending
+What is race condition in Java? Given one example 
+How to avoid race condition 
+How to stop a thread in Java 
+What is Future Task in Java 
+How to achive thread safety in Java 
 What happens if a thread throws an Exception inside synchronized block---Pending
 Example of Join() method
-What is the difference between the submit() and execute() method thread pool in Java---Pending  
-What is Abstract Map or Map of Map---Pending
-how to create proxy object---Pending 
+What is the difference between the submit() and execute() method thread pool in Java 
+What is Abstract Map or Map of Map 
+how to create proxy object 
 Spring Core Projects 
 Internal working of ConcurrentHashMap  
 what happen when you use transaction at both class level & method level
@@ -177,49 +152,49 @@ how can we create exactly five object of a class in java
 What is try with resource in java for custom resource
 How to sort a HashMap based on Value
 Can we make final class serializable---Pending
-Difference between init block and static---Pending 
+Difference between init block and static  
 The static initializer block will be called on loading of the class
 The non-static initializer block on the other hand is created on object construction only
 So static block are used for static intialization where as initializer are used for non-static varriables
-Advantage of dependency injection in Spring---Pending
+Advantage of dependency injection in Spring 
 Detail about serialization
 what is iterable in java
 The Java Iterable interface ( java.lang.Iterable ) is one of the root interfaces of the Java Collections API
 Iterator Advantage: Ability to remove elements from Collections. Ability to move 
-forward and backward using next() and previous().---Pending
+forward and backward using next() and previous() 
 Use of @primary annotation 
 What is return type of put method in hashMap 
-It returns the previous value associated with key, or null if there was no mapping for key---Pending
+It returns the previous value associated with key, or null if there was no mapping for key 
 How can you print 0,1,0,1 in alternative order using two threads which are running in infinitive loop---Pending
-What is use of @Configuration ---Pending
+What is use of @Configuration 
 What spring boot application does when it boot at 1st time.
-How can you process a 12 gb file if 4 gb memory will be available---Pending
-How you will do pagination & sorting using your own query---Pending
+How can you process a 12 gb file if 4 gb memory will be available 
+How you will do pagination & sorting using your own query 
 How can I configure two data source in a single spring boot application
 Can I change the name of the application.propeeties file in Spring Boot 
 Why we are restricting the access modifier in case of method overiding. 
 Difference between callable & runnable. 
-Why load factor is by default 0.75.---Pending 
+Why load factor is by default 0.75.  
 Can we make a contructor as final---Pending
 Can we make our class a static---Pending
 What if call a static method with class name after assigning a null value to it---Pending
-What call by reference & call by value---Pending
+What call by reference & call by value 
 How can I secure my ends point in REST 
 How can we check that we are getting only Numeric value while calling our services not null or specail character---Pending  
 How can I make differnent log file for differnet profile---Pending
 How can we track your error that is repository layer---Pending
 How can I filter the employee object having age greater than 50 years
-What is diference between Map & Flat Map---Pending
-ClassNotFoundException vs NoClassDefFoundError---Pending
-What are the end point of actuator in Spring Boot---Pending 
-What we will get if we call getName on object load using load method in Hibernate but object is not there--Pending
-What is differnce between save() & saveAndUpdate()---Pending
+What is diference between Map & Flat Map
+ClassNotFoundException vs NoClassDefFoundError 
+What are the end point of actuator in Spring Boot  
+What we will get if we call getName on object load using load method in Hibernate but object is not there 
+What is differnce between save() & saveAndUpdate() 
 Question:-How many bean will be create of a singleton bean in different ApplicationContext
 Answer:-Spring singleton beans are instantiated once per application context. That is, if you create many application contexts from the same config, they'll have different instances of singleton beans.
 How can I return different media type from REST---Pending
 How can I return Custom code using custom class in REST---Pending
 How Spring Boot Appication Handle the request
-Difference Between REST & SOAP---Pending
+Difference Between REST & SOAP 
 I case of Post how can we data from request Body
 How you will deploy your microservice---Pending
 Advantage Of Spring Boot
@@ -227,18 +202,18 @@ What is use of optional
 what is Partition in Database
 How feature of java8 help in Concurrency in java
 How can I increase performance in Hibernate to in persisting the object in DB---Pending
-How can I enable Caching in Spring---Pending
-How can I get the child object automatically when accessing the parent in Hibernate---Pending
+How can I enable Caching in Spring 
+How can I get the child object automatically when accessing the parent in Hibernate 
 How you can solve the conflict problem default method in interface
-Difference between poll(), peek()----Pending
-What is @CrossOrigin annotation----Pending
+Difference between poll(), peek() 
+What is @CrossOrigin annotation 
 What is executor Framework in java---Pending
 Can we do operator overloading in java ---------------->>>NO , Because it will make the java code more complex 
-What is working of Garbdge collector in java---Pending
-What are the class loader in java----Pending
+What is working of Garbdge collector in java 
+What are the class loader in java g
 Can we make Array as volatile------------------->>>YES
-Example of Call by Value & Call by reference in java---Pending
-Woking of JVM---Pending
+Example of Call by Value & Call by reference in java 
+Woking of JVM 
 Executor framework
 How can you catch an exception thrown by another thread in Java
 Java reflection example

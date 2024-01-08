@@ -13,19 +13,55 @@
 <div style="text-align:justify;" data-role="page">
   
 <div data-role="main" class="ui-content">
+<b class="redC">Question:-</b>What is collections in simple word.<br/>
+Its a group of Interface & Classes to work with group of object in Java.
+<br/>
+<b class="redC">Question:-</b>What is Auto Boxing<br/>
+Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes.
+For example, converting an int to an Integer.
+Consider the following code:<br/>
+<pre  class="blueC">
+List<Integer> li = new ArrayList<>();
+for (int i = 1; i < 50; i += 2)
+    li.add(i);
+</pre>	
+ 	
+<b class="redC">Question:-</b>What is fail safe<br/>
+Fail-Safe iterators don’t throw ConcurrentModificationException while Fail-Fast iterators immediately throw ConcurrentModificationException 
+<br/>
+<b class="redC">Note:-</b>
+The DispatcherServlet is the front controller in Spring web applications.
+<br/>
+<b class="redC">Note:-</b>
+CyclicBarrier allows multiple threads to wait for each other to reach a common point
+before continuing their execution.<br/>
+<b class="redC">Note:-</b>
+CountDownLatch is a synchronization aid that allows one or more threads
+to wait for a set of operations to complete.
+<br/>
+
+<b class="redC">Note:-</b>LinkedList traversing is more expensive than arrays and since in selection sort we do more traversing(more coparision)
+therefore we should go for selection sort in case of Arrays
+<br/>
+<b class="redC">Note:-</b>
+LinkedList insertion is more less expensive than arrays and since insertion sort we insert element at it's location
+so if data structure is linkedList we should use Insertion sort.
+<br/>
 <b class="redC">Question:-</b>What is addShutdownHook() in java <br/> 
 	addShutdownHook() will register some actions which is to be performed on a Program's termination.<br/> 
 The program that you start ends in two ways:<br/> 
-1.the main thread (Root) ends its running context;<br/> 
-2.the program meets some unexpected situation, so it cannot proceed further.<br/> 
+1-The main thread (Root) ends its running context;<br/> 
+2-The program meets some unexpected situation, so it cannot proceed further.<br/> 
 If you add a ShutdownHook, the hook will start a thread that will start running at time of termination only.<br/> 
 <b class="redC">For example:</b><br/>
- Runtime.getRuntime().addShutdownHook(new Thread() {<br/>
-      public void run() {<br/>
-        System.out.println("Running Shutdown Hook");<br/>
-      }<br/>
-    });<br/>
-	<br/>
+<pre  class="blueC">
+ Runtime.getRuntime().addShutdownHook(new Thread() { 
+      public void run() { 
+        System.out.println("Running Shutdown Hook"); 
+      } 
+    }); 
+	 
+</pre>	
 <b class="redC">Question:-</b> Can a constructor be synchronized?<br/>
 <b class="redC">Answer:-</b> No, constructor cannot be synchronized. Because constructor is used for instantiating object, when we are in constructor object is under creation.<br/>
 		 So, until object is not instantiated it does not need any synchronization.	<br/>
@@ -63,6 +99,7 @@ If you add a ShutdownHook, the hook will start a thread that will start running 
 	9-We use call-by-reference to pass objects as arguments to methods in java.<br/>
 	10-TreeMap does not allow null key.<br/>
 	11-Angle Bracket in Java is used to define Generics.<br/>
+	<br/>
 		It means that the angle bracket takes a generic type, say T, in the definition and any class as a parameter during the calling.<br/>
 		The idea is to allow type (Integer, String, … etc and user-defined types) to be a parameter to methods, classes, and interfaces.<br/>
 		For example, classes like HashSet, ArrayList, HashMap, etc use generics very well. We can use them for any type.<br/>
@@ -161,7 +198,7 @@ If you add a ShutdownHook, the hook will start a thread that will start running 
 		
 <b class="redC">Note</b>Parent and Child classes having same data member in Java<br/>
 <b class="redC">Answer:-</b><br/>
-		<pre  class="blueC" >
+		<pre  class="blueC">
 				// A Java program to demonstrate that non-method
 				// members are accessed according to reference
 				// type (Unlike methods which are accessed according
@@ -424,9 +461,9 @@ Cake{sugar=0.75, butter=0.5, eggs=2, vanila=2, flour=1.5, bakingpowder=0.0, milk
    <br/>
    <b class="redC">When to use atomic Integer in Java</b><br/>
    In real life uses, we will need AtomicInteger in two cases:<br/>
-   <b class="redC">1-</b>As an atomic counter which is being used by multiple threads concurrently.<br/>
-   <b class="redC">2-</b>In compare-and-swap operations to implement non-blocking algorithms.<br/>
-   <b class="redC">OR</b><br/>
+    1- As an atomic counter which is being used by multiple threads concurrently.<br/>
+    2- In compare-and-swap operations to implement non-blocking algorithms.<br/>
+   <b>OR</b><br/>
    when we need to perform atomic operations on an int value without using synchronized keyword.
    <br/>
 	<b class="redC">Question:</b>What is Spock FrameWork<br/>
@@ -675,7 +712,7 @@ class BlockingQueue<E> {
 	  lambda expressions are nameless functions given as constant values, 
 	  and written exactly in the place where it’s needed,  
 	  typically as a parameter to some other function.<br/> 
-	  <b class="redC">in other words</b><br/>
+	  <b>in other words</b><br/>
 	  Lanbda Expression are used for the implementation of the functional interface 
 	  So,it is clear that lambda is some kind of function without name and identifiers.Well, what’s big deal? Why everyone is so excited<br/>
 	  <br/> 
@@ -685,7 +722,7 @@ class BlockingQueue<E> {
 	  them as method arguments and much more. JavaScript is a good example of this where you can pass callback methods e.g. to Ajax calls. It’s very useful feature and has been lacking in java from 
 	  beginning. Now with java 8, we can also use these lambda expressions.<br/>
 	  
-	  <b class="redC">Syntax:-</b><br/>
+	  <b>Syntax:-</b><br/>
 	  <pre class="aa">
 	  (parameters) -> expression  
 	   or 
@@ -693,17 +730,17 @@ class BlockingQueue<E> {
 	   or 
 	  () -> expression 
 	  </pre>
-	  <b class="redC">Example:-</b><br/>
-	  <b class="redC">1- </b>(int a, int b) ->    a * b               // takes two integers and returns their multiplication<br/> 
-	  <b class="redC">2- </b>(a, b)          ->   a - b               // takes two numbers and returns their difference<br/> 
-	  <b class="redC">3- </b>() -> 99                                // takes no values and returns 99<br/> 
-	  <b class="redC">4- </b>(String a) -> System.out.println(a)     // takes a string, prints its value to the console, and returns nothing <br/> 
-	  <b class="redC">5- </b>a -> 2 * a                               // takes a number and returns the result of doubling it<br/> 
-	  <b class="redC">6- </b>c -> { //some complex statements }    // takes a collection and do some procesing<br/> 
+	  <b>Example:-</b><br/>
+	  <b>1- </b>(int a, int b) ->    a * b               // takes two integers and returns their multiplication<br/> 
+	  <b>2- </b>(a, b)          ->   a - b               // takes two numbers and returns their difference<br/> 
+	  <b>3- </b>() -> 99                                // takes no values and returns 99<br/> 
+	  <b>4- </b>(String a) -> System.out.println(a)     // takes a string, prints its value to the console, and returns nothing <br/> 
+	  <b>5- </b>a -> 2 * a                               // takes a number and returns the result of doubling it<br/> 
+	  <b>6- </b>c -> { //some complex statements }    // takes a collection and do some procesing<br/> 
 	  
-	  <b class="redC">Lambda expression examples:-</b><br/>
+	  <b>Lambda expression examples:-</b><br/>
 	  
-	  <font class="redC">1) Iterating over a List and perform some operations</font><br/>
+	  <b>1- </b> Iterating over a List and perform some operations</font><br/>
 	  <pre class="aa">
 			List<String> pointList = new ArrayList();
 			pointList.add("1");
@@ -715,7 +752,7 @@ class BlockingQueue<E> {
 		                        }
 		                 );
 	  </pre>
-	   <font class="redC">2) Create a new runnable and pass it to thread</font><br/>
+	   <b>2- </b> Create a new runnable and pass it to thread</font><br/>
 	  <pre class="aa">
 			new Thread(
 		    () -> System.out.println("My Runnable"); 
@@ -767,7 +804,7 @@ class BlockingQueue<E> {
 	
 	Default methods in java 8 are simply default. If you do not override them, they<br/>
 	are the methods which will be invoked by caller classes. They are defined in interfaces.<br/>
-	<font class="redC">Let’s understand with an example:</font><br/>
+	<b>Let’s understand with an example:</b><br/>
 	
 	<pre class="aa">
 	public interface Moveable {
@@ -778,10 +815,10 @@ class BlockingQueue<E> {
 	</pre>
 	
 	<font class="redC">Best part comes as following benefits:</font><br/>
-	<b class="redC">&#07;</b>Static default methods: You can define static default methods in interface which will be available to all instances of class which implement this interface. This makes it easier for 
+	<b>1-</b>Static default methods: You can define static default methods in interface which will be available to all instances of class which implement this interface. This makes it easier for 
 	you to organize helper methods in your libraries; you can keep static methods specific to an interface in the same interface rather than in a separate class. This enables you to define methods out of your class and yet share with all child classes. <br/> 
 	
-	<b class="redC">&#07;</b>methods out of your class and yet share with all child classes. without even touching their code. Simply add a default method in interface which they all implement.<br/><br/>
+	<b>2-</b>methods out of your class and yet share with all child classes. without even touching their code. Simply add a default method in interface which they all implement.<br/><br/>
 	
 	<b class="redC">Why default methods were needed in java 8</b><br/>
 	This is a good candidate for your next interview question. Simplest answer is to enable the functionality of lambda expression in java. Lambda expression are essentially of type of 
@@ -799,16 +836,16 @@ class BlockingQueue<E> {
 	</pre>
 	
 	<b class="redC">How conflicts are resolved while calling default methods</b><br/>
-	<font class="redC">Rules for this conflict resolution are as follows:</font><br/>
-	<font class="redC">1)</font> Most preferred are the overridden methods in classes. They will be matched and called if found before matching anything.<br/>
+	<b>Rules for this conflict resolution are as follows:</b><br/>
+	<b>1-</b> Most preferred are the overridden methods in classes. They will be matched and called if found before matching anything.<br/>
 	<br/>
-	<font class="redC">2)</font> The method with the same signature in the “most specific default-providing interface” is selected. This means if class Animal implements two interfaces i.e. Moveable and Walkable such 
+	<b>2-</b> The method with the same signature in the “most specific default-providing interface” is selected. This means if class Animal implements two interfaces i.e. Moveable and Walkable such 
 		that Walkable extends Moveable. Then Walkable is here most specific interface and default method will be chosen from here if method signature is matched.<br/>
 	<br/>	
-	<font class="redC">3)</font> If Moveable and Walkable are independent interfaces then a serious conflict condition happen, and compiler will complain then it is unable to decide. Then implemating class need to override the
+	<b>3-</b> If Moveable and Walkable are independent interfaces then a serious conflict condition happen, and compiler will complain then it is unable to decide. Then implemating class need to override the
 		default method explicitly and then call the interface method using super <br/> 
 	<br/>	
-		<font class="redC">Example</font><br/>
+		<b>Example</b><br/>
 		
 		<pre class="aa">
 		public interface Test
@@ -842,12 +879,12 @@ class BlockingQueue<E> {
 	
 	<b class="redC">(5)-New Date-Time API</b><br/>
 	New date-time API is introduced in Java 8 to overcome the following drawbacks of old date-time API :<br/>
-	1-<font class="redC">Not thread safe : </font>Unlike old java.util.Date which is not thread safe the new date-time API is immutable and doesn’t have setter methods.<br/>
-	2-<font class="redC">Less operations : </font>In old API there are only few date operations but the new API provides us with many date operations.<br/>
+	<b>1-</b>Not thread safe :-Unlike old java.util.Date which is not thread safe the new date-time API is immutable and doesn’t have setter methods.<br/>
+	<b>2-</b>Less operations :-In old API there are only few date operations but the new API provides us with many date operations.<br/>
 	<br/>
 	<font class="redC">Java 8 under the package java.time introduced a new date-time API, most important classes among them are :</font><br/>
-	1-<font class="redC">Local :</font> Simplified date-time API with no complexity of timezone handling.<br/>
-	2-<font class="redC">Zoned :</font>Specialized date-time API to deal with various timezones.<br/>
+	<b>1-</b>Local :-Simplified date-time API with no complexity of timezone handling.<br/>
+	<b>2-</b>Zoned :-Specialized date-time API to deal with various timezones.<br/>
 	
 	</div>
 	<br/>
@@ -859,17 +896,17 @@ class BlockingQueue<E> {
   ThreadLocal variable, then the two threads cannot see each other's ThreadLocal variables.<br/>
   <br/>
   
-  <b class="redC">Creating a ThreadLocal</b><br/>
+  <b >Creating a ThreadLocal</b><br/>
   <pre class="aa">private ThreadLocal myThreadLocal = new ThreadLocal();</pre>
   
-  <b class="redC">Accessing a ThreadLocal</b><br/>
+  <b >Accessing a ThreadLocal</b><br/>
   <font>Once a ThreadLocal has been created you can set the value to be stored in it like this:</font><br/> 
   <pre class="aa">myThreadLocal.set("A thread local value");</pre>
   
   <font>You read the value stored in a ThreadLocal like this:</font><br/> 
   <pre class="aa">String threadLocalValue = (String) myThreadLocal.get();</pre>
   
-  <font class="redC">Full ThreadLocal Example</font><br/>
+  <b>Full ThreadLocal Example</b><br/>
   
   <pre class="aa">
   public class ThreadLocalExample {
@@ -903,7 +940,7 @@ class BlockingQueue<E> {
  <b class="redC">Java Custom Exception</b><br/>
  If you are creating your own Exception that is known as custom exception or user-defined exception.Java custom exceptions are used to customize the exception according to user need. 
  By the help of custom exception, you can have your own exception and message.<br/>
- <font class="redC">Let's see a simple example of java custom exception</font><br/> 
+ <b>Let's see a simple example of java custom exception</b><br/> 
  <pre class="aa">
  class InvalidAgeException extends Exception{  
 	 InvalidAgeException(String s){  
@@ -960,10 +997,10 @@ Java String intern() method is used for getting the string from the memory if it
   
   <b class="redC">Question:-</b>Can we override static method in java <br/>
   <b class="redC">Answer:-</b>
-    <font class="redC">Preemptive scheduling:</font>
+    <b>Preemptive scheduling:</b>
     The highest priority task executes until it enters the waiting or dead states or a higher priority task comes into existence.<br/>
 	
-    <font class="redC">Time slicing:</font> 
+    <b>Time slicing:</b> 
     A task executes for a predefined slice of time and then reenters the pool of ready tasks. The scheduler then determines which task should execute<br/>
     next, based on priority and other factors.<br/>
     <br/>
@@ -990,7 +1027,7 @@ Java String intern() method is used for getting the string from the memory if it
   Serialization is a mechanism of converting the state of an object into a byte stream.<br/>
   Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory.<br/>
   <b class="redC">To make a Java object serializable we implement the java.io.Serializable interface.</b><br/>
-  <pre>
+  <pre class="aa">
   The ObjectOutputStream class contains writeObject() method for serializing an Object.
   public final void writeObject(Object obj)
                        throws IOException
@@ -1004,8 +1041,8 @@ Java String intern() method is used for getting the string from the memory if it
   </b><br/>
   1. To save/persist state of an object.<br/>
   2. To travel an object across a network.<br/>
-  <b class="redC">Only the objects of those classes can be serialized which are implementing java.io.Serializable interface.</b><br/>
-  <pre>
+  <b >Only the objects of those classes can be serialized which are implementing java.io.Serializable interface.</b><br/>
+  <pre class="aa">
   Serializable is a <b class="redC">marker interface</b> (has no data member and method). 
   It is used to “mark” java classes so that objects of these classes may get certain capability.
    Other examples of marker interfaces are:- <b class="redC">Cloneable and Remote.</b>
@@ -1013,12 +1050,12 @@ Java String intern() method is used for getting the string from the memory if it
   <b class="redC">
   Points to remember:-
   </b><br/>
-  <b class="redC">1.</b> If a parent class has implemented Serializable interface then child class doesn’t need to implement it but vice-versa is not true.<br/>
-  <b class="redC">2.</b> Only non-static data members are saved via Serialization process.<br/>
-  <b class="redC">3.</b> Static data members and transient data members are not saved via Serialization
+  <b>1-</b> If a parent class has implemented Serializable interface then child class doesn’t need to implement it but vice-versa is not true.<br/>
+  <b>2-</b> Only non-static data members are saved via Serialization process.<br/>
+  <b>3-</b> Static data members and transient data members are not saved via Serialization
   	process.So, if you don’t want to save value of a non-static data member then make it transient.<br/>
-  <b class="redC">4.</b> Constructor of object is never called when an object is deserialized.<br/>
-  <b class="redC"> 5.</b> Associated objects must be implementing Serializable interface.<br/>
+  <b>4-</b> Constructor of object is never called when an object is deserialized.<br/>
+  <b>5</b> Associated objects must be implementing Serializable interface.<br/>
   <b class="redC">SerialVersionUID:-</b><br/>
   The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID 
   and will ckeck at reciever end if it will not match with sender then it will throw an exception InvalidClassException. 
@@ -1049,14 +1086,14 @@ Java String intern() method is used for getting the string from the memory if it
  <div data-role="main" class="ui-content">
  <b class="redC">Object class in Java</b><br/>
  There are methods in Object class:<br/>
-	 <b class="redC">1-</b>toString()<br/>
-	 <b class="redC">2-</b>hashCode()<br/>
-	 <b class="redC">3-</b>equals(Object obj)<br/> 
-	 <b class="redC">4-</b>finalize()<br/>
-	 <b class="redC">5-</b>clone()<br/>
-	 <b class="redC">6-</b>wait()<br/>
-	 <b class="redC">7-</b>notify()<br/>
-	 <b class="redC">8-</b>notifyAll()<br/>
+	 <b>1-</b>toString()<br/>
+	 <b>2-</b>hashCode()<br/>
+	 <b>3-</b>equals(Object obj)<br/> 
+	 <b>4-</b>finalize()<br/>
+	 <b>5-</b>clone()<br/>
+	 <b>6-</b>wait()<br/>
+	 <b>7-</b>notify()<br/>
+	 <b>8-</b>notifyAll()<br/>
 	 
 	 <b class="redC">hashCode() (important point):-</b>
 	  A common misconception about this method is that hashCode() method returns the address of object, which is not correct,
@@ -1073,7 +1110,7 @@ Java String intern() method is used for getting the string from the memory if it
 	  <b class="redC">Otherwise HashMap, HashSet, and Hashtable do not work properly
 	  </b>
 	  <b class="redC">For Example if your equals(Object obj) method is as below </b><br/>
-	  <pre>
+	  <pre class="aa">
 	  @Override
     public boolean equals(Object obj) {
 	    if (obj == null) return false;
@@ -1086,7 +1123,7 @@ Java String intern() method is used for getting the string from the memory if it
 	  </pre>
 	  <b class="redC">Means:-</b> if id of the Student is same object will be same
 	  Then we need to override the hashCode() also like that<br/>
-	  <pre>
+	  <pre class="aa">
 	  @Override
 		public int hashCode() {
    		 return id;
@@ -1096,7 +1133,7 @@ Java String intern() method is used for getting the string from the memory if it
  </div>
  <div data-role="main" class="ui-content">
  <b class="redC">How to create Singleton object :- </b><br/>
- <pre>
+ <pre class="aa">
 	// Java program implementing Singleton class 
 	// with getInstance() method 
 	class Singleton 
@@ -1134,14 +1171,14 @@ Java String intern() method is used for getting the string from the memory if it
   volatile force the thread to update the original variable for each variable<br/>
   <b class="redC">Volatile vs Synchronized:-</b><br/>
   Before we move on let’s take a look at two important features of locks and synchronization<br/>
-  <b class="redC">1-Mutual Exclusion:-</b> It means that only one thread or process can execute a block of code (critical section) at a time.<br/>
-  <b class="redC">2-Visibility:-</b>It means that changes made by one thread to shared data are visible to other threads.<br/>
+  <b>1-Mutual Exclusion:-</b> It means that only one thread or process can execute a block of code (critical section) at a time.<br/>
+  <b>2-Visibility:-</b>It means that changes made by one thread to shared data are visible to other threads.<br/>
   Java’s synchronized keyword guarantees both mutual exclusion and visibility 
   But in some cases we may only desire the visibility and not atomicity 
   Volatile variables have the visibility features of synchronized but not the atomicity features 
   The values of volatile variable will never be cached and all writes and reads will be done to and from the main memory. 
   However, use of volatile is limited to very restricted set of cases as most of the times atomicity is desired.<br/>
-  <b class="redC">For example:-</b><br/>
+  <b>For example:-</b><br/>
   however, an operation that requires more than one read/write -- such as i++, which is <br/>
   equivalent to i = i + 1, which does one read and one write -- is not atomic, since another thread may<br/>
   write to i between the read and the write.
@@ -1149,20 +1186,20 @@ Java String intern() method is used for getting the string from the memory if it
  <div data-role="main" class="ui-content">
  <b class="redC">What is ConcurrentHashMap and it's advantage over HashMap</b><br/>
  <b class="redC">Key points of ConcurrentHashMap:</b><br/>
- <b class="redC">1-</b>The underlined data structure for ConcurrentHashMap is Hashtable.<br/>
- <b class="redC">2-</b>ConcurrentHashMap class is thread-safe i.e. multiple thread can operate on a single object without any complications.<br/>
- <b class="redC">3-</b>At a time any number of threads are applicable for read operation without locking the<br/> 
+ <b>1-</b>The underlined data structure for ConcurrentHashMap is Hashtable.<br/>
+ <b>2-</b>ConcurrentHashMap class is thread-safe i.e. multiple thread can operate on a single object without any complications.<br/>
+ <b>3-</b>At a time any number of threads are applicable for read operation without locking the<br/> 
  	ConcurrentHashMap object which is not there in SynchronizedHashMap.<br/>
- <b class="redC">4-</b>In ConcurrentHashMap, the Object is divided into number of segments according to the concurrency level.<br/>
- <b class="redC">5-</b>Default concurrency-level of ConcurrentHashMap is 16.<br/>
- <b class="redC">6-</b>In ConcurrentHashMap, at a time any number of threads can perform retrieval opera-<br/>
+ <b>4-</b>In ConcurrentHashMap, the Object is divided into number of segments according to the concurrency level.<br/>
+ <b>5-</b>Default concurrency-level of ConcurrentHashMap is 16.<br/>
+ <b>6-</b>In ConcurrentHashMap, at a time any number of threads can perform retrieval opera-<br/>
  	tion but for updation in object, thread must lock the particular segment in which<br/> 
  	thread want to operate.This type of locking mechanism is known as Segment locking<br/> 
  	or bucket locking.Hence at a time 16 updation operations can be performed by threads<br/>
- <b class="redC">7-</b>null insertion is not possible in ConcurrentHashMap as key or value.<br/>
- <b class="redC">ConcurrentHashMap m=new ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel)</b><br/>
- <b class="redC">How to iterate a ConcurrentHashMap in java </b><br/>
- <pre>
+ <b>7-</b>null insertion is not possible in ConcurrentHashMap as key or value.<br/>
+ <b>ConcurrentHashMap m=new ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel)</b><br/>
+ <b>How to iterate a ConcurrentHashMap in java </b><br/>
+ <pre class="aa">
  public static void main(String s[])
 	{
 		ConcurrentHashMap  concurrentHashMap=new ConcurrentHashMap();
@@ -1179,13 +1216,13 @@ Java String intern() method is used for getting the string from the memory if it
  </pre>
  <b class="redC">Same will be applicable to HashMap also</b>
  <b class="redC">Difference between Synchronized HashMap and ConcurrentHashMap</b><br/>
- <b class="redC">1-</b>Multiple threads can add/remove key-value pairs from ConcurrentHashMap, while only one  
+ <b>1-</b>Multiple threads can add/remove key-value pairs from ConcurrentHashMap, while only one  
  	thread is allowed to make change in case of SynchronizedHashMap. This results higher degree of  
  	concurrency in ConcurrentHashMap.<br/>
- <b class="redC">2-</b>No need to lock the map to read a value in ConcurrentHashMap. A retrieval operation will return  
+ <b>2-</b>No need to lock the map to read a value in ConcurrentHashMap. A retrieval operation will return  
  	the value inserted by the most recent completed insert operation. A lock is required for read  
  	operation too in SynchronizedHashMap.<br/>
- <b class="redC">3-</b>ConcurrentHashMap doesn’t throw a ConcurrentModificationException if one thread tries to  
+ <b>3-</b>ConcurrentHashMap doesn’t throw a ConcurrentModificationException if one thread tries to  
  	modify it while another is iterating over it. The iterator reflects the state of the map at the time of 
  	it’s creation. SynchronizedHashMap returns Iterator, which fails-fast on concurrent modification.<br/>
  <b class="redC">Why synchronizedHashMap require both read and write lock</b><br/>
@@ -1195,7 +1232,7 @@ Java String intern() method is used for getting the string from the memory if it
   collection classes. Java Collection classes are fail-fast, which means if the Collection will be<br/> 
   <b>changed(means remove element)</b> while some thread is traversing over it using iterator, the iterator.next() will throw<br/> 
   ConcurrentModificationException<br/>
-  <pre>
+  <pre class="aa">
   public class Example_v1 {
      public static void main(String[] args) {
           Map  map = new HashMap ();
@@ -1213,7 +1250,7 @@ Java String intern() method is used for getting the string from the memory if it
      }
 }
   </pre>	
-  <pre>
+  <pre class="aa">
   public static void main(String s[])
 	{
 		List list=new ArrayList();
@@ -1238,7 +1275,7 @@ Java String intern() method is used for getting the string from the memory if it
   when you're using an <b>iterator/for each</b> which keeps the context of where you are<br/>
   within the collection. Calling collection.remove invalidates that context, hence the error<br/>
   Therefore if you use simple for loop then it will work fine for those collection that we can iterate using for loop means index based collection<br/>
-  <pre>
+  <pre class="aa">
   		ArrayList arrayList=new ArrayList();
 		arrayList.add("shashi");
 		arrayList.add("bhusan");
@@ -1264,7 +1301,7 @@ Java String intern() method is used for getting the string from the memory if it
   	 1-JDK 1.5 or higher provides with ConcurrentHashMap and CopyOnWriteArrayList classes. These classes help us in avoiding concurrent modification exception<br/>
   <b>How to avoid ConcurrentModificationException in a single-threaded environment?</b><br/>
      2-By using iterator's remove() function<br/>
-     <pre>
+     <pre class="aa">
 	    for (Iterator iterator = l.iterator(); iterator.hasNext();) {
 	    Person s = (Person)iterator.next();
 	    if (s.name.equals("b")) {
@@ -1291,7 +1328,7 @@ Java String intern() method is used for getting the string from the memory if it
 		 System.out.println("==="+abc);
      </pre>
   <b class="redC">How to iterate a HashMap</b><br/>
-  <pre>
+  <pre class="aa">
   public static void main(String s[])
 	{
 		 HashMap&lt;String, String&gt; abc=new HashMap&lt;&gt;();
@@ -1315,8 +1352,8 @@ Java String intern() method is used for getting the string from the memory if it
  <b class="redC">What is CountDownLatch in multithreading</b><br/>
  <b class="redC">Answer:-</b><br/>
  CountDownLatch class is a synchronization aid which allows one or more thread to wait until the mandatory operations are performed by other threads.<br/>
- <b class="redC">&#07; </b>CountDownLatch is initialized with a given count of threads which are required to be completed before the main thread.<br/>
- <b class="redC">&#07; </b>CountDownLatch.await() method block the main thread execution until the current count reaches to zero. the count is decremented using countDown() method by executing threads when their task is completed. Any call to await returns immediately once the count is 0.<br/>
+ <b>1-</b>CountDownLatch is initialized with a given count of threads which are required to be completed before the main thread.<br/>
+ <b>2-</b>CountDownLatch.await() method block the main thread execution until the current count reaches to zero. the count is decremented using countDown() method by executing threads when their task is completed. Any call to await returns immediately once the count is 0.<br/>
  <font class="redC">Example:-</font><br/>
  <pre class="aa">
 		package com.thread;
@@ -1374,9 +1411,9 @@ Java String intern() method is used for getting the string from the memory if it
  Different is  you can not reuse CountDownLatch once the count reaches zero while you can reuse CyclicBarrier by calling reset() method which resets Barrier to its initial State<br/>
  <b class="redC">Question:-</b>How to return value from thread<br/>
  <b class="redC">Answer:-</b><br/>
- <font class="redC">Step:1-</font>We can no longer use the Runnable interface to do this. We must use the callable interface that was implemented in version 1.5 of java<br/>
- <font class="redC">Step:2-</font>The use ExecutorService method submit(Callable task) then submit has a return, it is the Future type.<br/> 
- <font class="redC">Example:-</font><br/>
+ <b>Step:1-</b>We can no longer use the Runnable interface to do this. We must use the callable interface that was implemented in version 1.5 of java<br/>
+ <b>Step:2-</b>The use ExecutorService method submit(Callable task) then submit has a return, it is the Future type.<br/> 
+ <b>Example:-</b><br/>
  <pre class="aa">
 		package com.javacodegeeks.snippets.core;
 		import java.util.concurrent.Callable;
@@ -1441,7 +1478,7 @@ Java String intern() method is used for getting the string from the memory if it
  its sub-interface –<b class="redC">ExecutorService</b> and the class-<b class="redC">ThreadPoolExecutor</b>, which implements both of these interfaces.<br/>
  There is an other class <b class="redC">Executors</b> class provides factory methods to create different kinds of thread pools.<br/>
  <b class="redC">Example :-</b><br/>
- <pre>
+ <pre class="aa">
  public class ThreadPoolExample {
 	
 	Thread t1=new Thread()
@@ -1498,13 +1535,13 @@ Java String intern() method is used for getting the string from the memory if it
 }
  </pre>
  <b class="redC">Difference between Executor and ExecutorService</b><br/>
- <b class="redC">1-</b>Executor is core interface of Executor framework , ExecutorService is sub interface.<br/>
- <b class="redC">2-</b>Executor have execute() method , ExecutorService have submit() method<br/>
- <b class="redC">3-</b>execute() return nothing , submit() return future object which can be pooled for completion of task later<br/>
- <b class="redC">4-</b>In Executor you can not cancel the task once started , ExecutorService can cancel the task using Future.cancel() method.<br/>
- <b class="redC">5-</b>Executor does not provide any method for shutdown ExecutorService provide shutdown() method<br/>
+ <b>1-</b>Executor is core interface of Executor framework , ExecutorService is sub interface.<br/>
+ <b>2-</b>Executor have execute() method , ExecutorService have submit() method<br/>
+ <b>3-</b>execute() return nothing , submit() return future object which can be pooled for completion of task later<br/>
+ <b>4-</b>In Executor you can not cancel the task once started , ExecutorService can cancel the task using Future.cancel() method.<br/>
+ <b>5-</b>Executor does not provide any method for shutdown ExecutorService provide shutdown() method<br/>
  <b class="redC">Disadvantage of ThreadPool</b><br/>
- <b class="redC">1-</b>Deadlock : While deadlock can occur in any multi-threaded program, thread pools introduce another case of deadlock, 
+ <b>1-</b>Deadlock : While deadlock can occur in any multi-threaded program, thread pools introduce another case of deadlock, 
  			one in which all the executing threads are waiting for the results from the blocked threads waiting in the queue due to the
  			unavailability of threads for execution.
  </div>
