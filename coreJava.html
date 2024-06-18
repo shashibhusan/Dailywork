@@ -13,6 +13,14 @@
 <div style="text-align:justify;" data-role="page">
   
 <div data-role="main" class="ui-content">
+<b>Best Practices for Preventing Session Hijacking</b><br/>
+<b>1-</b>It’s essential to ensure that session IDs are long, random, and complex enough to resist guessing or brute-force attacks.<br/>
+<b>2-</b>Attackers commonly exploit the cross-site scripting (XSS) vulnerability to insert malicious scripts into web pages,
+		The client and server sides should implement strict input validation to filter out potentially malicious characters and scripts.<br/>
+<b>3-</b>Token-based authentication generates and sends a unique token to the client upon successful login.
+		Tokens should have short lifetimes and expire after a certain period of inactivity like JSON Web Token (JWT). 
+<b class="redC">Note :-</b>A thread that is in the sleeping or waiting state can be interrupted with the help of the interrupt() method of Thread class.<br/>
+<b class="redC">Note :-</b>The java.lang.Thread.isInterrupted() method tests whether this thread has been interrupted.<br/> 
 <b class="redC">Question:-</b>What is collections in simple word.<br/>
 Its a group of Interface & Classes to work with group of object in Java.
 <br/>
@@ -63,63 +71,63 @@ If you add a ShutdownHook, the hook will start a thread that will start running 
 	 
 </pre>	
 <b class="redC">Question:-</b> Can a constructor be synchronized?<br/>
-<b class="redC">Answer:-</b> No, constructor cannot be synchronized. Because constructor is used for instantiating object, when we are in constructor object is under creation.<br/>
+<b class="redC">Answer:-</b> No, constructor cannot be synchronized. Because constructor is used for instantiating object, when we are in constructor object is under creation. 
 		 So, until object is not instantiated it does not need any synchronization.	<br/>
 <br/>	
 	<b class="redC">Question:-</b>Types of Memory Leaks in Java.<br/>
 	<b class="redC">Answer:-</b><br/>
-	1-Static Field Holding Object Reference<br/>
-	2-Unclosed Resources<br/>
-	3-Through finalize() Methods<br/>
-	Use of finalizers is yet another source of potential memory leak issues. Whenever a class’ finalize() method is<br/>
-	overridden, then objects of that class aren’t instantly garbage collected. Instead, the GC queues them for<br/>
+	<b>1-</b>Static Field Holding Object Reference<br/>
+	<b>2-</b>Unclosed Resources<br/>
+	<b>3-</b>Through finalize() Methods<br/>
+	Use of finalizers is yet another source of potential memory leak issues. Whenever a class’ finalize() method is 
+	overridden, then objects of that class aren’t instantly garbage collected. Instead, the GC queues them for 
 	finalization, which occurs at a later point in time.<br/>
 	<b class="redC">Question:-</b>Java Memory Leak Detection<br/>
 	<b class="redC">Answer:-</b><br/>
-	1-Memory Profilers like JProfiler<br/>
-	Memory profilers or in general Java Virtual Machine profilers, such as Java VisualVM, YourKit,<br/>
+	<b>1-</b>Memory Profilers like JProfiler<br/>
+	Memory profilers or in general Java Virtual Machine profilers, such as Java VisualVM, YourKit, 
 	JProfiler, and Mission Control are applications allowing you to get a deep insight into what is happening inside the Java Virtual Machine.<br/>
-	2-Heap Dumps:-<br/>
-	heap dumps come in handy. The heap dump is a snapshot of the heap memory of your Java Virtual<br/>
+	<b>2-</b>Heap Dumps:-<br/>
+	heap dumps come in handy. The heap dump is a snapshot of the heap memory of your Java Virtual 
 	Machine that can be generated on demand or for example when the application crashes with the<br/>
 	OutOfMemory error.<br/>
 	<b class="redC">Question:-</b>What are the mainly performace issue in java application.<br/>
 	<img width="650px" alt="Node1" src="image/performance_issue.jpg"><br/>
    <b class="redC">Question:-</b>What is difference between map() and flatMap().<br/>
    <img width="700px" alt="Node1" src="image/fmap.jpg"><br/>
-	1-While evaluating an expression containing int, bytes or shorts, the whole expression is converted to int then evaluated and the result is also of type int.<br/>
-	2-When casting int into byte if value of int in beyond the range of byte then  a complete range of byte will be lost means -128 to 127 including 0 that  256 Will be lost.<br/>
+	<b>1-</b>While evaluating an expression containing int, bytes or shorts, the whole expression is converted to int then evaluated and the result is also of type int.<br/>
+	<b>2-</b>When casting int into byte if value of int in beyond the range of byte then  a complete range of byte will be lost means -128 to 127 including 0 that  256 Will be lost.<br/>
 		For example  if I will cast 257 then result will be 1.<br/>
-	3-We can only overrides methods not variables in java.<br/>
-	4-If no package is specified, the classes in the file  go into a special unnamed package.<br/>
-	5-Applets are embedded in another applications.<br/>
-	6-A Servlet can use the user interface classes like AWT or Swing.<br/>
-	7-Type IV JDBC driver is a driver - which communicates through Java sockets.<br/>
-	8-Parameters are passed by value in Java.<br/>
-	9-We use call-by-reference to pass objects as arguments to methods in java.<br/>
-	10-TreeMap does not allow null key.<br/>
-	11-Angle Bracket in Java is used to define Generics.<br/>
+	<b>3-</b>We can only overrides methods not variables in java.<br/>
+	<b>4-</b>If no package is specified, the classes in the file  go into a special unnamed package.<br/>
+	<b>5-</b>Applets are embedded in another applications.<br/>
+	<b>6-</b>A Servlet can use the user interface classes like AWT or Swing.<br/>
+	<b>7-</b>Type IV JDBC driver is a driver - which communicates through Java sockets.<br/>
+	<b>8-</b>Parameters are passed by value in Java.<br/>
+	<b>9-</b>We use call-by-reference to pass objects as arguments to methods in java.<br/>
+	<b>10-</b>-TreeMap does not allow null key.<br/>
+	<b>11-</b>-Angle Bracket in Java is used to define Generics.<br/>
 	<br/>
-		It means that the angle bracket takes a generic type, say T, in the definition and any class as a parameter during the calling.<br/>
-		The idea is to allow type (Integer, String, … etc and user-defined types) to be a parameter to methods, classes, and interfaces.<br/>
+		It means that the angle bracket takes a generic type, say T, in the definition and any class as a parameter during the calling. 
+		The idea is to allow type (Integer, String, … etc and user-defined types) to be a parameter to methods, classes, and interfaces. 
 		For example, classes like HashSet, ArrayList, HashMap, etc use generics very well. We can use them for any type.<br/>
 		<br/>
 	<b class="redC">Question:-</b>What is Queue interface in Java<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 	Being an interface queue needs a concreate class for the declaration and the most common classes are the PriorityQueue & LinkedList in java. It is to noted that implemention are not thread safe<br/> 
 	PriorityBlockingQueue is one alternative implemention if the thread safe implemention is needed.<br/>  		
 	<br/>
 <b class="redC">Question:-</b>What is different between peek() & element().<br/>
 <b class="redC">Answer:-</b><br/>
-	peek()- Method is used to view the head of the queue without removing it.It returns NULL is the queue is empty.<br/>
-	element()-This method is similar to peek().It throws NoSuchElementException when the queue is empty.<br/>
+	<b>peek()-</b> Method is used to view the head of the queue without removing it.It returns NULL is the queue is empty.<br/>
+	<b>element()-</b>This method is similar to peek().It throws NoSuchElementException when the queue is empty.<br/>
 <br/>
 <b class="redC">Question:-</b>What is difference between remove() & poll().<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 	The remove() and poll() method only differs in their behavior when the queue is empty: the remove() method throws exception, while the poll() method returns null.<br/> 
 <br/> 
 <b class="redC">Question:-</b>What is PriorityBlockingQueue.<br/> 
-<b class="redC">Answer:-</b><br/> 
+<b class="redC">Answer:-</b>  
 		It is to be noted that both implemention , the PriorityQueue and LinkedList are not thread-safe.<br/> 
 		if thread-safe implemention is needed PriorityBlockingQueue are used.<br/> 
 		<br/> 
@@ -132,61 +140,61 @@ If you add a ShutdownHook, the hook will start a thread that will start running 
 	<b class="redC">Note :-</b> When we use transient then at deserailization all the transient varrible will intialize with default value<br/>
 <b class="redC">Question:-</b>Lock vs Synchronized Block<br/>
 <b class="redC">Answer:-</b><br/>
-	1-A synchronized block is fully contained within a method — we can have Lock API’s lock() and unlock() operation in separate methods<br/>
-  	2-A synchronized block doesn’t support fairness, any thread can acquire the lock once released, no preference can be specified. We can achieve fairness within the Lock APIs by specifying the fairness property. It makes sure that the longest waiting thread is given access to the lock<br/>
+	<b>1-</b>A synchronized block is fully contained within a method — we can have Lock API’s lock() and unlock() operation in separate methods<br/>
+  	<b>2-</b>A synchronized block doesn’t support fairness, any thread can acquire the lock once released, no preference can be specified. We can achieve fairness within the Lock APIs by specifying the fairness property. It makes sure that the longest waiting thread is given access to the lock<br/>
   
   <b class="redC">Encapsulation vs Data Abstraction</b><br/>
-	1-Encapsulation is data hiding(information hiding) while Abstraction is detail hiding(implementation hiding)<br>
-	2-While encapsulation groups together data and methods that act upon the data, data abstraction deals with exposing the interface to the user and hiding the details of implementation.<br/>
+	<b>1-</b>Encapsulation is data hiding(information hiding) while Abstraction is detail hiding(implementation hiding)<br>
+	<b>2-</b>While encapsulation groups together data and methods that act upon the data, data abstraction deals with exposing the interface to the user and hiding the details of implementation.<br/>
 	
 <b class="redC">Question</b>Which is the final class in these three classes – String, StringBuffer and StringBuilder<br/>	
-<b class="redC">Answer:-</b><br/>All three are final. (Interviewer will ask this type of questions to confuse you)<br/>
+<b class="redC">Answer:-</b> All three are final. (Interviewer will ask this type of questions to confuse you)<br/>
 
 <b class="redC">Question</b>What is a Tree Map<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 		Treemap class is like HashMap which stores key- value pairs . The major difference is that Treemap  sorts
 		the key in ascending order.<br/>
 
 <b class="redC">Question</b>Why do we need TreeMap when we have sortedMap<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 	 sortedMap is a interface and TreeMap is the class implementing it .As we know one can not create objects of the interface .
 	 Interface tells us which methods a sortedMap implementation should provide .TreeMap is such an implementation.<br/>
 
 <b class="redC">Question</b>Why and when we use TreeMap<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 		We need TreeMap  when we need key value pair data in ascending order <br/>
 
 <b class="redC">Question</b>Which data structure you will prefer in your code : HashMap or TreeMap ?<br/>
 <b class="redC">Answer:-</b><br/>
-		HashMap is faster while  TreeMap is sorted .Thus we choose them according to their advantage.<br/>
+		HashMap is faster while  TreeMap is sorted .Thus we choose them according to their advantage. 
 		If you do not want to sort the elements but just to insert and retrieve the elements then use HashMap .<br/>
 		But if you want to maintain the  order of the elements then TreeMap should be preferred because the result is alphabetically sorted .
 		While iterating HashMap there is no ordering of the elements ,on the other hand , TreeMap iterates in the natural key order.<br/>
 
 <b class="redC">Question</b>What is TreeSet<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 		TreeSet is like HashSet which contains the unique elements only but in a sorted manner. <br/>
 
 <b class="redC">Question</b>What does yield() method in Multithreading<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 		Yield method temporarily pauses the currently executing thread to give a chance to
 		the remaining waiting threads of the same priority to execute.
 		If there is no waiting thread or all the waiting threads of low priority then the current thread will continue its execution.
 			<br/>
 <b class="redC">Question</b>Difference between Callable and Runnable in Java<br/>
 <b class="redC">Answer:-</b><br/>
-		1. Checked Exception : Callable's call() method can throw checked exception while  Runnable run() method can  not throw checked exception.<br/>
-		2. Return value : Return type of Runnable run() method is void , so it can not return any value.
+		<b>1-</b> Checked Exception : Callable's call() method can throw checked exception while  Runnable run() method can  not throw checked exception.<br/>
+		<b>2-</b> Return value : Return type of Runnable run() method is void , so it can not return any value.
 						  while Callable can return the Future object, which represents the life cycle of a task and provides methods to check if the task has been completed or canceled.
 			<br/>
-<b class="redC">Note:-</b><br/>
+<b class="redC">Note:-</b> 
 			What we need to take care is that static synchronized method locked on class object lock and nonstatic synchronized method locks on current object (this).
 			So it’s possible that both static and nonstatic java synchronized method running in parallel.<br/>
 			<br/>
 <b class="redC">Java synchronized keyword is re-entrant in nature</b><br/>
 		 It means if a java synchronized method calls another synchronized method which requires the same lock then the current thread which is holding lock can enter into that method without acquiring the lock.
 			<br/>
-<b class="redC">Note:-</b><br/>
+<b class="redC">Note:-</b> 
 		One more limitation of java synchronized keyword is that it can only be used to control access to a shared object within the same JVM.
 		If you have more than one JVM and need to synchronize access to a shared file system or database, the Java synchronized keyword is not at all sufficient. You need to implement a kind of global lock for that.
 			<br/>
@@ -1188,13 +1196,13 @@ Java String intern() method is used for getting the string from the memory if it
  <b class="redC">Key points of ConcurrentHashMap:</b><br/>
  <b>1-</b>The underlined data structure for ConcurrentHashMap is Hashtable.<br/>
  <b>2-</b>ConcurrentHashMap class is thread-safe i.e. multiple thread can operate on a single object without any complications.<br/>
- <b>3-</b>At a time any number of threads are applicable for read operation without locking the<br/> 
+ <b>3-</b>At a time any number of threads are applicable for read operation without locking the  
  	ConcurrentHashMap object which is not there in SynchronizedHashMap.<br/>
  <b>4-</b>In ConcurrentHashMap, the Object is divided into number of segments according to the concurrency level.<br/>
  <b>5-</b>Default concurrency-level of ConcurrentHashMap is 16.<br/>
- <b>6-</b>In ConcurrentHashMap, at a time any number of threads can perform retrieval opera-<br/>
- 	tion but for updation in object, thread must lock the particular segment in which<br/> 
- 	thread want to operate.This type of locking mechanism is known as Segment locking<br/> 
+ <b>6-</b>In ConcurrentHashMap, at a time any number of threads can perform retrieval opera- 
+ 	tion but for updation in object, thread must lock the particular segment in which  
+ 	thread want to operate.This type of locking mechanism is known as Segment locking  
  	or bucket locking.Hence at a time 16 updation operations can be performed by threads<br/>
  <b>7-</b>null insertion is not possible in ConcurrentHashMap as key or value.<br/>
  <b>ConcurrentHashMap m=new ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel)</b><br/>
@@ -1730,9 +1738,9 @@ Java String intern() method is used for getting the string from the memory if it
 	  <b class="redC">Initial Capacity :-</b>Is the number of bucket when you have created the instance of HashMap.<br/>
 	  Load Factor (defult 0.75):- The Load Factor is a measure that when rehashing should be done.<br/>
 	  Rehashing is a process of increasing the capacity. <br/>
-	  In HashMap capacity is multiplied by 2.<br/>
+	  In HashMap capacity is multiplied by 2. 
 	  Load Factor is also a measure that what fraction of the HashMap is allowed to fill before rehashing.<br/>
-	  <b class="redC">Note:-</b> If you take the initial large size then it will decrease the performace the HashMap <br/>
+	  <b class="redC">Note:-</b> If you take the initial large size then it will decrease the performace the HashMap  
 	         So we should chose the size as per requirement.<br/>
 </div>	
 
@@ -1746,8 +1754,8 @@ Java String intern() method is used for getting the string from the memory if it
   <div data-role="main" class="ui-content">
   <b class="redC">Note:-</b>JVM does not generates hashCode for object in java , it simply stores object in memory.<br/>
   <b class="redC">Note:-</b> Now for every object there is method hashCode()and implemation of the hashCode method is as fallow<br/>
-  This is typically implemented by converting the internal address of the object into an integer,<br/> 
-  <b class="redC">but this implementation technique is not required by the JavaTM programming language</b><br/>
+  This is typically implemented by converting the internal address of the object into an integer, 
+   but this implementation technique is not required by the JavaTM programming language 
   So other implementation which doesn't break the contract can be used<br/> 
   <b class="redC">hence hashCode is the memory address is not Not necessarily</b><br/>
   
@@ -1767,9 +1775,9 @@ Java String intern() method is used for getting the string from the memory if it
 	let say two different address is 45 and 225 then hashCode will be<br/> 
     45%10=5	<br/>
 	225%10=5<br/>
-	here i am using % operator but if you use some other technique with this address even then<br/>
-	there may be such case.<br/>
-	Threfore two distinct object can have same hashCode <br/>
+	here i am using % operator but if you use some other technique with this address even then 
+	there may be such case. 
+	Threfore two distinct object can have same hashCode  
 	this is why point 2 is correct.<br/>
 	<a href="https://www.geeksforgeeks.org/internal-working-of-hashmap-java/"><b>https://www.geeksforgeeks.org/internal-working-of-hashmap-java/</b></a><br/>
 	Note:- Also learn what are the changes in HashMap in case of java 8 from above link.<br/>
@@ -3046,8 +3054,7 @@ public class ConcreteWallHouse extends House {
     brief description about lock or monitor.<br/>
     1-Whenever an object is created to any class, an object lock is created and is stored inside the object.<br/>
     2-One object will have only one object lock associated with it.<br/>
-    3-Any thread wants to enter into synchronized methods or blocks of any object, they must ac 
-	quire object lock associated with that object and release the lock after they are done with the  
+    3-Any thread wants to enter into synchronized methods or blocks of any object, they must acquire object lock associated with that object and release the lock after they are done with the  
 	execution.<br/>
     4-The other threads which wants to enter into synchronized methods of that object have to wait 
 	until the currently executing thread releases the object lock.<br/>
@@ -3058,8 +3065,7 @@ public class ConcreteWallHouse extends House {
     (ii)Both static and non-static methods can use synchronized keyword. For static methods, thread  
 	need class level lock and for non-static methods, thread need object level lock.<br/>
     (iii)Synchronization in java is Re-entrant in nature. A thread can not acquire a lock that is owned 
-	by another thread. But, a thread can acquire a lock that it already owns.<b> That means if a synchro- 
-	nized method gives a call to another synchronized method which needs same lock, then currently  	
+	by another thread. But, a thread can acquire a lock that it already owns.<b> That means if a synchronized method gives a call to another synchronized method which needs same lock, then currently  	
 	executing thread can directly enter into that method or block without acquiring the lock.</b><br/>	
 	</div>
 	

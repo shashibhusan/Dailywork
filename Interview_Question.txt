@@ -1,3 +1,37 @@
+@Configuration
+
+Annotating a class with @Configuration indicates that its primary purpose is as a source of bean definitions and also
+@Configuration is meta-annotated with @Component
+
+@ComponentScan
+
+In case our @SpringBootApplication class can’t be at the root of our project or we want to scan outside sources,
+we can configure @ComponentScan explicitly to look in whatever package we specify, as long as it exists on the classpath.
+
+@Controller
+
+@Controller annotation is an annotation used in Spring MVC framework.
+The @Controller annotation indicates that a particular class serves the role of a controller.
+The @Controller annotation acts as a stereotype for the annotated class, indicating its role.
+The dispatcher scans such annotated classes for mapped methods and detects @RequestMapping annotations.
+
+@Component
+
+Such classes are considered as candidates for auto-detection when using annotation-based configuration and classpath scanning.
+
+@Service
+
+This annotation only classify bean as service level beans and have no additional processing like @Repository. 
+
+@Repository annotation also catch platform specific exceptions and re-throw them Spring specific unchecked exception. 
+@Repository catches persistence specific checked exceptions and rethrow them as one of Spring’s unified unchecked exception.
+The @Repository annotation can catch the persistence related exceptions and wrap them into Runtime Exceptions.
+
+
+
+
+ 
+
 What is cyclic barier in multithreading.
 What is use of AOP in your project.
 Transaction management in Spring. 
@@ -48,7 +82,11 @@ What is solid in java development
 How you can make a class immutable if it contain a refernce varriable
 Why wait() & notify() method is inside the object class
 What are the final method of the object class.
-How can i make the sub class non serailzable if super class is serailzable--Pending
+How can i make the sub class non serailzable if super class is serailzable
+
+There is no direct way to prevent sub-class from serialization in java.
+One possible way by which a programmer can achieve this is by implementing the writeObject() and readObject() methods in the subclass and needs to throw NotSerializableException from these methods.
+
 How Java become robust
 Difference between JVM, JRE & JDK
 Exaplain the working of JVM
@@ -99,7 +137,10 @@ Difference Between RowMapper & ResultSetExtractor.
 Difference between ResultSet & RowSet 
 Advantage of Hibernate over jdbcTemplate 
 Expression for Pointcut
-How can i validate a json request---Pending
+How can i validate a json request 
+
+There is validator Like "json-schema-validator" (Need to check how it works) 
+
 RowNum in mysql 
 DES (Data encryption standard)
 SOLID
@@ -110,7 +151,10 @@ Give me the scenario when you go for rest and when you go for soap
 How to covert set in arrayList and vice-versa
 How to covert LinkedList in arrayList and vice-versa
 What is enumarator in java---Pending
-What will be state of thread after calling the yield() method---Pending
+What will be state of thread after calling the yield() method
+
+The thread will still be in the RUNNABLE state.
+
 How to configure hibernate with spring 
 How to sort a hash on value base in java 
 Executor frameWork
@@ -125,7 +169,10 @@ What is the difference between preemptive scheduling and time slicing
 What is static & dynamic binding in java.
 How can i handle if 10  request will hit my web service at same time---Pending
 How can i delete duplicate from a text file having case insensitive string 
-Which is better based on the performance method overloading or method overriding---Pending
+Which is better based on the performance method overloading or method overriding.
+
+Performance: Overloading gives better performance compared to overriding. The reason is that the binding of overridden methods is being done at runtime.
+
 Where we should use template design pattern in java
 Where we sould use normalization and where denormalization in java---Pending
 What is difference between primary key & unique key 
@@ -139,7 +186,10 @@ How to avoid race condition
 How to stop a thread in Java 
 What is Future Task in Java 
 How to achive thread safety in Java 
-What happens if a thread throws an Exception inside synchronized block---Pending
+What happens if a thread throws an Exception inside synchronized block.
+
+The thread will release the lock because no matter how you exit a synchronized block, either normally by finishing execution or abruptly because of exception, the thread releases the lock it acquired while entering that synchronized block.
+
 Example of Join() method
 What is the difference between the submit() and execute() method thread pool in Java 
 What is Abstract Map or Map of Map 
@@ -151,7 +201,7 @@ What will be memory location of clone object in java---Pending
 how can we create exactly five object of a class in java
 What is try with resource in java for custom resource
 How to sort a HashMap based on Value
-Can we make final class serializable---Pending
+Can we make final class serializable---YES
 Difference between init block and static  
 The static initializer block will be called on loading of the class
 The non-static initializer block on the other hand is created on object construction only
@@ -175,9 +225,9 @@ Can I change the name of the application.propeeties file in Spring Boot
 Why we are restricting the access modifier in case of method overiding. 
 Difference between callable & runnable. 
 Why load factor is by default 0.75.  
-Can we make a contructor as final---Pending
-Can we make our class a static---Pending
-What if call a static method with class name after assigning a null value to it---Pending
+Can we make a contructor as final---No
+Can we make our class a static---No
+What if call a static method with class name after assigning a null value to it--Yes It will work.
 What call by reference & call by value 
 How can I secure my ends point in REST 
 How can we check that we are getting only Numeric value while calling our services not null or specail character---Pending  
@@ -192,11 +242,14 @@ What is differnce between save() & saveAndUpdate()
 Question:-How many bean will be create of a singleton bean in different ApplicationContext
 Answer:-Spring singleton beans are instantiated once per application context. That is, if you create many application contexts from the same config, they'll have different instances of singleton beans.
 How can I return different media type from REST---Pending
-How can I return Custom code using custom class in REST---Pending
+How can I return Custom code using custom class in REST---YES
+
+https://www.youtube.com/watch?v=y7uBDTWTLQM
+
 How Spring Boot Appication Handle the request
 Difference Between REST & SOAP 
 I case of Post how can we data from request Body
-How you will deploy your microservice---Pending
+How you will deploy your microservice---Done.
 Advantage Of Spring Boot
 What is use of optional
 what is Partition in Database
@@ -207,7 +260,7 @@ How can I get the child object automatically when accessing the parent in Hibern
 How you can solve the conflict problem default method in interface
 Difference between poll(), peek() 
 What is @CrossOrigin annotation 
-What is executor Framework in java---Pending
+What is executor Framework in java---Done.
 Can we do operator overloading in java ---------------->>>NO , Because it will make the java code more complex 
 What is working of Garbdge collector in java 
 What are the class loader in java g
@@ -228,6 +281,32 @@ How to do exception handling in spring boot
 What is IOC
 Type of bean scope
 can we write constructor in abstract class.
+How you can make a class immutable
+How can i make the sub class non serailzable if super class is serailzable
+Why String is Immutable in java
+Autowiring in Spring
+Scope of singleton object
+Can we Autowiring static varriable Spring
+Difference between beanFactory & ApplicationContext.
+What in thread local varriable in java.
+Can we write constructor in abstract class. 
+Can abstract class implement an interface.  
+Can we write main method in abstract class
+How to stop a thread in Java. 
+Internal working of ConcurrentHashMap 
+How to iterate Map in java.
+Why we use @Qualifier annotation.
+How can you make a object immutable in java
+What is advantage of microservices.
+How to do exception handling in spring boot
+What is IOC
+Type of bean scope
+Difference between component,service,repository & controller 
+How you will handle Exception in REST API
+Differentiate between an Enumeration and an Iterator.
+What is Discuss IdentityHashMap.
+
+Difference between callable & runnable
 
 
 		

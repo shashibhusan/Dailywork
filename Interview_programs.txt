@@ -1,17 +1,17 @@
-1- Find first unique character in a String.
-2- Find first repeated character in a String.
-3- Find maximum occurance of charcter in a program.
-4- Write a program to count all the character of a String.
-5- Print all permutation of a String.
-6- Program for Atomic Integer.
-7- Builder pattern example.
-8- Callable interface example.
-9- ConcurrentModification example.
+1- 	Find first unique character in a String.
+2- 	Find first repeated character in a String.
+3- 	Find maximum occurance of charcter in a program.
+4- 	Write a program to count all the character of a String.
+5- 	Print all permutation of a String.
+6- 	Program for Atomic Integer.
+7- 	Builder pattern example.
+8- 	Callable interface example.
+9- 	ConcurrentModification example.
 10- Custom exception example.
 11- Program for singleton class.
 12- Comparable example.
 13- Comparator example.
-14- ThreadDeadLock example.
+14- ThreadDeadLock example. 
 15- Check Number is binary or not.
 16- Count Vowel and consonant in a string.
 17- Decending order of a string.
@@ -60,7 +60,7 @@
 59- Write a program for find all permutation of a String.
 60- Write a program to find intersection of multiple array.
 61- Find leaders in integer array.
-62- Write a program to find logest subarray without repeating.-----Pending
+62- Write a program to find logest subarray without repeating. 
 63- How can merge two sorted array.
 64- Write a program to print all possible subString.
 65- Print common character between two String.
@@ -79,31 +79,46 @@
 78- Write a progaram for ThreadLocal.
 79- Write a program for Thread Group.
 80- Write a program for Thread Pool.
-81-Print all numbers between 1 to N without using any loop.
-82-Find first k maximum occurring words in given set of strings.
-83-Find maximum occurring word in given set of strings.
-84-Longest Common Prefix in given set of strings.
-85-Check if a string is K-Palindrome or not.---Pending
-86-Count number of times a pattern appears in given string as a subsequence.
-87-Find pair with given sum in the array.
-88-Find maximum product of two integers in an array.
-89-Find all distinct combinations of given length with repetition allowed.---Pending
-90-Find all distinct combinations of given length.----Pending
-91-Stack Implementation
-92-Evaluate given postfix expression
-93-Longest Palindromic Substring --(Generate all the subString and then check every String for Palindrom & find the logest )
-94-Find all possible palindromic substrings in a string
-95-Find first k non-repeating characters in a string in single traversal
-96-Find all palindromic permutations of a string
-97-Find the longest substring of given string containing all distinct characters
-98-Insertion sort
-99-Selection sort
-100-Merge sort----Pending
+81- Print all numbers between 1 to N without using any loop.
+82- Find first k maximum occurring words in given set of strings.
+83- Find maximum occurring word in given set of strings.
+84- Longest Common Prefix in given set of strings.
+85- Check if a string is K-Palindrome or not.---Pending
+86- Count number of times a pattern appears in given string as a subsequence.
+87- Find pair with given sum in the array.
+88- Find maximum product of two integers in an array.
+89- Find all distinct combinations of given length with repetition allowed. 
+90- Find all distinct combinations of given length. 
+91- Stack Implementation
+92- Evaluate given postfix expression
+93- Longest Palindromic Substring --(Generate all the subString and then check every String for Palindrom & find the logest )
+94- Find all possible palindromic substrings in a string
+95- Find first k non-repeating characters in a string in single traversal
+96- Find all palindromic permutations of a string
+97- Find the longest substring of given string containing all distinct characters
+98- Insertion sort
+99- Selection sort
+100-Merge sort 
 102-Linear Search
 103-Binary Search
 104-Cycle Detection in a Singly Linked List
 105-Sort an array of 0s,1s and 2s
 106-Problem solving issue when travel form a-b, b-c.
+107-Find first unique character in a String.
+108-Find first repeated character in a String.
+109-Find maximum occurance of charcter in a program.
+110-Write a program to count all the character of a String.
+111-First and last occurance of a character in String.
+112-Sorting HashMap using java8.
+113-Remove duplicate from int array using java8
+114-Sort int array using java8
+115-Calculate frequency of all elements of int array using java8
+116-Remove duplicate from String array using java8
+117-Sort array of String using java8
+118-Calculate frequency of elements in String array using java8
+119-Remove duplicate from a arrayList.
+120-Sort an arrayList using java8.
+121-Calculate frequency of elements of arrayList using java8.
 
 
 

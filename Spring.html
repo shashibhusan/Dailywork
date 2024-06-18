@@ -86,23 +86,23 @@ public class Department implements BeanPostProcessor {
  }<br/>
  <br/>
 <b class="redC">Question:-</b>What is starter dependency in spring<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
  A starter dependency is nothing but a special dependency that aggregates commonly used dependencies for a particular feature.<br/> 
 <b class="redC">Question-</b>What is use of ObjectMapper class<br/>
 <b class="redC">Answer:-</b><br/>
-	<b>1- To convert Java Object to JSON</b><br/>
+	<b>1-</b> To convert Java Object to JSON<br/>
 	<pre style="color:blue">
 		ObjectMapper objectMapper = new ObjectMapper(); 
 		Car car = new Car("yellow", "renault");
 		objectMapper.writeValue(new File("target/car.json"), car);
 		</pre>	
-	<b>2- To JSON to Java Object</b><br/>
+	<b>2-</b> To JSON to Java Object <br/>
 	<pre style="color:blue">
 		String json = "{ \"color\" : \"Black\", \"type\" : \"BMW\" }"; 
 		Car car = objectMapper.readValue(json, Car.class); 	 
 		</pre>
 <b class="redC">Question-</b>What is working of Stream API<br/>
-<b class="redC">Answer:-</b><br/>
+<b class="redC">Answer:-</b> 
 Stream represents a sequence of objects from a source  
 then we applied Intermediate Operations & Terminate Operations to get the output<br/>
  <b class="redC">Question-</b>Example of Spring Boot - Interceptor in spring Boot<br/>
@@ -155,28 +155,28 @@ applicationTest : applicationTest
 	</pre>
 <b class="redC">Note-</b>
 The ApplicationProps class needs to be decorated with @ConfigurationProperties to express the intention of mapping the YAML properties<br/> 
-<br/>	
+ 	
   <b class="redC">Question-</b>Avantages & Disadvantages of spring container<br/>
   <b class="redC">Avantages</b><br/>
-	  1-Forces you to write more modular code<br/>
-	  2-Decouples the application<br/>
-	  3-Centralized configuration<br/>
-	  4-Control over lifetime of dependencies<br/>
-	  5-Takes care of long nested dependency chains<br/>
+	  <b>1-</b>Forces you to write more modular code<br/>
+	  <b>2-</b>Decouples the application<br/>
+	  <b>3-</b>Centralized configuration<br/>
+	  <b>4-</b>Control over lifetime of dependencies<br/>
+	  <b>5-</b>Takes care of long nested dependency chains<br/>
   
   <b class="redC">Disadvantages</b><br/>
-	  1-Another framework in your toolbox (another mindset to adapt)<br/>
-	  2-Hard to figure out the flow in the application. As in, what is the actual<br/>
-	  3-No build errors - requires some way of testing dependencies together (yes not unit tests)<br/>
-	  4-Requires configuration of dependencies.<br/>
+	  <b>1-</b>Another framework in your toolbox (another mindset to adapt)<br/>
+	  <b>2-</b>Hard to figure out the flow in the application. As in, what is the actual<br/>
+	  <b>3-</b>No build errors - requires some way of testing dependencies together (yes not unit tests)<br/>
+	  <b>4-</b>Requires configuration of dependencies.<br/>
   
     <b class="redC">Question-</b>Avantage of annotation over XML configuration in java<br/>
 	<b class="redC">Answer:-</b><br/>
 	Advantages of the annotation:<br/>
-		1- All the information is in a single file (no need to open two files to configure a given behavior)<br/>
-		2- When the class changes, no need to modify the xml file<br/>
+		<b>1-</b> All the information is in a single file (no need to open two files to configure a given behavior)<br/>
+		<b>2-</b> When the class changes, no need to modify the xml file<br/>
 	Advantages of xml file:<br/>
-    	1-Clear separation between the POJO and its behavior<br/>
+    	<b>1-</b>Clear separation between the POJO and its behavior<br/>
     	
   <b class="redC">Spring Security</b><br/>
   When you want to use Spring Security before spring 3.0 then you have to extends WebSecurityConfigurerAdapter
@@ -209,7 +209,7 @@ The ApplicationProps class needs to be decorated with @ConfigurationProperties t
 
 	 <b class="redC">Note:-</b>
 	 <b>@EnableWebSecurity:-</b>It tells the spring that it is a web security configuration<br/>
-<b class="redC">Now Spring security after Spring Boot 3.0</b><br/>
+ 
 	 
 	 <b class="redC">Question:-</b>How to set passwordEncoder<br/>
 	 <b class="redC">Answer:-</b>Just expose a bean of type passwordEncoder <br/>
@@ -227,11 +227,7 @@ The ApplicationProps class needs to be decorated with @ConfigurationProperties t
   spring.dataSource.userName= 
   spring.dataSource.password= 
   </pre>
-
- <b class="redC">What is LDAP</b><br/>
- LDAP is light weight Directory Access Protocol<br/>
- LDAP is datastore(It stores data,mostly user identities)<br/>
- It stores data in heirarchical format<br/>
+ 
  <b class="redC">Constructor based dependency:-</b>
   Constructor based dependency injection using spring annotation<br/>
 	<pre style="color:blue">
@@ -241,15 +237,9 @@ The ApplicationProps class needs to be decorated with @ConfigurationProperties t
       this.employee = employee;
    }
  	</pre>
- <b class="redC">Question:-</b>Difference Between RowMapper and ResultSetExtractor <br/>
- 	Difference between RowMapper and ResultSetExtrator is that with the mapper, we have 
- 	access to a returned row while with the extractor we can use the whole result set. So if we need to map  
- 	several rows returned from the query to a single object, we should use extractor, but in the other cases, a 
- 	mapper should be sufficient. 
- 	Every row with a corresponding  bean object.<br/>
  <b class="redC">Question:-</b>Advantage of jdbcTemplate over Hibernate<br/>
- <b>(i)-</b>Hibernate create some extra overhead.<br/>
- <b>(ii)-</b>Hibernate is not intended for batch-jobs.<br/>
+ <b>1-</b>Hibernate create some extra overhead.<br/>
+ <b>2-</b>Hibernate is not intended for batch-jobs.<br/>
  Make this entry<br/>
  <pre  class="blueC">
  &lt;property name="hibernate.jdbc.batch_size"&gt; 50 &lt;/property&gt;
@@ -276,7 +266,6 @@ you can do this but is not intended for batch-jobs.
   @Component is a generic stereotype annotation for any Spring-managed component<br/>
   This means that if you want to register a class in the application context you can use @Component to do so
   The other stereotypes (Controller, Service, Repository) are simply specializations of the @Component class<br/> 
-  <b class="redC">Version 4.0.6.RELEASE </b><br/>
   <b class="redC">HandlerInterceptor in Spring Boot</b><br/> 
   <b class="redC">Step:-1 Create custom handler</b>
   <pre  class="blueC">
@@ -789,19 +778,6 @@ The @Transactional annotation also supports other attributes, such as readOnly, 
 	1)-Boolean hasMore Element().<br/>
 	2)-object nextElement().<br/>
 	<br/>
-	
-	<b class="redC">Question:-</b>What is difference between ArrayList and Vector.<br/>
-	<b class="redC">Question:-</b>What is collections in java <br/>
-	<b class="redC">Question:-</b>What is collections in java<br/>
-	<b class="redC">Question:-</b>Why we required Struts Tags and interceptor in Struts2.<br/>
-	<b class="redC">Question:-</b>What is String literal and Pool and exlpain String Heap<br/>
-	<b class="redC">Question:-</b>Explain the Life cycle of Servlet <br/>
-	<b class="redC">Question:-</b>What is JSp  <br/>
-	<b class="redC">Question:-</b>What are JSP Syntax (Directive,Declaration,Expression,scriplet,Action,Comment) and thier Syntax<br/>
-	<b class="redC">Question:-</b>Explain Jsp page Lifecycle with diagram<br/>
-	<b class="redC">Question:-</b>what is implicit objects<br/>
-	<b class="redC">Question:-</b>How does handle JSP run-time exception<br/>
-	
   </div>
  
   <div data-role="main" class="ui-content">
