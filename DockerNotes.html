@@ -1,20 +1,41 @@
-Docker Notes
+<!DOCTYPE html>
+<html>
+<title>Docker</title>
+<head>
+	<style type="text/css">
+	.redC{color:red}
+	.blueC {color: blue;}
+	</style>
+</head>
+<body>
 
-Simple docker file
+<div data-role="page">
 
-FROM openjdk:8
-EXPOSE 8080
-ADD target/spring-boot-docker.jar spring-boot-docker.jar
-ENTYPOINT ["java","-jar","/spring-boot-docker.jar"]
+  <div data-role="main" class="ui-content">
+<b class="redC">Docker Notes</b><br/><br/>
 
-Important Docker command
-1- docker build -t spring-boot-docker.jar (where t stand for target)
-2- docker history	Show the history of an image
-3- docker images		List images
-4- docker logs		Fetch the logs of a container
-5- docker pull		Pull an image or a repository from a registry
-6- docker run		Run a command in a new container
-7- docker ps			To get the docker process running
-8- docker restart	Restart one or more containers
-9- docker stop		one or more running containers
-10-docker kill		Kill one or more running containers
+<b class="redC">Simple docker file</b><br/>
+
+<pre class="blueC">
+FROM openjdk:8 
+EXPOSE 8080 
+ADD target/spring-boot-docker.jar spring-boot-docker.jar 
+ENTYPOINT ["java","-jar","/spring-boot-docker.jar"] 
+</pre>
+
+<b class="redC">Important Docker command</b><br/>
+<b>1-</b>docker build -t spring-boot-docker.jar &nbsp;&nbsp;&nbsp;&nbsp; (where t stand for target)<br/>
+<b>2-</b>docker history	&nbsp;&nbsp;&nbsp;&nbsp;	Show the history of an image<br/>
+<b>3-</b>docker images	&nbsp;&nbsp;&nbsp;&nbsp;	List images<br/>
+<b>4-</b>docker logs	&nbsp;&nbsp;&nbsp;&nbsp;	Fetch the logs of a container<br/>
+<b>5-</b>docker pull	&nbsp;&nbsp;&nbsp;&nbsp;	Pull an image or a repository from a registry<br/>
+<b>6-</b>docker run		&nbsp;&nbsp;&nbsp;&nbsp;	Run a command in a new container<br/>
+<b>7-</b>docker ps		&nbsp;&nbsp;&nbsp;&nbsp;	To get the docker process running<br/>
+<b>8-</b>docker restart	&nbsp;&nbsp;&nbsp;&nbsp;	Restart one or more containers<br/>
+<b>9-</b>docker stop	&nbsp;&nbsp;&nbsp;&nbsp;	one or more running containers<br/>
+<b>10-</b>docker kill	&nbsp;&nbsp;&nbsp;&nbsp;	Kill one or more running containers<br/>
+
+</div>
+</div>
+</body>
+</html>

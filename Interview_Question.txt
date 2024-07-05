@@ -1,44 +1,10 @@
-@Configuration
-
-Annotating a class with @Configuration indicates that its primary purpose is as a source of bean definitions and also
-@Configuration is meta-annotated with @Component
-
-@ComponentScan
-
-In case our @SpringBootApplication class can’t be at the root of our project or we want to scan outside sources,
-we can configure @ComponentScan explicitly to look in whatever package we specify, as long as it exists on the classpath.
-
-@Controller
-
-@Controller annotation is an annotation used in Spring MVC framework.
-The @Controller annotation indicates that a particular class serves the role of a controller.
-The @Controller annotation acts as a stereotype for the annotated class, indicating its role.
-The dispatcher scans such annotated classes for mapped methods and detects @RequestMapping annotations.
-
-@Component
-
-Such classes are considered as candidates for auto-detection when using annotation-based configuration and classpath scanning.
-
-@Service
-
-This annotation only classify bean as service level beans and have no additional processing like @Repository. 
-
-@Repository annotation also catch platform specific exceptions and re-throw them Spring specific unchecked exception. 
-@Repository catches persistence specific checked exceptions and rethrow them as one of Spring’s unified unchecked exception.
-The @Repository annotation can catch the persistence related exceptions and wrap them into Runtime Exceptions.
-
-
-
-
- 
-
 What is cyclic barier in multithreading.
 What is use of AOP in your project.
 Transaction management in Spring. 
 Join in mysql .
 Impact analysis in your project. 
 Flow diagram of your current project. 
-How you are avoiding session hijacking in your project.----Pending
+How you are avoiding session hijacking in your project.
 What is design pattern & Type of design pattern. 
 What are the design pattern in Spring.
 Difference between Synchronize HashMap & Concurrent HashMap.
@@ -62,7 +28,7 @@ Study the polymorphism concept in detail
 How to make HashMap Synchronize in java 
 What is call by value & what is call by reference
 What is Thread group
-Internal working of Garbdge collector & Type of Garbdge collector--Pending
+Internal working of Garbdge collector & Type of Garbdge collector
 Thread Pool 
 Internal working of HashMap 
 What is Marker Interface 
@@ -83,10 +49,8 @@ How you can make a class immutable if it contain a refernce varriable
 Why wait() & notify() method is inside the object class
 What are the final method of the object class.
 How can i make the sub class non serailzable if super class is serailzable
-
 There is no direct way to prevent sub-class from serialization in java.
 One possible way by which a programmer can achieve this is by implementing the writeObject() and readObject() methods in the subclass and needs to throw NotSerializableException from these methods.
-
 How Java become robust
 Difference between JVM, JRE & JDK
 Exaplain the working of JVM
@@ -126,7 +90,7 @@ How can we reduce the complexity of hashMap.
 Can we write constructor in abstract class. 
 Can abstract class implement an interface.  
 Can we write main method in abstract class 
-How you will tract your application in hanged and there is nothings in log file at that time---Pending 
+How you will tract your application in hanged and there is nothings in log file at that time- 
 Is there add method in iterator :-NO
 How can i synchronize a hashmap. 
 How can i clone a collection like arraylist 
@@ -138,9 +102,7 @@ Difference between ResultSet & RowSet
 Advantage of Hibernate over jdbcTemplate 
 Expression for Pointcut
 How can i validate a json request 
-
 There is validator Like "json-schema-validator" (Need to check how it works) 
-
 RowNum in mysql 
 DES (Data encryption standard)
 SOLID
@@ -150,11 +112,9 @@ Why sub class can not hold the reference of super class
 Give me the scenario when you go for rest and when you go for soap 
 How to covert set in arrayList and vice-versa
 How to covert LinkedList in arrayList and vice-versa
-What is enumarator in java---Pending
+What is enumarator in java-
 What will be state of thread after calling the yield() method
-
 The thread will still be in the RUNNABLE state.
-
 How to configure hibernate with spring 
 How to sort a hash on value base in java 
 Executor frameWork
@@ -167,14 +127,12 @@ Program to explain merge() & update in hibernate
 How to use Auto-Scaler in microservies 
 What is the difference between preemptive scheduling and time slicing
 What is static & dynamic binding in java.
-How can i handle if 10  request will hit my web service at same time---Pending
+How can i handle if 10  request will hit my web service at same time 
 How can i delete duplicate from a text file having case insensitive string 
 Which is better based on the performance method overloading or method overriding.
-
 Performance: Overloading gives better performance compared to overriding. The reason is that the binding of overridden methods is being done at runtime.
-
 Where we should use template design pattern in java
-Where we sould use normalization and where denormalization in java---Pending
+Where we sould use normalization and where denormalization in java 
 What is difference between primary key & unique key 
 HQL 
 Answer:-Yes, We can use more than one column for primary key then it will be a composite
@@ -187,9 +145,7 @@ How to stop a thread in Java
 What is Future Task in Java 
 How to achive thread safety in Java 
 What happens if a thread throws an Exception inside synchronized block.
-
 The thread will release the lock because no matter how you exit a synchronized block, either normally by finishing execution or abruptly because of exception, the thread releases the lock it acquired while entering that synchronized block.
-
 Example of Join() method
 What is the difference between the submit() and execute() method thread pool in Java 
 What is Abstract Map or Map of Map 
@@ -197,7 +153,7 @@ how to create proxy object
 Spring Core Projects 
 Internal working of ConcurrentHashMap  
 what happen when you use transaction at both class level & method level
-What will be memory location of clone object in java---Pending
+What will be memory location of clone object in java-
 how can we create exactly five object of a class in java
 What is try with resource in java for custom resource
 How to sort a HashMap based on Value
@@ -215,7 +171,7 @@ forward and backward using next() and previous()
 Use of @primary annotation 
 What is return type of put method in hashMap 
 It returns the previous value associated with key, or null if there was no mapping for key 
-How can you print 0,1,0,1 in alternative order using two threads which are running in infinitive loop---Pending
+How can you print 0,1,0,1 in alternative order using two threads which are running in infinitive loop-
 What is use of @Configuration 
 What spring boot application does when it boot at 1st time.
 How can you process a 12 gb file if 4 gb memory will be available 
@@ -230,9 +186,9 @@ Can we make our class a static---No
 What if call a static method with class name after assigning a null value to it--Yes It will work.
 What call by reference & call by value 
 How can I secure my ends point in REST 
-How can we check that we are getting only Numeric value while calling our services not null or specail character---Pending  
-How can I make differnent log file for differnet profile---Pending
-How can we track your error that is repository layer---Pending
+How can we check that we are getting only Numeric value while calling our services not null or specail character 
+How can I make differnent log file for differnet profile 
+How can we track your error that is repository layer 
 How can I filter the employee object having age greater than 50 years
 What is diference between Map & Flat Map
 ClassNotFoundException vs NoClassDefFoundError 
@@ -241,11 +197,9 @@ What we will get if we call getName on object load using load method in Hibernat
 What is differnce between save() & saveAndUpdate() 
 Question:-How many bean will be create of a singleton bean in different ApplicationContext
 Answer:-Spring singleton beans are instantiated once per application context. That is, if you create many application contexts from the same config, they'll have different instances of singleton beans.
-How can I return different media type from REST---Pending
+How can I return different media type from REST 
 How can I return Custom code using custom class in REST---YES
-
-https://www.youtube.com/watch?v=y7uBDTWTLQM
-
+https://www.youtube.com/watch?v=y7uBDTWTLQM (Example of returning custom code.)
 How Spring Boot Appication Handle the request
 Difference Between REST & SOAP 
 I case of Post how can we data from request Body
@@ -254,7 +208,7 @@ Advantage Of Spring Boot
 What is use of optional
 what is Partition in Database
 How feature of java8 help in Concurrency in java
-How can I increase performance in Hibernate to in persisting the object in DB---Pending
+How can I increase performance in Hibernate to in persisting the object in DB-
 How can I enable Caching in Spring 
 How can I get the child object automatically when accessing the parent in Hibernate 
 How you can solve the conflict problem default method in interface
@@ -305,8 +259,8 @@ Difference between component,service,repository & controller
 How you will handle Exception in REST API
 Differentiate between an Enumeration and an Iterator.
 What is Discuss IdentityHashMap.
-
 Difference between callable & runnable
+Difference between condidate key & unique key 
 
 
 		

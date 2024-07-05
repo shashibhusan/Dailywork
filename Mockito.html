@@ -17,14 +17,17 @@
 @PrepareForTest <br/>
 @PowerMockIgnore <br/>
 @InjectMock <br/>
-@MockUtil----------------------------------------------------Pending<br/>
-MockDestination----------------------------------------------Pending<br/>
-any() <br/>
+@MockUtil<br/>
+MockDestination<br/>
+<br/>
 @Mock.lient(https://www.baeldung.com/mockito-unnecessary-stubbing-exception)<br/>
+<br/>
 How to mock final class <br/>
-how to mock static method <br/>
+How to mock static method <br/>
 How mock a final method <br/>
-How to check that object is mocked object or not <br/>
+<b class="redC">Question:-</b>How to check that object is mocked object or not <br/>
+<b class="redC">Answer:-</b>
+System.out.println("===="+Mockito.mockingDetails(calcService1).isMock());<br/>
 What is Http Unit<br/>
 <br/>
 <b class="redC">Important links</b><br/>
@@ -38,26 +41,24 @@ https://frontbackend.com/java/mocking-final-method-with-mockito-framework<br/>
 https://stackoverflow.com/questions/11214136/unit-testing-with-mockito-for-constructors<br/>
 https://github.com/powermock/powermock/wiki/Mockito#how-to-mock-construction-of-new-objects<br/>
 <br/>
-System.out.println("===="+Mockito.mockingDetails(calcService1).isMock());<br/>
+ 
 <br/>
 <b class="redC">Notes</b><br/>
-@RunWith(MockitoJunitRunner.class)-:Eable to run that particular class with Mockito<br/>
-When(obj.calculate()).thenReturn(value,value);//That means if your method are called multiple times the you can mock to return multiple values<br/>
+@RunWith(MockitoJunitRunner.class)-:Eable to run that particular class with Mockito<br/><br/>
+When(obj.calculate()).thenReturn(value,value);<br/>
+That means if your method are called multiple times the you can mock to return multiple values<br/>
 VerifyNoMoreInteraction()<br/>
 <br/>
-InOrder inOrder=Mockito.inOrder(bookRepository);<br/>
-inOrder.verify(bookRepository).save();<br/>
-inOrder.verify(bookRepository).findById(bookId);<br/>
-<br/>
-Type of Argument Matchers<br/>
-Method Name -------------------------Matching Rule<br/>
+
+<b class="redC">Type of Argument Matchers</b><br/>
+<b>Method Name</b>----------------------<b>Matching Rule</b><br/>
 any()-------------------------any object or null<br/>
 any(Class<T>clazz)-------------------------any object of given type or null<br/>
-anyVararg()	Like anyInt(),anyString() 	any vararg<br/>
+anyVararg()---------Like anyInt(),anyString(),any vararg<br/>
 <br/>
-Note:-ArgumentMatcher should be provided for all Arguments<br/>
+<b class="redC">Note:-</b>ArgumentMatcher should be provided for all Arguments<br/>
 <br/>
-Collection Type Argument Matchers<br/>
+<b>Collection Type Argument Matchers</b><br/>
 Method Name -------------------------Matching Rules<br/>
 anyCollection()-------------------------any Collection type<br/>
 anyList()-------------------------any list type<br/>
@@ -75,8 +76,10 @@ When <br/>
 Then<br/>
 <br/>
 
-<b class="redC">Question:-</b>What is use of any() in Mocito<br/>
-<b class="redC">Important Annotation:-</b>These annotations are used in case of @ParameterizedTest<br/>
+ 
+<b class="redC">Important Annotation:-</b>
+<br/>
+These annotations are used in case of @ParameterizedTest<br/>
 1-@ValueSource<br/>
 2-@CsvSource<br/>
 3-@CsvFileSource<br/>

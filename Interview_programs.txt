@@ -60,7 +60,7 @@
 59- Write a program for find all permutation of a String.
 60- Write a program to find intersection of multiple array.
 61- Find leaders in integer array.
-62- Write a program to find logest subarray without repeating. 
+62- Write a program to find longest subarray without repeating. 
 63- How can merge two sorted array.
 64- Write a program to print all possible subString.
 65- Print common character between two String.
@@ -91,7 +91,7 @@
 90- Find all distinct combinations of given length. 
 91- Stack Implementation
 92- Evaluate given postfix expression
-93- Longest Palindromic Substring --(Generate all the subString and then check every String for Palindrom & find the logest )
+93- Longest Palindromic Substring --(Generate all the subString and then check every String for Palindrom & find the logest)
 94- Find all possible palindromic substrings in a string
 95- Find first k non-repeating characters in a string in single traversal
 96- Find all palindromic permutations of a string
@@ -119,6 +119,12 @@
 119-Remove duplicate from a arrayList.
 120-Sort an arrayList using java8.
 121-Calculate frequency of elements of arrayList using java8.
+
+Source :- https://www.java67.com/2012/08/10-java-coding-interview-questions-and.html
+Implement Producer Consumer design Pattern in Java using wait, notify, and notifyAll method in Java?
+How to find if a linked list contains a cycle or not in Java?
+Create a Java program to find the middle node of the linked list in Java in one pass?
+
 
 
 

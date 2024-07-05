@@ -14,19 +14,19 @@
   <div data-role="main" class="ui-content">
   
   <b class="redC">What is primary key</b><br/>
-  <font class="redC">1-</font>There will be only one primary key in a table.<br/>
-  <font class="redC">2-</font>It can not have null value.<br/>
-  <font class="redC">3-</font>If it cantain more than one column then it will become <b class="redC">composite key</b><br/>
+  <font>1-</font>There will be only one primary key in a table.<br/>
+  <font>2-</font>It can not have null value.<br/>
+  <font>3-</font>If it cantain more than one column then it will become composite key<br/>
   <br/>
   <b class="redC">What is candidate key</b><br/>
-  <font class="redC">1-</font>There may be more than one candidate key in a table.<br/>
-  <font class="redC">2-</font>It can have null value.<br/>
-  <font class="redC">3-</font>It can have more than one column<br/>
+  <font>1-</font>There may be more than one candidate key in a table.<br/>
+  <font>2-</font>It can have null value.<br/>
+  <font>3-</font>It can have more than one column<br/>
   <br/>
   <b class="redC">What is unique key</b><br/>
-  <font class="redC">1-</font>There may be many unique key one table.<br/>
-  <font class="redC">2-</font>It can have null value.<br/>
-  <font class="redC">3-</font>A unique key is a set of one or more than one fields/columns of a table that uniquely identify a record in a database table.<br/>
+  <font>1-</font>There may be many unique key one table.<br/>
+  <font>2-</font>It can have null value.<br/>
+  <font>3-</font>A unique key is a set of one or more than one fields/columns of a table that uniquely identify a record in a database table.<br/>
   <br/>
   <b class="redC">Note:-</b><br/>
   Candidate key is also a unique key to identify a record uniquely in a table<br/>
@@ -59,7 +59,7 @@
 	</tr>
 	</tbody>
 	</table><br/>
-    The PreparedStatement interface is a subinterface of Statement. It is used to execute parameterized query.<br/>
+    <!-- The PreparedStatement interface is a subinterface of Statement. It is used to execute parameterized query.<br/>
     <p><b class="redC">Main advatage of the PreparedStatement over simple statement(means simple insert)is that you can insert all the special character in the database using PreparedStatement</b><br/>
 	    PreparedStatement stmt=con.prepareStatement("insert into Emp values(?,?)");<br/>  
 	    stmt.setInt(1,101);//1 specifies the first parameter in the query <br/> 
@@ -82,7 +82,7 @@
             rsAdminResult = stmt.executeQuery();<br/>
             <b> Then String outputValue=stmt.getString(2);</b>
         </p>
-<b class="redC">Detail:-</b><br/> 
+<b class="redC">Detail:-</b><br/> -->
 <b class="redC">Question:-</b>What is the Prons/cons of procedure.<br/>
 <b class="redC">Prons:-</b><br/>
 <b>1-Better Performance –</b>The procedure calls are quick and efficient as stored procedures are compiled once and stored in executable form.
@@ -95,7 +95,7 @@
 <b class="redC">Note:-</b><br/>
 <b>1-</b>EXISTS executes at high speed against IN : when the subquery results is very large.<br/>
 <b>2-</b>IN gets ahead of EXISTS : when the subquery results is very small<br/>
-
+<!--
         <table border="1">
         <tr>
 	        	<td>
@@ -164,7 +164,7 @@
                 </td>
             </tr>
         </table>
-        <br/>
+        <br/> -->
         <table border="1">
             <tbody><tr><th>Stored Procedure</th><th>Function</th></tr>
                 <tr><td>1-is used to perform business logic.</td><td>1-is used to perform calculation.</td></tr>
@@ -173,7 +173,8 @@
                 <tr><td>4-We can call functions from the procedure.</td><td>4-Procedure cannot be called from function.</td></tr>
                 <tr><td>5-Procedure supports input and output parameters.</td><td>5-Function supports only input parameter.</td></tr>
                 <tr><td>6-Exception handling using try/catch block can be used in stored procedures.</td><td>6-Exception handling using try/catch can't be used in user defined functions.</td></tr>
-            </tbody></table>  
+            </tbody></table> 
+<!--			
        <b class="redC"> FLOAT(M,N) : FLOAT(4,2) - Four digits total of which 2 are after the decimal. i.e. 12.34 Values are rounded to fit format if they are too large.</b><br/> 
 
         <b class="redC">
@@ -376,27 +377,27 @@
 	return (aa);
 	end //
 	delimiter ;
- </pre>
-<b class="redC">Few important point :-</b><br/>
+ </pre> -->
+<b class="redC">Few important point :-</b><br/> 
  <pre>
 1-<b class="redC">WHERE</b> clause is used for filtering rows and it applies on each and every row,
   while HAVING clause is used to filter groups.
 2-<b class="redC">Distinct</b> is used to filter unique records out of the records that satisfy the query criteria. 
   Group by clause is used to group the data upon which the aggregate functions are fired
 </pre>
-
+<!--
 <b class="redC">Now some important point about hibernate</b><br/>
 <pre>
 1-We can change the name and location of Hibernate.cfg.xml filename will be any things but location must be relative to project means in differnt package.
 2-We can change the name name location of tablename.hbm.xml filename will be anything but location must be relative to projrct means in different package.
-</pre>
+</pre> -->
 <b class="redC">Important point about hibernate</b><br/>
         
 <pre>
 1-A POJO is a Java object that doesn't have a requirement to implement a particular interface or derive from a particular base class,	or make use of particular annotations in order to be compatible with a given framework 
 2-A JavaBean follows certain conventions.Getter/setter naming,having a public default constructor, being serialisable.
 </pre>
-
+<!--
 <b class="redC">creating the session factory</b><br/>
 <pre>
     	//creating configuration object
@@ -412,11 +413,11 @@
         session.save(t1);
         t.commit();
         session.close();
-</pre>
+</pre> -->
 <b class="redC">Now how to load/get data in hibernate</b>
     <pre>
 <b>
-    difference between get and load is that <br/>
+    Difference between get and load is that <br/>
     in case of get object will be fetch from the database when you ask for the object.<br/>
     but in case of load , object will be fetch from the database when it will be actually use<br/>
     means in case of load <br/>
@@ -445,7 +446,7 @@
 </pre>
 
 <b style="color: red">
-    Now difference between merge and update <br/>
+    Now difference between merge and update  
     major difference between update and merge is that update method cannot be used when the
     same object exists in the session
     Example:-
@@ -460,7 +461,7 @@
         session.merge(changed); 
         System.out.println("After merge: " + current.getName());
 </pre>
-
+<!--
 <b style="color: red">Now single table mapping</b>
 <pre>
 <b class="redC">Advantage:-</b>
@@ -488,7 +489,7 @@ Table per class
     Disadvantage:-
     Only state of the entity is saved , their relation is lossed.
 </pre>
-
+-->
 
 <b class="redC">Some important point</b><br/>
 1-Cascade <br/>
@@ -496,7 +497,7 @@ Cascade always used in owner side which told which operaton of owner will be app
 2-Inverse true<br/>
 The side which will write inverse true will be managed side. this attribute will be used when we make the relation by-directional.<br/>
 
- 
+ <!--
 <b class="redC">Now when to use what mapping </b>
     1-if relation is currently one-to-one and may be one-to-many or many to many in future then we should use the<br/>
     Joint table mapping.<br/>
@@ -539,7 +540,7 @@ The side which will write inverse true will be managed side. this attribute will
         </tr>
     </tbody>
 </table>
-
+-->
 <b class="redC">Caching in Hibernate</b><br/>
 <pre>
 	Hibernate caching improve the performance of application by pooling the object
@@ -560,7 +561,7 @@ The side which will write inverse true will be managed side. this attribute will
 	</b>
 
 </pre>
-
+<!--
 <b class="redC">Servlet package detail</b><br/>
 
 
@@ -822,7 +823,7 @@ public void doFilter(ServletRequest req, ServletResponse resp,
 <b class="redC">To do the transaction with autocommit turned off</b><br/>
 SET autocommit=0; <br/>
 By default it will be SET autocommit=0 means autocommit ON. <br/>
-
+-->
    
 </div>
 </div>

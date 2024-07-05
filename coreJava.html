@@ -18,7 +18,7 @@
 <b>2-</b>Attackers commonly exploit the cross-site scripting (XSS) vulnerability to insert malicious scripts into web pages,
 		The client and server sides should implement strict input validation to filter out potentially malicious characters and scripts.<br/>
 <b>3-</b>Token-based authentication generates and sends a unique token to the client upon successful login.
-		Tokens should have short lifetimes and expire after a certain period of inactivity like JSON Web Token (JWT). 
+		Tokens should have short lifetimes and expire after a certain period of inactivity like JSON Web Token (JWT).<br/> 
 <b class="redC">Note :-</b>A thread that is in the sleeping or waiting state can be interrupted with the help of the interrupt() method of Thread class.<br/>
 <b class="redC">Note :-</b>The java.lang.Thread.isInterrupted() method tests whether this thread has been interrupted.<br/> 
 <b class="redC">Question:-</b>What is collections in simple word.<br/>
@@ -73,7 +73,28 @@ If you add a ShutdownHook, the hook will start a thread that will start running 
 <b class="redC">Question:-</b> Can a constructor be synchronized?<br/>
 <b class="redC">Answer:-</b> No, constructor cannot be synchronized. Because constructor is used for instantiating object, when we are in constructor object is under creation. 
 		 So, until object is not instantiated it does not need any synchronization.	<br/>
+		 Or Usually it is considered bad style to "give out" it is your not-yet-constructed object, so a synchronized constructor is not necessary.
+		 it does not make any sense.<br/>
 <br/>	
+<b class="redC">Question:-</b> Why a Constructor can not be final, static or abstract in Java?<br/>
+<b>Java constructor can not be final:-</b><br/>
+	One of the important property of java constructor is that it can not be final. As we know, constructors are
+	not inherited in java. Therefore, constructors are not subject to hiding or overriding. When there is no
+	chance of constructor overriding, there is no chance of modification also. When there is no chance of
+	modification, then no sense of restricting modification there.
+ <br/>
+ <b>Java constructor can not be static:-</b><br/>
+	One of the important property of java constructor is that it can not be static. We know static keyword
+	belongs to a class rather than the object of a class. A constructor is called when an object of a class is
+	created, so no use of the static constructor.
+	<br/>
+ <b>Java constructor can not be abstract:-</b><br/>
+	One of the important property of java constructor is that it can not be abstract. If we are declaring a
+	constructor as abstract as we have to implement it in a child class, but we know a constructor is called
+	implicitly when the new keyword is used so it can’t lack a body and also it can not be called as a normal
+	method. Also, if we make a constructor abstract then we have to provide the body later. But we know
+	constructor can not be overridden so providing body is impossible.
+	<br/>
 	<b class="redC">Question:-</b>Types of Memory Leaks in Java.<br/>
 	<b class="redC">Answer:-</b><br/>
 	<b>1-</b>Static Field Holding Object Reference<br/>
