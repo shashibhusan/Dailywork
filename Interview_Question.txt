@@ -1,5 +1,5 @@
 What is cyclic barier in multithreading.
-What is use of AOP in your project.
+What is use of AOP in your project.life cycle
 Transaction management in Spring. 
 Join in mysql .
 Impact analysis in your project. 
@@ -8,12 +8,12 @@ How you are avoiding session hijacking in your project.
 What is design pattern & Type of design pattern. 
 What are the design pattern in Spring.
 Difference between Synchronize HashMap & Concurrent HashMap.
-How to create a singleton Bean when it will be required. 
+How to create a singleton Bean when it will be required.
 How you will intiate Spring using java means no configuration file
 Can you overload main method (YES) 
 Serailization in detail  
 String heap & pool concept 
-Concurrent hashMap in detail 
+Concurrent hashMap in detail.
 How to iterate Map in java 
 Design pattern in java
 What is dispatcher servlet in spring
@@ -24,7 +24,7 @@ How to manage transaction in hibernate
 How you will handle Exception in REST API 
 How you will swap the two object in java 
 How can you make a object immutable in java  
-Study the polymorphism concept in detail  
+Study the polymorphism concept in detail.
 How to make HashMap Synchronize in java 
 What is call by value & what is call by reference
 What is Thread group
@@ -33,9 +33,13 @@ Thread Pool
 Internal working of HashMap 
 What is Marker Interface 
 What happen When you manually change the class file(Change the class file after compilation) 
+	Error: LinkageError occurred while loading main class ConvertArrayListToLinkList
+        java.lang.ClassFormatError: Extra bytes at the end of class file ConvertArrayListToLinkList
 What happen when you manually copy a class file in an other class file(If there is two file & you copy the content of
-a class file inside the other class file & vice-versa)  
-How you will convert ArrayList to LinkedList 
+	a class file inside the other class file & vice-versa)
+	Error: LinkageError occurred while loading main class ConvertArrayListToLinkList
+        java.lang.ClassFormatError: Extra bytes at the end of class file ConvertArrayListToLinkList
+How you will convert ArrayList to LinkedList
 @Transient annotation in Hibernate
 What is fail safe
 Flow of Spring 
@@ -47,14 +51,16 @@ Design pattern that is there in Spring MVC
 What is solid in java development 
 How you can make a class immutable if it contain a refernce varriable
 Why wait() & notify() method is inside the object class
+	===>
 What are the final method of the object class.
 How can i make the sub class non serailzable if super class is serailzable
 There is no direct way to prevent sub-class from serialization in java.
-One possible way by which a programmer can achieve this is by implementing the writeObject() and readObject() methods in the subclass and needs to throw NotSerializableException from these methods.
+	One possible way by which a programmer can achieve this is by implementing the writeObject() and readObject()
+	methods in the subclass and needs to throw NotSerializableException from these methods.
 How Java become robust
 Difference between JVM, JRE & JDK
 Exaplain the working of JVM
-Define the life cycle of thread
+Define the life cycle of thread.
 Difference between Throw & Throws
 What is difference between comparable & comparator
 Where we should use Abstract class & Interface
@@ -64,17 +70,30 @@ Difference between If & Switch case
 Difference between StringBuffer & StringBuilder
 What is Dynamic Bonding in java
 What is difference between ArrayList and Vector
-What is static bonding in java
+What is static bonding in java.
 Difference between HashMap and HashTable
 What is String literal and Pool and exlpain String Heap 
 What are Wrapper Class in Java why it require in java
+	 Wrapper classes are fundamental in Java because they help a Java program be completely object-oriented. 
+	 The primitive data types in java are not objects, by default.
+	 They need to be converted into objects using wrapper classes. 
 How can we crate custom exception in java
 Difference between peek() and element() in queue, in collection.
+	The element and peek methods return, but do not remove, the head of the queue.
+	They differ from one another in precisely the same fashion as remove and poll.
+	if the queue is empty, element throws NoSuchElementException while peek returns null.
 Difference between poll() and remove() in queue, in collection.
+	Poll(): Retrieves and removes the head of this queue, or returns null if this queue is empty.
+	Remove(): Retrieves and remove the head of this queue,This method differs from poll only in that
+	it throws an exception if this queue is empty.
 What is Auto Boxing
 What is collections in simple word.
 Its a group of Interface & Classes to work with group of object in Java.
 Difference between Error and Exception.
+	Errors are usually caused by serious problems that are outside the control of the program
+	Like OutOfMemoryError,StackOverflowError,NoClassDefFoundError
+	Exceptions, on the other hand,can be recovered from within the program.
+	Like NullPointerException,IllegalArgumentException,IOException
 Difference between component,service,repository & controller 
 Autowiring in Spring
 Scope of singleton object
@@ -83,17 +102,36 @@ Difference between beanFactory & ApplicationContext.
 What in thread local varriable in java
 How to map composite key in hibernate 
 Difference between rowset & resultSet  
-can we write constructor in abstract class.
+Can we write constructor in abstract class.---YES.
 What is down casting.
 Why we get concurrentupdate exception. 
 How can we reduce the complexity of hashMap.   
-Can we write constructor in abstract class. 
-Can abstract class implement an interface.  
-Can we write main method in abstract class 
-How you will tract your application in hanged and there is nothings in log file at that time- 
+	1-Better implementation of hashCode()method so that we can maximum unique
+	  hashCode to avoid the collision and make the hashMap more balanced.
+	2-If you need to store a huge amount of data (millions),
+	  you should create your HashMap with an initial capacity close to your expected volume.
+	  so that we can avoid the rehashing which is costly operation.
+    3-In Java 8, HashMap replaces linked list with a binary tree when the number of elements in
+	  a bucket reaches certain threshold.
+	  
+Can we write constructor in abstract class.---YES. 
+Can abstract class implement an interface.---YES.  
+Can we write main method in abstract class.---YES.
+How you will tract your application in hanged and there is nothings in log file at that time
 Is there add method in iterator :-NO
 How can i synchronize a hashmap. 
-How can i clone a collection like arraylist 
+How can i clone a collection like arraylist.
+
+	1- Need to implement the clone method in side the class which object is there in the list.
+	2- Create a new clone list.
+	3- Get the object from original list clone it and copy it to new clone list one by one.
+
+	Note if we use the below approches
+		List<Employee> cloneList=new ArrayList<>(originalList);
+        List<Employee> cloneList=new ArrayList<>();
+        cloneList.addAll(originalList);
+	then it will be shallow copy and the clone object and original object will share the same refernece.
+	
 Comprable contain compareTo().
 Comparator contain compare().
 Constructor based dependency injection using spring annotation 
@@ -106,15 +144,21 @@ There is validator Like "json-schema-validator" (Need to check how it works)
 RowNum in mysql 
 DES (Data encryption standard)
 SOLID
+====>>
 Second level of catching in hibernate 
 How to create native query in hibernate 
-Why sub class can not hold the reference of super class 
+Why sub class can not hold the reference of super class.
+	If you are creating a Subclass from a Superclass means Subclass will be more specific and Superclass is more generic
+	for example if Animal is Superclass class and Dogs & Cats are Subclass the Dogs & Cats are more specific than Animal
+	Therefore assigning a specific behaviour into generic behaviour make sence but assigning generic to specific behaviour
+	does not make any sence.
+	
 Give me the scenario when you go for rest and when you go for soap 
 How to covert set in arrayList and vice-versa
 How to covert LinkedList in arrayList and vice-versa
 What is enumarator in java-
 What will be state of thread after calling the yield() method
-The thread will still be in the RUNNABLE state.
+	The thread will still be in the RUNNABLE state.
 How to configure hibernate with spring 
 How to sort a hash on value base in java 
 Executor frameWork
@@ -130,48 +174,54 @@ What is static & dynamic binding in java.
 How can i handle if 10  request will hit my web service at same time 
 How can i delete duplicate from a text file having case insensitive string 
 Which is better based on the performance method overloading or method overriding.
-Performance: Overloading gives better performance compared to overriding. The reason is that the binding of overridden methods is being done at runtime.
+	Performance: Overloading gives better performance compared to overriding. The reason is that the binding of overridden methods is being done at runtime.
 Where we should use template design pattern in java
 Where we sould use normalization and where denormalization in java 
 What is difference between primary key & unique key 
 HQL 
 Answer:-Yes, We can use more than one column for primary key then it will be a composite
-but main difference between primary key & unique key is that primary key can not be null
+	but main difference between primary key & unique key is that primary key can not be null
 How to break the singleton class 
 What is the difference between CyclicBarrier and CountDownLatch in Java
 What is race condition in Java? Given one example 
-How to avoid race condition 
+How to avoid race condition
+	====>>
 How to stop a thread in Java 
 What is Future Task in Java 
+	===>>
 How to achive thread safety in Java 
 What happens if a thread throws an Exception inside synchronized block.
-The thread will release the lock because no matter how you exit a synchronized block, either normally by finishing execution or abruptly because of exception, the thread releases the lock it acquired while entering that synchronized block.
+	The thread will release the lock because no matter how you exit a synchronized block, either normally by finishing execution or abruptly because of exception, the thread releases the lock it acquired while entering that synchronized block.
 Example of Join() method
 What is the difference between the submit() and execute() method thread pool in Java 
-What is Abstract Map or Map of Map 
-how to create proxy object 
+What is Abstract Map.
+	AbstractMap is an abstract class in Java that provides a structure to the Map interface, making it easier to implement other classes. 
+	Concrete classes that inherit from AbstractMap can be used to create objects.
+	Map interface which implemented by AbstractMap class then Other classes like HashMap extends the AbstractMap. 
+How to create proxy object 
 Spring Core Projects 
 Internal working of ConcurrentHashMap  
-what happen when you use transaction at both class level & method level
-What will be memory location of clone object in java-
-how can we create exactly five object of a class in java
+What happen when you use transaction at both class level & method level
+What will be memory location of clone object in java
+	Heap memory
+How can we create exactly five object of a class in java
 What is try with resource in java for custom resource
 How to sort a HashMap based on Value
-Can we make final class serializable---YES
+Can we make final class serializable ---YES.
 Difference between init block and static  
-The static initializer block will be called on loading of the class
-The non-static initializer block on the other hand is created on object construction only
-So static block are used for static intialization where as initializer are used for non-static varriables
+	The static initializer block will be called on loading of the class
+	The non-static initializer block on the other hand is created on object construction only
+	So static block are used for static intialization where as initializer are used for non-static varriables
 Advantage of dependency injection in Spring 
 Detail about serialization
-what is iterable in java
-The Java Iterable interface ( java.lang.Iterable ) is one of the root interfaces of the Java Collections API
-Iterator Advantage: Ability to remove elements from Collections. Ability to move 
-forward and backward using next() and previous() 
+What is iterable in java
+	The Java Iterable interface ( java.lang.Iterable ) is one of the root interfaces of the Java Collections API
+	Iterator Advantage: Ability to remove elements from Collections. Ability to move 
+	forward and backward using next() and previous() 
 Use of @primary annotation 
 What is return type of put method in hashMap 
-It returns the previous value associated with key, or null if there was no mapping for key 
-How can you print 0,1,0,1 in alternative order using two threads which are running in infinitive loop-
+	It returns the previous value associated with key, or null if there was no mapping for key 
+How can you print 0,1,0,1 in alternative order using two threads which are running in infinitive loop.
 What is use of @Configuration 
 What spring boot application does when it boot at 1st time.
 How can you process a 12 gb file if 4 gb memory will be available 
@@ -183,8 +233,12 @@ Difference between callable & runnable.
 Why load factor is by default 0.75.  
 Can we make a contructor as final---No
 Can we make our class a static---No
-What if call a static method with class name after assigning a null value to it--Yes It will work.
-What call by reference & call by value 
+What if call a static method with class name after assigning a null value to it---Yes It will work.
+What call by reference & call by value.
+	Java is strickly call by value for primitive type but for Object reference it becomes
+	tricky. So it gets tricky when we pass object references to methods. Java creates a copy of
+	references and pass it to method, but they still point to same memory reference.
+	So, It behave like call by reference.
 How can I secure my ends point in REST 
 How can we check that we are getting only Numeric value while calling our services not null or specail character 
 How can I make differnent log file for differnet profile 
@@ -196,28 +250,29 @@ What are the end point of actuator in Spring Boot
 What we will get if we call getName on object load using load method in Hibernate but object is not there 
 What is differnce between save() & saveAndUpdate() 
 Question:-How many bean will be create of a singleton bean in different ApplicationContext
-Answer:-Spring singleton beans are instantiated once per application context. That is, if you create many application contexts from the same config, they'll have different instances of singleton beans.
+Answer:-Spring singleton beans are instantiated once per application context. That is,
+		if you create many application contexts from the same config, they'll have different instances of singleton beans.
 How can I return different media type from REST 
-How can I return Custom code using custom class in REST---YES
+How can I return Custom code using custom class in REST
 https://www.youtube.com/watch?v=y7uBDTWTLQM (Example of returning custom code.)
 How Spring Boot Appication Handle the request
 Difference Between REST & SOAP 
 I case of Post how can we data from request Body
-How you will deploy your microservice---Done.
+How you will deploy your microservice.
 Advantage Of Spring Boot
 What is use of optional
 what is Partition in Database
 How feature of java8 help in Concurrency in java
-How can I increase performance in Hibernate to in persisting the object in DB-
+How can I increase performance in Hibernate to in persisting the object in DB
 How can I enable Caching in Spring 
 How can I get the child object automatically when accessing the parent in Hibernate 
 How you can solve the conflict problem default method in interface
 Difference between poll(), peek() 
 What is @CrossOrigin annotation 
-What is executor Framework in java---Done.
+What is executor Framework in java 
 Can we do operator overloading in java ---------------->>>NO , Because it will make the java code more complex 
 What is working of Garbdge collector in java 
-What are the class loader in java g
+What are the class loader in java.
 Can we make Array as volatile------------------->>>YES
 Example of Call by Value & Call by reference in java 
 Woking of JVM 
@@ -234,7 +289,7 @@ What is use of @ComponentScan
 How to do exception handling in spring boot
 What is IOC
 Type of bean scope
-can we write constructor in abstract class.
+Can we write constructor in abstract class.---YES.
 How you can make a class immutable
 How can i make the sub class non serailzable if super class is serailzable
 Why String is Immutable in java
@@ -243,9 +298,9 @@ Scope of singleton object
 Can we Autowiring static varriable Spring
 Difference between beanFactory & ApplicationContext.
 What in thread local varriable in java.
-Can we write constructor in abstract class. 
-Can abstract class implement an interface.  
-Can we write main method in abstract class
+Can we write constructor in abstract class.---YES. 
+Can abstract class implement an interface.---YES  
+Can we write main method in abstract class---YES
 How to stop a thread in Java. 
 Internal working of ConcurrentHashMap 
 How to iterate Map in java.
@@ -258,7 +313,7 @@ Type of bean scope
 Difference between component,service,repository & controller 
 How you will handle Exception in REST API
 Differentiate between an Enumeration and an Iterator.
-What is Discuss IdentityHashMap.
+What is IdentityHashMap.
 Difference between callable & runnable
 Difference between condidate key & unique key 
 

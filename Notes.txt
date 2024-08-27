@@ -1,0 +1,59 @@
+To add new functionality to existing interfaces while preserving backward compatibility with older versions of the interface. 
+
+Example:- Runnable interfere in Java which has just run() method, so we can easily provide implementation using lamda expression while implementing a thread with Runnable.
+
+Temporal is somethings like microservices Orchestrator.
+Temporal is a Pure code based open source orchestration framework.
+For most developers it will be the easiest and most conventional of all as it allows workflows to be defined programatically.
+
+Flyway is used for database migration & version control for database changes.
+
+Flyway :-
+		Flyway is an open source database tool. it strongly 
+		favors simplicity and convention over configuration.
+		it acts as version control for your database means it 
+		maintain the database changes.
+		
+		So it becomes easy when we move from one environment to
+		other environment like development to UAT. We don't nee to make
+		this database changes manually.
+	1- Any changes to the database consider as migration.
+	
+	Flyway suports two type of migrations
+	(a)- Versioned Migrations
+    (b)- Repeatable Migrations
+	Versioned Migrations:-
+	(i) Most common type of migration, they are applied once in the order
+		they appear.
+	(ii) Version Migrations are used for creating, altering, dropping tables, indexes or foreign Key.
+	(iii) Changes can be written in SQL or Java file.
+	
+	Repeatable Migrations :-
+	(i) Reapplied every time there are checksum changes.
+	(ii) Useful for managing views, stored procedure, or bulk reference data update
+	(iii) Applied after all the version migration are applied.
+		
+Note :- Two important properties are
+		1- spring.flyway.enable=true.
+		2- spring.flyway.locations=classpath:db/migrations
+		3- spring.flyway.baseline-on-migrate=true
+		When migrate is executed against a non-empty schema with no schema history table. 
+		4- spring.flyway.validate-on-migrate=true
+		It is used to validate the migration.
+Note :- Flyway also comes with maven plugin and using this we can manage the flyway 
+		with command line.
+		It comes with seven goal
+		1- flyway:baseline
+		2- flyway:clean
+		3- flyway:info
+		4- flyway:migrate
+		5- flyway:repair
+		6- flyway:undo (Available only for commercial version)
+		7- flyway:validate
+
+IdentityHashMap :-
+			In Java, IdentityHashMap is a class that implements the Map interface. It is similar to the HashMap class,
+			with the main difference being that IdentityHashMap uses reference equality instead of object equality
+			when comparing keys.
+	While HashMap uses the equals() method to compare the keys, IdentityHashMap uses the == operator to compare the keys.
+

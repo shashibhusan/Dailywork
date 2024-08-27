@@ -61,6 +61,7 @@ SecurityFilterChain<br/>
 AuthenticationProvider<br/>
 AuthenticationManager<br/> 
 <br/>
+<b>Note:-</b><br/>
 Please notice that if multiple Spring interceptors are configured, the preHandle() method is executed in the configuration order,
 whereas postHandle() and afterCompletion() methods are invoked in the reverse order.
 <br/>
@@ -103,7 +104,7 @@ Usage: Idempotence is used at the remote service, or data source so that, when i
 <b class="redC">Answer:-</b> What I have used for checking the performance of the End point is Jmeter.<br/>
 <br/>
 <b class="redC">Question:-</b>How do you handle security concerns, such as authentication and authorization, in a microservices environment?<br/> 
-<b class="redC">Answer:-</b> Using OAuth/Spring security for Authentication and JWT for securing API ends point.<br/>
+<b class="redC">Answer:-</b> Using OAuth/Spring security for Authentication and JWT for authorization to securing API ends point.<br/>
 <br/>
 <b class="redC">Question:-</b>What is spring cloud.<br/>
 <b class="redC">Answer:-</b>Spring Cloud--an open-source library--makes it easy to develop Java based applications for the cloud<br/>

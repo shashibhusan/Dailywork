@@ -1,6 +1,11 @@
 How to configure HandlerInterceptor in spring boot.
 Example of bean life cycle.
-What is Spring WebFlux
-What is Spunk, Kiwana in Java microservices
-How you are monitoring your microservice
-What is the difference between ResponseEntity and @ResponseBody?
+What is Spring WebFlux.
+What is Spunk, Kiwana in Java microservices.
+How you are monitoring your microservice.
+What is the difference between ResponseEntity and @ResponseBody.
+How to reverse a ArrayList with using inbuilt methods.
+Difference between AOuth & AOuth2.
+How AOuth works with Spring Boot.
+Spring security with example.
+WebClient with example.

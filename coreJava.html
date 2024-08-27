@@ -13,6 +13,13 @@
 <div style="text-align:justify;" data-role="page">
   
 <div data-role="main" class="ui-content">
+<b class="redC">PriorityQueue:-</b><br/>
+It implements the Queue interface [Collection]---extends--->[Queue]---implements--->[PriorityQueue].<br/>
+Unlike normal queues, priority queue elements are retrieved in sorted order.
+It is important to note that the elements of a priority queue may not be sorted. However, elements are always retrieved in sorted order.<br/><br/>
+<b class="redC">PriorityBlockingQueue:-</b><br/> 
+It implements the Queue interface [Collection]---extends--->[Queue]---extends--->[BlockingQueue]---implements--->[PriorityBlockingQueue]<br/>
+it is priority queue having blocking feature when queue is full or empty<br/><br/>
 <b>Best Practices for Preventing Session Hijacking</b><br/>
 <b>1-</b>It’s essential to ensure that session IDs are long, random, and complex enough to resist guessing or brute-force attacks.<br/>
 <b>2-</b>Attackers commonly exploit the cross-site scripting (XSS) vulnerability to insert malicious scripts into web pages,
@@ -39,22 +46,23 @@ Fail-Safe iterators don’t throw ConcurrentModificationException while Fail-Fast 
 <br/>
 <b class="redC">Note:-</b>
 The DispatcherServlet is the front controller in Spring web applications.
-<br/>
+<br/><br/>
 <b class="redC">Note:-</b>
 CyclicBarrier allows multiple threads to wait for each other to reach a common point
-before continuing their execution.<br/>
+before continuing their execution.
+<br/><br/>
 <b class="redC">Note:-</b>
 CountDownLatch is a synchronization aid that allows one or more threads
 to wait for a set of operations to complete.
-<br/>
+<br/><br/>
 
 <b class="redC">Note:-</b>LinkedList traversing is more expensive than arrays and since in selection sort we do more traversing(more coparision)
 therefore we should go for selection sort in case of Arrays
-<br/>
+<br/><br/>
 <b class="redC">Note:-</b>
 LinkedList insertion is more less expensive than arrays and since insertion sort we insert element at it's location
 so if data structure is linkedList we should use Insertion sort.
-<br/>
+<br/><br/>
 <b class="redC">Question:-</b>What is addShutdownHook() in java <br/> 
 	addShutdownHook() will register some actions which is to be performed on a Program's termination.<br/> 
 The program that you start ends in two ways:<br/> 
@@ -108,10 +116,14 @@ If you add a ShutdownHook, the hook will start a thread that will start running 
 	<b>1-</b>Memory Profilers like JProfiler<br/>
 	Memory profilers or in general Java Virtual Machine profilers, such as Java VisualVM, YourKit, 
 	JProfiler, and Mission Control are applications allowing you to get a deep insight into what is happening inside the Java Virtual Machine.<br/>
+	<b>JProfiler is a paid version but you can use for some period of time on trial basis.</b><br/>
 	<b>2-</b>Heap Dumps:-<br/>
 	heap dumps come in handy. The heap dump is a snapshot of the heap memory of your Java Virtual 
 	Machine that can be generated on demand or for example when the application crashes with the<br/>
 	OutOfMemory error.<br/>
+	<b>Tools that ca be used to read memory dump are VisualVM,YourKit,MemoryAnalyzer etc.</b>
+	Tools 
+	<br/> ================>>> <br/>
 	<b class="redC">Question:-</b>What are the mainly performace issue in java application.<br/>
 	<img width="650px" alt="Node1" src="image/performance_issue.jpg"><br/>
    <b class="redC">Question:-</b>What is difference between map() and flatMap().<br/>
